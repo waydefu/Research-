@@ -21,6 +21,8 @@
 
 | 專題 | 內容 |
 | --- | --- |
+| [EAG-100｜企業級治理評分規範](EAG-100.md) | 100 分、20 項控制、五項 P0 一票否決、成熟度門檻 |
+| [EAG-100 稽核模板](EAG-100-AUDIT-TEMPLATE.md) | 記錄證據、測試結果、分數、未解風險與改善行動 |
 | [01｜治理和權限](01-governance-and-authority.md) | Repo 規則、PR、人工批准、CI、權限矩陣 |
 | [02｜查找任何資訊的路由](02-search-routing.md) | 精確搜尋、AST、LSP、SCIP、Zoekt、混合檢索 |
 | [03｜可維護索引資料庫設計](03-index-database-design.md) | Schema、增量索引、版本、來源與新鮮度 |
