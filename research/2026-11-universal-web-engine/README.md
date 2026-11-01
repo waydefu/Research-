@@ -21,7 +21,7 @@
 12. [12｜70 個 GitHub 候選及 Top 18 深入比較](12-github-creative-ecosystem.md)
 13. [13｜高階 UI 設計系統、六種裝置、三套 Creative Stacks、Top 20 評分](13-design-performance-and-architecture.md)
 14. [14｜十種特效 Rendering Pipeline／偽碼與五個 PoC 驗收](14-effects-recipes-and-poc-validation.md)
-15. [15｜40 項原始來源、證據層級、衝突處理與決策閘門](15-creative-web-evidence-and-adoption.md)
+15. [15｜55 項來源條目、證據層級、衝突處理與決策閘門](15-creative-web-evidence-and-adoption.md)
 16. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
