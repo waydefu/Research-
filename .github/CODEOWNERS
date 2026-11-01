@@ -1,0 +1,7 @@
+# Ownership is not enforcement until GitHub branch/ruleset protection is configured.
+# Solo owners cannot approve their own PRs under required code-owner review.
+* @waydefu
+/.github/ @waydefu
+/AGENTS.md @waydefu
+/scripts/ @waydefu
+/docs/governance/ @waydefu
