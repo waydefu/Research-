@@ -16,7 +16,13 @@
 7. [07｜效能預算、可及性與可量測指標](07-performance-and-accessibility.md)
 8. [08｜安全、測試、CI/CD、供應鏈](08-security-testing-and-deployment.md)
 9. [09｜三種參考技術棧與從舊系統遷移的策略](09-reference-stacks-and-migration.md)
-10. [SOURCES｜原始來源／證據等級／更新日](SOURCES.md)
+10. [10｜28 個頂級互動作品：美術指導與 UX 規範](10-creative-direction-and-reference-sites.md)
+11. [11｜Motion、3D Rendering、Shader 與電影級特效技術](11-motion-graphics-and-rendering.md)
+12. [12｜70 個 GitHub 候選及 Top 18 深入比較](12-github-creative-ecosystem.md)
+13. [13｜高階 UI 設計系統、六種裝置、三套 Creative Stacks、Top 20 評分](13-design-performance-and-architecture.md)
+14. [14｜十種特效 Rendering Pipeline／偽碼與五個 PoC 驗收](14-effects-recipes-and-poc-validation.md)
+15. [15｜40 項原始來源、證據層級、衝突處理與決策閘門](15-creative-web-evidence-and-adoption.md)
+16. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
 
@@ -53,3 +59,16 @@
 5. 除非實際量測，**不宣稱任何框架普遍最快、相容性最高或永遠最省 Token／成本**。
 
 本 Repo 只保存研究與技術選型，**不會自動修改別的 Repo、CI、Hermes 或本機設定**。
+
+
+## Creative Web 深化研究增量（2026-11-02）
+
+**本次新增 10–15 篇，保留原有 01–09：**面向世界級 Web Creative Development 的獨立研究延伸，不取代現有的前端／架構／相容性章節。
+
+- **網站與視覺語言：**28 件案例（來源強度 A／B／C），涵蓋 Active Theory、Resn、Dogstudio、makemepulse、Hello Monday、Locomotive；部分有作者工程說明，未在真實瀏覽器逐站測量。
+- **Open Source：**70 個 GitHub 存在性、授權 metadata 與維護快照；其中 18 個檢查官方 release／工程選型與導入風險。未做同條件 Bundle/Android/iOS Benchmark。
+- **實作研究：**WebGL2、WebGPU/TSL、WGSL、GLSL、PBR、後製、GPU particles、SDF、fluid、GSAP/Motion/Rive 等的性能代價與跨端降級。
+- **可轉成開發規範：**8 類 Design Tokens、非模板化 AI 視覺檢核、三種 Creative Stack、10 種最小 Rendering Pipeline／偽碼、5 個 PoC 的可重做驗收、Top 20 五維研究序位分。
+- **尚未完成：**第三方作品 28 個逐頁功能 Walkthrough、真機 GPU/FPS/功耗、依賴完整漏洞掃描、真實 Bundle size；凡缺實測保留 Unknown。研究未安裝套件、未修改其他 Repo、未授權部署或合併。
+
+**方法與來源：**[Creative Web 證據台帳](15-creative-web-evidence-and-adoption.md)，**查證日期 2026-11-02**；研究評級不代表產品測試得分。
