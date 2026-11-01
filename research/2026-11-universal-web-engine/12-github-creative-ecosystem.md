@@ -17,7 +17,7 @@
 | 3 | 3D / GPU | [pmndrs/drei](https://github.com/pmndrs/drei) | MIT | 2026-10-21 |
 | 4 | 3D / GPU | [BabylonJS/Babylon.js](https://github.com/BabylonJS/Babylon.js) | Apache-2.0 | 2026-10-31 |
 | 5 | 3D / GPU | [playcanvas/engine](https://github.com/playcanvas/engine) | MIT | 2026-11-01 |
-| 6 | 3D / GPU | [oframe/ogl](https://github.com/oframe/ogl) | Unknown | 2025-04-13 |
+| 6 | 3D / GPU | [oframe/ogl](https://github.com/oframe/ogl) | API Unknown；package.json 聲明 Unlicense（需人工審核） | 2025-04-13 |
 | 7 | 3D / GPU | [pmndrs/postprocessing](https://github.com/pmndrs/postprocessing) | Zlib | 2026-11-01 |
 | 8 | 3D / GPU | [pmndrs/react-postprocessing](https://github.com/pmndrs/react-postprocessing) | MIT | 2026-10-21 |
 | 9 | 3D / GPU | [pmndrs/three-stdlib](https://github.com/pmndrs/three-stdlib) | MIT | 2026-06-26 |
@@ -93,7 +93,7 @@
 | 3 | [Drei](https://github.com/pmndrs/drei) | v10.7.9 · 09/25 | MIT | R3F helpers、環境、相機、材質工具 | R3F 專用 | 視實際 import、component 而定 | 白名單 import；避免全部 helpers 無審查 · [官方](https://drei.docs.pmnd.rs/) |
 | 4 | [Babylon.js](https://github.com/BabylonJS/Babylon.js) | 9.33.1 · 10/30 | Apache-2.0 | 遊戲級 3D、材質／物理/XR | 框架無關，React/Vue 橋接 | 偏重：完整 3D runtime、shader 管線 | 全景、複雜 3D 應用候選；純展示先比 Three · [官方](https://doc.babylonjs.com/) |
 | 5 | [PlayCanvas](https://github.com/playcanvas/engine) | v2.23.3 · 10/15 | MIT | 3D engine、WebGPU/WebGL、shader | 框架獨立 App shell | 偏重：完整場景／資產管理 | 備選引擎；先做同內容 PoC · [官方](https://developer.playcanvas.com/) |
-| 6 | [OGL](https://github.com/oframe/ogl) | latest GitHub release Unknown | Unknown | 小型 WebGL primitives、full-screen quad | 原生／Astro／Vue/React 容器可用 | 低抽象但維護自行負擔大；上游 2025/04 最後 push | 選小型液化 shader；授權未核對前不准產品採用 · [官方](https://oframe.github.io/ogl/) |
+| 6 | [OGL](https://github.com/oframe/ogl) | GitHub release Unknown；package.json 1.0.11 | API Unknown；npm manifest Unlicense | 小型 WebGL primitives、full-screen quad | 原生／Astro／Vue/React 容器可用 | 低抽象但維護自行負擔大；上游 2025/04 最後 push | 選小型液化 shader；授權未核對前不准產品採用 · [官方](https://oframe.github.io/ogl/) |
 | 7 | [GSAP](https://github.com/greensock/GSAP) | latest GitHub release Unknown | GSAP standard custom | 精準 timeline、ScrollTrigger、SplitText | 原生／React hook；Vue/Astro 命令式整合 | DOM 動效低～中；過多 pin/measure 會提高主執行緒成本 | 複雜敘事一個 motion director；競品 visual builder 授權需律師確認 · [官方](https://gsap.com/docs/v3/) |
 | 8 | [Motion](https://github.com/motiondivision/motion) | latest release Unknown | MIT | layout、spring、gesture、scroll | JS/React/Vue 視對應 package | 成本依 layout measure/同時執行數 | 產品 UI / state transition 優先候選 · [官方](https://motion.dev/) |
 | 9 | [Lenis](https://github.com/darkroomengineering/lenis) | v1.3.27 · 10/15 | MIT | 慣性 scroll 介面 | React/原生等，需事件整合 | 潛在滾動路徑及 focus 語意負擔 | 預設不採用；只在明確需要時可移除式導入 · [官方](https://lenis.dev/) |
@@ -143,3 +143,27 @@
 - [GSAP 使用限制](https://gsap.com/community/standard-license/)。
 - [Three WebGPU 能力／遷移](https://threejs.org/manual/pages/webgpurenderer)。
 - [WebGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)。
+
+
+## 第二輪修正與授權證據（2026-11-02，直讀上游程式檔）
+
+**OGL：** GitHub API 的 `license.spdx_id` 為 Unknown，且根目錄沒有 `LICENSE`。不過 [官方 repo 的 package.json](https://github.com/oframe/ogl/blob/master/package.json) 宣告 `license: "Unlicense"`、`version: "1.0.11"`。這使「套件聲明」可從 Unknown 提升到可查，但**不等於**已找到完整授權全文、符合每個公司法律條件。正式商用採用要再核對實際 npm tarball 內容、原始程式授權與 notice。
+
+**GSAP：** [官方 repo package.json](https://github.com/greensock/GSAP/blob/master/package.json) 聲明 `version: 3.15.0` 與 Standard no-charge license；此為 **Git 原始碼 manifest 的版本**，非 `/releases/latest` 或正式 npm dist-tag 驗證。 [官方授權全文](https://gsap.com/community/standard-license/) 區分網站／App 中的 permitted uses 與可能競爭 Webflow 視覺動畫編輯工具的 prohibited uses；**不能將「免費」等同可自由再授權**。
+
+**封存：** `dimforge/rapier.js` 與 `LottieFiles/lottie-player` 的 GitHub `archived: true` 已確認，不建議新專案直接以這兩者當長期主要核心。`dimforge/rapier` 是另一條未封存 repo，**不能**因此推斷舊 rapier.js API 與它的 WASM 版本百分百相容。
+
+**重導向：** `pmndrs/maath`、`BuilderIO/partytown` 舊路徑 REST 查詢得到 `Moved Permanently`；在未取得 canonical URL 與來源前，不補成已查證候選，避免重複／失真計數。
+
+### 商用與安全前置關卡（不能以 Stars、npm weekly downloads 放行）
+
+| 導入分類 | 必須額外取證 | 未驗證時的處理 |
+|---|---|---|
+| GSAP／特殊 license | 完整 license、產品是否視覺動畫 builder、限制是否適用 | 常規網站可列候選；builder 場景法律審查 |
+| OGL／API unknown | repo manifest 與包內 LICENSE/NOTICE 是否一致 | 不標為商用授權通過 |
+| Rive、Lottie | runtime license vs 圖形素材與編輯器費用 | 核准 runtime 不代表核准素材 |
+| WebGPU／TSL | WebGPU device features、WebGL2 fallback、shader 及後製 migration | 不可將可 fallback 當成可原樣兼容 |
+| 跨端 | 實機 WebKit／Chromium／Gecko、觸控與 keyboard | 無結果為 Unknown，不給精確 FPS |
+| 供應鏈 | 鎖版、transitive dependencies、advisory、maintainer/release、SBOM 可再生性 | 不作「無漏洞」宣告 |
+
+**不同框架的實際整合成本必須單獨測：** React 的 R3F lifecycle 不能直接套 Vue；Next SSR 要檢查 browser globals/hydration；Astro 的 GPU canvas 只以 client island 初始化，否則 LCP 可能由大型 3D JS 阻塞。這些是驗證提案，不是此研究已完成的安裝測試。
