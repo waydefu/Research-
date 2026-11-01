@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0b1012" />
+  <meta name="description" content="Research Observatory — 可追溯、可搜尋、持續驗證的開放工程研究觀測站。探索 Web 渲染、AI Agent、系統工程與治理方法。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="THE OBSERVATORY — Research, rendered." />
+  <meta property="og:description" content="An evolving field guide to the systems we have not finished understanding." />
+  <meta property="og:image" content="./assets/og.svg" />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>THE OBSERVATORY — Research, rendered.</title>
+  <script src="./app.js" type="module" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#top" aria-label="Research Observatory 回到首頁"><span class="logo-mark" aria-hidden="true">R<span class="logo-point">.</span></span><span class="brand-copy">RESEARCH <small>OBSERVATORY / EST. 2026</small></span></a>
+    <nav class="nav-main" aria-label="主選單">
+      <a href="#explorer">研究索引</a><a href="#systems">技術星圖</a><a href="#method">研究方法</a>
+    </nav>
+    <a class="header-link" href="https://github.com/waydefu/Research-" target="_blank" rel="noopener noreferrer" aria-label="開啟 GitHub 研究庫（新分頁）">GITHUB <span aria-hidden="true">↗</span></a>
+    <button id="menu-toggle" class="menu-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="展開選單"><span></span><span></span></button>
+  </header>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="手機主選單" hidden><a href="#explorer">探索研究</a><a href="#systems">技術星圖</a><a href="#method">研究方法</a><a href="https://github.com/waydefu/Research-" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title" id="introduction">
+      <div class="hero-topline eyebrow"><span>01 / AN OPEN ENGINEERING ARCHIVE</span><span class="hero-coordinate">25°10′ N — 121°26′ E · DIGITAL FIELD NOTES</span></div>
+      <div class="hero-art" aria-hidden="true"><div class="fallback-sculpture"><i></i><i></i><i></i><span>R</span></div><canvas id="artifact-canvas"></canvas><div class="visual-cross cross-one">+</div><div class="visual-cross cross-two">+</div><div class="artifact-caption">FIG. 01 — ANATOMY OF AN UNKNOWN<br />PROCEDURAL STUDY / LIVE RENDER</div></div>
+      <div class="hero-content"><div class="hero-overline"><span class="status-dot"></span> RESEARCH IS A PROCESS, NOT A CLAIM</div><h1 id="hero-title">THE ART OF<br /><em>NOT</em> KNOWING<span class="punctuation">.</span></h1><p class="hero-lead">把未知拆解為證據。<br />把想法推進到可以驗證的工程。</p><div class="hero-actions"><a class="action-primary" href="#explorer">進入研究資料庫 <span aria-hidden="true">↗</span></a><a class="action-quiet" href="#method">了解研究方法 <span aria-hidden="true">↘</span></a></div></div>
+      <div class="hero-foot"><span>OPEN SOURCE / EVIDENCE FIRST</span><span class="scroll-cue">SCROLL TO DECODE <span aria-hidden="true">↓</span></span><span id="hero-renderer">RENDERER: POSTER</span></div>
+    </section>
+    <section class="thesis section-grid" aria-labelledby="thesis-title"><div class="section-index">/ 001<br />THE PREMISE</div><div class="thesis-main"><p class="eyebrow">FROM SPECULATION TO SYSTEM</p><h2 id="thesis-title">A living map of the things <span class="outlined">worth understanding.</span></h2><p>這裡保存的不只是答案。還有假設、取捨、證據、失敗，以及每一次需要重新驗證的理由。研究從未因為寫完一份文件而結束。</p><div class="principles"><div><span>01</span><strong>TRACE</strong><small>追溯原始來源</small></div><div><span>02</span><strong>QUESTION</strong><small>標註不確定性</small></div><div><span>03</span><strong>TEST</strong><small>實際驗證與回退</small></div></div></div></section>
+    <section id="systems" class="systems" aria-labelledby="systems-title"><div class="section-heading"><div class="eyebrow">/ 002 — THE SYSTEM MAP</div><div class="heading-row"><h2 id="systems-title">Connected<br /><em>thinking.</em></h2><p>技術從不獨立存在。瀏覽器、渲染、代理、索引與安全互相構成系統。點選節點，探索相應研究領域。</p></div></div><div class="map-shell"><div class="map-head"><span>FIELD / RESEARCH DOMAINS</span><span>TOPOLOGY: CONCEPTUAL, NOT MEASURED</span></div><div class="map-stage"><svg id="domain-map" class="domain-map" viewBox="0 0 1100 480" role="img" aria-label="六個研究領域的概念關係圖；下方提供可鍵盤操作的同等列表"></svg><div class="map-axis axis-x"></div><div class="map-axis axis-y"></div></div><div class="map-footer"><span class="eyebrow">SELECT A NODE TO FILTER THE INDEX</span><div id="domain-legend" class="domain-legend" aria-label="研究領域快速連結"></div></div></div></section>
+    <section id="explorer" class="explorer section-grid" aria-labelledby="explorer-title"><div class="section-index">/ 003<br />THE ARCHIVE</div><div class="explorer-main"><div class="explorer-intro"><p class="eyebrow">A SEARCHABLE, SOURCE-LINKED INDEX</p><h2 id="explorer-title">Follow the <em>evidence.</em></h2><p>直接從 Repository 的 Markdown 建立索引。每筆研究都保留原始路徑，讓發現的線索可以回到原文。</p></div><div id="index-status" class="index-status" role="status" aria-live="polite">正在載入研究索引…</div><form id="search-form" class="search-control" role="search" autocomplete="off"><label for="research-search">搜尋標題、關鍵詞與章節</label><div class="search-field"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5"></circle><path d="m15 15 6 6"></path></svg><input id="research-search" type="search" name="q" placeholder="試試 WebGPU、Agent、EAG-100…" spellcheck="false" /><kbd>/</kbd></div></form><div id="filter-bar" class="filter-bar" aria-label="依領域篩選"></div><div class="results-header"><span id="results-count">— 條研究</span><span>DOCUMENT / SOURCE / DOMAIN</span></div><div id="results" class="results" aria-live="polite"></div><div id="results-end" class="results-end"><button id="load-more" class="load-more" type="button" hidden>繼續探索 <span aria-hidden="true">↓</span></button><span id="results-note"></span></div></div></section>
+    <section class="interlude" aria-label="研究宣言"><span class="eyebrow">THE DIFFERENCE IS THE DISCIPLINE</span><p>Beautiful ideas<br />are everywhere.<br /><em>Defensible ones</em><br />are rare.</p><span class="interlude-foot">AN ARCHIVE BUILT TO BE QUESTIONED — NOT JUST ADMIRED.</span></section>
+    <section id="method" class="method section-grid" aria-labelledby="method-title"><div class="section-index">/ 004<br />THE PROTOCOL</div><div class="method-main"><p class="eyebrow">A METHOD, NOT A MARKETING CLAIM</p><h2 id="method-title">Make every claim<br /><em>answerable.</em></h2><div class="method-steps"><article><div class="step-no">01 / SOURCE</div><div><h3>Find the primary signal.</h3><p>以官方文件與原始碼為優先；第三方資訊作為追索線索，保留可回查來源。</p></div></article><article><div class="step-no">02 / SEPARATE</div><div><h3>Distinguish fact from inference.</h3><p>將已證實、研究建議、假設與未測量資料清楚區分。未知不以推測填補。</p></div></article><article><div class="step-no">03 / TEST</div><div><h3>Let reality disagree.</h3><p>設計可重現的正反測試；量測效能、可靠度與失敗情境，拒絕虛構結果。</p></div></article><article><div class="step-no">04 / GOVERN</div><div><h3>Keep authority outside the model.</h3><p>EAG-100 是本專案自訂的 20 項治理檢核與 5 項 P0 閘門，並非外部認證，亦不代表目前全部通過。</p></div></article></div><div class="governance-note"><div class="governance-number">20<span> / 05</span></div><div><strong>CONTROLS / CRITICAL GATES</strong><p>治理框架已建立；實際符合程度必須另附稽核證據，不以網站展示畫面代替驗收。</p><a href="https://github.com/waydefu/Research-/blob/main/research/2026-11-agent-repository-operations/EAG-100.md" target="_blank" rel="noopener noreferrer">閱讀 EAG-100 原始文件 ↗</a></div></div></div></section>
+    <section class="exit"><div class="eyebrow">THE NEXT QUESTION STARTS HERE</div><h2>The work is<br /><em>still unfolding.</em></h2><p>研究不是一座已完成的紀念碑，而是一個持續修正的座標系。</p><a class="exit-link" href="https://github.com/waydefu/Research-" target="_blank" rel="noopener noreferrer">EXPLORE THE SOURCE <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer class="site-footer"><a class="footer-logo" href="#top">R<span>.</span></a><div><strong>RESEARCH OBSERVATORY</strong><small>INDEPENDENT ENGINEERING ARCHIVE</small></div><p>Made to be explored.<br />Built to be verified.</p><div class="footer-end"><a href="#top">BACK TO TOP ↑</a><a href="https://github.com/waydefu/Research-" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></div></footer>
+</body>
+</html>
