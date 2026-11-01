@@ -19,15 +19,19 @@ with sync_playwright() as p:
   page.add_script_tag(content=artifact+'\n'+app)
   page.wait_for_timeout(1200)
   heading=page.locator('h1').inner_text();status=page.locator('#index-status').inner_text();initial=page.locator('.result').count()
+  page.screenshot(path=str(base/f'{name}.png'),full_page=True,animations='disabled')
   page.locator('#research-search').fill('WebGPU');page.wait_for_timeout(300);filtered=page.locator('.result').count()
   if name=='mobile':
    page.locator('#menu-toggle').click();menu=page.locator('#mobile-nav').is_visible();assert menu
   else: menu=False
-  page.screenshot(path=str(base/f'{name}.png'),full_page=True,animations='disabled')
+  if name=='mobile':page.screenshot(path=str(base/'mobile-menu.png'),full_page=False,animations='disabled')
   info={'device':name,'status':status,'heading':heading,'initialRows':initial,'filteredRows':filtered,'menu':menu,'errors':errors,'renderer':page.locator('#hero-renderer').inner_text(),'scrollWidth':page.evaluate('document.documentElement.scrollWidth'),'clientWidth':page.evaluate('document.documentElement.clientWidth')}
   result.append(info)
   assert not errors,errors
   assert filtered>0,'search should find WebGPU'
+  page.locator('#filter-bar button').last.click()
+  assert page.locator('#filter-bar button').last.get_attribute('aria-pressed')=='true'
+  assert page.locator('#results-count').inner_text().endswith('條研究')
   assert info['scrollWidth']<=info['clientWidth']+2,'horizontal overflow'
   page.close()
  browser.close()
