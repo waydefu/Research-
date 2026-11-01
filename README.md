@@ -4,6 +4,23 @@
 
 > 最新研究：**2026-11｜AI Coding 代理工程** — EGM、Claude Code 多模型協作／Advisor、Imagine 視覺化、Jev（JEV）決策路由。
 
+## 2026 年 11 月：AI Agent 專案治理、搜尋索引與額度最佳化（新研究）
+
+**[完整研究：Agent Repository Operations](research/2026-11-agent-repository-operations/README.md)** — 通用於 GitHub 專案，研究 Agent 治理、資料庫與精確搜尋、MCP、Token 成本、長期記憶、權限、安全、CI、評測和分階段導入。
+
+- [治理：AGENTS.md、權限、人工批准、PR Gate](research/2026-11-agent-repository-operations/01-governance-and-authority.md)
+- [搜尋：rg、ast-grep、Serena、SCIP、Zoekt](research/2026-11-agent-repository-operations/02-search-routing.md)
+- [索引：增量同步、來源 SHA、索引新鮮度](research/2026-11-agent-repository-operations/03-index-database-design.md)
+- [省額度：Tool Search、Cache、模型路由、硬預算](research/2026-11-agent-repository-operations/04-cost-context-and-routing.md)
+- [記憶：Mem0、Cognee、Graphiti、FTS5 與實驗](research/2026-11-agent-repository-operations/05-memory-and-rag.md)
+- [Agent 流程：單主控、工具隔離、停止與回退](research/2026-11-agent-repository-operations/06-agent-workflows.md)
+- [安全 CI：GitHub gh-aw、Conftest、zizmor](research/2026-11-agent-repository-operations/07-security-and-ci.md)
+- [A/B 指標：Recall@k、p95、總 Token、正確率](research/2026-11-agent-repository-operations/08-evaluation-and-benchmarks.md)
+- [導入路線：Phase 0–5，必要時才增加資料庫或代理](research/2026-11-agent-repository-operations/09-implementation-roadmap.md)
+- [GitHub 開源方案精選](research/2026-11-agent-repository-operations/10-github-project-catalog.md) · [37 項原始來源](research/2026-11-agent-repository-operations/SOURCES.md)
+
+**狀態：** 官方文件與原始碼研究完成；不是已在其他 Repo 進行安裝或效能實測。十月 Codebase Memory MCP 的 freshness 21/21 FAIL 保留為未解驗證 Gate。
+
 ## 2026 年 11 月：通用 Web 工程與現代程式技術（新研究）
 
 **[通用 Web 工程完整專題](research/2026-11-universal-web-engine/README.md)** — 不限定小說、AKM 或任何特定網站；涵蓋從 Next.js 到 WebGPU 的完整架構決策。
