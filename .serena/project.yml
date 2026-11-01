@@ -1,0 +1,13 @@
+# Optional Serena configuration for this predominantly Markdown research repository.
+# Serena is NOT installed or launched by committing this file.
+# Use Serena only for Python symbol navigation; use local FTS5 for Markdown content.
+project_name: "Research-"
+language_servers:
+  - python
+ignore_all_files_in_gitignore: true
+ignored_paths:
+  - ".cache/**"
+  - ".serena/cache/**"
+read_only: true
+excluded_tools: []
+initial_prompt: ""
