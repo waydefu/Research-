@@ -17,7 +17,7 @@
 | 3 | 3D / GPU | [pmndrs/drei](https://github.com/pmndrs/drei) | MIT | 2026-10-21 |
 | 4 | 3D / GPU | [BabylonJS/Babylon.js](https://github.com/BabylonJS/Babylon.js) | Apache-2.0 | 2026-10-31 |
 | 5 | 3D / GPU | [playcanvas/engine](https://github.com/playcanvas/engine) | MIT | 2026-11-01 |
-| 6 | 3D / GPU | [oframe/ogl](https://github.com/oframe/ogl) | API Unknown；package.json 聲明 Unlicense（需人工審核） | 2025-04-13 |
+| 6 | 3D / GPU | [oframe/ogl](https://github.com/oframe/ogl) | Unknown（GitHub API）；原始 `package.json` = Unlicense | 2025-04-13 |
 | 7 | 3D / GPU | [pmndrs/postprocessing](https://github.com/pmndrs/postprocessing) | Zlib | 2026-11-01 |
 | 8 | 3D / GPU | [pmndrs/react-postprocessing](https://github.com/pmndrs/react-postprocessing) | MIT | 2026-10-21 |
 | 9 | 3D / GPU | [pmndrs/three-stdlib](https://github.com/pmndrs/three-stdlib) | MIT | 2026-06-26 |
@@ -93,7 +93,7 @@
 | 3 | [Drei](https://github.com/pmndrs/drei) | v10.7.9 · 09/25 | MIT | R3F helpers、環境、相機、材質工具 | R3F 專用 | 視實際 import、component 而定 | 白名單 import；避免全部 helpers 無審查 · [官方](https://drei.docs.pmnd.rs/) |
 | 4 | [Babylon.js](https://github.com/BabylonJS/Babylon.js) | 9.33.1 · 10/30 | Apache-2.0 | 遊戲級 3D、材質／物理/XR | 框架無關，React/Vue 橋接 | 偏重：完整 3D runtime、shader 管線 | 全景、複雜 3D 應用候選；純展示先比 Three · [官方](https://doc.babylonjs.com/) |
 | 5 | [PlayCanvas](https://github.com/playcanvas/engine) | v2.23.3 · 10/15 | MIT | 3D engine、WebGPU/WebGL、shader | 框架獨立 App shell | 偏重：完整場景／資產管理 | 備選引擎；先做同內容 PoC · [官方](https://developer.playcanvas.com/) |
-| 6 | [OGL](https://github.com/oframe/ogl) | GitHub release Unknown；package.json 1.0.11 | API Unknown；npm manifest Unlicense | 小型 WebGL primitives、full-screen quad | 原生／Astro／Vue/React 容器可用 | 低抽象但維護自行負擔大；上游 2025/04 最後 push | 選小型液化 shader；授權未核對前不准產品採用 · [官方](https://oframe.github.io/ogl/) |
+| 6 | [OGL](https://github.com/oframe/ogl) | latest GitHub release Unknown | API Unknown；原始宣告 Unlicense | 小型 WebGL primitives、full-screen quad | 原生／Astro／Vue/React 容器可用 | 低抽象但維護自行負擔大；上游 2025/04 最後 push | 選小型液化 shader；需按選定版本檢查 npm tarball／授權風險後再採用 · [官方](https://oframe.github.io/ogl/) |
 | 7 | [GSAP](https://github.com/greensock/GSAP) | latest GitHub release Unknown | GSAP standard custom | 精準 timeline、ScrollTrigger、SplitText | 原生／React hook；Vue/Astro 命令式整合 | DOM 動效低～中；過多 pin/measure 會提高主執行緒成本 | 複雜敘事一個 motion director；競品 visual builder 授權需律師確認 · [官方](https://gsap.com/docs/v3/) |
 | 8 | [Motion](https://github.com/motiondivision/motion) | latest release Unknown | MIT | layout、spring、gesture、scroll | JS/React/Vue 視對應 package | 成本依 layout measure/同時執行數 | 產品 UI / state transition 優先候選 · [官方](https://motion.dev/) |
 | 9 | [Lenis](https://github.com/darkroomengineering/lenis) | v1.3.27 · 10/15 | MIT | 慣性 scroll 介面 | React/原生等，需事件整合 | 潛在滾動路徑及 focus 語意負擔 | 預設不採用；只在明確需要時可移除式導入 · [官方](https://lenis.dev/) |
