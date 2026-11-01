@@ -4,6 +4,23 @@
 
 > 最新研究：**2026-11｜AI Coding 代理工程** — EGM、Claude Code 多模型協作／Advisor、Imagine 視覺化、Jev（JEV）決策路由。
 
+## 2026 年 11 月：通用 Web 工程與現代程式技術（新研究）
+
+**[通用 Web 工程完整專題](research/2026-11-universal-web-engine/README.md)** — 不限定小說、AKM 或任何特定網站；涵蓋從 Next.js 到 WebGPU 的完整架構決策。
+
+- [框架比較：Next.js、Nuxt、SvelteKit、Astro、TanStack Start、React Router](research/2026-11-universal-web-engine/01-framework-selection.md)
+- [Next.js 16 深入研究與十月安全修補](research/2026-11-universal-web-engine/02-nextjs-deep-dive.md)
+- [前端 UI、樣式、狀態、互動](research/2026-11-universal-web-engine/03-frontend-ui-and-state.md)
+- [後端／API／資料庫／Auth](research/2026-11-universal-web-engine/04-backend-data-and-auth.md)
+- [TypeScript／Node／Vite／Turbopack／DX](research/2026-11-universal-web-engine/05-runtime-build-and-dx.md)
+- [WebGPU／3D／資產與相容回退](research/2026-11-universal-web-engine/06-graphics-and-compatibility.md)
+- [效能／可及性、CWV、真機測試](research/2026-11-universal-web-engine/07-performance-and-accessibility.md)
+- [安全、測試、CI/CD 與部署](research/2026-11-universal-web-engine/08-security-testing-and-deployment.md)
+- [三種參考技術棧與遷移方案](research/2026-11-universal-web-engine/09-reference-stacks-and-migration.md)
+- [官方來源與證據等級](research/2026-11-universal-web-engine/SOURCES.md)
+
+**狀態：** 官方資料已核對，**尚未跑同條件實機 Benchmarks**，不宣稱任何框架已驗收或被安裝到其他 Repo。
+
 ## 2026 年 10 月：有價值的 AI 工程研究精選（新增）
 
 **[開啟十月精選研究目錄](research/2026-10-retrospective/README.md)**
