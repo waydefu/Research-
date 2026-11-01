@@ -78,14 +78,14 @@ export function mountArtifact(canvas,label){
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer=matchMedia('(pointer:fine)');
   const saveData=navigator.connection?.saveData===true;
-  let gl=null,program=null,buffer=null,raf=0,visible=false,disposed=false,frameCount=0,slow=0,start=0,last=0,scale=.78,active=false;
+  let gl=null,program=null,buffer=null,raf=0,visible=false,disposed=false,frameCount=0,slow=0,start=0,last=0,scale=.78,active=false,disabled=false;
   let uResolution,uTime,uPointer;
   const pointer={x:0,y:0};
   const status=s=>{if(label)label.textContent=`RENDERER: ${s}`};
   const stop=()=>{if(raf)cancelAnimationFrame(raf);raf=0;active=false};
   function cleanupGL(){stop();if(gl){if(buffer)gl.deleteBuffer(buffer);if(program)gl.deleteProgram(program)}buffer=null;program=null;gl=null;canvas.classList.remove('is-ready')}
   function create(){
-    if(disposed||reduced.matches||saveData){status(reduced.matches?'REDUCED MOTION':'DATA SAVER');return}
+    if(disposed||disabled||reduced.matches||saveData){status(reduced.matches?'REDUCED MOTION':'DATA SAVER');return}
     try{
       gl=canvas.getContext('webgl2',{alpha:false,antialias:false,depth:false,stencil:false,powerPreference:'low-power',preserveDrawingBuffer:false});
       if(!gl){status('CSS FALLBACK');return}
@@ -107,15 +107,15 @@ export function mountArtifact(canvas,label){
     if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h)}
   };
   function tick(now){raf=0;if(!active||!gl||!visible||document.hidden)return;resize();gl.useProgram(program);gl.uniform2f(uResolution,canvas.width,canvas.height);gl.uniform1f(uTime,(now-start)*.001);gl.uniform2f(uPointer,pointer.x,pointer.y);gl.drawArrays(gl.TRIANGLES,0,6);
-    if(last&&frameCount>30){const dt=now-last;if(dt>40)slow++;else slow=Math.max(0,slow-1);if(slow>14&&scale>.52){scale=.52;status('WEBGL2 / ECO');slow=0} else if(slow>27){stop();status('CSS / PERFORMANCE FALLBACK');canvas.classList.remove('is-ready');return}}frameCount++;last=now;
+    if(last&&frameCount>30){const dt=now-last;if(dt>40)slow++;else slow=Math.max(0,slow-1);if(slow>14&&scale>.52){scale=.52;status('WEBGL2 / ECO');slow=0} else if(slow>27){disabled=true;cleanupGL();status('CSS / PERFORMANCE FALLBACK');return}}frameCount++;last=now;
     raf=requestAnimationFrame(tick)}
-  function startLoop(){if(active||!gl||disposed||!visible||document.hidden)return;active=true;last=0;frameCount=0;start=performance.now();raf=requestAnimationFrame(tick)}
+  function startLoop(){if(active||!gl||disposed||disabled||!visible||document.hidden)return;active=true;last=0;frameCount=0;start=performance.now();raf=requestAnimationFrame(tick)}
   const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;if(visible)startLoop();else stop()},{threshold:.05});observer.observe(canvas);
   const resizer=new ResizeObserver(()=>resize());resizer.observe(canvas);
   const move=e=>{if(!finePointer.matches)return;const r=canvas.getBoundingClientRect();pointer.x=((e.clientX-r.left)/r.width-.5)*2;pointer.y=((e.clientY-r.top)/r.height-.5)*2};
   const hidden=()=>{if(document.hidden)stop();else startLoop()};
   const lost=e=>{e.preventDefault();stop();canvas.classList.remove('is-ready');status('CONTEXT LOST / CSS')};
-  const restored=()=>{cleanupGL();create()};
+  const restored=()=>{if(disposed||disabled)return;cleanupGL();create()};
   const change=()=>{if(reduced.matches){cleanupGL();status('REDUCED MOTION')}else if(!gl)create()};
   window.addEventListener('pointermove',move,{passive:true});document.addEventListener('visibilitychange',hidden);
   canvas.addEventListener('webglcontextlost',lost);canvas.addEventListener('webglcontextrestored',restored);
