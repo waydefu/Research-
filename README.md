@@ -4,6 +4,15 @@
 
 > 最新研究：**2026-11｜AI Coding 代理工程** — EGM、Claude Code 多模型協作／Advisor、Imagine 視覺化、Jev（JEV）決策路由。
 
+## EAG-100 治理實施（2026-11-02，獨立 PR）
+
+**[研究庫治理中心](docs/governance/README.md)**：已提出唯讀文件完整性 CI、PR／Issue 模板、CODEOWNERS，以及現況風險與 GitHub Rulesets 操作手冊。
+
+- [目前稽核基線](docs/governance/BASELINE-2026-11-02.md)：主分支缺乏保護，P0 有尚未解決的缺口。
+- [GitHub 管理設定待決](docs/governance/RULESETS.md)：必經 PR、Required Status Checks，需要 Repo Owner 另行確認並設定。
+- [威脅模型](docs/governance/THREAT-MODEL.md) · [回退手冊](docs/governance/OPERATIONS.md)。
+- **目前只是工作分支中的提案，尚未合併，也未完成 EAG-100 驗收。**
+
 ## 2026 年 11 月：AI Agent 專案治理、搜尋索引與額度最佳化（新研究）
 
 **[完整研究：Agent Repository Operations](research/2026-11-agent-repository-operations/README.md)** — 通用於 GitHub 專案，研究 Agent 治理、資料庫與精確搜尋、MCP、Token 成本、長期記憶、權限、安全、CI、評測和分階段導入。
