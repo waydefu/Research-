@@ -104,3 +104,36 @@ GitHub 第一輪透過 2026-11-02 公開 API `/repos/{owner}/{repo}` 確認 **70
 - 本研究沒有宣稱 Repository 通過 EAG-100 100/100；CI Markdown integrity 通過 ≠ EAG-100 全合格。
 - 本研究依現有 `research/2026-11-universal-web-engine/` 分類增量加入 10–15 篇，沿用 01–09，維持現有內容。
 - **2026-11-02 v1 初稿：** 28 案例、70 GitHub、18 選型、10 pipeline、5 PoC、Top20；無正式 FPS 實測。後續若證據更新，應保留此 snapshot 並加修訂日期。
+
+## 8. 第二輪證據補強：15 項新增原始來源（2026-11-02）
+
+> 來源索引現在為**首輪 40 項 + 第二輪 15 項 = 55 項條目**。這是原始來源的登錄數量，不是 55 次獨立實測或 55 份第三方效能數據。為避免重複原有 40 筆，此節不重列初版條目。
+
+| # | 來源 | 原始位置 | 實際可支持的主張、證據限制 |
+|---:|---|---|---|
+| 41 | GSAP repo package manifest | [原始來源](https://github.com/greensock/GSAP/blob/master/package.json) | manifest 提供 3.15.0／custom license 聲明；不能冒充 npm latest |
+| 42 | OGL repo package manifest | [原始來源](https://github.com/oframe/ogl/blob/master/package.json) | manifest 提供 Unlicense／1.0.11；GitHub API 授權仍 Unknown |
+| 43 | Resn Zentry 作品獎項敘述 | [原始來源](https://bestawards.co.nz/digital/large-scale-websites/resn/zentry/) | 可支持跨產品、玩家/投資人入口定位 |
+| 44 | Sculpting Harmony 獎項案例 | [原始來源](https://designersinstitute.nz/case-study/sculpting-harmony/) | 可支持 3D、檔案資料、空拍和音樂，不能支持特定 shader |
+| 45 | Chrome CSS Scroll Entry/Exit | [原始來源](https://developer.chrome.com/docs/modern-web-guidance/guides/ui-behaviors/scroll-entry-exit-effects) | @supports 要同時測 animation-range |
+| 46 | Chrome Scroll-triggered Animations | [原始來源](https://developer.chrome.com/blog/scroll-triggered-animations) | triggered 與 driven 動作模型不同 |
+| 47 | Chrome View Transitions 2025 | [原始來源](https://developer.chrome.com/blog/view-transitions-in-2025) | 支援逐年擴大，仍需 feature detection |
+| 48 | Chrome WebGPU Compatibility Mode | [原始來源](https://developer.chrome.com/blog/new-in-webgpu-146) | Chrome 146 Android opt-in restricted feature level |
+| 49 | W3C Dragging Movements | [原始來源](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements) | 拖曳必須有同等單指替代的 AA 條件與例外 |
+| 50 | web.dev LCP Optimization | [原始來源](https://web.dev/articles/optimize-lcp) | LCP 資源早發現、priority；不要把首屏主圖無條件 lazy load |
+| 51 | Chrome DevTools Performance Reference | [原始來源](https://developer.chrome.com/docs/devtools/performance/reference) | Frames、main thread、時間線的官方分析參考 |
+| 52 | MDN WebGL Context Lost Event | [原始來源](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/webglcontextlost_event) | 定義 lost event，主 canvas 故障退場 |
+| 53 | MDN WEBGL_lose_context | [原始來源](https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_lose_context) | 可在有擴充支援時模擬 loss/restore，為負向測試入口 |
+| 54 | Chrome Scroll Story Best Practices | [原始來源](https://developer.chrome.com/docs/modern-web-guidance/guides/ui-behaviors/scrollytelling) | 官方建議性能屬性／非必需裝飾動效回退 |
+| 55 | MDN isContextLost | [原始來源](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/isContextLost) | 探測 GL context loss；不能視為修復成功 |
+
+### 本輪實際修正的研究判斷
+
+1. **作品的可核對度不能用作品數冒充。** 已將 28 件作品個別寫出官方可支持的概念、我們的工程轉譯與必要的未知測試。原始碼級別僅少數案例具有公開證據；沒有宣稱已逐站做互動瀏覽器實測。
+2. **OGL 授權由單一「Unknown」改為兩種不同觀測：** GitHub API 仍 Unknown；其 `package.json` 聲明 Unlicense，正式商用仍要取得發行套件中的完整授權資訊。
+3. **GSAP 版本與授權分開：** 程式庫 manifest 3.15.0 是一個 source snapshot，不是官方 npm latest 的確認；`Standard License` 的 Permitted Uses 與 Prohibited Uses 不能省略。
+4. **LCP 與 3D loading 是互相牽制的：** 首屏主要圖像應在 HTML 可被快速發現，3D 模型通常延遲；不能誤把 LCP Hero 圖片和非首屏 GLB 都 lazy load 當一條通用規則。[web.dev](https://web.dev/articles/optimize-lcp)。
+5. **API 能力檢測不代表性能等級：** Chrome 146 的相容模式只代表可在某些舊 API 下取到受限 Adapter，WebGPU 仍非 Web Platform Baseline；高畫質仍需同場景實機驗收。
+6. **工程測試必須有負面案例：** 可以透過支援的 WebGL 擴充模擬 context loss；React/Next/Vue/Astro 上下文釋放、手機回上一頁、多重 RAF、焦點失效都要在實際 PoC 才能通過 Gate。
+
+**仍無法驗證：** 瀏覽器互動操作錄影、真實裝置 FPS/帧時間、bundle gzip 數據、溫度與功耗、完整 SCA 審查、各作品的內部私有 engine。新增文件是有來源的規格與推論，不是替代實測的證明。
