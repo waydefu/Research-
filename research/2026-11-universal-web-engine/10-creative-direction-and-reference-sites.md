@@ -90,3 +90,55 @@
 - 所有案例未跑 2026 實機瀏覽器瀑布圖與性能 trace；案例表只描述**來源可確認內容**與待驗證研究重點。
 - Resn 網站在文字擷取環境只返回圖片／空白；採用獎項索引，**不可把 Resn 各作品技術寫成已查證**。
 - 尚無真正的 25 個作品逐頁完整 UX walkthrough。若用於商業創作，應在 PoC 階段挑 5 個案例再做錄影、實際鍵盤與觸控檢驗。
+
+
+## 第二輪：28 件作品逐案「設計主張 → 工程翻譯 → 待驗證」審核
+
+> **2026-11-02 增補：** 本表不是逐站 live browser 實測。**證據欄**描述作者／獎項目錄能支持的內容；**工程轉譯**是本研究原創實作建議；**Unknown** 欄表示沒有捕獲到的裝置行為、材質、shader 或第三方 runtime。出品方有作品但無底層實作資訊時，明確不推斷 framework。
+
+| # | 官方作品可證實的任務／定位 | 工程與 UX 可轉用原則（**建議**） | 需補的證據 |
+|---:|---|---|---|
+| 1 | Paper Planes：跨螢幕摺紙、投擲、接取；WebGL | 以紙飛機動作代替導覽頁堆積；視覺物件用 instancing，互動回饋獨立於粒子 | 2026 網站可用性、行動版本與即時後端 |
+| 2 | Active Theory Portfolio：作品與聯絡的雙入口、AI 探索、分享光帶 | 先兩個明確 CTA，再把光帶與 AI 當可略過的探索；導覽速度回饋不應改 hit target | 手機鍵盤導覽、Network waterfall、LCP 真實資料 |
+| 3 | Zentry：產品生態系的中心入口，跨玩家／投資者 | 首屏按受眾分流，世界觀是跨產品索引，不是沒有出口的沉浸迷宮 | 導覽 click path、SSR / 渲染 stack Unknown |
+| 4 | Getty Tracing Art：藝術學習／展示作品名由獎項索引確認 | 歷史材料與自由探索分層；每個熱點有可閱讀替代描述 | 主互動流程、GPU 技術、行動降級 Unknown |
+| 5 | Getty Sculpting Harmony：音樂廳的檔案材料、空拍、互動 3D、音樂 | 3D 模型當知識索引，時間軸與空間探索可切換；聲音默認可控 | 音效開關、3D 互動路徑與效能 Unknown |
+| 6 | Breakthrough Energy：2026 大型網站獎項目錄確認存在 | 複雜能源資訊優先 IA，動畫只引導下一個概念 | 未找到足夠作者工程說明，stack Unknown |
+| 7 | Virgin Galactic：商業太空旅遊 3D 沉浸敘事 | 大景別鏡頭→短說明→內容段落→轉換 CTA；雙向剪裁轉場須保留返回路徑 | 真機 3D 參數、景別時長和是否原生 scroll |
+| 8 | Geske：WebGL 商品視圖、Shopware/Strapi、壓縮與 lazy loading | 商品材質放大檢視接真實購物 CTA；中文/多語字體不能壓在 shader bitmap | 版本、Bundle bytes、KTX2/meshopt 是否使用（作者未指明） |
+| 9 | DEPT Pioneer：工作室標記 Web/3D/Film/動畫 | 以影像導演的定鏡/推鏡控制節奏，不用假裝所有鏡頭即時渲染 | 真正 3D 與影片占比 Unknown |
+| 10 | Adobe Taking Shape：工作室標記 Web/3D | 將品牌 shape／typography 的規則映射進形變，不為形變犧牲文案可選性 | 實際 pipeline / 客戶端引擎 Unknown |
+| 11 | Meebits：工作室標記 Web/3D | 大量數位角色優先 LOD、選中角色高品質、列表語意 UI | 是否採用 instancing、mesh compression Unknown |
+| 12 | Reverso Hybris Mechanica：腕錶創意展示的影像導演與開發 | 高精材質/微距鏡頭/產品數據分工；不把影片標成 WebGL PBR | 是否存在即時 3D Unknown |
+| 13 | Cartier Le Choeur des pierres：高級珠寶敘事作品 | 一致的金屬/寶石光照、留白、低速鏡頭；優先資產真實性 | 實際光照模型、相容性 Unknown |
+| 14 | Ruinart Digital Fresco：實體壁畫→App-free AR／網頁，20+ 熱點及提示 | 不同交互 modality 對應相同資訊樹；深層熱點要有引導入口 | 網頁與 AR 各自 render path、FPS Unknown |
+| 15 | Benno’s Light：作品集列歷史敘事 | 歷史創傷內容以可讀、可信與尊重為主，避免無關 Glitch | 完整導覽、GPU 技術 Unknown |
+| 16 | McDonald’s Rösti Fall：品牌忠誠度遊戲 | 任務→回饋→獎勵的 loop 比粒子密度重要；失敗重試須可理解 | 是否 WebGL/Canvas、轉換率 Unknown |
+| 17 | Brunello Cucinelli：意圖導向品牌導購體驗 | 產品需求查找與品牌探索分層，AI 不得隱藏商品必要資訊 | 推薦品質、實際購物完成率 Unknown |
+| 18 | Bang & Olufsen：See Yourself in Sound 體驗 | 聲波材質轉成個人化視覺時仍有靜音、字幕、文字提示 | 即時音訊處理／渲染 stack Unknown |
+| 19 | The Web Can Do What?!：Google 網頁能力展示 | 一次只傳達一個 API 能力，減少多效果同屏認知負擔 | 各子 demo 的 browser support 與原始碼 Unknown |
+| 20 | Star Atlas：虛擬世界遊戲體驗 | 善用分段載入、顯示「體驗中」與明顯返回；不能無限預載 | 3D streaming 與低端裝置路徑 Unknown |
+| 21 | Hollow：側向夜→晝影像、互動照片、3D 木雕 | 用水平位置表達時間主題；手勢／鍵盤提供等價章節跳轉 | 圖片載入體積、FPS Unknown |
+| 22 | MoMA surreal exhibition：官方列展覽作品 | 透過資訊分層／章節導航保留策展邏輯，而不是自由鏡頭到迷路 | 現存網址與 engine Unknown |
+| 23 | Baillat Studio：黑白／粗體的編輯式設計 | 用字階、模組與留白形成識別，不需要 GPU 背景 | 視覺對比實測、真實 keyboard focus Unknown |
+| 24 | Elektra Virtual Museum：網站與 3D 虛擬展示 | 讓一般內容索引與虛擬漫遊共享同一 item ID / URL；資料與渲染分離 | 3D 物件結構、虛擬空間操作 Unknown |
+| 25 | Zap Energy：核融合品牌科技內容 | 科技名詞先建立前後概念的對應，再引入 scroll scene | 真實用戶理解測試與 JS 成本 Unknown |
+| 26 | Webisoft：軟體及 AI 品牌官網 | 以技術實證圖/案例替代抽象「未來霓虹」；產品頁保持文字可讀 | 具體動畫實作 Unknown |
+| 27 | FinalFinal：音樂協作平台 | 把文件／版本／回饋的時間線當資訊主幹，品牌視覺只在主入口加強 | 操作完成率、可及性與前端框架 Unknown |
+| 28 | Truck'n Roll：演出物流品牌、原創拍攝與編輯內容 | 讓攝影、排版、CTA 解釋服務價值；不需要 3D | 內容/圖片 load budget 未知 |
+
+### 第二輪新增直接可核對的案例材料
+
+- [Resn / Zentry 獎項作品描述](https://bestawards.co.nz/digital/large-scale-websites/resn/zentry/)：明確為跨多產品、玩家與投資人定位的平台。原表的「遊戲品牌互動」描述過於粗糙，以上補正。
+- [Getty Sculpting Harmony（Purple Pin 評審與作品說明）](https://designersinstitute.nz/case-study/sculpting-harmony/)：實際有檔案文獻、空拍、3D renderings 與交響樂的文化敘事；**不可由此推出引擎名稱**。
+- [Dogstudio Geske 完整作者文章](https://dogstudio.co/cases/geske/)：明確說明專用 WebGL 前端＋Strapi＋Shopware、模型減面、壓縮與 lazy/adaptive loading；不是作者證實採用了 Draco/KTX2。
+- [Dogstudio Virgin Galactic](https://dogstudio.co/cases/virgin-galactic/)：有大型 3D 場景、無重力感動態與段落鏡頭節奏。
+- [makemepulse Ruinart](https://www.makemepulse.com/case-study/maison-ruinart-digital-fresco)：確有 20+ 互動點、網頁/AR 兩路與提示頁，屬 UX 支援複雜互動的證據。
+- [Hello Monday Hollow](https://hellomonday.com/work/hollow)、[Hello Monday Work](https://hellomonday.com/work)：Hollow 設計細節直接由作者說明；其餘作品尚多屬官方名錄。
+- [Locomotive Work](https://locomotive.ca/en/work)：Baillat、Elektra、Zap、Webisoft、FinalFinal、Truck'n Roll 的存在與類別已核對。
+
+### 作品研究提升到「真正能複用」的驗證方式
+1. **同題目 UX 對照**：品牌官網 vs 展演網站各挑 2 案；同時做不載入 GPU 的首屏截圖，排除只是靠特效造成高級感的錯覺。
+2. **鏡頭腳本**：記錄每個 Hero 的 shot ID、起點/終點、camera path、與文案同步點、skip/end state；不是單一無限動畫。
+3. **投入報酬**：對每個效果記錄它支持的任務（看懂產品／找到內容／完成導購／傳達品牌），沒有任務只標 decorational。
+4. **效能／可及性**：需另用真實瀏覽器、錄影或 trace 取得鍵盤、滾動、網路、FPS；本輪未持有實際逐站操作證據，不能把上述 28 筆轉譯當作驗證通過。
