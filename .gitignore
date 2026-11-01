@@ -1,0 +1,10 @@
+.cache/
+__pycache__/
+*.pyc
+.serena/cache/
+.serena/memories/
+.serena/logs/
+.serena/project.local.yml
+.env
+.env.*
+!.env.example
