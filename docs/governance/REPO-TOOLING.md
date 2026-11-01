@@ -2,6 +2,12 @@
 
 **最後查證：2026-11-02（Asia/Taipei）**。本文件區分**已提交且可在 CI 運作**、**Repo 內有設定但需 Agent 宿主／外部工具**、**僅列入候選**。Repository 是研究文件庫，不是程式編譯專案；避免無目的安裝大量 MCP。
 
+## 相容性與實測修正（2026-11-02）
+
+- **Serena 1.5.3：** 專案 YAML 已改用該版本原始碼要求的 `languages: [python]`，而非較新版的 `language_servers`。加入固定版本／設定一致性回歸檢查；**尚未在 Hermes 或 Codex 中實際啟動 MCP**。
+- **Token 計數：** 現在所有 JSONL 紀錄都必須提供 `input_token_basis`（`inclusive` 或 `exclusive`）。OpenAI Responses 快取包含在 `input_tokens` 中；Anthropic Messages 的快取讀寫另計。沒有明確語意的舊紀錄會拒絕計算。格式詳見 [Token 計數契約](TOKEN-ACCOUNTING.md)。
+- **GitHub CI：** Checkout 由固定 SHA 的 v4.2.2 更新到固定 SHA 的 v5.0.1（Node.js 24）；實際測試結果以 PR Checks 為準。
+
 ## 這個 Repo 實際建立了什麼？
 
 | 領域 | 檔案 | 執行狀態與限制 |
@@ -39,11 +45,11 @@ SQLite 需內建 FTS5 的 Trigram tokenizer；不支援時回報錯誤並用 \`r
 python3 scripts/agent_usage_audit.py my-local-usage.jsonl --warn-above-tokens 100000
 \`\`\`
 
-每行是一個 model call，必填 task ID、model、input/output/cache read/cache write tokens、tool calls、duration、success 與 \`cost_usd\`（未知用 \`null\`）；不需要 prompt、對話或 API Key。**不會攔截 Provider，不能阻止實際訂閱配額超額。** 只適合離線測量與品質成本比。
+每行是一個 model call，必填 task ID、model、\`input_token_basis\`（inclusive / exclusive）、input/output/cache read/cache write tokens、tool calls、duration、success 與 \`cost_usd\`（未知用 \`null\`）；不需要 prompt、對話或 API Key。**不會攔截 Provider，不能阻止實際訂閱配額超額。** 只適合離線測量與品質成本比。
 
 ### C. 可選 Serena MCP（不要當成自動啟用）
 
-1. 本 Repo 已提交 [.serena/project.yml](../../.serena/project.yml)：\`read_only: true\`、\`language_servers: [python]\`，因為主要資料是 Markdown，Serena 對 Python 腳本的 symbol 查找才有意義。
+1. 本 Repo 已提交 [.serena/project.yml](../../.serena/project.yml)：\`read_only: true\`、\`languages: [python]\`，因為主要資料是 Markdown，Serena 對 Python 腳本的 symbol 查找才有意義。
 2. 已提交 [.mcp.json.example](../../.mcp.json.example)，不會自動啟動；**只有在已信任此 Repo、符合安全界線、願意安裝 uv／Python 3.13、客戶端支援 portable \`.mcp.json\` 時**才自行複製為 \`.mcp.json\`。
 3. 範例以官方 PyPI package \`serena-agent==1.5.3\` 固定版本，啟動時使用 \`--project-from-cwd\`。如套件版本不存在或客戶端不支援，需改用 Serena 上游正式文件對應版，不能假裝測過。
 4. Claude Code、Codex、Hermes、OpenCode／VS Code 的 MCP schema 和信任策略不一致；**不要把一份 JSON 當成所有 Agent 的通用自動安裝器**。
