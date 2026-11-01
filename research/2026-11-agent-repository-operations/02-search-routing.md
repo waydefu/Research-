@@ -14,7 +14,7 @@
 | 查 API 最新規格、產品手冊 | 官方文件、版本化 docs / Context7 | 受控外網查證 |
 | 不知道原詞的概念問題 | 標題/FTS/BM25 → semantic embedding | hybrid rerank／Graph retrieval |
 | 多年份、跨系統事實如何演變 | 文件引用 + timestamp/version | Graphiti 時序圖譜（若資料量值得） |
-| 一次性打包供人或模型審閱 | [Repomix](https://github.com/repomix/repomix) 限定目錄 + token tree | **不得長期每次全量注入** |
+| 一次性打包供人或模型審閱 | [Repomix](https://github.com/yamadashy/repomix) 限定目錄 + token tree | **不得長期每次全量注入** |
 
 ## 如何控制一次搜尋的 Tokens
 
