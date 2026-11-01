@@ -1,0 +1,49 @@
+{
+  "schema_version": "research-2026-11-v1",
+  "query": {
+    "text": "Find references to updateWidget",
+    "intent": "symbol-references",
+    "repo": "owner/example",
+    "requested_branch": "feature/refactor",
+    "max_results": 8
+  },
+  "index": {
+    "engine": "LSP or SCIP",
+    "generation": "EXAMPLE_GENERATION",
+    "source_commit_sha": "EXAMPLE_COMMIT_SHA",
+    "indexed_at": "2026-11-02T00:00:00+08:00",
+    "is_fresh": null,
+    "coverage": "partial",
+    "missing_paths": [],
+    "warnings": [
+      "Example only: no index or repository was queried"
+    ]
+  },
+  "answer": {
+    "status": "unverified",
+    "complete_callers": false,
+    "no_callers_proven": false,
+    "source_verification_required": true
+  },
+  "results": [
+    {
+      "path": "src/example.ts",
+      "start_line": 10,
+      "end_line": 17,
+      "symbol": "updateWidget",
+      "content_digest": "EXAMPLE_SHA256",
+      "snippet": "EXAMPLE_SNIPPET_NOT_REAL_CODE",
+      "evidence_kind": "source",
+      "source_commit_sha": "EXAMPLE_COMMIT_SHA"
+    }
+  ],
+  "execution": {
+    "tool": "search",
+    "token_count_estimate": null,
+    "elapsed_ms": null
+  },
+  "security": {
+    "acl_checked": false,
+    "secret_scan_passed": null
+  }
+}
