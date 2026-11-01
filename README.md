@@ -57,6 +57,19 @@
 
 **狀態：** 官方資料已核對，**尚未跑同條件實機 Benchmarks**，不宣稱任何框架已驗收或被安裝到其他 Repo。
 
+## 2026-11｜世界級 Creative Web：UI/UX × 電影級特效 × 跨端性能（獨立研究分支）
+
+本次是既有 [通用 Web 工程研究](research/2026-11-universal-web-engine/README.md) 的 **10–15 深化篇**，非網站實作：28 件頂尖作品、70 個 GitHub 候選、18 項核心技術精選，並整理成渲染架構和真正可執行的 PoC 驗收規格。
+
+- [10｜設計工作室與 28 個案例：設計語言、導航與美術規則](research/2026-11-universal-web-engine/10-creative-direction-and-reference-sites.md)
+- [11｜WebGL/WebGPU、GLSL/WGSL、PBR、Fluid、Motion 與 Rendering Pipeline](research/2026-11-universal-web-engine/11-motion-graphics-and-rendering.md)
+- [12｜70 個 GitHub 開源候選、Top 18 授權／版本／維護／相容調查](research/2026-11-universal-web-engine/12-github-creative-ecosystem.md)
+- [13｜Design Tokens、反 AI 模板規範、跨裝置性能、三套 Creative Stack、Top 20 五維分數](research/2026-11-universal-web-engine/13-design-performance-and-architecture.md)
+- [14｜十種代表特效：原創偽碼、瓶頸、降級，以及五個 PoC 驗收](research/2026-11-universal-web-engine/14-effects-recipes-and-poc-validation.md)
+- [15｜40 個來源、證據等級、限制與導入先後順序](research/2026-11-universal-web-engine/15-creative-web-evidence-and-adoption.md)
+
+**證據限制：** 非 28 個站逐頁操作、非跨裝置實機 Benchmark；GitHub API 授權 metadata 不代替 LICENSE 法律審查；無 FPS、Bundle 體積、功耗數據時明確保留 Unknown。**已建立規格，不代表安裝、部署或通過 EAG-100。**
+
 ## 2026 年 10 月：有價值的 AI 工程研究精選（新增）
 
 **[開啟十月精選研究目錄](research/2026-10-retrospective/README.md)**
