@@ -3,7 +3,7 @@
 
 ## 1. 架構：不要讓渲染器接管整個網站
 
-\`\`\`text
+```text
 Semantic HTML + CSS (SEO, nav, forms, focus, screen reader)
   ├─ Design tokens / CSS layout (desktop + mobile)
   ├─ UI state & input normalizer (mouse/touch/keyboard/gesture)
@@ -14,7 +14,7 @@ Semantic HTML + CSS (SEO, nav, forms, focus, screen reader)
        ├─ scene graph / GPU buffers / assets
        ├─ postprocess graph (bounded passes)
        └─ fallback poster + accessible text
-\`\`\`
+```
 
 **設計原則：** 導覽、語意、表單不變成 GPU texture；UI 綁定 scene state，但 WebGPU device lost 不得造成站點不可用。風格由美術系統定義，GPU 是一個可替換的實作。參考 [Three WebGPURenderer](https://threejs.org/manual/pages/webgpurenderer) 與 [MDN WebGPU](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)。
 
@@ -55,7 +55,7 @@ Semantic HTML + CSS (SEO, nav, forms, focus, screen reader)
 | GPU compute | Compute pipeline dispatch → storage buffers → render | pipeline compile、sync、硬體 fallback | **高階且有條件** |
 
 ### 3.1 GPU Frame Graph（僅示意，順序依 alpha／TAA 方案而變）
-\`\`\`text
+```text
 Assets decode / KTX2 transcode (loading; outside frame)
 → update visible state + Worker inputs
 → depth pre-pass (only if profiling justifies)
@@ -65,15 +65,15 @@ Assets decode / KTX2 transcode (loading; outside frame)
 → TAA/AA or resolution upscaling (engine-specific)
 → tone mapping + color management
 → UI DOM compositing, not drawn into 3D framebuffer
-\`\`\`
+```
 
 **不得把「光追感」寫成硬體 ray tracing：** SSR、IBL、SDF ray marching 都能模擬某些反射／空間視覺，但與 path tracing / hardware RT 不同。詳見 [glTF PBR](https://www.khronos.org/gltf/)。
 
 ### 3.2 線性空間、色彩與素材
 - albedo／一般照片為 sRGB → shader 計算轉 linear，normal/roughness/metallic **不得**當 sRGB 色彩貼圖處理；最後 tone map＋輸出轉換。
-- 依 Khronos [KTX Artist Guide](https://github.com/KhronosGroup/3D-Formats-Guidelines/blob/main/KTXArtistGuide.md)，\`KTX2\` 比 PNG/JPEG 更可能保留 GPU 壓縮狀態；但 **傳輸檔案不保證更小**，轉碼成本需測。
-- 建議 glTF/GLB、\`KHR_texture_basisu\`（KTX2）、\`EXT_meshopt_compression\`；高品質 normal 選擇 UASTC 候選；色彩圖可以試 ETC1S。建立 visual golden image，確認壓縮 artifacts。
-- 建議每個資產帶 \`license/source/version/materials/lods/texture_formats/fallback\` 中繼資料；不要誤把素材庫存視為全部可商用。
+- 依 Khronos [KTX Artist Guide](https://github.com/KhronosGroup/3D-Formats-Guidelines/blob/main/KTXArtistGuide.md)，`KTX2` 比 PNG/JPEG 更可能保留 GPU 壓縮狀態；但 **傳輸檔案不保證更小**，轉碼成本需測。
+- 建議 glTF/GLB、`KHR_texture_basisu`（KTX2）、`EXT_meshopt_compression`；高品質 normal 選擇 UASTC 候選；色彩圖可以試 ETC1S。建立 visual golden image，確認壓縮 artifacts。
+- 建議每個資產帶 `license/source/version/materials/lods/texture_formats/fallback` 中繼資料；不要誤把素材庫存視為全部可商用。
 
 ## 4. Web 動態與互動「做什麼、花什麼」
 
@@ -100,13 +100,13 @@ Assets decode / KTX2 transcode (loading; outside frame)
 **排序：** DOM/CSS 基礎 → 有必要才使用單一 Motion Director → WebGL → WebGPU Compute。對技術選型，不能只比較 npm package 大小；還要量測 parse/eval、動畫 long tasks、GPU render passes。
 
 ## 5. 可重複利用的高階特殊效果
-- **液態圖片／屈折**：將滑鼠軌跡寫入 velocity/normal map；fragment \`uv += flow * amplitude\` 後對原圖取樣。對應手機改單次 ripple 或 CSS mask。
+- **液態圖片／屈折**：將滑鼠軌跡寫入 velocity/normal map；fragment `uv += flow * amplitude` 後對原圖取樣。對應手機改單次 ripple 或 CSS mask。
 - **RGB Split／色差**：各色頻道以不同方向偏移取樣，幅度依速度，不要常駐高亮造成閱讀干擾。
 - **Glitch／數位雜訊／Film Grain**：用受控 deterministic noise + row offsets，低強度且只作用於背景層；禁在主要字上長時間閃爍。
-- **粒子聚合**：每粒 \`mix(startPos,targetPos,easedProgress)\`；動畫結束恢復靜態圖形。尺寸有級差，避免粒子填滿手機螢幕。
+- **粒子聚合**：每粒 `mix(startPos,targetPos,easedProgress)`；動畫結束恢復靜態圖形。尺寸有級差，避免粒子填滿手機螢幕。
 - **玻璃／全息／金屬**：玻璃以實際環境反射、透射、厚度／色散近似；全息掃描線僅為 art direction，不是 PBR 自然材質。
 - **SVG + Canvas + GPU**：DOM 文字／控件前景、SVG 路徑剪切、GPU shader 背景。對 pointer/scroll 使用同一標準化輸入，不要每層各掛全域 listener。
-- **實體回饋**：彈簧模型 \`a=(target-x)*k-v*c; v+=a*dt; x+=v*dt\`，必須對 \`dt\` clamp，tab 切回不能瞬間爆炸。
+- **實體回饋**：彈簧模型 `a=(target-x)*k-v*c; v+=a*dt; x+=v*dt`，必須對 `dt` clamp，tab 切回不能瞬間爆炸。
 - **3D 爆炸圖**：以產品邏輯節點和拆裝約束決定路徑，動畫以零件局部座標 + easing；不應只播放不可操作的 FBX 影片。
 - **Render-to-texture image reveal**：雙 sampler 紋理與 mask mix、少量 noise/displacement；緩慢網路直接顯示 alt/poster。
 
