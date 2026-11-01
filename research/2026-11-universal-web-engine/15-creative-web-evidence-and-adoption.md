@@ -55,6 +55,22 @@ GitHub 第一輪透過 2026-11-02 公開 API `/repos/{owner}/{repo}` 確認 **70
 | 39 | 案例 | [Locomotive Baillat](https://locomotive.ca/en/work/baillat-studio) | 作者確認黑白/粗體/極簡導航 | 2026-11-02 |
 | 40 | 案例 | [Locomotive Zap Energy](https://locomotive.ca/en/work/zap) | 作者確認 IA/品牌/科學內容優先 | 2026-11-02 |
 
+## 2.1 PR #4 審查補證（2026-11-02；不納入原 40 項計數）
+
+審查時對照作者**個別作品頁**，已在 [第 10 篇](10-creative-direction-and-reference-sites.md) 逐列替換有直接個案來源的 15 個入口，不再以整個工作室目錄代表作品的細部事實。
+
+| 追加來源 | 新查證的可支持內容 | 仍 Unknown |
+| --- | --- | --- |
+| [DEPT Pioneer](https://dogstudio.co/cases/dept-pioneer/) | Nuxt.js + 自家 WebGL framework、兩條內容路徑、點雲 Entity（2023） | 現在是否仍採用同技術 |
+| [Virgin Galactic](https://dogstudio.co/cases/virgin-galactic/) | AstroGL、多個 WebGL subscenes、環境貼圖模擬反射、雙向 pin/clipping | 裝置 FPS、目前部署版本 |
+| [Geske](https://dogstudio.co/cases/geske/) | Strapi／Shopware、WebGL、3D 旋轉商品、減面／懶載入 | 真實效能、轉換率 |
+| [MoMA Magritte](https://hellomonday.com/work/moma-magritte) | 旁白、配樂、超現實轉場、X-ray／紅外修復素材 | Rendering engine |
+| [OGL package.json](https://github.com/oframe/ogl/blob/master/package.json) + [README](https://github.com/oframe/ogl/blob/master/README.md#unlicense) | 上游原始碼明確標示 Unlicense；GitHub API 欄位仍可為 Unknown | 版本別法律合規與第三方授權 |
+
+- **研究評分補強**：第 13 篇新增各維度 1／3／5 錨點、2／4 使用條件與 Unknown 原則；原有 Top 20 分數仍是尚未重新雙評的研究快照。
+- **PoC 補強**：第 14 篇新增五種特效／介面的固定比較情境、採樣次數、裝置分層及故障退場；皆為**未執行的測試規格**，不得將表格數字視為真實性能結果。
+- **採信界線**：作者文字可以證明案例中描述的功能、當時使用的工具，**不能證明此刻線上相同版本或跨裝置性能**。新來源仍屬 research evidence，不是 Repo 操作授權。
+
 ## 3. 來源互相矛盾時如何裁決
 1. **Three WebGPU 是新架構，但非所有場景更快。** 官方明文仍標 experimental，並指出某些場景 WebGLRenderer 更快。因而 `WebGPU` 值得 PoC，但不可根據 API 現代性決定採用或產生「WebGPU 永遠快 30%」的幻覺。[官方說明](https://threejs.org/manual/pages/webgpurenderer)。
 2. **Three WebGPURenderer 有 WebGL2 backend，但老 Shader/EffectComposer 不兼容。** 它解決支援落差，不會自動移植舊 GLSL 材質或舊後製；必須以 TSL/RenderPipeline 重寫或保留 WebGLRenderer。[遷移說明](https://threejs.org/manual/pages/webgpurenderer)、[新 Postprocessing](https://threejs.org/manual/pages/webgpu-postprocessing)。

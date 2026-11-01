@@ -108,6 +108,27 @@
 - **驗收：**辨識度不依賴通用漸層與玻璃卡；WCAG 2.2 AA 的可自動檢項及人工流程分開記；每個狀態都有可見回饋。
 - **Go/No-go：**若移除動畫後失去層級和品牌識別，視覺設計退回，不靠堆 shader 掩蓋。
 
+## 3.1 五個 PoC 的可重現性測試矩陣（設計方案；尚未執行）
+
+**共通基線**：在開始前鎖定 Git SHA、依賴 lockfile、資產 hash、解析度／DPR、瀏覽器 build、OS、電源與測試網路；固定相同素材、畫面面積與輸入節奏。每組情境至少重複 **3 次冷啟動 + 5 次暖啟動**，較長的持續動畫另進行每次 **10 分鐘 × 3 回合** 觀察熱穩定；上述只是預先宣告的採樣計畫，不是完成的數據，也**不足以單獨宣稱統計顯著性**。
+
+| PoC | A/B 對照場景 | 輸入與測試資料固定方式 | 可比較的主要輸出 | 錯誤注入與退出條件 |
+| --- | --- | --- | --- | --- |
+| 1 液態折射 | WebGL2 flow FBO vs CSS/SVG spring | 固定同圖 hash、畫面尺寸；重播相同 5 段 touch/mouse 軌跡與速度 | JS gzip、首次 shader compile、p95/p99 frame time、畫面相似性、觸控命中 | 關閉 WebGL2、移除 canvas、切 reduced motion；無遮 CTA、能回靜態圖 |
+| 2 PBR 爆炸圖 | 分件 GLB + meshopt/KTX2 vs 同幾何未壓縮資產 | 固定攝影機、光源、拆件矩陣、配件數、貼圖品質容忍範圍 | 傳輸量、decode、顯存（可得才填）、draw calls、配件選取正確率 | 遺失/損壞 GLB、WebGL context loss、鍵盤操作；2D 零件列表仍能選配 |
+| 3 Scroll Story | CSS scroll-driven + View Transitions vs GSAP + 小型 Three 場景 | 相同篇章文字、單一腳本捲動距離、錨點及 back/forward 任務 | 任務成功、跳章/回上一頁正確性、長幀／INP、JS parse/eval | 關閉各 API、禁動畫、錯誤導航與低速網路；主內容仍可讀 |
+| 4 粒子聚合 | WebGPU Compute vs WebGL2 更新 vs 靜態 Logo | 同 target point 雜湊、初速種子、粒子數、像素覆蓋與渲染比例 | 每秒更新／顯示幀、p95 frame time、粒子 count、穩態功耗（可得才填） | requestAdapter=null、device.lost、編譯失敗；禁無限重試，回退 WebGL2／靜態 |
+| 5 品牌 UI | 科技 HUD、奢侈品、編輯排版三種 Art Direction；有／無特效 | 相同文案、CTA、資訊架構；測試順序輪替避免學習偏差 | 首屏品牌回憶、CTA 完成、誤點、鍵盤／螢幕閱讀器可用性 | 禁用字型／動態／GPU，切換中英+CJK 長文；結構仍可辨識 |
+
+### 測試環境與量測解讀
+
+- **必要裝置覆蓋**：高階桌機、一般整合顯示筆電、高階 Android、中階 Android、iPhone Safari、WebGPU 不支援環境；無法取得真機時標 `NOT TESTED`，不可由桌面模擬假裝 Safari 真機結果。
+- **Chrome/Edge DevTools** 記 Network／Performance trace、draw calls、Long Animation Frames（支援時）、GPU context loss；Safari Web Inspector／Android trace 用各自支援的資料。無法量測硬體 GPU memory／power 的欄位用 Unknown。
+- **FPS／p95**：指定刷新率和互動區間，不把 `requestAnimationFrame` 間距直接視為 GPU 時間；60Hz 約 16.67ms 僅為理論預算。比較兩方案前分別標記 GPU 與 Main Thread 的瓶頸；無實測不提供 FPS 勝負。
+- **資料與隱私**：腳本化假資料、不上傳訪客識別資訊；暈眩測試需明示可退出；不在未授權環境蒐集硬體指紋。
+- **可合併的 Go/No-go 記錄**：每組填 `PASS / FAIL / UNKNOWN`、理由、trace 路徑與 SHA。主導航、鍵盤可用性、基本 CTA、減少動態、GPU 失效退場若失敗即 `NO-GO`；純美術偏好由人體評審與一致性問卷另列，不用跑分取代設計品質。
+- **變更控制**：先完成 PoC-1、2、3 的比較；只有遇到 WebGL2 的可重現性能限制時才研究 PoC-4 GPU Compute 的收益。每次測試輸出同一模板，保存失敗案例供回歸。
+
 ## 4. PoC 的統一測試報表模板
 | 欄位 | 內容 |
 |---|---|

@@ -16,28 +16,39 @@
 | 4 | Resn | [Getty Tracing Art](https://bestawards.co.nz/studios/resn/) | 藝術教育沉浸展示 | 作品名稱與獎項已核對；互動與引擎 Unknown | C |
 | 5 | Resn | [Getty Sculpting Harmony](https://bestawards.co.nz/studios/resn/) | 藝術／文化敘事 | 作品名稱已核對；材質／渲染技術 Unknown | C |
 | 6 | Resn | [Breakthrough Energy](https://bestawards.co.nz/studios/resn/) | 科技敘事 | 2026 入選名稱已核對；技術 Unknown | C |
-| 7 | Dogstudio | [Virgin Galactic](https://dogstudio.co/cases/) | 高級產品／旅程展示 | 工作室標記 Strategy、Design、Web、3D；可研究敘事→CTA 路徑 | B |
-| 8 | Dogstudio | [Geske](https://dogstudio.co/cases/) | 產品展示與電商 | 官方標記 3D/eCommerce；應驗證 3D 是否協助理解產品 | B |
-| 9 | Dogstudio | [DEPT Pioneer](https://dogstudio.co/cases/) | 電影與 Web 的跨媒介語言 | 工作室明列 Film Direction、3D Animation；技術實作 Unknown | B |
-| 10 | Dogstudio | [Adobe Taking Shape](https://dogstudio.co/cases/) | 品牌形變與設計工具敘事 | 官方明列 Web/3D；體驗動作細節待人工瀏覽 | B |
-| 11 | Dogstudio | [Meebits](https://dogstudio.co/cases/) | 數位角色／收藏品展示 | 官方明列 Web/3D；資產規模與 API Unknown | B |
-| 12 | Dogstudio | [Jaeger-LeCoultre: Reverso Hybris Mechanica](https://dogstudio.co/cases/) | 奢侈品材質與鏡頭語言 | 官方列 Design/Film Direction/Development；精確 3D 技術 Unknown | B |
-| 13 | makemepulse | [Cartier Le Choeur des pierres](https://www.makemepulse.com/case-studies) | 奢侈品珠寶敘事 | 官方定位為沉浸式高級珠寶旅程；聚焦材質／節奏與選購資訊分層 | B |
-| 14 | makemepulse | [Ruinart – Digital fresco](https://www.makemepulse.com/case-studies) | 數位壁畫互動 | 官方定位為數位壁畫重構；需核對是否真 GPU 筆觸 | B |
-| 15 | makemepulse | [Benno’s Light](https://www.makemepulse.com/case-studies) | 高情緒密度的歷史見證 | 以敘事清晰、尊重內容優先，不應拿 Glitch 為噱頭 | B |
-| 16 | makemepulse | [McDonald’s Rösti Fall](https://www.makemepulse.com/case-studies) | 遊戲化行銷 | 官方描述為忠誠度遊戲；需驗證任務→獎勵 UX | B |
-| 17 | makemepulse | [Brunello Cucinelli Human-Centred AI](https://www.makemepulse.com/case-studies) | 意圖驅動電商 | 官方描述 intent-led experience；要區分導購有效性與視覺特效 | B |
-| 18 | Hello Monday | [Bang & Olufsen – See Yourself in Sound](https://hellomonday.com/work) | 感官化品牌敘事 | 工作室列為體驗；研究聲音→視覺映射是否可關閉／替代 | B |
-| 19 | Hello Monday | [The Web Can Do What?! with Google](https://hellomonday.com/work) | 瀏覽器能力敘事 | 官方列 Experience；可借鑑單一技術能力→可理解的互動示範 | B |
-| 20 | Hello Monday | [Star Atlas](https://hellomonday.com/work) | 虛擬世界入門 | 官方列虛擬遊戲宇宙體驗；應審查導航與載入等待 | B |
+| 7 | Dogstudio | [Virgin Galactic](https://dogstudio.co/cases/virgin-galactic/) | 高級產品／旅程展示 | 作者確認 AstroGL 多 WebGL 子場景、預計算環境貼圖近似反射及雙向 pin/clipping；效能數據未提供 | A |
+| 8 | Dogstudio | [Geske](https://dogstudio.co/cases/geske/) | 產品展示與電商 | 作者確認自有 WebGL framework、Strapi/Shopware、旋轉產品檢視與 lazy/adaptive loading；實際轉換效益未測 | A |
+| 9 | Dogstudio | [DEPT Pioneer](https://dogstudio.co/cases/dept-pioneer/) | 電影與 Web 的跨媒介語言 | 作者確認 Nuxt.js + 自有 WebGL framework、雙路導覽與即時點雲 Entity（2023 個案）；現行技術 Unknown | A |
+| 10 | Dogstudio | [Adobe Taking Shape](https://dogstudio.co/cases/adobe-taking-shape/) | 品牌形變與設計工具敘事 | 官方明列 Web/3D；體驗動作細節待人工瀏覽 | B |
+| 11 | Dogstudio | [Meebits](https://dogstudio.co/cases/meebits/) | 數位角色／收藏品展示 | 官方明列 Web/3D；資產規模與 API Unknown | B |
+| 12 | Dogstudio | [Jaeger-LeCoultre: Reverso Hybris Mechanica](https://dogstudio.co/cases/jaeger-lecoultre-reverso-hybris-mechanica/) | 奢侈品材質與鏡頭語言 | 官方列 Design/Film Direction/Development；精確 3D 技術 Unknown | B |
+| 13 | makemepulse | [Cartier Le Choeur des pierres](https://www.makemepulse.com/case-study/cartier-le-choeur-des-pierres) | 奢侈品珠寶敘事 | 官方定位為沉浸式高級珠寶旅程；聚焦材質／節奏與選購資訊分層 | B |
+| 14 | makemepulse | [Ruinart – Digital fresco](https://www.makemepulse.com/case-study/maison-ruinart-digital-fresco) | 數位壁畫互動 | 官方定位為數位壁畫重構；需核對是否真 GPU 筆觸 | B |
+| 15 | makemepulse | [Benno’s Light](https://www.makemepulse.com/case-study/bennos-light-claims-conference) | 高情緒密度的歷史見證 | 以敘事清晰、尊重內容優先，不應拿 Glitch 為噱頭 | B |
+| 16 | makemepulse | [McDonald’s Rösti Fall](https://www.makemepulse.com/case-study/mcdonalds-france-rosti-fall-loyalty-mobile-game) | 遊戲化行銷 | 官方描述為忠誠度遊戲；需驗證任務→獎勵 UX | B |
+| 17 | makemepulse | [Brunello Cucinelli Human-Centred AI](https://www.makemepulse.com/case-study/brunello-cucinelli-ai-shopping-experience) | 意圖驅動電商 | 官方描述 intent-led experience；要區分導購有效性與視覺特效 | B |
+| 18 | Hello Monday | [Bang & Olufsen – See Yourself in Sound](https://hellomonday.com/work/bang%26olufsen) | 感官化品牌敘事 | 工作室列為體驗；研究聲音→視覺映射是否可關閉／替代 | B |
+| 19 | Hello Monday | [The Web Can Do What?! with Google](https://hellomonday.com/work/the-web-can-do-what) | 瀏覽器能力敘事 | 官方列 Experience；可借鑑單一技術能力→可理解的互動示範 | B |
+| 20 | Hello Monday | [Star Atlas](https://hellomonday.com/work/staratlas) | 虛擬世界入門 | 官方列虛擬遊戲宇宙體驗；應審查導航與載入等待 | B |
 | 21 | Hello Monday | [Hollow](https://hellomonday.com/work/hollow) | 3D 展覽與側向敘事 | 作者指出側向捲動的明暗敘事、互動圖片及 3D 雕塑 | A |
-| 22 | Hello Monday | [MoMA surreal digital exhibition](https://hellomonday.com/work) | 文化藝術展示 | 官方作品目錄證明存在；渲染引擎 Unknown | B |
+| 22 | Hello Monday | [MoMA Magritte surreal digital exhibition](https://hellomonday.com/work/moma-magritte) | 文化藝術展示 | 作者描述 Magritte 主題、旁白、配樂、視覺轉場及修復素材；渲染引擎 Unknown | A |
 | 23 | Locomotive | [Baillat Studio](https://locomotive.ca/en/work/baillat-studio) | 黑白編輯式字體設計 | 官方說明粗體排版、極簡導覽、模組化系統；低特效也有高質感 | A |
 | 24 | Locomotive | [Elektra Virtual Museum](https://locomotive.ca/en/work/elektra-virtual-museum) | 文化展覽、品牌容器 | 官方區分可持續更新的網站與獨立虛擬體驗；內容與引擎分離 | A |
 | 25 | Locomotive | [Zap Energy](https://locomotive.ca/en/work/zap) | 複雜技術品牌的資訊架構 | 官方強調 IA、內容策略與動畫微互動結合，不是 GPU 優先 | A |
 | 26 | Locomotive | [Webisoft](https://locomotive.ca/en/work/webisoft) | 未來科技美術方向 | 官方描述流暢動態與未來感導航；具體渲染技術 Unknown | A |
 | 27 | Locomotive | [FinalFinal](https://locomotive.ca/en/work/finalfinal) | 產品故事與互動示範 | 工作室強調 sound/motion/storytelling 與平台實際工作流程一致 | A |
 | 28 | Locomotive | [Truck'n Roll](https://locomotive.ca/en/work/truck-n-roll) | 真實照片與動態品牌 | 官方描述客製攝影，服務商業開發與招聘；內容可信優先 | A |
+
+### 官方個案頁補證（2026-11-02）
+
+以下只列**工作室自己明確公開的行為或技術**。括號內的工程建議屬研究推論，不代表作者使用同樣的實作，也未做網站實機性能測試：
+
+- **DEPT Pioneer**： [官方個案](https://dogstudio.co/cases/dept-pioneer/) 說明 2023 年版本以 Nuxt.js + 自有 WebGL framework、點雲 Entity 與兩條 UX 導覽路徑呈現；使用者可跳過 AI 問答直接閱讀內容。**建議推論：**沉浸式引導不應阻擋快速進入內容。
+- **Virgin Galactic**： [官方個案](https://dogstudio.co/cases/virgin-galactic/) 明述 AstroGL、多 WebGL 子場景、相機位置觸發的環境貼圖切換、鏡頭與雙向 pin/clipping swipe。**建議推論：**高成本即時反射應先比較靜態／預算內替代方案；未取得真實 FPS。
+- **Geske**： [官方個案](https://dogstudio.co/cases/geske/) 明述 Strapi、Shopware、自有前端／WebGL 框架，及減面、壓縮、懶載入與 adaptive loading。**建議推論：**3D 產品視圖應與商品資訊及購買工作流程整合；未取得轉換率數據。
+- **MoMA Magritte**： [官方個案](https://hellomonday.com/work/moma-magritte) 指出 René Magritte 展覽使用旁白、配樂、超現實視覺轉場，以及 X-ray／紅外線／修復影像支援內容探索。**建議推論：**效果須服務藝術知識而不是強迫跳過內容；未確認其使用何種 WebGL/Shader 架構。
+
+單一作品頁只提高「來源定位精確度」，**不自動提升證據等級**；本章僅對有作者技術或互動描述的案例升至 A。Resn 只有獎項來源的作品維持 C，其他官方名錄案例仍維持 B。
 
 ## 五個深度拆解
 
