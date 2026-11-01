@@ -151,3 +151,27 @@
 - [GSAP 使用限制](https://gsap.com/community/standard-license/)。
 - [Three WebGPU 能力／遷移](https://threejs.org/manual/pages/webgpurenderer)。
 - [WebGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)。
+
+
+## 第二輪修正與授權證據（2026-11-02，直讀上游程式檔）
+
+**OGL：** GitHub API 的 `license.spdx_id` 為 Unknown，且根目錄沒有 `LICENSE`。不過 [官方 repo 的 package.json](https://github.com/oframe/ogl/blob/master/package.json) 宣告 `license: "Unlicense"`、`version: "1.0.11"`。這使「套件聲明」可從 Unknown 提升到可查，但**不等於**已找到完整授權全文、符合每個公司法律條件。正式商用採用要再核對實際 npm tarball 內容、原始程式授權與 notice。
+
+**GSAP：** [官方 repo package.json](https://github.com/greensock/GSAP/blob/master/package.json) 聲明 `version: 3.15.0` 與 Standard no-charge license；此為 **Git 原始碼 manifest 的版本**，非 `/releases/latest` 或正式 npm dist-tag 驗證。 [官方授權全文](https://gsap.com/community/standard-license/) 區分網站／App 中的 permitted uses 與可能競爭 Webflow 視覺動畫編輯工具的 prohibited uses；**不能將「免費」等同可自由再授權**。
+
+**封存：** `dimforge/rapier.js` 與 `LottieFiles/lottie-player` 的 GitHub `archived: true` 已確認，不建議新專案直接以這兩者當長期主要核心。`dimforge/rapier` 是另一條未封存 repo，**不能**因此推斷舊 rapier.js API 與它的 WASM 版本百分百相容。
+
+**重導向：** `pmndrs/maath`、`BuilderIO/partytown` 舊路徑 REST 查詢得到 `Moved Permanently`；在未取得 canonical URL 與來源前，不補成已查證候選，避免重複／失真計數。
+
+### 商用與安全前置關卡（不能以 Stars、npm weekly downloads 放行）
+
+| 導入分類 | 必須額外取證 | 未驗證時的處理 |
+|---|---|---|
+| GSAP／特殊 license | 完整 license、產品是否視覺動畫 builder、限制是否適用 | 常規網站可列候選；builder 場景法律審查 |
+| OGL／API unknown | repo manifest 與包內 LICENSE/NOTICE 是否一致 | 不標為商用授權通過 |
+| Rive、Lottie | runtime license vs 圖形素材與編輯器費用 | 核准 runtime 不代表核准素材 |
+| WebGPU／TSL | WebGPU device features、WebGL2 fallback、shader 及後製 migration | 不可將可 fallback 當成可原樣兼容 |
+| 跨端 | 實機 WebKit／Chromium／Gecko、觸控與 keyboard | 無結果為 Unknown，不給精確 FPS |
+| 供應鏈 | 鎖版、transitive dependencies、advisory、maintainer/release、SBOM 可再生性 | 不作「無漏洞」宣告 |
+
+**不同框架的實際整合成本必須單獨測：** React 的 R3F lifecycle 不能直接套 Vue；Next SSR 要檢查 browser globals/hydration；Astro 的 GPU canvas 只以 client island 初始化，否則 LCP 可能由大型 3D JS 阻塞。這些是驗證提案，不是此研究已完成的安裝測試。

@@ -131,3 +131,115 @@ Assets decode / KTX2 transcode (loading; outside frame)
 - https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas
 - https://gsap.com/docs/v3/Plugins/ScrollTrigger/
 - https://motion.dev/
+
+
+## 8. 可直接轉成工程工作的瀏覽器相容性契約
+
+此節是**可審查的實作範本**，不是已部署或已在 Chrome/Safari 真機測通。**GL context 探測與主渲染器初始化必須分開**，避免對同一 canvas 建立互斥 context。
+
+### 8.1 Progressive rendering / runtime states
+
+```ts
+type SceneQuality = "basic" | "balanced" | "high" | "ultra";
+type RendererBackend = "webgpu" | "webgl2" | "none";
+
+type SceneStatus =
+  | { state: "poster"; reason: "initial" | "reduced-motion" | "unsupported" }
+  | { state: "initializing"; backend: RendererBackend }
+  | { state: "ready"; backend: RendererBackend; quality: SceneQuality }
+  | { state: "failed"; reason: string };
+
+async function chooseBackend(requiredFeatures: GPUFeatureName[] = []) {
+  // Progressive enhancement: feature detection is not permission to assume speed.
+  if ("gpu" in navigator && navigator.gpu) {
+    try {
+      const adapter = await navigator.gpu.requestAdapter();
+      if (adapter && requiredFeatures.every(f => adapter.features.has(f))) {
+        const device = await adapter.requestDevice({ requiredFeatures });
+        return { kind: "webgpu" as const, device };
+      }
+    } catch {
+      // Any adapter/device rejection is a normal fallback state.
+    }
+  }
+  // Capability probe ONLY: production renderer creates its own real context.
+  const probe = document.createElement("canvas");
+  const gl = probe.getContext("webgl2");
+  if (gl) {
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    return { kind: "webgl2" as const };
+  }
+  return { kind: "none" as const };
+}
+```
+
+**API 限制：** Chrome 146 的 WebGPU Compatibility Mode 可以嘗試 `requestAdapter({featureLevel:"compatibility"})`，但此模式只涵蓋受限的功能集合，未獲得 device 不能視為支援，且不代表所有瀏覽器都可呼叫。對已有 Three WebGPURenderer 的專案，不要外加一份互相競爭的 adapter/device 狀態機，應透過渲染器初始化結果和 backend 實際能力組合管理。 [MDN WebGPU](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)、[Chrome 146](https://developer.chrome.com/blog/new-in-webgpu-146)。
+
+**修復與退出**：`webglcontextlost` 觸發後停止提交 draw，顯示 poster、暫停迴圈；`webglcontextrestored` 之後重新建立 texture/program/FBO（或完整重建 renderer），多次失敗保持 Basic，不要無限重試。WebGPU device 的 `lost` promise 也必須監聽，不能假定 WebGL2 自動接續 GPU 計算結果。 [MDN context lost](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/webglcontextlost_event)、[GPU device lost](https://developer.mozilla.org/en-US/docs/Web/API/GPUDevice/lost)。
+
+### 8.2 只對真的有支援的瀏覽器啟用 CSS Scroll Motion
+
+```css
+.story-section { opacity: 1; transform: none; } /* baseline */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    .story-section {
+      animation: appear linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+@keyframes appear {
+  from { opacity: .35; transform: translateY(1rem); }
+  to { opacity: 1; transform: none; }
+}
+```
+
+這個 fallback 令**重要內容預設可見**。不要用不完整的 scroll timeline polyfill 代替標準支援，也不能在 reduced-motion 時讓所有文字維持隱藏。以上 `@supports` 判斷採用 [Chrome Scroll Entry/Exit Best Practices](https://developer.chrome.com/docs/modern-web-guidance/guides/ui-behaviors/scroll-entry-exit-effects) 的雙條件建議；若產品要求 2026 Safari/Firefox 精確時序，仍需實際測試。
+
+### 8.3 WebGL2 → Basic 之 Shader／資產邊界
+
+```text
+ScenePayload (assets by immutable id)
+  ├─ geometry: .glb meshopt / alternative .glb
+  ├─ textures: KTX2 (if decoder & format available) / jpg-png fallback
+  ├─ shader variants: webgl2 GLSL / webgpu TSL (NOT automatic migration)
+  ├─ fallback poster: AVIF/WebP + alt + dimensions
+  ├─ controls: DOM buttons + keyboard + touch labels
+  └─ device lifecycle: init, visibility, loss, dispose, restore
+```
+
+- **Texture memory estimate**：未壓縮 RGBA8 貼圖每像素 4 bytes，1024×1024 base level = 4 MiB；完整 mip chain 約乘 4/3。這是**理論資料量**，實際 GPU 配置有 row alignment、額外 attachment、transcoding 與格式差異，不可當量測值。
+- **Draw calls / GPU time**：Draw-call count 只是 CPU 提交成本的一部分；若每粒子透明且覆蓋全屏，重度 overdraw 不會因 instancing 消失。
+- **Shader compile stutter**：資產下載、GLSL compile/link、WebGPU pipeline creation 需要分別計時；不要把下載慢解釋成 GPU 慢，也不要以 `requestAnimationFrame` 單獨宣稱 GPU time。
+
+### 8.4 基本事件清理與渲染排程約定
+```ts
+function attachSceneLifecycle(canvas: HTMLCanvasElement, stop: () => void, recover: () => void) {
+  const lost = (e: Event) => {
+    e.preventDefault(); // allow restoration if the implementation supports it
+    stop();
+    // poster remains in DOM and controls remain usable
+  };
+  const restored = () => recover(); // reallocate all GPU resources
+  const visibility = () => { if (document.hidden) stop(); else recover(); };
+  canvas.addEventListener("webglcontextlost", lost);
+  canvas.addEventListener("webglcontextrestored", restored);
+  document.addEventListener("visibilitychange", visibility);
+  return () => {
+    canvas.removeEventListener("webglcontextlost", lost);
+    canvas.removeEventListener("webglcontextrestored", restored);
+    document.removeEventListener("visibilitychange", visibility);
+    stop();
+  };
+}
+```
+上例只示意**單一控制層的清理契約**，實際 `recover()` 必須避免重複開 RAF、重複初始化並完整重建 context-loss 的 GPU 資源；需要狀態互斥與 abort/cancel。這是工程示意，不可直接複製成完整容錯器。
+
+## 9. 2026 新增的重要瀏覽器能力：不是所有 scroll 動效一樣
+
+- **Scroll-driven**：scroll 進度驅動 0–100%，捲動停止則動畫停止；適合 parallax／進度指示。
+- **Scroll-triggered**：越過位置後啟動「基於時間」的動畫，與 timeline scrub 不同；Chrome 145 起的官方說明不能直接推及 Safari/Firefox。[Chrome 官方](https://developer.chrome.com/blog/scroll-triggered-animations)。
+- **View Transitions**：同文件與跨文件須分別檢查；跨文件路由／來源限制與焦點復原不是自動完成。2025 官方已說明 Safari 支援擴大，但仍需 feature-detection。[Chrome 2025](https://developer.chrome.com/blog/view-transitions-in-2025)。
+- **Motion Safety**：非裝飾性的 3D 互動需要 keyboard／single-pointer 替代；WCAG 2.2 的 dragging criterion 不是「只要手機可滑就合格」。[W3C 2.5.7](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements)。
