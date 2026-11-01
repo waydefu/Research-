@@ -157,3 +157,73 @@ tests/visual-and-a11y
 - https://www.khronos.org/ktx/
 - https://www.khronos.org/gltf/
 - **未完成**：任何正式同場景 FPS 表、實機功耗、動態解析度閾值、Core Web Vitals RUM 樣本；不因上表有數字就宣稱已實測。
+
+
+## 7. 跨端效能：可重現 Benchmark 的正式測量協定（**規格，尚未執行**）
+
+### 7.1 必須拆開三個不同的性能問題
+
+| 問題 | 正確量測（資料來源） | 不可採信的捷徑 |
+|---|---|---|
+| 使用者看到主要內容要多久？ | LCP element / TTFB / resource load delay / render delay；RUM p75、冷啟動 lab 報告 | Lighthouse 單次 100 分宣稱所有使用者快 |
+| 點擊/滑動有沒有遲鈍？ | Field INP p75、Long Animation Frame attribution、task trace、touch latency | 以平均 FPS 代替 INP |
+| 3D 是否維持品質且不發熱？ | 前景 p50/p95/p99 frame interval、GPU timestamps（可用才測）、VRAM/texture、thermals、長測降頻 | 只看 `requestAnimationFrame` 平均值而稱 GPU render time |
+
+**來源：** [web.dev LCP optimize](https://web.dev/articles/optimize-lcp) 說明 LCP 必須早出現在 HTML preload scanner 可發現的位置；[Chrome Performance Panel](https://developer.chrome.com/docs/devtools/performance/reference) 可看到 frame 類型與時間；[Chrome Rendering](https://developer.chrome.com/docs/devtools/rendering/performance) 顯示 frame overlay 是即時估計，並非精確 GPU profiler；[Core Web Vitals](https://web.dev/articles/vitals) 是 p75 體驗指標。
+
+### 7.2 流程與記錄標準
+
+1. **測同一個網站情境**：固定 2 個完整流程（Hero 靜止載入、使用者操作／捲動 30 秒）、一個 3D 極端場景（最大的 draw calls／overdraw）、一個失敗流程（停用 WebGPU 或 context loss）。
+2. **控制版本**：鎖 commit/lockfile、瀏覽器 build、實際 CSS pixel 和 physical DPR、素材 SHA、後製 pass 組合、同一個畫質 tier、background apps。
+3. **測冷／暖啟動**：新會話首訪與瀏覽器已有快取分開。慢網模擬只作用於網路，不能用它推算手機 GPU 幀時間。
+4. **記錄每個 run**：Navigation Timing、LCP candidate、INP（有真互動才記）、CLS、bundle transfer/parse/eval、frame interval 及長幀；GPU timestamp 不可取得時明記 `null`。
+5. **重複實測**：建議每設備 × 情境至少 5 次，報原始 CSV / trace，摘要以中位數和分位數描述；「5 次」是研究提案，不是統計置信保證。熱測另建 10–15 分鐘連續場景。
+6. **失敗也入表**：API 初始化失敗、黑屏、missing material、JS exception、GPU context/device lost、focus 失蹤、導航被動畫鎖住，都視為一次 failure，不可從結果中剔除。
+7. **驗證畫質公平性**：同解析度／相同光源素材比較 WebGL2 vs WebGPU；若結果某端強制去掉 Bloom/DoF，記為**不同畫質方案**，不能宣稱同畫質更快。
+8. **後續報告**：每項技術用 `hypothesis → workload → environment → evidence → counterexample → recommendation`；未能在手機取得 FPS 就只保留部署前 Gate。
+
+### 7.3 可量測的 GPU 預算推導（純理論例子）
+
+- 1920×1080 的 4-byte RGBA8 **單張顏色 Render Target**：`1920 × 1080 × 4 = 8,294,400 bytes ≈ 7.91 MiB`（不含深度、MSAA、mip、額外 texture）。
+- 1920×1080 的 RGBA16F **單張 HDR buffer**：假設每像素 4 channels × 2 bytes = 8 bytes，`16,588,800 bytes ≈ 15.82 MiB`。
+- 若加深度 attachment、兩次 ping-pong、透明物件、MSAA，實際**峰值記憶體**不是簡單把這個數字視為 GPU 診斷結果；因為資源可重用、format alignment、browser allocator、driver 及 tile memory 不同。
+- 60Hz 的 `1000/60 ≈ 16.67ms`、30Hz `≈ 33.33ms` 是**顯示更新間距**。120Hz 需約 8.33ms 間隔，但未必網站每幀都應持續動畫；應優先 `on-demand render`。
+- 片元（fragment）成本可用相對 work-factor 思考：`renderWidth × renderHeight × averageSamples × passCount × overdraw`。這不是 GPU 時間公式，因為快取、並行和硬體架構差異很大，但能定位為何多個 fullscreen passes 比一個小模型昂貴。
+
+### 7.4 初始 Quality Tier 的狀態機（政策方案，不是效能承諾）
+
+```text
+Basic poster / DOM first
+  ├─ supports WebGL2? ─ No ──> Basic
+  └─ Yes → Balanced candidate
+          ├─ optional WebGPU adapter/device + required features success?
+          │       └─ Yes → High candidate (NOT immediately Ultra)
+          ├─ warmup → measure foreground stable animation intervals
+          ├─ sustained > budget → reduce 1 tier, enforce cooldown
+          ├─ stable + user still interacting + thermal state acceptable
+          │       └─ optional quality probe +1 tier (max configured)
+          ├─ page hidden / prefers reduced motion → pause or Basic
+          └─ context/device loss or repeated failure → Basic + log reason
+```
+
+- **Hysteresis**：升階需要**連續兩段**穩態窗口都符合 budget、降階只需一段明顯不符合；取樣窗口與界限必須在 PoC 中校準。這是示意策略，不能宣稱單一閾值普遍適用。
+- **Tier≠UA**：Android 旗艦也可能溫控後比桌機慢；沒有 hardware telemetry 的情況不能假測溫度。Safari 跨版本也不能一律預設 WebGPU 成功。
+- **可操作優先**：降低 render scale、減少 shader samples、關 volumetric/SSR、減透明粒子優先於犧牲正文清晰；DOM 字體不應跟著 canvas render scale 降解。
+- **電量／發熱**：在允許存取真機且有實際儀器時記 5 / 10 / 15 分鐘幀時間變化；沒有可用硬體傳感器就不能輸出攝氏度或 mW 數字。
+
+### 7.5 產品級容錯負向案例（PoC pass/fail）
+
+| 失敗注入 | 必須達到 |
+|---|---|
+| 刪除/阻斷 WebGPU adapter | 頁面非黑屏，使用 WebGL2 或 Basic；記錄 fallback |
+| WebGL context loss | 停止 RAF、資源可重建或完全轉 Basic；按鈕繼續可用 |
+| 2G/3G 慢網 + 阻擋 GLB | poster 出現在初始 HTML，標題／CTA 不等待 JS shader 才出現 |
+| 降低動態 preference | 取消持續 parallax、飛行鏡頭和閃爍，保持所有資訊可讀 |
+| iOS Safari Back/Forward | Scroll restoration、focus/active element、GPU canvas lifecycle 沒有重複 |
+| 旋轉手機與 zoom | 以 CSS layout/container 控制、GPU render targets 有界更新，文字不被截斷 |
+| 非 hover／單指／鍵盤 | 3D 操作有列表或按鈕替代；符合 [WCAG 2.5.7](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements) |
+| 小型 click targets | 檢核 WCAG 2.2 的 2.5.8 ≥24×24 CSS px 與例外，建議產品可採更大觸控尺寸 |
+| 三次快速切頁 | 取消重入 animation/RAF、dispose GPU，不能留下複數 canvas/事件 listener |
+| shader/pipeline compile 失敗 | 完整 error logs（無 secrets），進入 Basic；不無限重試 |
+
+**結論：** 生產環境應建立三張不同的表——(a) Web Vitals Field RUM，(b) 關鍵互動可用性，(c) GPU frame/thermal/loss——合格標準不同，互不替代。本文所有實測欄都尚空白。
