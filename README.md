@@ -8,6 +8,7 @@
 
 **[完整研究：Agent Repository Operations](research/2026-11-agent-repository-operations/README.md)** — 通用於 GitHub 專案，研究 Agent 治理、資料庫與精確搜尋、MCP、Token 成本、長期記憶、權限、安全、CI、評測和分階段導入。
 
+- [EAG-100｜企業級 Agent 治理 100 分規範（20 項控制＋5 個 P0 閘門）](research/2026-11-agent-repository-operations/EAG-100.md) · [可直接使用的稽核表](research/2026-11-agent-repository-operations/EAG-100-AUDIT-TEMPLATE.md)
 - [治理：AGENTS.md、權限、人工批准、PR Gate](research/2026-11-agent-repository-operations/01-governance-and-authority.md)
 - [搜尋：rg、ast-grep、Serena、SCIP、Zoekt](research/2026-11-agent-repository-operations/02-search-routing.md)
 - [索引：增量同步、來源 SHA、索引新鮮度](research/2026-11-agent-repository-operations/03-index-database-design.md)
