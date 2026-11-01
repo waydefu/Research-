@@ -1,22 +1,27 @@
 # Research-｜治理控制中心
 
-**治理依據：** [EAG-100 v1.0](../../research/2026-11-agent-repository-operations/EAG-100.md)。這是自訂治理量表，不是正式第三方認證。治理文件及 CI 提案**不等同 GitHub Ruleset 已生效**。
+**治理依據：** [EAG-100 v1.0](../../research/2026-11-agent-repository-operations/EAG-100.md)，研究自訂量表，非官方企業認證。
 
-## 文件
+## GitHub 事實（2026-11-02 已查證）
 
-- [初次稽核基線（2026-11-02）](BASELINE-2026-11-02.md)：實際查看到的安全缺口、P0 狀態及證據不足之處。
-- [GitHub Rulesets 建議](RULESETS.md)：需要管理權限／人類確認的操作，不會自動執行。
-- [威脅模型](THREAT-MODEL.md)：Repo、Agent、CI、索引與資料邊界。
-- [營運與回退手冊](OPERATIONS.md)：錯誤來源、更正、停止與復原方式。
-- [EAG-100 稽核模板](../../research/2026-11-agent-repository-operations/EAG-100-AUDIT-TEMPLATE.md)：逐項補齊證據。
-- [研究完整性腳本](../../scripts/check_repository.py)：僅標準庫，離線驗證 Markdown/JSON/量表一致性。
+- main branch: protected = true，Repo Ruleset [main-eag-100](https://github.com/waydefu/Research-/rules/26319641) Active，目標 `refs/heads/main`。
+- PR 必經、Required Job `Markdown, JSON and governance integrity`、禁止分支刪除及 Force Push 已由 GitHub API 回傳。
+- PR #1 已合併，原版 Research Integrity CI 已成功。
+- **仍缺乏**：Agent 沙盒、權限提升負向測試、真正模型額度硬上限、不可竄改稽核與回退演練的完整證據，因此不得稱 EAG-100 合格。
 
-## 工作順序
+## 文件導覽
 
-1. 研究治理基線，不冒充完成驗收。
-2. 在工作分支開 PR，檢查唯讀 CI 的實際結果。
-3. 需要的話，經授權另行設定 GitHub Ruleset（本 Repo 尚未強制）。
-4. 每次權限或 CI 變更後重新驗證 P0。
-5. 所有 EAG 得分須提供控制項對應的實際證據與負向測試。
+- [初次稽核基線（歷史快照）](BASELINE-2026-11-02.md)：當時 `main` 未保護，**不是目前狀態**。
+- [GitHub Rulesets 操作與管理考量](RULESETS.md)：需持續確認啟用與維護策略。
+- [Repo 工具選型／安裝狀態](REPO-TOOLING.md)：Serena MCP、搜尋索引、Skills、CI、安全／額度及未導入選項。
+- [威脅模型](THREAT-MODEL.md)：外部輸入、CI、權限與索引。
+- [營運與回退手冊](OPERATIONS.md)：故障／事故與復原規範。
+- [EAG-100 稽核模板](../../research/2026-11-agent-repository-operations/EAG-100-AUDIT-TEMPLATE.md)：必須有當期證據才能得分。
+- [研究完整性腳本](../../scripts/check_repository.py) · [Markdown 全文索引工具](../../scripts/research_search.py) · [Agent 使用量檢視](../../scripts/agent_usage_audit.py)。
 
-**現況（此 PR）：** 已提議建立基本治理 CI，不能因此宣稱 EAG-100 滿分；GitHub Settings、Hermes、Codex 與其他 Repo 都沒有被更動。
+## 操作紀律
+
+1. Repo 工具設定不代表其他 Agent 客戶端真的安裝成功；MCP 必須逐宿主單獨驗證。
+2. 新增的 GitHub Actions 步驟以 PR 實際 Check 結果為準；CI 通過也不等於安全無漏洞。
+3. 保持 GitHub Ruleset／Hermes／外部專案設定不變，除非另行明確授權。
+4. 即使 Github 目前已有 Branch Protection，仍需要全面 P0 證據才能完整評分。

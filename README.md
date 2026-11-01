@@ -4,6 +4,15 @@
 
 > 最新研究：**2026-11｜AI Coding 代理工程** — EGM、Claude Code 多模型協作／Advisor、Imagine 視覺化、Jev（JEV）決策路由。
 
+## 可直接放進 Repo 的 Agent 工具（EAG-100 Phase 2）
+
+**[工具清單與啟用條件](docs/governance/REPO-TOOLING.md)**：研究資料專用的離線 SQLite FTS5 搜尋、AGENTS Skills、Copilot 指南、Serena 唯讀專案配置、可選 MCP 範本、CI 安全掃描，以及離線 Agent Token 成本彙總。
+
+- 搜尋：`python3 scripts/research_search.py build` → `python3 scripts/research_search.py search "關鍵字" --limit 5`；變更資料後必須重建索引。
+- 安全：Repo-local zizmor CI（需 PR 實際通過才算驗收）。
+- 成本：`python3 scripts/agent_usage_audit.py usage.jsonl`（**只做事後核算，不是模型配額強制**）。
+- MCP：`.serena/project.yml` 可設定唯讀；`.mcp.json.example` **不會自動安裝或啟動**。
+
 ## EAG-100 治理實施（2026-11-02，獨立 PR）
 
 **[研究庫治理中心](docs/governance/README.md)**：已提出唯讀文件完整性 CI、PR／Issue 模板、CODEOWNERS，以及現況風險與 GitHub Rulesets 操作手冊。

@@ -26,5 +26,15 @@ jobs:
           persist-credentials: false
       - name: Check documents without dependencies
         run: python3 scripts/check_repository.py
+      - name: Build and verify real repository search index
+        run: |
+          python3 scripts/research_search.py build
+          python3 scripts/research_search.py verify
+          python3 scripts/research_search.py search 'EAG-100' --limit 3
       - name: Run regression tests
         run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Analyze GitHub Actions with zizmor (pinned action)
+        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+        with:
+          advanced-security: false
+          version: v1.7.0

@@ -1,5 +1,8 @@
 # GitHub Rulesets／權限設定建議（需 GitHub 管理權限與明確批准）
 
+> **現況更新：2026-11-02** — 後續使用者已建立 `main-eag-100`（Ruleset #26319641），Active，`include: refs/heads/main`，且 GitHub branch API 回報 `protected: true`。原文件的 `protected:false` 是**建立前的歷史基線**，不得當成目前狀態。此 Repo 仍未通過所有 EAG-100 P0 安全驗收。
+
+
 **狀態：操作手冊，尚未執行。** Repo 是 private；GitHub 方案不同，Rulesets/Required Review 在私人 Repo 的可用性可能受限。先確認 GitHub 帳戶方案與實際 UI 顯示。
 
 ## 基線問題
