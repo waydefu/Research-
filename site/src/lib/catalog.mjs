@@ -91,3 +91,15 @@ export const graph = () => ({
   nodes: documents.map(d => ({ id: d.file, title: d.title, group: d.group, url: d.href })),
   edges: documents.flatMap(d => linksFrom(d).map(to => ({ from: d.file, to })))
 });
+
+// Human-readable Traditional Chinese domain names; URLs and Pagefind filter keys stay stable.
+const DOMAIN_NAMES = {
+  'governance': '專案治理',
+  'design': '視覺設計規格',
+  '2026-10-retrospective': '十月技術研究回顧',
+  '2026-11-agent-engineering': 'AI 代理工程',
+  '2026-11-agent-repository-operations': 'Agent 治理與資料索引',
+  '2026-11-universal-web-engine': '現代 Web 工程與互動技術',
+  'RESEARCH-TEMPLATE': '研究文件模板'
+};
+export const displayDomain = domain => DOMAIN_NAMES[domain] || domain;
