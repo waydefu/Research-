@@ -79,6 +79,7 @@ The proposed `../.github/workflows/publish-showcase.yml` changes this at the sou
 The Repo Owner requested the **Active Theory standard as the minimum creative benchmark** and supplied gold/cyan animated references for a new, original optical language. These are **planning documents only**; the running V1 Showcase is unchanged until a separate authorized implementation PR.
 
 - [Evidence Engine — visual identity, palette, storyboard, desktop/mobile art direction](design/V2-ART-DIRECTION.md)
+- [Original desktop visual study (SVG, not deployed)](design/V2-DESKTOP-CONCEPT.svg) · [Original mobile visual study (SVG, not deployed)](design/V2-MOBILE-CONCEPT.svg)
 - [Scene/data architecture, SDF-vs-mesh PoC, fallbacks and cross-device acceptance](design/V2-ENGINEERING-ACCEPTANCE.md)
 - [External primary-source research, evidence boundaries and V1→V2 gap](../research/2026-11-universal-web-engine/16-active-theory-quality-benchmark.md)
 
