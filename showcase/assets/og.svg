@@ -1,1 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0b1012"/><g stroke="#394144" fill="none" opacity=".75"><ellipse cx="900" cy="310" rx="240" ry="164" transform="rotate(-29 900 310)"/><ellipse cx="900" cy="310" rx="185" ry="230" transform="rotate(35 900 310)"/><ellipse cx="900" cy="310" rx="155" ry="208" transform="rotate(-64 900 310)"/><path d="M675 310h450M900 80v460" stroke-dasharray="4 10"/></g><circle cx="900" cy="310" r="17" fill="#fb673f"/><text x="74" y="104" font-size="24" fill="#fb673f" font-family="monospace">R / OBSERVATORY</text><text x="68" y="295" font-size="93" fill="#f2f0e9" font-weight="700" font-family="Arial,sans-serif" letter-spacing="-6">THE ART OF</text><text x="68" y="394" font-size="93" fill="#f2f0e9" font-weight="700" font-family="Arial,sans-serif" letter-spacing="-6">NOT KNOWING.</text><text x="74" y="542" font-size="21" fill="#a8aeaa" font-family="monospace">AN OPEN ENGINEERING RESEARCH ARCHIVE / EST. 2026</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs>
+ <radialGradient id="void"><stop offset="0" stop-color="#142D40"/><stop offset="1" stop-color="#0A101D"/></radialGradient>
+ <linearGradient id="metal"><stop stop-color="#167B90"/><stop offset=".47" stop-color="#40D4DE"/><stop offset=".7" stop-color="#E4B451"/><stop offset="1" stop-color="#365067"/></linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#void)"/>
+<g transform="translate(918 313)" fill="none" stroke="url(#metal)">
+ <ellipse rx="248" ry="181" stroke-width="4" transform="rotate(-31)"/>
+ <ellipse rx="191" ry="248" stroke-width="1.5" transform="rotate(37)"/>
+ <ellipse rx="152" ry="222" stroke-width="1" transform="rotate(-58)"/>
+ <path d="M-305 0h610M0-280v560" stroke="#40D4DE" stroke-width=".75" stroke-dasharray="3 15" opacity=".35"/>
+ <path d="M-19-13 26-7 19 30-15 22Z" stroke="#E4B451" stroke-width="2"/>
+</g>
+<g font-family="sans-serif">
+ <text x="68" y="112" font-size="19" letter-spacing="5" fill="#40D4DE">R / THE OBSERVATORY</text>
+ <text x="60" y="290" font-size="91" font-weight="700" letter-spacing="-5" fill="#F5F3EA">THE UNKNOWN,</text>
+ <text x="62" y="393" font-size="102" font-family="serif" font-style="italic" fill="#E4B451">ENGINEERED.</text>
+ <text x="68" y="532" font-size="18" letter-spacing="3" fill="#A9C2CB">EVIDENCE FIRST · AN OPEN ENGINEERING ARCHIVE</text>
+</g>
+</svg>

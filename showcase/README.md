@@ -1,5 +1,20 @@
 # THE OBSERVATORY — Research Showcase
 
+## V2 live implementation — four staged PRs (2026-11-02)
+
+This section describes **new website code in stacked, unmerged PRs**, not a claim about the current public Pages deployment. Merge reviews in sequence #12 → #13 → #14 → #15, retarget each dependent PR to `main` after its predecessor merges, rerun exact-head CI and approve each through the Repository ruleset.
+
+- **#12 Art direction:** real website CSS/Shader uses `#0A101D`, `#E4B451`, `#40D4DE`, a reauthored editorial Hero and pinned SIL OFL Instrument Serif / Manrope / IBM Plex Mono copied to the built site. [Font licensing and reproducibility](design/V2-FONT-LICENSES.md). Chinese glyph subsetting is **not implemented**; system fonts remain the fallback.
+- **#13 Mesh:** live runtime switches from the original 58-step SDF to an **original WebGL2 procedural torus mesh scene** (4 offset ring meshes, explicit normals and depth, forward gold/cyan lighting, bounded single composite highlight-bloom pass). Legacy `artifact.js` remains for historical regression/rollback comparison, not active on the website.
+- **#14 Scroll:** one fixed canvas behind ordinary DOM spans six conceptual editorial chapters; `scene-director.js` drives visual interpolation from passive native scrolling. No scroll-jacking, no external imagery, no mandatory intro.
+- **#15 Interaction:** real Markdown source filenames/commit reference are the only orbit-label input, domain selection drives camera orientation, 4 completed-resource promises (3 font families + research index) drive progress, original pointer detailing is fine-pointer only, heading clip-reveal and visual motion pause are optional. `?qa=1` enables **local-only** manual performance samples with `__researchQaReport()` in browser DevTools, **not** analytics or field Core Web Vitals.
+
+**Reproducible testing:** `npm --prefix showcase run check` checks unit/state simulations, geometry and source contracts, plus the entire Markdown index. GitHub PR build gate builds a real static artifact with four self-hosted font binaries, three full OFL license texts, JS/CSS/assets and checked source SHA. `showcase/tests/browser_smoke.py` is an **optional** Chromium harness and not part of required CI. No user-provided mobile-device GPU traces, field INP p75, thermal/power data, native screen reader, real Safari GPU render or A/B hardware comparisons have been performed. The HTML and Markdown source remain readable when the GPU is absent.
+
+**Owner release boundary:** These are PR branches until explicitly merged. Public Pages may still serve V1. Do not describe PR CI, a mock WebGL lifecycle test or optional desktop smoke as measured 60 FPS or a complete WCAG AA audit. The QA module does not transmit anything off-device.
+
+---
+
 An original, editorial cinematic experience for the public `waydefu/Research-` archive. **The website is actual static source, not a mock-up.** It uses one self-contained WebGL2 SDF sculpture, with semantic HTML as the complete fallback. Research data are generated from checked-in Markdown files rather than copied into hand-written UI cards.
 
 ## Run and build (zero npm dependencies)
