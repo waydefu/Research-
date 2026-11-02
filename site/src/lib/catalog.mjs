@@ -56,10 +56,15 @@ export const findDocBySource = file => {
 export const resolveLocal = (doc, rawUrl) => {
   if (!rawUrl || rawUrl.startsWith('#') || rawUrl.startsWith('//')) return { url: rawUrl, kind: 'pass' };
   if (/^(?:[a-z][a-z0-9+.-]*:)/i.test(rawUrl)) {
-    if (/^https:\/\/github\.com\/waydefu\/Research-\/(?:pull\/|settings\/rules|rulesets\/)/i.test(rawUrl)) return { kind: 'plain', url: rawUrl };
     const own = rawUrl.match(/^https:\/\/github\.com\/waydefu\/Research-\/(?:blob|tree)\/[^/]+\/(.+)$/i);
-    if (!own) return { kind: 'pass', url: rawUrl };
-    rawUrl = '/' + own[1];
+    if (own) {
+      rawUrl = '/' + own[1];
+    } else if (/^https:\/\/github\.com\/waydefu\/Research-(?:\/|$)/i.test(rawUrl)) {
+      // Public research lives on this site; don't send readers to this repo's GitHub UI.
+      return { kind: 'plain', url: rawUrl };
+    } else {
+      return { kind: 'pass', url: rawUrl };
+    }
   }
   const [beforeHash, hash = ''] = rawUrl.split('#', 2);
   const [pathname, query = ''] = beforeHash.split('?', 2);
