@@ -5,7 +5,8 @@ base=Path(__file__).resolve().parents[1]
 html=(base/'index.html').read_text().replace('<script src="./app.js" type="module" defer></script>','').replace('<link rel="stylesheet" href="./styles.css" />','')
 css=(base/'styles.css').read_text()
 artifact=(base/'artifact.js').read_text().replace('export function mountArtifact','function mountArtifact')
-app=(base/'app.js').read_text().replace("import {mountArtifact} from './artifact.js';",'')
+mesh=(base/'mesh-core.js').read_text().replace('export function makeTorus','function makeTorus').replace('export const RINGS','const RINGS').replace('export function mountMeshCore','function mountMeshCore')
+app=(base/'app.js').read_text().replace("import {mountMeshCore} from './mesh-core.js';",'')
 fixture=json.loads((base/'data/research-index.json').read_text())
 result=[]
 with sync_playwright() as p:
@@ -16,7 +17,7 @@ with sync_playwright() as p:
   page.set_content(html,wait_until='domcontentloaded')
   page.add_style_tag(content=css)
   page.evaluate('data => { window.fetch=async () => ({ok:true,json:async()=>data}) }',fixture)
-  page.add_script_tag(content=artifact+'\n'+app)
+  page.add_script_tag(content=artifact+'\n'+mesh+'\n'+app)
   page.wait_for_timeout(1200)
   heading=page.locator('h1').inner_text();status=page.locator('#index-status').inner_text();initial=page.locator('.result').count()
   page.screenshot(path=str(base/f'{name}.png'),full_page=True,animations='disabled')
