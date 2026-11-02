@@ -48,3 +48,11 @@ GitHub Pages does not allow custom response headers through this directory. Set 
 ## Scope and rollback
 
 All site code lives under `showcase/`; original research, tooling, `.github`, GitHub rules, credentials and repository settings are untouched. Revert the site PR or delete the `showcase/` directory through a separately approved PR to roll back.
+
+## Post-merge reliability and accessibility review (2026-11-02)
+
+- **Renderer fallback is terminal for a sustained slow-frame failure:** when the adaptive renderer has already stepped down to ECO and continues to miss frame deadlines, it now releases its WebGL program/buffer, hides the canvas and records the CSS fallback state. Scrolling out of and back into the Hero must not silently restart an expensive invisible RAF loop.
+- **WebGL context restoration remains recoverable:** a separate test injects `webglcontextlost` followed by `webglcontextrestored` and asserts that only one animation loop resumes. This is a **mocked state-machine test**, not a GPU driver verification.
+- **Accessible navigation:** the skip link targets a programmatically focusable `main`; the SVG concept graph uses group semantics for its embedded controls, with equivalent HTML filter buttons underneath. The Hero caption describes an adaptive renderer, not a guaranteed live render.
+- **Local checks actually performed:** `npm run check` and `npm run build` on the local Markdown fixture; Chromium browser smoke at desktop/mobile widths; targeted manual checks at 320, 375, 390, 768, 1024 and 1440 CSS pixels for horizontal overflow, keyboard skip focus, and mobile menu Escape. The **real checkout** must be verified by PR CI.
+- **Still unverified:** a genuine WebGL2 shader execution on Android/iOS GPU hardware, real thermal/GPU profiling, native VoiceOver/TalkBack, full WCAG 2.2 AA audit, and real-user field Web Vitals. The test double checks JavaScript control flow only, not driver behavior or 60 FPS.
