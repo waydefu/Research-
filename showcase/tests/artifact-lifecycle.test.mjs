@@ -88,10 +88,34 @@ test('context loss returns poster then restoration allows exactly one frame loop
     assert.match(h.label.textContent, /CONTEXT LOST/);
     assert.equal(h.pending, 0);
     assert.equal(h.classes.has('is-ready'), false);
+    const drawsOnLoss = h.draws;
+    h.show(false);
+    h.show(true); // An observer event must not restart the lost-context animation loop.
+    globalThis.document.dispatch('visibilitychange'); // Nor may a visibility event.
+    assert.equal(h.pending, 0, 'context-loss lock must survive visibility and intersection changes');
+    assert.equal(h.draws, drawsOnLoss);
     h.canvas.dispatch('webglcontextrestored');
     assert.equal(h.classes.has('is-ready'), true);
     assert.equal(h.pending, 1, 'one recovered animation loop');
     h.frame(16);
     assert.equal(h.pending, 1);
+  } finally {dispose?.(); h.restore()}
+});
+
+test('reduced-motion preference prevents a lost WebGL context from restarting', () => {
+  const h = harness();
+  let dispose;
+  try {
+    dispose = mountArtifact(h.canvas, h.label);
+    h.show(true);
+    h.canvas.dispatch('webglcontextlost', {preventDefault() {}});
+    h.mq.matches = true;
+    h.mq.dispatch('change');
+    h.show(false);
+    h.show(true);
+    assert.equal(h.pending, 0);
+    h.canvas.dispatch('webglcontextrestored');
+    assert.equal(h.pending, 0, 'reduced motion must block restoration');
+    assert.match(h.label.textContent, /REDUCED MOTION/);
   } finally {dispose?.(); h.restore()}
 });
