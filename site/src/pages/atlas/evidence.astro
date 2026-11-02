@@ -1,0 +1,50 @@
+---
+import Atlas from '../../layouts/Atlas.astro';
+const views = [
+  {title:'正面｜FRONT',subtitle:'偏心雙環與中央不對稱切角',rotate:0},
+  {title:'側面｜PROFILE',subtitle:'薄片環體、斜切透鏡與機械層次',rotate:68},
+  {title:'四分之三｜THREE QUARTER',subtitle:'確認前後支架與斜軸仍可辨識',rotate:28}
+];
+---
+<Atlas title="Evidence Engine 黑白輪廓｜P1 G0">
+<section class="atlas-study">
+  <p class="atlas-overline">03 / FORM STUDY · NO GLOW · NO BLOOM</p>
+  <h1>刪掉光，留下形狀。</h1>
+  <p>觀測核心不是普通同心圓 Logo。它由偏心雙軌、非對稱刻度、斜切菱形透鏡與支架構成。這三張為原創 SVG 的 <strong>G0 二維輪廓研究</strong>，不是 Blender 3D 正交攝影，也不聲稱代表真實幾何厚度。</p>
+  <div class="atlas-study-note">審查條件：縮小到手機畫面後，偏心結構、鏡片方向與外環切口仍能辨認。若只能依賴金色、藍光或 Glow 才認得出核心，則不通過 G0。</div>
+  <div class="atlas-evidence-grid">
+  {views.map((v,i)=>
+    <article class="atlas-evidence-frame">
+      <svg viewBox="0 0 400 400" role="img" aria-label={v.title + ' 原創黑白觀測核心輪廓草案'}>
+        <rect width="400" height="400" fill="#e4e0d9"/>
+        <g fill="none" stroke="#15161a" stroke-width="4.5" transform={'translate(200 185) rotate('+v.rotate+')'}>
+          <ellipse rx="143" ry="54" transform="rotate(-17)"/>
+          <ellipse rx="137" ry="67" transform="rotate(56)"/>
+          <path d="M-148,-14A149,149 0 0,1 119,-90 M143,-39A149,149 0 0,1 -93,116" stroke-width="8"/>
+          <ellipse rx="97" ry="97" stroke-width="2.2" stroke-dasharray="8 11"/>
+          <ellipse rx="31" ry="112" stroke-width="2.7" transform="rotate(-28)"/>
+          <path d="M-84 52L27 -75 83 -19 -19 96Z" fill="#e4e0d9" stroke-width="5"/>
+          <path d="M-40 15L27 -48 55 -13 -20 65Z" fill="#15161a" stroke-width="2.5"/>
+          <path d="M-19 65L27 -48M-40 15L55 -13" stroke="#e4e0d9" stroke-width="2"/>
+          <path d="M-146,-102L-126,-119M101,130L128,145" stroke-width="8"/>
+          <circle cx="-140" cy="-93" r="7" fill="#15161a"/>
+          <circle cx="129" cy="89" r="5" fill="#15161a"/>
+        </g>
+        <g stroke="#15161a" stroke-width="5" fill="none">
+          <path d="M193 292V339M207 292V339M150 339H250V350H150Z"/>
+          <path d="M157 320H243"/>
+        </g>
+        <path d="M16 383H384" stroke="#15161a" stroke-width="1" opacity=".35"/>
+        <text x="20" y="35" fill="#15161a" font-family="monospace" font-size="13">EVIDENCE ENGINE / 0{i+1}</text>
+      </svg>
+      <h2>{v.title}</h2><p>{v.subtitle}</p>
+    </article>
+  )}
+  </div>
+  <div class="atlas-source-links">
+    <h2>輪廓驗收條件</h2>
+    <p>目前三張均使用相同原始幾何的二維旋轉構圖，用來比較輪廓節奏；真正的三維正面／側面／四分之三攝影需要 P2 Blender 建模後才能驗證透視與厚度。因此此頁可作 <strong>方向審查</strong>，不能替代完成的 3D 輪廓驗收。</p>
+    <a class="atlas-cta" href="/Research-/v3/atlas/">返回圖集 ↑</a>
+  </div>
+</section>
+</Atlas>
