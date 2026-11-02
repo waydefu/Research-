@@ -13,12 +13,6 @@ const assert = (condition, description) => {
   if (!condition) throw new Error('Pages layout invalid: ' + description);
 };
 const digest = path => createHash('sha256').update(readFileSync(path)).digest('hex');
-const files = dir => readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
-  const absolute = join(dir, entry.name);
-  if (entry.isDirectory()) return files(absolute);
-  assert(entry.isFile(), 'unexpected non-file asset: ' + absolute);
-  return [relative(dir === source ? source : dir, absolute)];
-});
 // Traverse with a stable reference root, including hidden files and Pagefind binary files.
 const walk = (dir, root = dir) => readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
   const path = join(dir, entry.name);
