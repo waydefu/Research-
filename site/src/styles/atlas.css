@@ -1,7 +1,7 @@
 :root{color-scheme:dark;--atlas-bg:#0b0e17;--atlas-blue:#152139;--atlas-gold:#d4b173;--atlas-text:#eee5d6;--atlas-muted:#b9b8b4;--atlas-ice:#6ea8d6;--atlas-line:rgba(212,177,115,.3);--atlas-serif:"Noto Serif TC","Songti TC","PMingLiU",serif;--atlas-sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:105px}
-body.atlas-body{margin:0;background:var(--atlas-bg);color:var(--atlas-text);font-family:var(--atlas-sans);font-size:16px;line-height:1.75}
+html{scroll-behavior:smooth;scroll-padding-top:105px;background:#0b0e17;color:#eee5d6}
+body,body.atlas-body{margin:0;background:var(--atlas-bg);color:var(--atlas-text);font-family:var(--atlas-sans);font-size:16px;line-height:1.75}
 .atlas-body a{color:inherit;text-decoration:none}
 .atlas-body a:hover{color:#f4d39a}
 .atlas-body a:focus-visible,.atlas-body button:focus-visible{outline:3px solid var(--atlas-ice);outline-offset:5px}
