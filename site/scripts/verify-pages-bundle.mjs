@@ -20,7 +20,7 @@ const walk = (dir, root = dir) => readdirSync(dir, { withFileTypes: true }).flat
   assert(entry.isFile(), 'unexpected symlink or special file: ' + path);
   return [relative(root, path)];
 }).sort();
-for (const name of ['index.html', 'styles.css', 'app.js', 'artifact.js', 'mesh-core.js', 'scene-director.js', 'interaction-core.js', 'qa-metrics.js']) {
+for (const name of ['index.html', 'styles.css', 'app.js', 'artifact.js', 'mesh-core.js', 'scene-director.js', 'interaction-core.js', 'qa-metrics.js', 'reader-links.js']) {
   assert(existsSync(join(published, name)), 'V2 root missing ' + name);
   if (name !== 'index.html') assert(digest(join(published, name)) === digest(join(repo, 'showcase', name)), 'V2 root modified: ' + name);
 }
