@@ -29,6 +29,16 @@ with sync_playwright() as p:
   result.append(info)
   assert not errors,errors
   assert filtered>0,'search should find WebGPU'
+  # Interacting with the visual graph must synchronize the source filter and both selected states.
+  page.locator('#domain-legend button').first.click()
+  assert page.locator('#filter-bar button').nth(1).get_attribute('aria-pressed')=='true'
+  assert page.locator('.domain-map g.node').first.get_attribute('aria-pressed')=='true'
+  assert page.locator('.domain-map g.node.node--active').count()==1
+  if name=='desktop':
+   page.locator('.domain-map g.node').nth(1).focus()
+   page.keyboard.press('Enter')
+   assert page.locator('#filter-bar button').nth(2).get_attribute('aria-pressed')=='true'
+   assert page.locator('#explorer-title').evaluate('(el) => document.activeElement === el'), 'keyboard graph activation should move focus to explorer'
   page.locator('#filter-bar button').last.click()
   assert page.locator('#filter-bar button').last.get_attribute('aria-pressed')=='true'
   assert page.locator('#results-count').inner_text().endswith('條研究')
