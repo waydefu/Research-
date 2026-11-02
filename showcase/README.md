@@ -73,3 +73,13 @@ The proposed `../.github/workflows/publish-showcase.yml` changes this at the sou
 **Rollback:** if the live site breaks, restore the previous Pages source in Settings → Pages → **Deploy from a branch → main → /(root)**. This restores the former README/Jekyll site; it does **not** revert Markdown or Git history. For an application rollback, revert the workflow/site PR through the normal branch protection and checks. Do not delete the research repository or disable security rules.
 
 **Source/current status boundaries:** This runbook is an authorized deployment proposal, not a claim that the GitHub Pages settings have already changed or that production is live. The only network endpoints needed by the browser are the static site on Pages and outbound GitHub source links; there is no hosted backend, credential or third-party runtime dependency.
+
+## V2 art direction and engineering research (design only; 2026-11-02)
+
+The Repo Owner requested the **Active Theory standard as the minimum creative benchmark** and supplied gold/cyan animated references for a new, original optical language. These are **planning documents only**; the running V1 Showcase is unchanged until a separate authorized implementation PR.
+
+- [Evidence Engine — visual identity, palette, storyboard, desktop/mobile art direction](design/V2-ART-DIRECTION.md)
+- [Scene/data architecture, SDF-vs-mesh PoC, fallbacks and cross-device acceptance](design/V2-ENGINEERING-ACCEPTANCE.md)
+- [External primary-source research, evidence boundaries and V1→V2 gap](../research/2026-11-universal-web-engine/16-active-theory-quality-benchmark.md)
+
+**No additional framework, shaders, image assets or services have been installed or deployed in this research pass.** The original third-party animation frames and logos are not included in the repository.
