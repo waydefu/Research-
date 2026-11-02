@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { allDocs, getDoc, backlinks, BASE } from '../../lib/catalog.mjs';
+import { allDocs, getDoc, backlinks, BASE, displayDomain } from '../../lib/catalog.mjs';
 export async function getStaticPaths() {
   const [research, governance, design] = await Promise.all([
     getCollection('research'), getCollection('governance'), getCollection('design')
@@ -24,7 +24,7 @@ const related = backlinks(doc);
 <Base title={doc.title}>
   <div class="reading-layout">
     <aside class="reading-sidebar" aria-label="文件導覽">
-      <a class="back-link" href={BASE + 'domains/' + encodeURIComponent(doc.group) + '/'}>← {doc.group}</a>
+      <a class="back-link" href={BASE + 'domains/' + encodeURIComponent(doc.group) + '/'}>← {displayDomain(doc.group)}</a>
       <nav aria-label="本篇目錄">
         <p class="eyebrow">CONTENTS</p>
         {headings.filter(h=>h.depth>1 && h.depth<5).length ? (
@@ -34,7 +34,7 @@ const related = backlinks(doc);
     </aside>
     <article class="document" data-pagefind-body data-pagefind-filter={'domain:' + doc.group}>
       <header class="document-header">
-        <div class="document-kicker">{doc.group} <span aria-hidden="true">/</span> {doc.id.split('/').at(-1)}</div>
+        <div class="document-kicker">{displayDomain(doc.group)} <span aria-hidden="true">/</span> {doc.id.split('/').at(-1)}</div>
         <div class="document-title"><h1>{doc.title}</h1></div>
         <dl class="provenance">
           <div><dt>最後提交</dt><dd>{doc.date}</dd></div>
