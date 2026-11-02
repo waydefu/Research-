@@ -31,10 +31,10 @@
 | 超強 JS 特效、電影級互動（延續 18） | 3D 世界常駐於版面之下，換頁時鏡頭連續移動；特效必須服務敘事（16 的「quality of intent」） |
 | 繁體中文主導、有字體變化（延續 18） | 閱讀層使用完整繁中字體；展示字體只用於標題並做子集化 |
 
-**「不用 GitHub 連結」的界定（需 Owner 確認，見第 10 節）：**
+**「不用 GitHub 連結」的界定（Owner 已於 2026-11-02 確認，見第 10 節）：**
 - 研究文件之間的連結 → 一律改成站內連結。
 - 文件引用的**外部官方來源**（MDN、W3C、各框架文件）→ 保留為外部連結，這是 `AGENTS.md`「事實需連結原始來源」的要求。
-- 指向本 Repo PR／Ruleset 的 GitHub 網址（目前 2 處）→ 預設改為純文字標註，不做連結。
+- 指向本 Repo PR／Ruleset 的 GitHub 網址（目前 2 處）→ 改為純文字標註，不做連結。
 - 每篇文件顯示來源 commit SHA 與最後修改日期，**以文字呈現、不連到 GitHub**。
 
 **不能接受（沿用 18 第 1 節，並新增三條）：**
@@ -104,10 +104,10 @@
 
 ```text
 site/
-  astro.config.ts           output: 'static'，base: '/Research-/'（P5 前為預覽子路徑）
+  astro.config.ts           output: 'static'，base: '/Research-/v3/'（P5 切換後改為 '/Research-/'）
   package.json · package-lock.json
   src/
-    content.config.ts       collections：research、governance、design（Zod schema）
+    content.config.ts       collections：research、governance（排除 THREAT-MODEL.md）、design（Zod schema）
     lib/markdown/           remark-rewrite-links、rehype-table-wrap、rehype-toc 等自訂外掛
     lib/graph/              build-graph.ts：連結 → 邊；預算星圖座標 → graph.json
     lib/provenance/         git log 取得每檔 commit SHA 與日期
@@ -154,7 +154,7 @@ site/
 
 ## 5. 內容管線
 
-**目前規模（以 PR #18 head 計算）：** `research/` 55 篇、`docs/governance/` 7 篇、`showcase/design/` 4 篇，共 66 篇 Markdown，約 415 KB（UTF-8）；本 PR 再加入 19、20 兩篇。其中 61 篇有表格、16 篇有程式碼區塊（多為 ASCII 圖），2 張 SVG 插圖位於 `showcase/design/`；沒有數學式或 Mermaid。
+**目前規模（以 PR #18 head 計算）：** `research/` 55 篇、`docs/governance/` 7 篇、`showcase/design/` 4 篇，共 66 篇 Markdown，約 415 KB（UTF-8）；本 PR 再加入 19、20 兩篇。依 Owner 決定，`docs/governance/THREAT-MODEL.md` 不在網站展示，其餘全部收錄。其中 61 篇有表格、16 篇有程式碼區塊（多為 ASCII 圖），2 張 SVG 插圖位於 `showcase/design/`；沒有數學式或 Mermaid。
 
 | 步驟 | 做法 | 驗收 |
 | --- | --- | --- |
@@ -163,7 +163,8 @@ site/
 | 3. 表格 | rehype 外掛把 `<table>` 包進可橫向捲動、可鍵盤聚焦的容器；手機上首欄固定 | 最寬表格在 360px 寬不裁字 |
 | 4. 程式碼與 ASCII 圖 | Shiki 上色；`text` 區塊保持等寬並可橫向捲動，不自動換行 | 第 3 節架構圖在手機上可完整捲動閱讀 |
 | 5. 站內連結 | 相對 `.md` 連結 → 站內路由，保留 `#錨點`；指向本 Repo 非 Markdown 檔（如 SVG）→ 複製到站內資產；壞連結 → 建置失敗 | 輸出中「指向本 Repo 檔案的 GitHub 連結」= 0 |
-| 6. 本 Repo 的 PR／Ruleset 網址 | 改為純文字標註（第 10 節待 Owner 決定） | 同上 |
+| 6. 本 Repo 的 PR／Ruleset 網址 | 改為純文字標註（Owner 已確認） | 同上 |
+| 6a. 排除清單 | `docs/governance/THREAT-MODEL.md` 不產生頁面、不進搜尋與星圖；其他文件連到它時顯示為純文字「（未公開於網站）」 | 輸出中沒有該文件的頁面、索引或節點 |
 | 7. 關係圖 | 節點 = 文件；邊 = 站內連結（有向、依次數加權）；群組 = 資料夾；建置時以固定亂數種子預算座標寫入 `graph.json` | 同一 commit 兩次建置輸出相同 |
 | 8. 反向連結 | 每篇頁尾列出「引用本篇的文件」 | 與 graph.json 一致 |
 | 9. 來源標示 | 頁首顯示 commit SHA 與最後修改日期（純文字） | 每頁皆有；取不到時顯示「Unknown」 |
@@ -215,7 +216,7 @@ context lost、shader 編譯失敗、頁面隱藏 → 停止繪製；重複失�
 - **閱讀是主產品：** 文件頁不是卡片拼貼。內文 17–18px，繁中每行約 32–40 字；標題階層清楚；表格、程式碼、引用區塊各有專屬樣式。
 - **字體策略：**
   - 內文：Noto Sans TC 或 Noto Serif TC，以 `unicode-range` 分片自架（不呼叫字體 CDN，沿用 V2 政策）。
-  - 展示標題：G0 盲測 Noto Serif TC 與其他 SIL OFL 繁中字體候選（例如霞鶩文楷 TC、芫荽），**導入前查核各自版本的 OFL 原文與字元覆蓋**。
+  - 展示標題：G0 盲測三個候選（Owner 2026-11-02 確認）：Noto Serif TC、霞鶩文楷 TC、芫荽。**導入前查核各自版本的 OFL 原文與字元覆蓋**。
   - 建置時收集所有標題用字 → `pyftsubset` 子集化展示字體。
 - **反模板規則：** 不用一致圓角卡片、裝飾性漸層、每節都有全大寫小標、每個區塊都淡入上滑；大膽只花在 3D 世界與首頁開場，閱讀層保持安靜。
 
@@ -237,7 +238,7 @@ context lost、shader 編譯失敗、頁面隱藏 → 停止繪製；重複失�
 
 ## 9. 分階段規劃
 
-每個階段都是**獨立、小範圍的 PR**，Owner 審查通過才進下一階段。V3 在 P5 之前部署到預覽子路徑（例如 `/Research-/v3/`，需另行批准 workflow 變更），V2 繼續在根路徑。
+每個階段都是**獨立、小範圍的 PR**，Owner 審查通過才進下一階段。V3 在 P5 之前部署到預覽子路徑 `/Research-/v3/`，V2 繼續在根路徑。Owner 已同意在 **P0 完成後**以獨立 PR 修改部署 workflow；該 PR 仍需 Owner 審查後才合併。
 
 | 階段 | 目標 | 主要交付物 | 通過條件（Gate） |
 | --- | --- | --- | --- |
@@ -261,13 +262,16 @@ context lost、shader 編譯失敗、頁面隱藏 → 停止繪製；重複失�
 | 3D 資產需要真正的美術 | 「四個圓環加 Glow」 | G0 先過靜止畫面；Blender 資產另立 PR 審查 |
 | AI 執行者越權或誤報完成 | 未授權部署、假驗收 | 依 [20 執行書](20-v3-chatgpt-5-6-execution-brief.md) 的授權邊界與回報格式 |
 
-**待 Owner 決定：**
-- [ ] 來源 commit SHA 以純文字顯示，是否接受？
-- [ ] 本 Repo 的 PR／Ruleset 網址改為純文字，是否接受？
-- [ ] `docs/governance/`（含威脅模型、Rulesets）是否在網站公開展示？Repo 已公開，但網站會提高能見度。
-- [ ] V3 預覽子路徑名稱與 workflow 變更。
-- [ ] 展示字體候選名單。
-- [ ] 本文件合併後，是否授權開始 P0 實作（文件合併 ≠ 開工許可）。
+**Owner 決定（2026-11-02，全部採用本文件建議）：**
+
+| 事項 | 決定 |
+| --- | --- |
+| 來源 commit SHA | 以純文字顯示，不連到 GitHub |
+| 本 Repo 的 PR／Ruleset 網址 | 改為純文字標註 |
+| `docs/governance/` 公開範圍 | 公開；`THREAT-MODEL.md` 先不在網站展示，日後由 Owner 另行決定 |
+| V3 預覽路徑 | `/Research-/v3/`；P0 完成後以獨立 PR 修改部署 workflow |
+| 展示字體候選 | Noto Serif TC、霞鶩文楷 TC、芫荽 |
+| P0 開工 | 本文件合併後，由 Owner 另行指定執行者（ChatGPT 5.6 或 Claude）並明確開工；文件合併不等於開工許可 |
 
 ## 11. 來源
 
@@ -285,3 +289,5 @@ context lost、shader 編譯失敗、頁面隱藏 → 停止繪製；重複失�
 ---
 
 **修訂紀錄｜2026-11-02 v1**：依 Owner 新需求，將 18 的首選殼層由 Vite SPA 改為 Astro 6 靜態輸出；新增內容管線、研究星圖世界觀、四種模式、P0–P5 規劃與待決事項。沒有變更現網、部署、權限或自動化設定，沒有任何真機量測。
+
+**修訂紀錄｜2026-11-02 v1.1**：記錄 Owner 對第 10 節六項待決事項的決定（全部採用建議）；排除 `THREAT-MODEL.md`；預覽路徑定為 `/Research-/v3/`；字體候選定案。

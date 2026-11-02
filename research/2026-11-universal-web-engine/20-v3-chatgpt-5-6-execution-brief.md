@@ -64,6 +64,8 @@ Astro 6（output: 'static'）+ TypeScript 6、<ClientRouter /> + transition:pers
 ## 資料與素材
 - research/、docs/、showcase/ 是唯讀資料來源：不修改、不複製進 site/；連結問題在內容管線中處理。
 - 研究文件之間的連結改寫成站內路由；外部官方來源保留外部連結；本 repo 的 PR／Ruleset 網址顯示為純文字。
+- docs/governance/THREAT-MODEL.md 不在網站展示：不產生頁面、不進搜尋與星圖，其他文件連到它時顯示純文字。
+- 網站部署在 /Research-/v3/（astro base），P5 切換前不動根路徑的 V2。
 - 3D 模型、貼圖、字體必須原創或具可再散布授權，授權記錄放在 site/ASSETS.md。不使用 Active Theory、Arctic Waters 或任何參考截圖的素材、輪廓與程式碼。
 
 ## 品質規則
@@ -103,7 +105,7 @@ Astro 6（output: 'static'）+ TypeScript 6、<ClientRouter /> + transition:pers
 
 ```text
 Goal
-建立 site/ 的 Astro 6 靜態網站，讓 research/、docs/governance/、showcase/design/ 的所有 Markdown（撰寫時約 66 篇，以實際檔案為準）全部在站內可讀、可搜尋。這一階段完全沒有 3D。
+建立 site/ 的 Astro 6 靜態網站（base 為 /Research-/v3/），讓 research/、docs/governance/、showcase/design/ 的所有 Markdown（撰寫時約 66 篇，以實際檔案為準；docs/governance/THREAT-MODEL.md 除外）全部在站內可讀、可搜尋。這一階段完全沒有 3D。
 
 Context
 - 規格：research/2026-11-universal-web-engine/19-v3-astro-research-cinema-architecture-and-roadmap.md 第 3、4、5、9 節。
@@ -115,7 +117,7 @@ Constraints
 - 先驗證 glob() 能否讀取 site/ 之外的上層目錄；不行就提出替代方案並停下來問，不要把 Markdown 複製進 git。
 - 不修改任何研究文件；連結與 metadata 問題在 remark/rehype 外掛中處理。
 - 壞連結讓建置失敗。
-- 不改 .github/workflows；若需要 CI 或預覽部署，在 PR 說明中提出建議即可。
+- 不改 .github/workflows。部署到 /Research-/v3/ 的 workflow 變更是 P0 完成後的下一個獨立 PR，在本 PR 說明中附上草案即可。
 
 Done when
 - 每一篇 Markdown 都有頁面，並以測試比對實際檔案數；站內連結全部改寫；輸出中指向本 repo 檔案的 GitHub 連結數為 0，並有測試保證。
@@ -139,7 +141,7 @@ Context
 Constraints
 - 靜態 HTML/CSS/SVG 即可，放在 site/src/pages/atlas/，不寫 WebGL。
 - 三個方向必須在構圖、字體、版面節奏上真正不同，不是同一版換色。
-- 展示字體候選需附 SIL OFL 授權來源與繁中字元覆蓋檢查。
+- 展示字體候選為 Noto Serif TC、霞鶩文楷 TC、芫荽（Owner 已確認），每個都需附 SIL OFL 授權來源與繁中字元覆蓋檢查。
 
 Done when
 - 3 個方向 ×（首頁桌機、首頁手機、文件頁、搜尋頁）共 12 張截圖。
@@ -295,3 +297,5 @@ Done when
 ---
 
 **修訂紀錄｜2026-11-02 v1**：依 OpenAI GPT-5.6 與 Codex 官方指南，建立 V3 的主執行書、P0–P5 任務提示詞、審查提示詞與失誤對策。未在本 Repo 實際執行任何 GPT-5.6 任務。
+
+**修訂紀錄｜2026-11-02 v1.1**：寫入 Owner 決定：排除 `THREAT-MODEL.md`、預覽路徑 `/Research-/v3/`、P0 後以獨立 PR 修改 workflow、展示字體候選三款。
