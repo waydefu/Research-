@@ -59,7 +59,7 @@ test('no JavaScript: reading and navigation remain available', async ({browser},
   await page.goto(DOC);
   await expect(page.locator('article .article-content')).not.toBeEmpty();
   await page.locator('.back-link').click();
-  await expect(page.locator('h1')).toContainText('2026-11-universal-web-engine');
+  await expect(page.locator('h1')).toContainText('現代 Web 工程與互動技術');
   await page.goto(SEARCH);
   await expect(page.locator('#search-fallback ol li').first()).toBeVisible();
   await page.screenshot({path:testInfo.outputPath('no-js-search.png'), fullPage:true});
