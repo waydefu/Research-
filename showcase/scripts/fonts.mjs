@@ -9,7 +9,10 @@ export const FONTS=[
   {family:'Instrument Serif',path:'ofl/instrumentserif/InstrumentSerif-Regular.ttf',file:'instrument-serif-regular.ttf',blob:'36fac00ef9b7d523236df6536cb09c712bb2c7e4'},
   {family:'Instrument Serif Italic',path:'ofl/instrumentserif/InstrumentSerif-Italic.ttf',file:'instrument-serif-italic.ttf',blob:'192c3eda9864241ad280e9bcc84e258c80a4a588'},
   {family:'Manrope',path:'ofl/manrope/Manrope[wght].ttf',file:'manrope-variable.ttf',blob:'75274da58537d6123b14f2cd0c355ad4681fc2b3'},
-  {family:'IBM Plex Mono',path:'ofl/ibmplexmono/IBMPlexMono-Regular.ttf',file:'ibm-plex-mono.ttf',blob:'0c9770d5183ba60dc4350d3e011b782a320761ae'}
+  {family:'IBM Plex Mono',path:'ofl/ibmplexmono/IBMPlexMono-Regular.ttf',file:'ibm-plex-mono.ttf',blob:'0c9770d5183ba60dc4350d3e011b782a320761ae'},
+  {family:'Instrument Serif License',path:'ofl/instrumentserif/OFL.txt',file:'instrument-serif-OFL.txt',blob:'669ce7917bec662fcf7244d37f49c4277f6fbd73'},
+  {family:'Manrope License',path:'ofl/manrope/OFL.txt',file:'manrope-OFL.txt',blob:'e271172a9ed0cddc895aabb6509f1c7d880b492d'},
+  {family:'IBM Plex Mono License',path:'ofl/ibmplexmono/OFL.txt',file:'ibm-plex-mono-OFL.txt',blob:'c35c4c618fab33da8695177b3a6cefe0810b7b28'}
 ];
 function gitHash(data){return createHash('sha1').update(`blob ${data.length}\0`).update(data).digest('hex')}
 async function acquire(font){
