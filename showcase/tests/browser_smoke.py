@@ -6,7 +6,8 @@ html=(base/'index.html').read_text().replace('<script src="./app.js" type="modul
 css=(base/'styles.css').read_text()
 artifact=(base/'artifact.js').read_text().replace('export function mountArtifact','function mountArtifact')
 mesh=(base/'mesh-core.js').read_text().replace('export function makeTorus','function makeTorus').replace('export const RINGS','const RINGS').replace('export function mountMeshCore','function mountMeshCore')
-app=(base/'app.js').read_text().replace("import {mountMeshCore} from './mesh-core.js';",'')
+director=(base/'scene-director.js').read_text().replace('export const SCENES','const SCENES').replace('export const clamp01','const clamp01').replace('export function progressForRect','function progressForRect').replace('export function mountSceneDirector','function mountSceneDirector')
+app=(base/'app.js').read_text().replace("import {mountMeshCore} from './mesh-core.js';",'').replace("import {mountSceneDirector} from './scene-director.js';",'')
 fixture=json.loads((base/'data/research-index.json').read_text())
 result=[]
 with sync_playwright() as p:
@@ -17,7 +18,7 @@ with sync_playwright() as p:
   page.set_content(html,wait_until='domcontentloaded')
   page.add_style_tag(content=css)
   page.evaluate('data => { window.fetch=async () => ({ok:true,json:async()=>data}) }',fixture)
-  page.add_script_tag(content=artifact+'\n'+mesh+'\n'+app)
+  page.add_script_tag(content=artifact+'\n'+mesh+'\n'+director+'\n'+app)
   page.wait_for_timeout(1200)
   heading=page.locator('h1').inner_text();status=page.locator('#index-status').inner_text();initial=page.locator('.result').count()
   page.screenshot(path=str(base/f'{name}.png'),full_page=True,animations='disabled')
