@@ -41,6 +41,21 @@
 
 上述數字為曾實際回傳的 CI 結果，不是新 PR 的預先結論。
 
+### 本次修正後可查驗的 CI 與手機截圖（2026-11-03）
+
+**驗證程式 commit：** `d04d0ec9ea53a5b0de7e1c230ba7542b88aefb3e`。此後若再修改報告文字，需要對最終 PR HEAD 重新執行 CI；不能用此成功紀錄覆蓋新版本失敗。
+
+| 工作流程 | Actions run | 實際結果 |
+| --- | --- | --- |
+| Publish Research Showcase | `41482519993` | **SUCCESS**；V2 + V3 產物驗證、Chromium 9/9（V2→V3 與手機星圖） |
+| Showcase static validation | `41482519833` | **SUCCESS** |
+| Research integrity | `41482519857` | **SUCCESS** |
+| V3 P0 build and checks | `41482519864` | **SUCCESS**；維持中文搜尋、無 JS、axe 等原有回歸驗證 |
+
+本輪 Pages CI：`P0 preflight: 68 Markdown files`、V2→V3 **64 條**站內文章路徑可達、2 條明確限於原始碼；**68 篇 V3 文件**與 **176 個完全一致的 V3 產物檔**已通過驗證。新增的 P0 報告已被計入研究全文。
+
+**視覺與操作證據：** `v2-v3-reader-test-evidence` artifact（run `41482519993`，保留七天），包含 `mobile-map-320.png`、`mobile-map-360.png`、`mobile-map-393.png`、`mobile-map-430.png`、`mobile-map-760.png`。Chromium 檢查每個節點文字邊界、彼此距離、最小觸控直徑、領域點選與桌面 ↔ 手機版回復。已人工檢視其中 320／360 截圖，沒有原先的標籤溢出；**此證據仍不是 Owner 實機複驗**。
+
 ## 2. Gate 分級與剩餘問題
 
 | Gate | 已取得的證據 | 判定 |
@@ -121,7 +136,7 @@
 
 | 檢查項 | 狀態 |
 | --- | --- |
-| 本 PR CI | 待執行／報告更新 |
+| 本 PR 修補程式版 CI | **四組成功、9/9 Pages E2E 通過**；本報告文字更新後仍需最終 HEAD CI 重驗 |
 | 手機星圖正式站點複驗 | **待 Owner** |
 | P0 可否標記 PASS | **待 Owner** |
 | P1 G0 是否准許開工 | **未授權；需 Owner 獨立指示** |
