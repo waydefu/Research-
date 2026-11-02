@@ -41,7 +41,12 @@ jobs:
       # After committing site/package-lock.json, replace npm install with npm ci.
       - name: Install dependencies and generate lockfile
         working-directory: site
-        run: npm install --no-audit --no-fund
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
       - name: Astro and catalog tests
         working-directory: site
         run: npm run check
@@ -82,3 +87,40 @@ jobs:
           name: v3-p0-static-site
           path: site/dist/
           retention-days: 7
+
+  lockfile:
+    name: Commit P0 lockfile to the feature branch (one-time)
+    needs: p0
+    # Only this Owner-controlled PR branch. No PR scripts execute with write credentials.
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 20 && github.event.pull_request.head.repo.full_name == 'waydefu/Research-' && github.event.pull_request.head.ref == 'feat/v3-p0-content-museum-20261102'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - name: Read exact PR head without storing credentials
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Node.js
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '22'
+      - name: Generate reproducible dependency lock without running package scripts
+        working-directory: site
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Commit lockfile only if missing or changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add -- site/package-lock.json
+          if git diff --cached --quiet; then
+            echo "Lockfile already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(v3): commit reproducible npm lockfile"
+          header="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $header" push origin HEAD:refs/heads/feat/v3-p0-content-museum-20261102
