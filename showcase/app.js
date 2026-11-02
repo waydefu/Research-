@@ -12,6 +12,17 @@ const DOMAINS=[
   {id:'research',label:'Field Notes',zh:'歷史實驗與研究',x:135,y:355,r:39,count:0}
 ];
 const LINKS=[['web','agents'],['web','data'],['web','creative'],['agents','security'],['agents','data'],['data','research'],['data','security'],['creative','web'],['creative','security'],['research','web']];
+const mobileMap=matchMedia('(max-width:760px)');
+// Mobile is a separately composed constellation, not a shrunken 1100px desktop map.
+const MOBILE_MAP=[
+  {id:'web',x:83,y:97,r:55,lines:['網頁與視覺','工程']},
+  {id:'agents',x:241,y:132,r:57,lines:['AI 代理','系統治理']},
+  {id:'security',x:82,y:271,r:54,lines:['安全與','治理']},
+  {id:'data',x:245,y:280,r:56,lines:['搜尋與','資料庫']},
+  {id:'creative',x:92,y:439,r:55,lines:['創意與','技術研究']},
+  {id:'research',x:246,y:438,r:55,lines:['歷史實驗','與研究']}
+];
+
 const $=id=>document.getElementById(id);
 const state={all:[],filtered:[],group:'all',query:'',limit:9,sourceCommit:''};
 const format=n=>new Intl.NumberFormat('zh-TW').format(n);
@@ -25,10 +36,33 @@ function goGroup(id,focusTarget=false){state.group=id;state.limit=9;state.query=
 function makeSVG(tag,attrs={}){const el=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [key,val] of Object.entries(attrs))el.setAttribute(key,String(val));return el}
 function renderGraph(){
  const svg=$('domain-map');svg.replaceChildren();
+ const mobile=mobileMap.matches;
+ svg.setAttribute('viewBox',mobile?'0 0 330 530':'0 0 1100 480');
+ svg.classList.toggle('domain-map--mobile',mobile);
+ const positions=mobile?MOBILE_MAP:DOMAINS;
+ const byId=new Map(positions.map(p=>[p.id,p]));
  const defs=makeSVG('defs'),lineGradient=makeSVG('linearGradient',{id:'connection-gradient',x1:0,x2:1});lineGradient.append(makeSVG('stop',{offset:0,'stop-color':'#167B90'}),makeSVG('stop',{offset:1,'stop-color':'#E4B451'}));defs.append(lineGradient);svg.append(defs);
- for(const [a,b] of LINKS){const aa=DOMAINS.find(x=>x.id===a),bb=DOMAINS.find(x=>x.id===b);svg.append(makeSVG('line',{class:'connection',x1:aa.x,y1:aa.y,x2:bb.x,y2:bb.y}))}
- for(const d of DOMAINS){const g=makeSVG('g',{class:`node ${state.group===d.id?'node--active':''}`,tabindex:0,role:'button','aria-label':`${d.zh}，${d.count} 篇研究，按 Enter 篩選`,'aria-pressed':String(state.group===d.id)});g.append(makeSVG('circle',{class:'orb-ring',cx:d.x,cy:d.y,r:d.r+11}));g.append(makeSVG('circle',{class:'orb-core',cx:d.x,cy:d.y,r:d.r}));g.append(makeSVG('circle',{class:'orb-pulse',cx:d.x,cy:d.y-18,r:3}));const label=makeSVG('text',{x:d.x,y:d.y+4,'text-anchor':'middle'});label.textContent=d.label;g.append(label);const num=makeSVG('text',{class:'node-index',x:d.x,y:d.y+21,'text-anchor':'middle'});num.textContent=`${String(d.count).padStart(2,'0')} STUDIES`;g.append(num);g.addEventListener('click',e=>goGroup(d.id,e.detail===0));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goGroup(d.id,true)}});svg.append(g)}
- const legend=$('domain-legend');legend.replaceChildren();for(const d of DOMAINS){const b=button(d.zh,e=>goGroup(d.id,e.detail===0));b.setAttribute('aria-pressed',String(state.group===d.id));legend.append(b)}
+ for(const [a,b] of LINKS){const aa=byId.get(a),bb=byId.get(b);svg.append(makeSVG('line',{class:'connection',x1:aa.x,y1:aa.y,x2:bb.x,y2:bb.y}))}
+ for(const d of DOMAINS){
+  const pos=byId.get(d.id),{x,y,r}=pos;
+  const g=makeSVG('g',{class:`node ${state.group===d.id?'node--active':''}`,'data-domain':d.id,tabindex:0,role:'button','aria-label':`${d.zh}，${d.count} 篇研究，按 Enter 篩選`,'aria-pressed':String(state.group===d.id)});
+  g.append(makeSVG('circle',{class:'orb-ring',cx:x,cy:y,r:r+(mobile?7:11)}));
+  g.append(makeSVG('circle',{class:'orb-core',cx:x,cy:y,r:r}));
+  g.append(makeSVG('circle',{class:'orb-pulse',cx:x,cy:y-(mobile?36:18),r:3}));
+  const label=makeSVG('text',{x:x,y:mobile?y-10:y+4,'text-anchor':'middle'});
+  if(mobile){
+   pos.lines.forEach((line,i)=>{const span=makeSVG('tspan',{x:x,dy:i?19:0});span.textContent=line;label.append(span)});
+  }else label.textContent=d.label;
+  g.append(label);
+  const num=makeSVG('text',{class:'node-index',x:x,y:y+(mobile?33:21),'text-anchor':'middle'});
+  num.textContent=`${String(d.count).padStart(2,'0')} ${mobile?'篇研究':'STUDIES'}`;
+  g.append(num);
+  g.addEventListener('click',e=>goGroup(d.id,e.detail===0));
+  g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goGroup(d.id,true)}});
+  svg.append(g);
+ }
+ const legend=$('domain-legend');legend.replaceChildren();
+ for(const d of DOMAINS){const b=button(d.zh,e=>goGroup(d.id,e.detail===0));b.setAttribute('aria-pressed',String(state.group===d.id));legend.append(b)}
 }
 function renderFilters(){const bar=$('filter-bar');bar.replaceChildren();for(const d of [{id:'all',zh:'全部研究'},...DOMAINS]){const b=button(d.zh,()=>{state.group=d.id;state.limit=9;persist();renderFilters();renderGraph();applyFilter();document.dispatchEvent(new CustomEvent('research:focus',{detail:{selected:d.id==='all'?false:d.id}}))});b.setAttribute('aria-pressed',String(state.group===d.id));bar.append(b)}}
 function filterDocs(docs,query,group){const terms=normalize(query).trim().split(/\s+/u).filter(Boolean);return docs.filter(d=>{if(group!=='all'&&d.group!==group)return false;const hay=normalize([d.title,d.summary,d.path,...(d.headings||[]),...(d.tags||[])].join(' '));return terms.every(t=>hay.includes(t))})}
@@ -45,5 +79,5 @@ async function loadIndex(){try{const response=await fetch('./data/research-index
 function setupSearch(){let debounce=0;$('search-form').addEventListener('submit',e=>{e.preventDefault();state.query=$('research-search').value;state.limit=9;persist();applyFilter()});$('research-search').addEventListener('input',e=>{clearTimeout(debounce);const next=e.target.value;debounce=setTimeout(()=>{state.query=next;state.limit=9;persist();applyFilter()},100)});document.addEventListener('keydown',e=>{const target=e.target;const editable=target instanceof HTMLElement&&(target.isContentEditable||['INPUT','TEXTAREA','SELECT'].includes(target.tagName));if(e.key==='/'&&!editable&&!e.altKey&&!e.ctrlKey&&!e.metaKey){e.preventDefault();$('research-search').focus()}else if(e.key==='Escape'&&document.activeElement===$('research-search')){if($('research-search').value){$('research-search').value='';state.query='';state.limit=9;persist();applyFilter()}else $('research-search').blur()}});$('load-more').addEventListener('click',()=>{state.limit+=9;renderResults()});window.addEventListener('popstate',()=>{setQueryFromURL();renderFilters();renderGraph();applyFilter()})}
 function setupMobileMenu(){const btn=$('menu-toggle'),nav=$('mobile-nav');function close(){nav.hidden=true;btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','展開選單')}btn.addEventListener('click',()=>{const opening=nav.hidden;nav.hidden=!opening;btn.setAttribute('aria-expanded',String(opening));btn.setAttribute('aria-label',opening?'關閉選單':'展開選單')});nav.addEventListener('click',e=>{if(e.target.closest('a'))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!nav.hidden){close();btn.focus()}});window.addEventListener('resize',()=>{if(innerWidth>760)close()})}
 function setupReveal(){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver'in window))return;const css='@keyframes editorialEnter{from{opacity:.35;transform:translateY(22px)}to{opacity:1;transform:none}}';const style=node('style');style.textContent=css;document.head.append(style);const io=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){if(entry.target.matches('h2'))entry.target.classList.add('v2-reveal');else entry.target.style.animation='editorialEnter 800ms cubic-bezier(.23,.84,.24,1) both';io.unobserve(entry.target)}},{threshold:.13});document.querySelectorAll('.section-heading,.thesis-main,.explorer-intro,.method-steps,.heading-row h2,.explorer-intro h2,.method-main > h2,.exit > h2').forEach(el=>io.observe(el))}
-function init(){if(new URL(location.href).searchParams.get('qa')==='1')import('./qa-metrics.js').then(m=>m.startQAMetrics()).catch(e=>console.warn('Local QA unavailable',e));setQueryFromURL();setupMobileMenu();setupSearch();setupReveal();const interaction=mountInteraction($('v2-stage'));loadIndex().then(()=>{interaction.setDocuments(state.all,state.sourceCommit);interaction.markIndexLoaded(state.all.length>0)});const canvas=$('artifact-canvas');if(canvas){const scene=mountMeshCore(canvas,$('hero-renderer'));mountSceneDirector(scene)}}
+function init(){mobileMap.addEventListener('change',renderGraph);if(new URL(location.href).searchParams.get('qa')='1')import('./qa-metrics.js').then(m=>m.startQAMetrics()).catch(e=>console.warn('Local QA unavailable',e));setQueryFromURL();setupMobileMenu();setupSearch();setupReveal();const interaction=mountInteraction($('v2-stage'));loadIndex().then(()=>{interaction.setDocuments(state.all,state.sourceCommit);interaction.markIndexLoaded(state.all.length>0)});const canvas=$('artifact-canvas');if(canvas){const scene=mountMeshCore(canvas,$('hero-renderer'));mountSceneDirector(scene)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
