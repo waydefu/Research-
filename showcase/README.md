@@ -74,6 +74,23 @@ The proposed `../.github/workflows/publish-showcase.yml` changes this at the sou
 
 **Source/current status boundaries:** This runbook is an authorized deployment proposal, not a claim that the GitHub Pages settings have already changed or that production is live. The only network endpoints needed by the browser are the static site on Pages and outbound GitHub source links; there is no hosted backend, credential or third-party runtime dependency.
 
+
+## Showcase source and accessibility audit — 2026-11-02 (PR #10)
+
+The earlier successful Pages deployment is **not** a measured LCP/INP/FPS result. This follow-up inspects the real `main` Showcase sources and repairs specific observable implementation gaps while preserving the original editorial art direction.
+
+| Finding | Root cause | Change and evidence |
+|---|---|---|
+| Graph selection did not track the selected category | `goGroup()` refreshed filter results but not the SVG/legend state | Rebuild both filter and graph, update `aria-pressed`, focus the Explorer heading for keyboard activation; optional Playwright smoke adds real DOM assertions |
+| WebGL context loss could be followed by a new frame loop | Intersect/visibility handlers restarted a context that had not yet emitted `webglcontextrestored` | Explicit `contextLost` state gates resize, draw, RAF start and initialization; simulated loss + viewport/visibility and reduced-motion tests |
+| Search announcements were noisy | The complete result list was `aria-live` | Announce only a compact result count using `role="status"`; keep the list accessible through normal reading |
+| Failed/no JavaScript index had no direct link | Source index status provided no actionable recovery | Show the public GitHub research directory as both a `<noscript>` link and runtime fetch-failure link |
+| Decorative mobile grain overlay | Full viewport procedural noise uses blend compositing even when not needed | Disable grain at narrow widths, preserving content and composition; **no claimed FPS gain** |
+
+**What was actually verified:** GitHub Actions runs `npm --prefix showcase run check` and builds the **real** repository into the Pages artifact. The PR's static checks include the live index count/commit and Node fake-WebGL lifecycle tests. The optional `showcase/tests/browser_smoke.py` now checks graph selection and keyboard focus in Chromium **when a developer runs it with Playwright**, but it is not part of mandatory CI. Static-source UX contract tests do not replace real assistive-technology validation.
+
+**Remaining unknowns:** the available external web reader could not retrieve the live Pages HTML/JSON; previous development screenshots were a fixture/CSS fallback, not a production WebGL capture. Native Android Chrome and iOS Safari GPU rendering, real hardware context loss, screen readers, long-run heat/power and field CWV remain unmeasured. Do not report AA certification or performance improvements without running those tests. Sources: [WebGL restoration](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/webglcontextrestored_event), [WCAG 4.1.3](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html), [Chrome render performance](https://developer.chrome.com/docs/devtools/performance/reference).
+
 ## V2 art direction and engineering research (design only; 2026-11-02)
 
 The Repo Owner requested the **Active Theory standard as the minimum creative benchmark** and supplied gold/cyan animated references for a new, original optical language. These are **planning documents only**; the running V1 Showcase is unchanged until a separate authorized implementation PR.
