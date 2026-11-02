@@ -56,6 +56,7 @@ export function mountInteraction(stage,{doc=document,win=window}={}){
   const paused=motionButton.getAttribute('aria-pressed')!=='true';
   motionButton.setAttribute('aria-pressed',String(paused));
   motionButton.textContent=paused?'RESUME VISUAL MOTION':'PAUSE VISUAL MOTION';
+  motionButton.setAttribute('aria-label',paused?'恢復視覺動畫':'暫停視覺動畫');
   doc.dispatchEvent(new CustomEvent('research:motion',{detail:{paused}}));
  };
  motionButton?.addEventListener('click',pause);
