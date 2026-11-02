@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import { BASE } from '../lib/catalog.mjs';
+const { title = '研究觀測所', description = 'Research-｜可追溯的技術研究資料庫' } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content={description}/>
+  <meta name="color-scheme" content="dark"/>
+  <title>{title} · THE OBSERVATORY</title>
+</head>
+<body>
+  <a class="skip" href="#main">直接前往正文</a>
+  <header class="global-header">
+    <a class="brand" href={BASE}>
+      <span class="brand-mark" aria-hidden="true">◈</span>
+      <span>研究觀測所 <small>THE OBSERVATORY</small></span>
+    </a>
+    <nav aria-label="全站導覽">
+      <a href={BASE}>研究總覽</a>
+      <a href={BASE + 'search/'}>全文搜尋</a>
+    </nav>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="global-footer">
+    <span>RESEARCH / VERIFIED SOURCES / OPEN QUESTIONS</span>
+    <span>V3 · P0 內容館 · 非最終美術版本</span>
+  </footer>
+</body>
+</html>

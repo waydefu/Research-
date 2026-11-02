@@ -1,0 +1,28 @@
+{
+  "name": "research-observatory-v3",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check && node --test tests/*.test.mjs",
+    "build": "npm run preflight && astro build && pagefind --site dist && node scripts/postbuild-verify.mjs",
+    "preflight": "node scripts/preflight.mjs",
+    "preview": "astro preview",
+    "predev": "npm run preflight",
+    "e2e": "playwright test",
+    "provenance": "node scripts/provenance-audit.mjs"
+  },
+  "dependencies": {
+    "astro": "^6.0.0",
+    "pagefind": "^1.6.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.0",
+    "typescript": "^6.0.0",
+    "@playwright/test": "^1.64.1",
+    "@axe-core/playwright": "^4.14.0"
+  }
+}

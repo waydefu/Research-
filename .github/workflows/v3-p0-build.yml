@@ -1,0 +1,84 @@
+# V3 P0 static research archive validation; no deploy, no credentials or write permissions.
+name: V3 P0 build and checks
+
+on:
+  pull_request:
+    paths:
+      - 'site/**'
+      - '.github/workflows/v3-p0-build.yml'
+      - 'research/**'
+      - 'docs/governance/**'
+      - 'showcase/design/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v3-p0-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  p0:
+    name: Install, validate and build Astro
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout with full provenance (pinned)
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js 22 (pinned)
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '22'
+      - name: Check runtime
+        run: |
+          node --version
+          npm --version
+      # Dependency tree is locked in site/package-lock.json; no PR write permissions.
+      - name: Install locked dependencies (npm ci)
+        working-directory: site
+        run: npm ci --no-audit --no-fund
+      - name: Astro and catalog tests
+        working-directory: site
+        run: npm run check
+      - name: Build static research museum and Pagefind
+        working-directory: site
+        run: npm run build
+      - name: Audit all source SHA/date values
+        working-directory: site
+        run: npm run provenance
+      - name: Install Chromium with required system dependencies
+        working-directory: site
+        run: npx playwright install --with-deps chromium
+      - name: Browser UX, 20 zh-TW searches, no-JS and axe checks
+        working-directory: site
+        run: npm run e2e
+      - name: Upload browser screenshots and traces
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: v3-p0-browser-evidence
+          path: |
+            site/test-results/
+            site/playwright-report/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Upload npm lockfile for review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: v3-p0-generated-package-lock
+          path: site/package-lock.json
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Upload built HTML for review
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: v3-p0-static-site
+          path: site/dist/
+          retention-days: 7
+

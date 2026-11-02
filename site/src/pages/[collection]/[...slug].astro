@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { allDocs, getDoc, backlinks, BASE, displayDomain } from '../../lib/catalog.mjs';
+export async function getStaticPaths() {
+  const [research, governance, design] = await Promise.all([
+    getCollection('research'), getCollection('governance'), getCollection('design')
+  ]);
+  const actual = new Set([...research.map(e => 'research:' + e.id), ...governance.map(e => 'governance:' + e.id), ...design.map(e => 'design:' + e.id)]);
+  const docs = allDocs();
+  for (const doc of docs) if (!actual.has(doc.collection + ':' + doc.id)) throw new Error('Astro collection 遺漏原文：' + doc.file);
+  if (actual.size !== docs.length) throw new Error('Astro collection 與原文數量不一致：' + actual.size + ' / ' + docs.length);
+  return [...research, ...governance, ...design].map(entry => ({
+    params: { collection: entry.collection, slug: entry.id },
+    props: { entry }
+  }));
+}
+const { entry } = Astro.props;
+const doc = getDoc(entry.collection, entry.id);
+if (!doc) throw new Error('站內文件不存在：' + entry.collection + '/' + entry.id);
+const { Content, headings } = await render(entry);
+const related = backlinks(doc);
+---
+<Base title={doc.title}>
+  <div class="reading-layout">
+    <aside class="reading-sidebar" aria-label="文件導覽">
+      <a class="back-link" href={BASE + 'domains/' + encodeURIComponent(doc.group) + '/'}>← {displayDomain(doc.group)}</a>
+      <nav aria-label="本篇目錄">
+        <p class="eyebrow">CONTENTS</p>
+        {headings.filter(h=>h.depth>1 && h.depth<5).length ? (
+          <ol class="toc">{headings.filter(h=>h.depth>1 && h.depth<5).map(h=><li class={'depth-' + h.depth}><a href={'#' + h.slug}>{h.text}</a></li>)}</ol>
+        ) : <p class="muted">本篇沒有子章節。</p>}
+      </nav>
+    </aside>
+    <article class="document" data-pagefind-body data-pagefind-filter={'domain:' + doc.group}>
+      <header class="document-header">
+        <div class="document-kicker">{displayDomain(doc.group)} <span aria-hidden="true">/</span> {doc.id.split('/').at(-1)}</div>
+        <div class="document-title"><h1>{doc.title}</h1></div>
+        <dl class="provenance">
+          <div><dt>最後提交</dt><dd>{doc.date}</dd></div>
+          <div><dt>來源 SHA</dt><dd class="sha">{doc.sha}</dd></div>
+        </dl>
+      </header>
+      <div class="article-content"><Content /></div>
+      <section class="related">
+        <h2>哪些研究引用了本篇？</h2>
+        {related.length ? <ul class="document-list">{related.map(d=><li><a href={d.href}>{d.title}</a></li>)}</ul> : <p>目前沒有其他研究直接引用本篇。</p>}
+      </section>
+    </article>
+  </div>
+</Base>

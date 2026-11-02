@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import { allDocs, domains, displayDomain } from '../lib/catalog.mjs';
+const docs = allDocs();
+---
+<Base title="全文搜尋">
+  <section class="search-page">
+    <p class="eyebrow">FULL-TEXT / DISCOVERY</p>
+    <h1>搜尋整座研究館。</h1>
+    <p>可以搜尋技術名稱、概念與研究原文。搜尋功能需要 JavaScript；下方仍保留完整文件入口。</p>
+    <form id="search-form" role="search">
+      <label for="search-term">研究關鍵字</label>
+      <div class="search-controls"><input id="search-term" type="search" placeholder="例如：WebGPU、Agent、效能……" autocomplete="off"/><button type="submit">搜尋</button></div><label for="domain-filter">領域篩選</label><select id="domain-filter"><option value="">全部領域</option>{domains().map(d=><option value={d}>{displayDomain(d)}</option>)}</select>
+    </form>
+    <div id="search-feedback" role="status" aria-live="polite"></div>
+    <ol id="search-results" class="document-list" aria-label="搜尋結果"></ol>
+    <section id="search-fallback">
+      <h2>所有研究文件</h2>
+      <p class="muted">如果停用了 JavaScript，仍可直接開啟以下文件。</p>
+      <ol class="document-list">{docs.map(d=><li><a href={d.href}><span>{d.title}</span><small>{displayDomain(d.group)}</small></a></li>)}</ol>
+    </section>
+  </section>
+  <script is:inline type="module">
+    const base = '/Research-/v3/';
+    const form = document.getElementById('search-form');
+    const input = document.getElementById('search-term');
+    const domain = document.getElementById('domain-filter');
+    const feedback = document.getElementById('search-feedback');
+    const list = document.getElementById('search-results');
+    let searchApi;
+    try {
+      searchApi = await import(base + 'pagefind/pagefind.js');
+      await searchApi.options({ baseUrl: base });
+      document.getElementById('search-fallback').hidden = true;
+      feedback.textContent = '輸入關鍵字，開始搜尋全文。';
+    } catch {
+      feedback.textContent = '全文搜尋尚未就緒，請使用下方文件目錄。';
+    }
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!searchApi) return;
+      const query = input.value.trim();
+      list.replaceChildren();
+      if (!query) { feedback.textContent = '請輸入關鍵字。'; return; }
+      feedback.textContent = '搜尋中……';
+      try {
+        const response = await searchApi.search(query, domain.value ? { filters: { domain: domain.value } } : {});
+        const results = await Promise.all(response.results.slice(0, 40).map(r => r.data()));
+        for (const r of results) {
+          const item = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = r.url;
+          const title = document.createElement('span');
+          title.textContent = r.meta?.title || r.url;
+          const small = document.createElement('small');
+          small.textContent = r.url;
+          a.append(title, small);
+          item.append(a); list.append(item);
+        }
+        feedback.textContent = '找到 ' + (response.results.length) + ' 項結果。';
+      } catch {
+        feedback.textContent = '搜尋發生錯誤，請使用完整文件目錄。';
+        document.getElementById('search-fallback').hidden = false;
+      }
+    });
+  </script>
+</Base>
