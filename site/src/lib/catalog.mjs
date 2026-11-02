@@ -1,9 +1,10 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
-import { dirname, join, relative, resolve, sep, posix, basename } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join, relative, resolve, sep, posix, basename } from 'node:path';
 import { execFileSync } from 'node:child_process';
 
-export const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
+// Astro bundles server modules into dist/.prerender; import.meta.url changes there.
+// npm scripts and Astro CLI run from site/, regardless of output chunk location.
+export const ROOT = resolve(process.cwd(), '..');
 export const BASE = '/Research-/v3/';
 const SOURCES = [
   { collection: 'research', folder: 'research' },
