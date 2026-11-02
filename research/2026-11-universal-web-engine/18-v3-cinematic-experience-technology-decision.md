@@ -174,7 +174,7 @@
 
 ## 5. V3 結構：一個世界、一條時間軸、同一份研究資料
 
-\`\`\`text
+```text
                   美術設計／Design Atlas／原創故事板
                                   │
              Blender（模型、材質、鏡頭、構圖、動畫）
@@ -194,7 +194,7 @@
                    GPU 分級／降級／reduced motion
                                   │
                        GitHub Pages（靜態）
-\`\`\`
+```
 
 **概念狀態（尚未實作，不是既有 API）：**
 - chapter：當前敘事認知階段，而不是傳統 HTML section 的編號；
