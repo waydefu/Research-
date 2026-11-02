@@ -59,7 +59,7 @@ jobs:
           import assert from 'node:assert/strict';
           const root = 'showcase/dist/';
           for (const path of [
-            'index.html', 'app.js', 'artifact.js', 'mesh-core.js', 'scene-director.js', 'interaction-core.js', 'qa-metrics.js', 'styles.css',
+            'index.html', 'app.js', 'artifact.js', 'mesh-core.js', 'scene-director.js', 'interaction-core.js', 'qa-metrics.js', 'reader-links.js', 'styles.css',
             'assets/favicon.svg', 'assets/og.svg', 'data/research-index.json'
           ]) {
             assert.ok(statSync(root + path).size > 0, `Missing built asset: ${path}`);
@@ -104,6 +104,20 @@ jobs:
       - name: Verify unchanged V2 and complete V3 Pages artifact
         working-directory: site
         run: node scripts/verify-pages-bundle.mjs
+      - name: Install Chromium for actual V2-to-V3 navigation checks
+        working-directory: site
+        run: npx playwright install --with-deps chromium
+      - name: Browser test V2 article links and GitHub-source fallback
+        working-directory: site
+        run: npx playwright test --config playwright.pages.config.mjs
+      - name: Upload V2 reader browser test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: v2-v3-reader-test-evidence
+          path: site/test-results/
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Upload verified V2 + V3 from showcase/dist only
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4

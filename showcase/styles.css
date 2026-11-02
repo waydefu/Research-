@@ -151,3 +151,10 @@ body[data-v2-scene="explorer"] #v2-stage,body[data-v2-scene="method"] #v2-stage{
 @media(prefers-reduced-motion:reduce){
  .v2-cursor{display:none!important}.v2-reveal{animation:none!important}
 }
+
+/* V2 research titles now open the local V3 reader; source code is an explicit secondary link. */
+.result-title[href]:hover{text-decoration:underline;text-decoration-color:var(--flare);text-underline-offset:6px}
+.result-title:not([href]):hover{text-decoration:none}
+.result-source{display:inline-block;margin-top:10px;border-bottom:1px solid #8ca99e;color:#f8e8bd;font-size:10px;line-height:1.5;white-space:normal}
+.result-source:hover{border-color:var(--flare);color:var(--flare)}
+.result-unavailable{display:block;font-size:11px;color:var(--muted);margin-top:9px}
