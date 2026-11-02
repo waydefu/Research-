@@ -23,7 +23,8 @@
 14. [14｜十種特效 Rendering Pipeline／偽碼與五個 PoC 驗收](14-effects-recipes-and-poc-validation.md)
 15. [15｜55 項來源條目、證據層級、衝突處理與決策閘門](15-creative-web-evidence-and-adoption.md)
 16. [16｜Research Showcase V2：Active Theory 品質基準、證據與視覺轉譯](16-active-theory-quality-benchmark.md)
-17. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
+17. [17｜Arctic Waters／Hydra：Three.js × Blender 3D 製作與可重現 QA 工作法](17-arctic-waters-threejs-creative-workflow.md)
+18. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
 
