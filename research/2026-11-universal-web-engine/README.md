@@ -25,7 +25,9 @@
 16. [16｜Research Showcase V2：Active Theory 品質基準、證據與視覺轉譯](16-active-theory-quality-benchmark.md)
 17. [17｜Arctic Waters／Hydra：Three.js × Blender 3D 製作與可重現 QA 工作法](17-arctic-waters-threejs-creative-workflow.md)
 18. [18｜THE OBSERVATORY V3：全部技術盤點、70 個 GitHub 專案及電影級互動網站最佳組合](18-v3-cinematic-experience-technology-decision.md)
-19. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
+19. [19｜THE OBSERVATORY V3：研究全文站內化的完整架構與規劃書（Astro 6 + Three.js）](19-v3-astro-research-cinema-architecture-and-roadmap.md)
+20. [20｜THE OBSERVATORY V3：ChatGPT 5.6 專用執行書](20-v3-chatgpt-5-6-execution-brief.md)
+21. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
 
