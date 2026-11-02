@@ -9,6 +9,7 @@ uniform vec3 uOffset;
 uniform vec2 uPointer;
 uniform float uTime;
 uniform float uProgress;
+uniform float uDomain;
 uniform float uAspect;
 out vec3 vNormal;
 out vec3 vWorld;
@@ -17,7 +18,7 @@ mat3 ry(float a){float c=cos(a),s=sin(a);return mat3(c,0.,s,0.,1.,0.,-s,0.,c);}
 mat3 rz(float a){float c=cos(a),s=sin(a);return mat3(c,-s,0.,s,c,0.,0.,0.,1.);}
 void main(){
  float phase=uTime*.028;
- mat3 m=rz(uAngles.z+phase*.55)*ry(uAngles.y+phase+uPointer.x*.14+uProgress*1.65)*rx(uAngles.x+uPointer.y*.10);
+ mat3 m=rz(uAngles.z+phase*.55)*ry(uAngles.y+phase+uPointer.x*.14+uProgress*1.65+uDomain)*rx(uAngles.x+uPointer.y*.10);
  vec3 pos=m*aPosition+uOffset+vec3(.06*sin(uProgress*6.283),.11*sin(uProgress*3.14159),0.);
  vNormal=normalize(m*aNormal);
  vWorld=pos;
@@ -119,9 +120,9 @@ export function mountMeshCore(canvas,label){
  const finePointer=matchMedia('(pointer: fine)');
  const saveData=navigator.connection?.saveData===true;
  let gl=null,mesh=null,composite=null,vao=null,vbo=null,fbo=null,color=null,depth=null,raf=0;
- let disposed=false,contextLost=false,disabled=false,visible=false,active=false;
+ let disposed=false,contextLost=false,disabled=false,visible=false,active=false,userPaused=false;
  let quality=.70,slow=0,frames=0,last=0,origin=0;
- let sceneProgress=0,focus=0,focusTarget=0;
+ let sceneProgress=0,focus=0,focusTarget=0,domain=0,domainTarget=0;
  const pointer={x:0,y:0,tx:0,ty:0};
  const uniforms={};
  const status=value=>{if(label)label.textContent='RENDERER: '+value};
@@ -158,7 +159,7 @@ export function mountMeshCore(canvas,label){
    gl.enableVertexAttribArray(1);gl.vertexAttribPointer(1,3,gl.FLOAT,false,24,12);
    gl.bindVertexArray(null);
    fbo=gl.createFramebuffer();color=gl.createTexture();depth=gl.createRenderbuffer();
-   uniforms.mesh={angles:u(mesh,'uAngles'),offset:u(mesh,'uOffset'),pointer:u(mesh,'uPointer'),time:u(mesh,'uTime'),progress:u(mesh,'uProgress'),aspect:u(mesh,'uAspect'),material:u(mesh,'uMaterial'),focus:u(mesh,'uFocus')};
+   uniforms.mesh={angles:u(mesh,'uAngles'),offset:u(mesh,'uOffset'),pointer:u(mesh,'uPointer'),time:u(mesh,'uTime'),progress:u(mesh,'uProgress'),domain:u(mesh,'uDomain'),aspect:u(mesh,'uAspect'),material:u(mesh,'uMaterial'),focus:u(mesh,'uFocus')};
    uniforms.composite={scene:u(composite,'uScene'),texel:u(composite,'uTexel'),bloom:u(composite,'uBloom'),progress:u(composite,'uSceneProgress')};
    uniforms.ranges=ranges;
    status('WEBGL2 / MESH CORE');canvas.classList.add('is-ready');resize();
@@ -194,13 +195,14 @@ export function mountMeshCore(canvas,label){
    pointer.x+=(pointer.tx-pointer.x)*Math.min(1,dt/120);
    pointer.y+=(pointer.ty-pointer.y)*Math.min(1,dt/120);
    focus+=(focusTarget-focus)*Math.min(1,dt/780);
+   domain+=(domainTarget-domain)*Math.min(1,dt/740);
    gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);
    gl.viewport(0,0,canvas.width,canvas.height);
    gl.clearColor(0,0,0,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
    gl.enable(gl.DEPTH_TEST);gl.disable(gl.BLEND);
    gl.useProgram(mesh);gl.bindVertexArray(vao);
    const uu=uniforms.mesh;gl.uniform2f(uu.pointer,pointer.x,pointer.y);
-   gl.uniform1f(uu.time,(now-origin)*.001);gl.uniform1f(uu.progress,sceneProgress);
+   gl.uniform1f(uu.time,(now-origin)*.001);gl.uniform1f(uu.progress,sceneProgress);gl.uniform1f(uu.domain,domain);
    gl.uniform1f(uu.focus,focus);gl.uniform1f(uu.aspect,canvas.width/Math.max(1,canvas.height));
    RINGS.forEach((r,i)=>{
     gl.uniform3f(uu.angles,...r.angles);gl.uniform3f(uu.offset,...r.offset);
@@ -222,7 +224,7 @@ export function mountMeshCore(canvas,label){
    frames++;last=now;raf=requestAnimationFrame(render);
   }catch(e){console.warn('Scene runtime failure',e);fail('CSS / RENDER ERROR')}
  }
- function start(){if(active||!gl||disposed||disabled||contextLost||!visible||document.hidden||reduced.matches)return;active=true;origin=performance.now();last=0;frames=0;raf=requestAnimationFrame(render)}
+ function start(){if(active||!gl||disposed||disabled||contextLost||!visible||document.hidden||reduced.matches||userPaused)return;active=true;origin=performance.now();last=0;frames=0;raf=requestAnimationFrame(render)}
  const obs=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;if(visible)start();else stop()},{threshold:.01});
  obs.observe(canvas);
  const resizer=new ResizeObserver(()=>{if(gl&&!contextLost)resize()});resizer.observe(canvas);
@@ -237,7 +239,12 @@ export function mountMeshCore(canvas,label){
  reduced.addEventListener?.('change',change);
  create();
  return {
-  setScene(progress,selected){sceneProgress=Math.max(0,Math.min(1,progress||0));focusTarget=selected?1:0},
+  setScene(progress,selected){
+   sceneProgress=Math.max(0,Math.min(1,progress||0));focusTarget=selected?1:0;
+   const angles={web:0,agents:.78,security:1.62,data:2.41,creative:3.12,research:4.15};
+   domainTarget=typeof selected==='string'?(angles[selected]??0):0;
+  },
+  setPaused(value){userPaused=!!value;if(userPaused)stop();else start()},
   pause:stop,resume:start,
   dispose(){disposed=true;release();obs.disconnect();resizer.disconnect();
    window.removeEventListener('pointermove',move);document.removeEventListener('visibilitychange',hidden);
