@@ -13,6 +13,7 @@ const doc = docs.find(d => d.file.endsWith('19-v3-astro-research-cinema-architec
 const sourceExcerpt = doc.text.split('\n').map(s => s.trim()).find(s => s.length > 55 && !/^[#>|*-]/.test(s))?.replace(/[*_]/g,'').slice(0,168) ?? doc.title;
 const sampleDomains = domains().slice(0,4);
 const sampleDocs = docs.filter(d => /README\.md$/.test(d.file)).slice(0,3);
+const articleHeadings = doc.text.split('\n').filter(line => /^##\s+/.test(line)).slice(0,3).map(line => line.replace(/^##\s+/,''));
 ---
 <Atlas title={concept.title + '｜P1 G0'}>
 <div class={'atlas-concept '+concept.slug}>
@@ -53,7 +54,7 @@ const sampleDocs = docs.filter(d => /README\.md$/.test(d.file)).slice(0,3);
           <p class="atlas-doc-para">{sourceExcerpt}</p>
           <a class="atlas-cta" href={doc.href}>閱讀完整原文 <span aria-hidden="true">↗</span></a>
         </div>
-        <aside class="atlas-doc-aside"><span class="atlas-overline">CATALOGUE / 目錄預覽</span><ol><li>研究背景</li><li>設計原則</li><li>工程架構</li></ol><p>此處為排版示意；完整文章的實際目錄以 P0 頁面為準。</p></aside>
+        <aside class="atlas-doc-aside"><span class="atlas-overline">CATALOGUE / 目錄預覽</span><ol>{articleHeadings.map(heading=><li>{heading}</li>)}</ol><p>以上章節取自真實 Markdown；完整目錄與閱讀功能以 P0 頁面為準。</p></aside>
       </div>
     </div>
   </section>
