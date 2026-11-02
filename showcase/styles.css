@@ -158,3 +158,26 @@ body[data-v2-scene="explorer"] #v2-stage,body[data-v2-scene="method"] #v2-stage{
 .result-source{display:inline-block;margin-top:10px;border-bottom:1px solid #8ca99e;color:#f8e8bd;font-size:10px;line-height:1.5;white-space:normal}
 .result-source:hover{border-color:var(--flare);color:var(--flare)}
 .result-unavailable{display:block;font-size:11px;color:var(--muted);margin-top:9px}
+
+/* P0 smartphone constellation: its own portrait projection, without shrinking desktop text. */
+@media (max-width:760px) {
+  .map-stage {
+    width:min(100%,440px);
+    height:auto;
+    aspect-ratio:330 / 530;
+    margin-inline:auto;
+  }
+  .domain-map--mobile text {
+    font-size:15px;
+    letter-spacing:.01em;
+    font-family:var(--brand-sans),system-ui,sans-serif;
+    font-weight:550;
+  }
+  .domain-map--mobile .node-index {
+    font-size:11px;
+    font-family:var(--brand-mono),ui-monospace,monospace;
+    font-weight:450;
+    letter-spacing:0;
+  }
+  .domain-map--mobile .node { touch-action:manipulation; }
+}
