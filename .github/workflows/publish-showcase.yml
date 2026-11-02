@@ -59,9 +59,12 @@ jobs:
             assert.ok(statSync(root + path).size > 0, `Missing built asset: ${path}`);
           }
           const html = readFileSync(root + 'index.html', 'utf8');
-          assert.match(html, /THE ART OF/);
+          assert.match(html, /THE UNKNOWN,/);
           assert.match(html, /\.\/styles\.css/);
           assert.match(html, /\.\/app\.js/);
+          for (const font of ['instrument-serif-regular.ttf','instrument-serif-italic.ttf','manrope-variable.ttf','ibm-plex-mono.ttf']) {
+            assert.ok(statSync(root + 'assets/fonts/' + font).size > 10000, 'Missing self-hosted font: ' + font);
+          }
           assert.doesNotMatch(html, /(?:src|href)=["']\/(?:assets|showcase|Research-)/);
           const index = JSON.parse(readFileSync(root + 'data/research-index.json', 'utf8'));
           assert.equal(index.sourceCommit, process.env.GITHUB_SHA, 'Index must use this exact checkout');

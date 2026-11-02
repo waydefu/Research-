@@ -45,7 +45,7 @@ void main(){
  vec2 p=(gl_FragCoord.xy-.5*uResolution)/min(uResolution.x,uResolution.y);
  p.x-=.015;
  vec3 ro=vec3(0.,0.,4.4),rd=normalize(vec3(p*.95,-1.7));
- vec3 bg=vec3(.049,.081,.087)+.024*exp(-length(p-vec2(.05,.02))*3.)*vec3(.26,.40,.35);
+ vec3 bg=vec3(.039,.063,.114)+.030*exp(-length(p-vec2(.05,.02))*3.)*vec3(.07,.24,.32);
  vec3 col=bg;
  float t=0.;vec2 hit=vec2(0.);
  for(int i=0;i<MAX_STEPS;i++){
@@ -55,20 +55,20 @@ void main(){
  }
  if(t<MAX_DIST&&hit.x<SURF){
     vec3 pos=ro+rd*t,n=norm(pos),v=normalize(ro-pos);
-    vec3 light=normalize(vec3(-.55,.85,1.5));
-    vec3 rimLight=normalize(vec3(1.,-.3,-.8));
+    vec3 light=normalize(vec3(-.75,.90,1.15));
+    vec3 rimLight=normalize(vec3(.95,-.1,-.8));
     float diff=max(dot(n,light),0.),fill=max(dot(n,rimLight),0.);
     float spec=pow(max(dot(reflect(-light,n),v),0.),42.);
     float rim=pow(1.-max(dot(n,v),0.),2.8);
-    vec3 metal=hit.y==1.?vec3(.37,.48,.44):(hit.y==2.?vec3(.64,.35,.24):(hit.y==3.?vec3(.55,.62,.53):vec3(.2,.34,.32)));
-    col=metal*(.10+.77*diff+.26*fill)+vec3(1.,.83,.65)*spec*.85+rim*vec3(.38,.66,.57)*.65;
+    vec3 metal=hit.y==1.?vec3(.095,.145,.19):(hit.y==2.?vec3(.16,.19,.23):(hit.y==3.?vec3(.10,.16,.20):vec3(.075,.11,.16)));
+    col=metal*(.12+.34*diff+.14*fill)+vec3(.89,.70,.32)*(diff*.23+spec*1.28)+rim*vec3(.25,.83,.87)*.34;
     col*=.88+.12*sin(dot(pos,vec3(65.,52.,43.)));
     col=mix(col,bg,smoothstep(3.7,6.8,t)*.35);
  }
  // Restrained calibration arcs: a map metaphor, not generic glitter.
  float a=length(p*vec2(1.,1.08));
  float ring=exp(-pow((a-.74)*min(uResolution.x,uResolution.y)*.6,2.))* .11;
- col+=ring*vec3(.4,.59,.54);
+ col+=ring*vec3(.25,.83,.87);
  float grain=(hash21(gl_FragCoord.xy+floor(uTime*12.))-.5)*.025;
  col=pow(max(col+grain,0.),vec3(.93));
  fragColor=vec4(col,1.);
