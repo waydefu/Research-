@@ -90,3 +90,14 @@ The earlier successful Pages deployment is **not** a measured LCP/INP/FPS result
 **What was actually verified:** GitHub Actions runs `npm --prefix showcase run check` and builds the **real** repository into the Pages artifact. The PR's static checks include the live index count/commit and Node fake-WebGL lifecycle tests. The optional `showcase/tests/browser_smoke.py` now checks graph selection and keyboard focus in Chromium **when a developer runs it with Playwright**, but it is not part of mandatory CI. Static-source UX contract tests do not replace real assistive-technology validation.
 
 **Remaining unknowns:** the available external web reader could not retrieve the live Pages HTML/JSON; previous development screenshots were a fixture/CSS fallback, not a production WebGL capture. Native Android Chrome and iOS Safari GPU rendering, real hardware context loss, screen readers, long-run heat/power and field CWV remain unmeasured. Do not report AA certification or performance improvements without running those tests. Sources: [WebGL restoration](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/webglcontextrestored_event), [WCAG 4.1.3](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html), [Chrome render performance](https://developer.chrome.com/docs/devtools/performance/reference).
+
+## V2 art direction and engineering research (design only; 2026-11-02)
+
+The Repo Owner requested the **Active Theory standard as the minimum creative benchmark** and supplied gold/cyan animated references for a new, original optical language. These are **planning documents only**; the running V1 Showcase is unchanged until a separate authorized implementation PR.
+
+- [Evidence Engine — visual identity, palette, storyboard, desktop/mobile art direction](design/V2-ART-DIRECTION.md)
+- [Original desktop visual study (SVG, not deployed)](design/V2-DESKTOP-CONCEPT.svg) · [Original mobile visual study (SVG, not deployed)](design/V2-MOBILE-CONCEPT.svg)
+- [Scene/data architecture, SDF-vs-mesh PoC, fallbacks and cross-device acceptance](design/V2-ENGINEERING-ACCEPTANCE.md)
+- [External primary-source research, evidence boundaries and V1→V2 gap](../research/2026-11-universal-web-engine/16-active-theory-quality-benchmark.md)
+
+**No additional framework, shaders, image assets or services have been installed or deployed in this research pass.** The original third-party animation frames and logos are not included in the repository.

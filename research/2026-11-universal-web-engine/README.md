@@ -22,7 +22,8 @@
 13. [13｜高階 UI 設計系統、六種裝置、三套 Creative Stacks、Top 20 評分](13-design-performance-and-architecture.md)
 14. [14｜十種特效 Rendering Pipeline／偽碼與五個 PoC 驗收](14-effects-recipes-and-poc-validation.md)
 15. [15｜55 項來源條目、證據層級、衝突處理與決策閘門](15-creative-web-evidence-and-adoption.md)
-16. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
+16. [16｜Research Showcase V2：Active Theory 品質基準、證據與視覺轉譯](16-active-theory-quality-benchmark.md)
+17. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
 
@@ -72,3 +73,14 @@
 - **尚未完成：**第三方作品 28 個逐頁功能 Walkthrough、真機 GPU/FPS/功耗、依賴完整漏洞掃描、真實 Bundle size；凡缺實測保留 Unknown。研究未安裝套件、未修改其他 Repo、未授權部署或合併。
 
 **方法與來源：**[Creative Web 證據台帳](15-creative-web-evidence-and-adoption.md)，**查證日期 2026-11-02**；研究評級不代表產品測試得分。
+
+
+## Research Showcase V2 設計研究（2026-11-02，**尚未實作**）
+
+Repo Owner 指定 Active Theory 為品質基準，並提供金色／青藍放射式動畫截圖作配色與光學參考。本增量明確區分**作者原始證據**、**使用者圖片觀察**、**本 Repo 原創美術推論**與**尚待測試的圖形方案**。
+
+- [16｜Active Theory 案例、差距分析與來源證據](16-active-theory-quality-benchmark.md)
+- [V2 原創美術規範、色票、桌面／手機分鏡](../../showcase/design/V2-ART-DIRECTION.md)
+- [V2 技術方案、GPU 降級與驗收關卡](../../showcase/design/V2-ENGINEERING-ACCEPTANCE.md)
+
+**注意：** 此 PR 僅研究、設計與文件索引，沒有更換線上 Showcase 的配色／Shader，沒有導入依賴，沒有真機測試，不得聲稱已達 Active Theory 品質或得獎。
