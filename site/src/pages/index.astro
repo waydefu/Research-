@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { allDocs, BASE, domains, domainDocs } from '../lib/catalog.mjs';
+const docs = allDocs();
+---
+<Base title="研究總覽">
+  <section class="intro">
+    <p class="eyebrow">RESEARCH ARCHIVE · 2026</p>
+    <h1>研究，不只是收藏答案。<br/><em>而是追蹤它如何成立。</em></h1>
+    <p class="intro-sub">一座可檢索、可深入閱讀的工程研究館。所有研究原文都留在這裡，不必跳回 GitHub。</p>
+    <div class="intro-actions">
+      <a class="primary-link" href={BASE + 'search/'}>開始搜尋研究 <span aria-hidden="true">↗</span></a>
+      <a href="#library">探索研究領域 ↓</a>
+    </div>
+    <div class="index-stat"><strong>{docs.length}</strong><span>份研究文件，直接閱讀</span></div>
+  </section>
+  <section class="library" id="library">
+    <header class="section-heading"><p class="eyebrow">INDEX / DOMAINS</p><h2>研究領域</h2><p>從主題開始，再進入每篇有完整來源脈絡的文件。</p></header>
+    <ol class="domain-list">
+      {domains().map((domain,i) =>
+        <li>
+          <a href={BASE + 'domains/' + encodeURIComponent(domain) + '/'}>
+            <span class="domain-num">{String(i+1).padStart(2,'0')}</span>
+            <span class="domain-name">{domain}</span>
+            <span class="domain-count">{domainDocs(domain).length} 篇</span>
+            <span class="domain-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      )}
+    </ol>
+  </section>
+  <section class="recent">
+    <div class="section-heading"><p class="eyebrow">DIRECT ACCESS</p><h2>閱讀入口</h2></div>
+    <ol class="document-list">
+      {docs.filter(d => /README\.md$/.test(d.file)).slice(0,12).map(doc =>
+        <li><a href={doc.href}><span>{doc.title}</span><small>{doc.group}</small></a></li>
+      )}
+    </ol>
+  </section>
+</Base>
