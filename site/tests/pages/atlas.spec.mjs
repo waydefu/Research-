@@ -62,7 +62,6 @@ test('reduced motion and serious/critical axe scan for G0 previews',async({brows
   for(const path of ['','concept-a/','concept-b/','concept-c/','typography/','evidence/']){
     await page.goto(ATLAS+path);
     expect(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
-    console.log('[atlas colors] ' + path + ' ' + JSON.stringify(await page.evaluate(() => Object.fromEntries(['body','.atlas-lead','.atlas-overline','.atlas-cta','.atlas-intro'].map(sel => {const e=document.querySelector(sel);const s=e&&getComputedStyle(e);return [sel,{color:s?.color,background:s?.backgroundColor,stylesheets:document.styleSheets.length}]})))));
     const audit=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();
     const blocking=audit.violations.filter(v=>['critical','serious'].includes(v.impact));
     expect(blocking.map(v=>v.id+' '+v.nodes.map(n=>n.target.join(',')).join('|'))).toEqual([]);
