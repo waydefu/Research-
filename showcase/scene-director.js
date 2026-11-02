@@ -47,18 +47,20 @@ export function mountSceneDirector(core,{doc=document,win=window}={}){
   }
   schedule();
  };
- const onDomain=e=>{selected=!!e.detail?.selected;core.setScene(current,selected)};
+ const onDomain=e=>{selected=e.detail?.selected||false;core.setScene(current,selected)};
+ const onMotion=e=>core.setPaused?.(!!e.detail?.paused);
  const onVisibility=()=>{if(doc.hidden){if(frame)win.cancelAnimationFrame(frame);frame=0;core.pause?.()}else{core.resume?.();update()}};
  win.addEventListener('scroll',update,{passive:true});
  win.addEventListener('resize',update,{passive:true});
  doc.addEventListener('research:focus',onDomain);
+ doc.addEventListener('research:motion',onMotion);
  doc.addEventListener('visibilitychange',onVisibility);
  reduced.addEventListener?.('change',update);
  update();
  return {update,dispose(){
    disposed=true;if(frame)win.cancelAnimationFrame(frame);
    win.removeEventListener('scroll',update);win.removeEventListener('resize',update);
-   doc.removeEventListener('research:focus',onDomain);doc.removeEventListener('visibilitychange',onVisibility);
+   doc.removeEventListener('research:focus',onDomain);doc.removeEventListener('research:motion',onMotion);doc.removeEventListener('visibilitychange',onVisibility);
    reduced.removeEventListener?.('change',update);
  }};
 }
