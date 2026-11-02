@@ -17,8 +17,8 @@ mat3 ry(float a){float c=cos(a),s=sin(a);return mat3(c,0.,s,0.,1.,0.,-s,0.,c);}
 mat3 rz(float a){float c=cos(a),s=sin(a);return mat3(c,-s,0.,s,c,0.,0.,0.,1.);}
 void main(){
  float phase=uTime*.028;
- mat3 m=rz(uAngles.z+phase*.55)*ry(uAngles.y+phase+uPointer.x*.14+uProgress*.45)*rx(uAngles.x+uPointer.y*.10);
- vec3 pos=m*aPosition+uOffset;
+ mat3 m=rz(uAngles.z+phase*.55)*ry(uAngles.y+phase+uPointer.x*.14+uProgress*1.65)*rx(uAngles.x+uPointer.y*.10);
+ vec3 pos=m*aPosition+uOffset+vec3(.06*sin(uProgress*6.283),.11*sin(uProgress*3.14159),0.);
  vNormal=normalize(m*aNormal);
  vWorld=pos;
  float depth=4.55-pos.z;
