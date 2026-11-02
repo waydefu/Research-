@@ -1,4 +1,5 @@
-# Publish ONLY the generated Research Showcase. Never publish the repository root.
+# Publish the generated V2 Showcase at the root and the generated V3 static site under /v3/.
+# Never publish the repository root; PR checks only build, they cannot deploy.
 # Manual prerequisite (Repo Owner): Settings > Pages > Build and deployment > Source > GitHub Actions.
 name: Publish Research Showcase
 
@@ -6,11 +7,15 @@ on:
   pull_request:
     paths:
       - 'showcase/**'
+      - 'site/**'
+      - 'research/**'
+      - 'docs/governance/**'
       - '.github/workflows/publish-showcase.yml'
   push:
     branches: [main]
     paths:
       - 'showcase/**'
+      - 'site/**'
       - 'research/**'
       - 'docs/governance/**'
       - 'README.md'
@@ -27,9 +32,9 @@ concurrency:
 
 jobs:
   build:
-    name: Showcase source build and artifact integrity
+    name: V2 + V3 static Pages artifact integrity
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     permissions:
       contents: read
     steps:
@@ -37,6 +42,7 @@ jobs:
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0 # V3 per-document source SHA/date requires real Git history
       - name: Set up Node.js 22 without npm dependencies
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5 / Node.js 24 action runtime
         with:
@@ -78,14 +84,34 @@ jobs:
           NODE
           # Static GitHub Pages must not treat the built directory as a Jekyll source tree.
           touch showcase/dist/.nojekyll
-      - name: Upload ONLY showcase/dist as the Pages artifact
+      - name: Install locked V3 dependencies
+        working-directory: site
+        run: npm ci --no-audit --no-fund
+      - name: Validate V3 Astro source and catalog
+        working-directory: site
+        run: npm run check
+      - name: Generate full V3 research HTML and Pagefind search index
+        working-directory: site
+        run: npm run build
+      - name: Check V3 per-document Git provenance
+        working-directory: site
+        run: npm run provenance
+      - name: Package V3 as an isolated /v3/ subdirectory beside V2
+        shell: bash
+        run: |
+          mkdir -p showcase/dist/v3
+          cp -a site/dist/. showcase/dist/v3/
+      - name: Verify unchanged V2 and complete V3 Pages artifact
+        working-directory: site
+        run: node scripts/verify-pages-bundle.mjs
+      - name: Upload verified V2 + V3 from showcase/dist only
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           path: showcase/dist
 
   deploy:
-    name: Deploy verified Showcase to GitHub Pages
+    name: Deploy verified V2 + V3 bundle to GitHub Pages
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
