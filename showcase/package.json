@@ -6,6 +6,6 @@
   "description": "A zero-dependency cinematic research showcase, indexed from Markdown at build time",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node --check app.js && node --check artifact.js && node --check scripts/build.mjs && node --check scripts/fonts.mjs && node --test tests/*.test.mjs"
+    "check": "node --check app.js && node --check artifact.js && node --check mesh-core.js && node --check scripts/build.mjs && node --check scripts/fonts.mjs && node --test tests/*.test.mjs"
   }
 }
