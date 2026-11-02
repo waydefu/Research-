@@ -2,13 +2,16 @@
   "name": "research-observatory-v3",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22.12.0" },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "check": "astro check && node --test tests/*.test.mjs",
-    "build": "npm run preflight && astro build && pagefind --site dist",
+    "build": "npm run preflight && astro build && pagefind --site dist && node scripts/postbuild-verify.mjs",
     "preflight": "node scripts/preflight.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "predev": "npm run preflight"
   },
   "dependencies": {
     "astro": "^6.0.0",
