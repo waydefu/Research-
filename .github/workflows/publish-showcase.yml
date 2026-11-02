@@ -53,7 +53,7 @@ jobs:
           import assert from 'node:assert/strict';
           const root = 'showcase/dist/';
           for (const path of [
-            'index.html', 'app.js', 'artifact.js', 'mesh-core.js', 'scene-director.js', 'styles.css',
+            'index.html', 'app.js', 'artifact.js', 'mesh-core.js', 'scene-director.js', 'interaction-core.js', 'styles.css',
             'assets/favicon.svg', 'assets/og.svg', 'data/research-index.json'
           ]) {
             assert.ok(statSync(root + path).size > 0, `Missing built asset: ${path}`);
