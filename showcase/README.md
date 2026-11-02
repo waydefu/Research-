@@ -56,3 +56,20 @@ All site code lives under `showcase/`; original research, tooling, `.github`, Gi
 - **Accessible navigation:** the skip link targets a programmatically focusable `main`; the SVG concept graph uses group semantics for its embedded controls, with equivalent HTML filter buttons underneath. The Hero caption describes an adaptive renderer, not a guaranteed live render.
 - **Local checks actually performed:** `npm run check` and `npm run build` on the local Markdown fixture; Chromium browser smoke at desktop/mobile widths; targeted manual checks at 320, 375, 390, 768, 1024 and 1440 CSS pixels for horizontal overflow, keyboard skip focus, and mobile menu Escape. The **real checkout** must be verified by PR CI.
 - **Still unverified:** a genuine WebGL2 shader execution on Android/iOS GPU hardware, real thermal/GPU profiling, native VoiceOver/TalkBack, full WCAG 2.2 AA audit, and real-user field Web Vitals. The test double checks JavaScript control flow only, not driver behavior or 60 FPS.
+
+
+## Publishing the actual Showcase at `/Research-/` (2026-11-02)
+
+**Observed failure:** GitHub Pages can report a successful *Jekyll/branch-source* deployment while `https://waydefu.github.io/Research-/` displays the repository's Markdown README instead of this website. A green generic `pages build and deployment` job is **not** evidence that `showcase/dist` was published.
+
+The proposed `../.github/workflows/publish-showcase.yml` changes this at the source:
+
+1. **Review and merge the workflow PR** after both the existing Repository integrity check and the new **Showcase source build and artifact integrity** check are green. Do not bypass branch protection; do not auto-merge.
+2. **Repository owner:** open [Settings → Pages](https://github.com/waydefu/Research-/settings/pages), select **Build and deployment → Source → GitHub Actions**. This Pages configuration cannot be changed by a read-only repository file commit. Do not choose the generated Markdown/Jekyll template workflow.
+3. The new **Publish Research Showcase** workflow runs on `main` pushes that change `showcase/**`, research Markdown, governance Markdown, root README, or the publish workflow, and can be rerun via **Actions → Publish Research Showcase → Run workflow → main**. Pull requests only build/test; **they cannot run the deployment job**.
+4. The workflow builds using **actual tracked Markdown**, ensures a unique/indexed link for each source and `sourceCommit=HEAD`, and uploads **only** `showcase/dist` as the GitHub Pages artifact, never repository root or README. The deploy job targets protected `github-pages` with narrowly scoped `pages:write` and `id-token:write` permissions. Node tests and artifact validation must pass before deployment.
+5. Verify the live [root URL](https://waydefu.github.io/Research-/): page source contains `<title>THE OBSERVATORY`, the dark cinematic Hero appears, and `https://waydefu.github.io/Research-/data/research-index.json` exposes the correct `sourceCommit`. On a mobile device, also test Search/Filters/GitHub links and CSS fallback. **A successful Actions deploy alone is not a browser-level acceptance test.**
+
+**Rollback:** if the live site breaks, restore the previous Pages source in Settings → Pages → **Deploy from a branch → main → /(root)**. This restores the former README/Jekyll site; it does **not** revert Markdown or Git history. For an application rollback, revert the workflow/site PR through the normal branch protection and checks. Do not delete the research repository or disable security rules.
+
+**Source/current status boundaries:** This runbook is an authorized deployment proposal, not a claim that the GitHub Pages settings have already changed or that production is live. The only network endpoints needed by the browser are the static site on Pages and outbound GitHub source links; there is no hosted backend, credential or third-party runtime dependency.
