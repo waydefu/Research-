@@ -37,3 +37,10 @@ test('backlinks only point to real entries', () => {
   const docs = allDocs();
   for (const doc of docs) assert.ok(backlinks(doc).every(b => docs.includes(b)));
 });
+
+test('GitHub Ruleset and PR links for this repo are plain text, not outgoing links', () => {
+  const doc = allDocs().find(d => d.collection === 'governance');
+  assert.equal(resolveLocal(doc, 'https://github.com/waydefu/Research-/rules/26319641').kind, 'plain');
+  assert.equal(resolveLocal(doc, 'https://github.com/waydefu/Research-/pull/19').kind, 'plain');
+  assert.equal(resolveLocal(doc, 'https://github.com/other/repo').kind, 'pass');
+});
