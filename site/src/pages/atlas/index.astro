@@ -1,0 +1,34 @@
+---
+import Atlas from '../../layouts/Atlas.astro';
+import SceneArt from '../../components/atlas/SceneArt.astro';
+import { concepts } from '../../lib/atlas-concepts.mjs';
+import { allDocs, BASE } from '../../lib/catalog.mjs';
+const count = allDocs().length;
+---
+<Atlas title="P1 G0｜觀測神殿美術圖集">
+  <div class="atlas-landing">
+    <section class="atlas-lead">
+      <p class="atlas-overline">RESEARCH- · PHASE ONE · ART DIRECTION GATE ZERO</p>
+      <p class="atlas-edition">VOL. 01 — OBSERVATORY SANCTUM</p>
+      <h1>讓研究有一座<br/><em>值得探索的神殿。</em></h1>
+      <p class="atlas-intro">暗金為核心，冰藍只作極少量的反射。三套截然不同的電影構圖，全部建立在真實的 {count} 份研究文件之上。</p>
+      <div class="atlas-actions"><a class="atlas-cta" href="#concepts">比較三種構圖 <span aria-hidden="true">↓</span></a><a class="atlas-link" href={BASE + 'search/'}>直接閱讀研究 ↗</a></div>
+      <p class="atlas-note">本圖集是靜態 HTML／CSS／原創 SVG 原型。尚未使用 Three.js、GSAP、Blender 或 GPU 特效；沒有把概念草圖當成已完成的網站。</p>
+    </section>
+    <div class="atlas-cover-art" aria-hidden="true"><SceneArt variant="concept-a" instance="atlas-cover"/></div>
+  </div>
+  <section id="concepts" class="atlas-overview">
+    <div class="atlas-section-heading"><span>01 / COMPOSITION STUDIES</span><h2>同一個世界，三種鏡頭語言。</h2><p>每案可檢視首頁、文章與搜尋畫面。手機版獨立構圖，不是把桌面縮小。</p></div>
+    <div class="atlas-concept-grid">
+      {concepts.map((c,i)=><article class={'atlas-option '+c.slug}>
+        <a class="atlas-option-image" href={BASE + 'atlas/' + c.slug + '/'} aria-label={'檢視 '+c.title+' 完整設計'}><SceneArt variant={c.slug} instance={'card-'+i}/><span class="atlas-option-num">{c.code} / 03</span></a>
+        <div class="atlas-option-copy"><p class="atlas-overline">{c.subtitle}</p><h3>{c.title}</h3><p>{c.lead}</p><a href={BASE + 'atlas/' + c.slug + '/'}>查看完整構圖與閱讀預覽 <span aria-hidden="true">↗</span></a></div>
+      </article>)}
+    </div>
+  </section>
+  <section class="atlas-secondary-links">
+    <a href={BASE + 'atlas/typography/'}><span>02 / TYPE STUDY</span><strong>繁中字體研究</strong><small>候選字型、長標題、載入與授權限制</small><b aria-hidden="true">↗</b></a>
+    <a href={BASE + 'atlas/evidence/'}><span>03 / FORM STUDY</span><strong>Evidence Engine 黑白輪廓</strong><small>三視角；沒有光效仍應能辨認</small><b aria-hidden="true">↗</b></a>
+  </section>
+  <div class="atlas-closing"><span>G0 FIRST</span><p>先讓靜止畫面成立，再考慮動畫的存在。</p></div>
+</Atlas>
