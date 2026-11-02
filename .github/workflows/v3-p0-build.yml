@@ -22,7 +22,7 @@ jobs:
   p0:
     name: Install, validate and build Astro
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Checkout with full provenance (pinned)
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
@@ -48,6 +48,25 @@ jobs:
       - name: Build static research museum and Pagefind
         working-directory: site
         run: npm run build
+      - name: Audit all source SHA/date values
+        working-directory: site
+        run: npm run provenance
+      - name: Install Chromium with required system dependencies
+        working-directory: site
+        run: npx playwright install --with-deps chromium
+      - name: Browser UX, 20 zh-TW searches, no-JS and axe checks
+        working-directory: site
+        run: npm run e2e
+      - name: Upload browser screenshots and traces
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: v3-p0-browser-evidence
+          path: |
+            site/test-results/
+            site/playwright-report/
+          if-no-files-found: warn
+          retention-days: 7
       - name: Upload npm lockfile for review
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
