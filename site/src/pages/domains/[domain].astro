@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import { domains, domainDocs, BASE } from '../../lib/catalog.mjs';
+export function getStaticPaths() {
+  return domains().map(domain => ({ params: { domain }, props: { domain } }));
+}
+const { domain } = Astro.props;
+const docs = domainDocs(domain);
+---
+<Base title={'研究領域｜' + domain}>
+  <section class="domain-page">
+    <a class="back-link" href={BASE}>← 所有領域</a>
+    <p class="eyebrow">RESEARCH / DOMAIN</p>
+    <h1>{domain}</h1>
+    <p class="muted">共 {docs.length} 份文件，均可在站內閱讀。</p>
+    <ol class="document-list">
+      {docs.map((d,i) =>
+        <li><a href={d.href}><span class="domain-num">{String(i+1).padStart(2,'0')}</span><span>{d.title}</span><small>{d.date}</small></a></li>
+      )}
+    </ol>
+  </section>
+</Base>
