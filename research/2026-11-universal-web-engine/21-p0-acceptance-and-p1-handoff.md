@@ -98,21 +98,27 @@
 
 ### 4.2 P0.5 執行順序
 
-| 順序 | 子階段 | 為什麼先做 |
+| 順序 | 子階段 | 核心目的 |
 | ---: | --- | --- |
-| 1 | **P0.5-A CI blocker** | 沒有可信綠線就不能安全重構 |
-| 2 | **P0.5-B Required Checks** | 驗收如果不強制，壞網站仍可能進 main |
-| 3 | **P0.5-C Metadata Schema** | 分類、圖片、繁中與 ingestion 都依賴資料契約 |
-| 4 | **P0.5-D 每篇視覺 + 全繁中 Gate** | 直接解抽象、重複圖片、slug 外露 |
-| 5 | **P0.5-E site/showcase 收斂** | 先固定唯一正式 build/deploy source |
-| 6 | **P0.5-F Governance re-baseline** | 讓 Agent 使用最新 repo 真實狀態 |
-| 7 | **P0.5-G Research ingestion pipeline** | 最後把已穩定的資料與網站規則自動化 |
+| 1 | **A CI blocker** | 先恢復可信交付線 |
+| 2 | **B Required Checks** | 讓網站驗收真的能阻擋合併 |
+| 3 | **C Metadata Schema** | 建立研究資料契約 |
+| 4 | **D Architecture Contract + ADR** | 固定正式決策與單向依賴 |
+| 5 | **E 模組化 + Design System** | 收斂 UI / CSS / data 邊界 |
+| 6 | **F Code / Visual Quality Gate** | lint、format、import boundary、visual regression |
+| 7 | **G 獨立視覺 + 全繁中 Gate** | 解重複圖、抽象導讀、slug 外露 |
+| 8 | **H site/showcase 收斂** | 固定唯一正式 build/deploy source |
+| 9 | **I Security + Dependency Governance** | 補安全政策、Secrets、SAST、依賴更新 |
+| 10 | **J Supply-chain + License Registry** | 補 root license 決策、第三方／資產台帳 |
+| 11 | **K Agent Skills + Context Governance** | 用任務 Skill 取代巨大長提示 |
+| 12 | **L Re-baseline + Machine Policy** | 將真實現況與可自動規則固化 |
+| 13 | **M Research ingestion pipeline** | 最後自動化新增研究 |
 
 詳細 Gate 以 [19｜V3 架構與規劃書 §9](19-v3-astro-research-cinema-architecture-and-roadmap.md) 與 [20｜V3 執行書 P0.5](20-v3-chatgpt-5-6-execution-brief.md) 為準。
 
 ### 4.3 P1 開工硬條件
 
-只有在 P0.5-A～G 都完成或由 Owner 明確豁免某一 Gate 時，才進 P1。**不能一邊做電影級美術，一邊繼續讓 metadata、圖片、CI、部署雙軌漂移。**
+只有在 P0.5-A～M 都完成，或 Owner 對特定 Gate 明確豁免時，才進 P1。**不能一邊做電影級美術，一邊讓 metadata、模組邊界、授權、Skills、資安或部署雙軌繼續漂移。**
 
 ## 5. P1 美術 G0 接手內容
 
@@ -142,7 +148,7 @@
 - 不改 `main` V2 首頁、不切換 `/Research-/` 至 V3、不引進 Three.js／GSAP／額外依賴；新依賴或權限變更先請 Owner 決策。
 - 不使用別人的品牌素材、影片、模型、圖片或原始碼當作網站成品。
 - 以 320、360、393、430、768、1440 CSS px、reduced motion 檢視靜止構圖；不偽稱真機 FPS／LCP。
-- P1 的 Owner 核准是 G0，P2 仍需獨立授權與 PR；**P0.5 未完成時，不得把 P1 Atlas 當成繞過基礎收斂的捷徑。**
+- P1 的 Owner 核准是 G0，P2 仍需獨立授權與 PR；**P0.5 A–M 未完成時，不得把 P1 Atlas 當成繞過基礎收斂的捷徑。**
 
 ## 6. 可核對的檔案與操作
 
