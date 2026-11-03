@@ -16,8 +16,8 @@ export const REPO_NAVIGATION = Object.freeze([
   {
     id:'metadata',title:'繁中標題、分類與證據',intent:'標題分類錯誤、來源不可信、導讀與原文混淆',
     entry:'site/src/lib/research-taxonomy.mjs',
-    paths:['site/src/lib/research-taxonomy.mjs','site/src/lib/research-metadata.mjs','site/src/lib/metadata-schema.mjs','site/RESEARCH-CURATION.md'],
-    checks:['site/tests/research-taxonomy.test.mjs','site/tests/research-metadata.test.mjs','site/tests/metadata-schema.test.mjs'],
+    paths:['site/src/lib/research-taxonomy.mjs','site/src/lib/research-metadata.mjs','site/src/lib/metadata-schema.mjs','site/src/lib/public-articles.mjs','site/src/lib/public-content-audit.mjs','site/RESEARCH-CURATION.md'],
+    checks:['site/tests/research-taxonomy.test.mjs','site/tests/research-metadata.test.mjs','site/tests/metadata-schema.test.mjs','site/tests/public-articles.test.mjs','site/tests/pages/public-articles.spec.mjs'],
     optionalPaths:['site/src/lib/research-leads.mjs'],
     optionalChecks:['site/tests/research-leads.test.mjs']
   },
@@ -44,7 +44,7 @@ export const REPO_NAVIGATION = Object.freeze([
   {
     id:'quality',title:'建置、回歸與來源 SHA',intent:'CI 失敗、Pagefind 缺頁、手機無 JS 閱讀',
     entry:'site/package.json',
-    paths:['site/package.json','site/scripts/postbuild-verify.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs','.github/workflows/research-integrity.yml','.github/workflows/v3-p0-build.yml','.github/workflows/publish-showcase.yml'],
+    paths:['site/package.json','site/scripts/postbuild-verify.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs','site/scripts/audit-public-content.mjs','.github/workflows/research-integrity.yml','.github/workflows/v3-p0-build.yml','.github/workflows/publish-showcase.yml'],
     checks:['site/tests/catalog.test.mjs','site/tests/pages/v2-reader.spec.mjs','scripts/check_repository.py']
   },
   {
@@ -64,7 +64,7 @@ export function navForTask(query){
   const s=String(query||'').toLocaleLowerCase('zh-Hant');
   if(/權限|agent|規範|授權|ruleset|approval/.test(s))return REPO_NAVIGATION.find(x=>x.id==='governance');
   if(/圖片|素材|圖像|插圖|svg|license/.test(s))return REPO_NAVIGATION.find(x=>x.id==='art');
-  if(/分類|標題|導讀|metadata|tag/.test(s))return REPO_NAVIGATION.find(x=>x.id==='metadata');
+  if(/分類|標題|導讀|公開正文|技術正文|內容稽核|metadata|tag/.test(s))return REPO_NAVIGATION.find(x=>x.id==='metadata');
   if(/首頁|sanctum|v2|封裝/.test(s))return REPO_NAVIGATION.find(x=>x.id==='homepage');
   if(/索引|ft[s5]|搜尋檔|舊資料/.test(s))return REPO_NAVIGATION.find(x=>x.id==='search');
   if(/ci|test|測試|build|部署|source sha/.test(s))return REPO_NAVIGATION.find(x=>x.id==='quality');
