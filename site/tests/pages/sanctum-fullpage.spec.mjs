@@ -21,7 +21,7 @@ for (const width of [320,360,393,430,768,1440]) {
       rootWidth:document.documentElement.scrollWidth,
       viewport:innerWidth,
       backgroundPosition:getComputedStyle(document.querySelector('.world-backdrop')).position,
-      glass:getComputedStyle(document.querySelector('.featured')).backdropFilter,
+      glass:getComputedStyle(document.querySelector('.narrative-glass')).backdropFilter,
       veil:parseFloat(getComputedStyle(document.body).getPropertyValue('--veil-alpha')),
       images:Array.from(document.images).every(im=>im.complete&&im.naturalWidth>0)
     }));
