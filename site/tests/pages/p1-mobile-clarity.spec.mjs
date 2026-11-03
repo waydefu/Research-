@@ -30,7 +30,7 @@ test('topic disclosure lists every article in place without search or script',as
   await expect(target).toBeVisible();
   const count=await page.locator('#library-results li[data-topic="LLM 模型與推論"]').count();
   expect(count).toBeGreaterThan(0);
-  await expect(target.locator('.topic-articles a')).not.toBeVisible();
+  await expect(target.locator('.topic-articles a').first()).not.toBeVisible();
   const initial=page.url();
   await target.locator('summary').click();
   await expect(target).toHaveAttribute('open','');
