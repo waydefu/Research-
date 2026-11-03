@@ -12,7 +12,15 @@ const paths=[
  'design/V2-ENGINEERING-ACCEPTANCE/',
  'design/V2-IMPLEMENTATION-REVIEW/',
  'research/2026-10-retrospective/11-adoption-roadmap/',
- 'research/2026-11-agent-repository-operations/09-implementation-roadmap/'
+ 'research/2026-11-agent-repository-operations/09-implementation-roadmap/',
+ 'governance/REPO-TOOLING/',
+ 'governance/RULESETS/',
+ 'governance/TOKEN-ACCOUNTING/',
+ 'research/2026-11-universal-web-engine/15-creative-web-evidence-and-adoption/',
+ 'research/2026-11-universal-web-engine/14-effects-recipes-and-poc-validation/',
+ 'research/2026-10-retrospective/01-agent-orchestration/',
+ 'research/2026-10-retrospective/02-code-intelligence-benchmarks/',
+ 'research/2026-11-agent-engineering/05-integration/'
 ];
 for(const slug of paths){
  test('mobile article leads with general technology; original remains opt-in: '+slug,async({page})=>{
