@@ -65,7 +65,7 @@ Astro 6（output: 'static'）+ TypeScript 6、<ClientRouter /> + transition:pers
 - research/、docs/、showcase/ 是唯讀資料來源：不修改、不複製進 site/；連結問題在內容管線中處理。
 - 研究文件之間的連結改寫成站內路由；外部官方來源保留外部連結；本 repo 的 PR／Ruleset 網址顯示為純文字。
 - docs/governance/THREAT-MODEL.md 不在網站展示：不產生頁面、不進搜尋與星圖，其他文件連到它時顯示純文字。
-- 網站部署在 /Research-/v3/（astro base），P5 切換前不動根路徑的 V2。
+- **現況：** 正式 root 已是 Sanctum `/Research-/`、legacy V2 在 `/Research-/v2/`、V3 reader/search 在 `/Research-/v3/`。不得依歷史 P0 說明把 V2 恢復成 root。
 - 3D 模型、貼圖、字體必須原創或具可再散布授權，授權記錄放在 site/ASSETS.md。不使用 Active Theory、Arctic Waters 或任何參考截圖的素材、輪廓與程式碼。
 
 ## 品質規則
@@ -97,6 +97,17 @@ Astro 6（output: 'static'）+ TypeScript 6、<ClientRouter /> + transition:pers
 （P0 建立 site/package.json 後補上實際指令）
 ```
 
+## 2.5 執行前 Current-State Rule（2026-11-03 新增）
+
+本執行書含 2026-11-02 的歷史步驟。**任何 Agent 開工前必須先讀 current main、相關 open PR、實際 workflow 與最新 CI；歷史規劃不得覆蓋已完成現況。**
+
+目前已知 current-state：
+- 正式 root 已是 Sanctum \`/Research-/\`。
+- V2 已歸檔 \`/Research-/v2/\`。
+- V3 reader / search 保留在 \`/Research-/v3/\`。
+- PR #36 先前 HEAD \`8fb9e3695d0b463adfdbad131b103e6ed5b84c8a\` 的三組 CI 曾全部 SUCCESS；新 HEAD 仍需重跑確認。
+- 看到「P5 才切 root」「V2 是正式 root」等內容，視為歷史上下文，不執行逆向切換。
+
 ## 3. 分階段任務提示詞
 
 每段直接貼進新對話。內容刻意只寫目標、背景、限制與完成條件，做法交給模型。
@@ -127,6 +138,64 @@ Done when
 - 停用 JS 時所有文件頁可讀；axe 無 serious／critical 問題。
 - 照 AGENTS.md 的回報格式開 PR。
 ```
+
+### P0.5｜基礎與治理收斂（High；Blocking / Parallel / Break-glass）
+
+\`\`\`text
+Goal
+在新的大規模 P1 production implementation 前，完成必要 Blocking Gates，同時允許既有 G0 收尾、低風險 bugfix 與治理工作平行。Security / secret / license / production regression 採 break-glass，不得排隊等里程碑。
+
+Start by verifying current state
+1. Read current main, open PRs, site/scripts/unify-home.mjs and workflow triggers.
+2. Read exact current PR HEAD CI.
+3. If Research integrity + V3 + Pages are green, record SHA/date and mark A PASS. Do NOT reopen a solved blocker.
+4. Treat Sanctum at /Research-/ and V2 at /v2/ as current routing facts.
+
+Blocking before NEW large P1 production work
+C. Research Metadata Schema.
+D. Architecture Contract + ADR.
+E. Frontend modularization + Design System.
+F. lint / format / import-boundary / visual-regression gates.
+G. per-article visuals + Traditional-Chinese public metadata gate.
+H. converge the CURRENT unified deployment toward one formal Web App / build source; never revert V2 to root.
+
+Parallel governance
+B. Design a required status that reports on every PR before touching ruleset. Current V3/Pages workflows use pull_request.paths; do not make those raw contexts globally required.
+I. Security + dependency full governance.
+J. Supply-chain + license / asset registry.
+K. task-specific Agent Skills.
+L. current-state governance baseline + machine-checkable policy.
+M. research ingestion pipeline (depends on C/G/L contracts).
+
+Break-glass
+- production regression
+- security vulnerability / leaked secret
+- license / legal issue
+- critical accessibility regression
+- CI outage that blocks safe delivery
+
+These may interrupt any phase. Record:
+Decision maker / Reason / Scope / Risk accepted / Revisit date / Deferred verification / Follow-up PR or issue.
+
+Required-check safety
+Use an every-PR wrapper or equivalent stable context:
+pull_request(all paths) -> path classifier -> expensive checks when relevant / lightweight checks otherwise -> one required status.
+Verify at least one docs/root-only PR and one site/research PR before adding it to main-eag-100.
+
+Constraints
+- Existing approved G0 closeout is not frozen by unfinished Parallel Governance.
+- Ruleset / GitHub Security / Pages / workflow permission changes still require Owner authorization.
+- Security and license minimum baseline applies immediately; full tooling may be parallel.
+- Do not add heavyweight enterprise tooling just for appearance.
+- Do not introduce Three.js / GSAP / cinematic 3D in P0.5.
+
+Done when
+- A has current SHA/date evidence, not an assumed failure.
+- Safe required-gate design cannot leave path-filtered PRs permanently Pending.
+- Blocking C-H are complete or carry explicit Owner waiver.
+- Current root/V2/V3 routing is documented consistently.
+- Parallel I-M each has state, owner/decision, and follow-up evidence.
+\`\`\`
 
 ### P1｜美術 G0：靜止畫面（推理強度：Medium）
 
@@ -213,11 +282,11 @@ Done when
 - 鍵盤、單指觸控、200% 縮放都能完成「搜尋 → 開啟文件 → 跳到相關文件」。
 ```
 
-### P5｜真機驗收與切換 G4（推理強度：Medium）
+### P5｜真機驗收與發布 G4（推理強度：Medium）
 
 ```text
 Goal
-產出可供 Owner 決定是否正式切換的真機證據，並準備切換 PR（不自行合併或部署）。
+產出可供 Owner 決定是否正式發布 P5 體驗的真機證據；**根入口目前已是 Sanctum，不再把「切 root」當成 P5 任務**。P5 只處理最終 3D／導演功能的正式發布與回退。
 
 Context
 - 規格：19 號文件第 8 節；research/2026-11-universal-web-engine/13-design-performance-and-architecture.md 第 7 節的量測協定與第 7.5 節負向測試。
@@ -228,7 +297,7 @@ Constraints
 
 Done when
 - 負向測試 10 項逐項結果。
-- 切換 PR：根路徑改為 V3，V2 移到 /v2/ 作為回退；PR 標明需要 Owner 批准的 workflow 與 Pages 變更。
+- 發布 PR：維持目前 root Sanctum、`/v2/` legacy、`/v3/` reader 的既有路由契約；若未來要改 URL 架構必須另立 ADR / migration。PR 標明需要 Owner 批准的 workflow 與 Pages 變更。
 ```
 
 ## 4. 驗收與審查提示詞

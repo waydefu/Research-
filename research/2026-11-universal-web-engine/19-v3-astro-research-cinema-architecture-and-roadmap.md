@@ -5,6 +5,18 @@
 > **重要：** 本文件是**架構與規劃**，不是已安裝、已部署或已驗收的 V3。本 PR 不修改 `showcase/`、不安裝套件、不改 GitHub Actions 或 Pages 設定。所有效能數字皆為官方門檻或**提案預算**，沒有真機量測。
 > **執行者手冊：** 交給 ChatGPT 5.6／Codex 實作時使用 [20｜ChatGPT 5.6 專用執行書](20-v3-chatgpt-5-6-execution-brief.md)。
 
+## 現行事實基線（2026-11-03）
+
+本文件最初寫於 2026-11-02，以下項目已被後續實作改變；**執行者遇到與舊段落衝突時，以本節與最新 main / PR / CI 證據為準，不得把歷史規劃逆向套回現況。**
+
+- 正式根入口目前已由後續 PR 切成 Sanctum：\`/Research-/\`。
+- 舊 V2 已歸檔到 \`/Research-/v2/\`；V3 研究館仍位於 \`/Research-/v3/\`。
+- \`site/scripts/unify-home.mjs\` 是目前 root / V2 / V3 組裝事實來源之一。
+- PR #26、#31、#33 已完成後續首頁／內容整合作業；PR #35 是本基線建立時的首頁修正候選。**PR 狀態屬動態資料，不在規劃文件中寫死：執行或合併本計畫前必須重新讀取 current main 與 PR #35；若 #35 已合併，就以其內容作為新的 main 現況。**
+- PR #36 在本輪審查前的 HEAD \`8fb9e3695d0b463adfdbad131b103e6ed5b84c8a\`（2026-11-03）曾取得 \`Research integrity\`、\`V3 P0 build and checks\`、\`Publish Research Showcase\` 三組 SUCCESS。**本文件後續再修改後必須以新的最終 HEAD 重新判斷，不可沿用舊 SHA 的綠燈。**
+- 因此 P0.5-A 是「現況驗證 Gate」，不是預設存在的修復工作；若當前 main / PR HEAD 已通過，就記錄證據並關閉 A。
+- 任何「P5 才切 root」「V2 仍是正式根首頁」等文字均視為 2026-11-02 的歷史計畫，不再是目前執行指令。
+
 ## 0. 結論
 
 **V3 是「一座可完整閱讀的研究館」加上「一個貫穿全站、由研究資料生成的 3D 世界」。** 網站殼層從 18 的 Vite SPA 改為 **Astro 6 靜態輸出**；渲染器、動畫、資產管線、字體策略與 G0–G4 驗收沿用 18。
@@ -26,7 +38,7 @@
 
 | Owner 需求（2026-11-02） | 對架構的影響 |
 | --- | --- |
-| 可以完全重構 | V3 放在新目錄 `site/` 平行開發；V2 保留到 P5 切換後作為回退 |
+| 可以完全重構 | **歷史決策（2026-11-02）**：V3 先在 `site/` 平行開發；**現況（2026-11-03）** 已由 `site/scripts/unify-home.mjs` 將 Sanctum 放到根入口，V2 歸檔 `/v2/` 作為回退 |
 | 研究資料直接在網頁展示，不用 GitHub 連結 | 每篇 Markdown 都有站內頁面；站內互相引用改寫成站內路由；不再以「在 GitHub 開啟」作為主要閱讀路徑 |
 | 超強 JS 特效、電影級互動（延續 18） | 3D 世界常駐於版面之下，換頁時鏡頭連續移動；特效必須服務敘事（16 的「quality of intent」） |
 | 繁體中文主導、有字體變化（延續 18） | 閱讀層使用完整繁中字體；展示字體只用於標題並做子集化 |
@@ -104,7 +116,7 @@
 
 ```text
 site/
-  astro.config.ts           output: 'static'，base: '/Research-/v3/'（P5 切換後改為 '/Research-/'）
+  astro.config.ts           output: 'static'，V3 reader base 仍為 '/Research-/v3/'；正式 root 目前由 unified-home 組裝為 Sanctum
   package.json · package-lock.json
   src/
     content.config.ts       collections：research、governance（排除 THREAT-MODEL.md）、design（Zod schema）
@@ -238,18 +250,101 @@ context lost、shader 編譯失敗、頁面隱藏 → 停止繪製；重複失�
 
 ## 9. 分階段規劃
 
-每個階段都是**獨立、小範圍的 PR**，Owner 審查通過才進下一階段。V3 在 P5 之前部署到預覽子路徑 `/Research-/v3/`，V2 繼續在根路徑。Owner 已同意在 **P0 完成後**以獨立 PR 修改部署 workflow；該 PR 仍需 Owner 審查後才合併。
+每個階段都是**獨立、小範圍的 PR**，Owner 審查通過才進下一階段。原始 P0–P5 架構保留，但依 2026-11-03 實際 Repo 狀態，在 P0 與 P1 之間新增 **P0.5 基礎收斂層**。原因是目前瓶頸已從「缺研究／缺頁面」轉成「CI 契約、資料模型、視覺唯一性、單一部署來源與治理一致性」。
+
+### 9.1 P0.5 執行模型：Blocking / Parallel / Break-glass
+
+P0.5 不再是一條十三項全部串行的硬鏈，而分成三種治理類型：
+
+| 類型 | 規則 | 項目 |
+| --- | --- | --- |
+| **Blocking Gate** | 新的大規模 P1 production implementation 前完成或重新驗證 | A Current CI verification、C Metadata Schema、D Architecture Contract + ADR、E 模組化 / Design System、F Code / Visual Quality Gate、G 公開視覺 / 全繁中 Gate、H 單一正式 Deploy Source |
+| **Parallel Governance** | 可和 G0 收尾、文件整理、低風險 bugfix 平行 | B Safe Required Checks、I Security / Dependency 完整治理、J Supply-chain / License Registry、K Agent Skills、L Re-baseline / machine policy、M ingestion pipeline |
+| **Break-glass** | 任何時候可插隊；處理 production regression、重大 accessibility、security、secret、license / legal、CI outage | 不受 A–M 順序限制，但必須留下豁免紀錄與補驗證 |
+
+**已授權／已進行的 G0 收尾不因 P0.5 被凍結。** P0.5 阻擋的是新的大規模 P1 production implementation，不是把已上線網站的 bugfix、首頁修正或 G0 驗收工作停住。
+
+### 9.2 P0–P5 主階段
 
 | 階段 | 目標 | 主要交付物 | 通過條件（Gate） |
 | --- | --- | --- | --- |
-| **P0 內容館** | 全部研究在站內可讀，**完全沒有 3D** | `site/` Astro 專案、三個 collection、連結改寫、表格與程式碼樣式、領域頁、Pagefind、CI build | 所有 Markdown 都有頁面；壞連結 0；本 Repo GitHub 檔案連結 0；無 JS 可讀；axe 無嚴重問題；中文搜尋人工抽測通過 |
-| **P1 美術 G0** | 用靜止畫面定案美術 | Design Atlas：3 個方向 ×（首頁桌機、首頁手機、文件頁、搜尋頁）；字體盲測；Evidence Engine 三視角黑白輪廓 | Owner 從靜止畫面選定一個方向；關掉所有光效仍有辨識度 |
-| **P2 3D PoC G1** | 一個精緻場景與一次飛行 | Blender GLB、graph.json 星圖、`首頁 → 文件` 一次鏡頭飛行、Art Direction Lab、品質分級雛形 | `transition:persist` 在 Chrome Android 與 iOS Safari 實測不重建 canvas；材質、黑位、構圖自洽 |
-| **P3 導演 G2** | 連續電影 | 首頁開場時間軸、四種模式、可打斷轉場、減少動態版本、跳過開場 | 主觀審查不再是「網頁 + 背景動畫」；任何時刻可直接讀文件 |
-| **P4 研究功能 G3** | 研究館完整 | 反向連結、章節目錄與滾動同步、搜尋篩選、領域頁星域鏡頭、來源標示 | 從任一篇文件 2 次操作內到達相關文件；世界與 DOM 永遠同一狀態 |
-| **P5 真機與切換 G4** | 正式上線 | 裝置矩陣實測、負向測試、TalkBack／VoiceOver 人工測試、效能報告；根路徑切到 V3，V2 移到 `/v2/` | Owner 人工驗收後才切換；保留 V2 回退至少一個版本週期 |
+| **P0 內容館** | 全部研究在站內可讀 | Astro 內容館、Pagefind、站內連結與 CI | 歷史主能力已完成；以當前 main / CI / 實機證據為準 |
+| **P0.5 基礎與治理收斂** | 讓資料、模組、UI、CI、安全、Agent、部署可持續擴張 | Blocking + Parallel + Break-glass 規則 | Blocking Gate 完成；Parallel 有 Owner 可見狀態與未結事項 |
+| **P1 美術 G0 / production** | 靜止 Atlas 定案後進正式美術實作 | Design Atlas、字體、Evidence Engine、production UI | 已授權 G0 可收尾；新的 production 實作需 Blocking Gate 完成或有明確 waiver |
+| **P2 3D PoC G1** | 一個精緻場景與一次飛行 | Blender GLB、星圖、鏡頭飛行、品質分級 | 目標瀏覽器實測 |
+| **P3 導演 G2** | 連續電影 | 開場、轉場、reduced-motion | 內容始終可直接讀，動效可打斷／關閉 |
+| **P4 研究功能 G3** | 研究館完整 | 反向連結、目錄、搜尋篩選、關係圖 | DOM / world 狀態一致 |
+| **P5 真機與發布 G4** | 正式上線、驗收與可追溯發布 | 真機、負向測試、rollback、release provenance | Owner 人工驗收；artifact 可追溯、可回退 |
 
-**先做 P0 的理由：** 它單獨就達成「研究全文站內化、不靠 GitHub 連結」，而且之後永遠是所有降級路徑的終點。3D 再怎麼延期，網站都已經可用。
+### 9.3 P0.5 十三個 Gate／Workstream
+
+| ID | 類型 | 要做什麼 | 完成 / 判定方式 |
+| --- | --- | --- | --- |
+| **A｜Current CI verification** | Blocking | 讀取當前 main / PR HEAD 的 Research integrity、V3、Pages artifact/browser 結果。**只有失敗才進修復。** | 若全綠：記錄 SHA、日期、run evidence → A = PASS；若 regression：只修真實失敗 |
+| **B｜Safe Required Checks** | Parallel | **禁止直接把目前有 \`pull_request.paths\` 的 V3 / Pages workflow 設為全 Repo required check。** 先設計 every-PR always-reporting wrapper，或調整 workflow 讓每個 PR 都回報穩定狀態；昂貴測試可由 path classifier 決定是否執行 | README/AGENTS-only PR 與 site/research PR 都能取得明確 required status；不存在 skipped workflow 永久 Pending |
+| **C｜Metadata Schema** | Blocking | 正式定義 publicTitle、summary、domain、topic、tags、creator、originalSource、demo、license、verifiedAt、image、evidenceLevel | 新研究不再主要靠 regex 推導；缺必要欄位可被 CI 發現 |
+| **D｜Architecture Contract + ADR** | Blocking | 建 docs/architecture + docs/adr；固定 source/content → metadata/domain → components → pages → runtime/effects 單向依賴；重大決策記錄 Context / Decision / Alternatives / Consequences / Status | 正式決策可快速判斷；越層依賴有可檢查規則 |
+| **E｜模組化 + Design System** | Blocking | 拆 content / metadata / search、primitives / research / navigation、tokens / typography / layout / motion | 頁面只組裝公開介面；共用 UI / CSS 不再散落複製 |
+| **F｜Code / Visual Quality Gate** | Blocking | 建 lint / format / import-boundary；Playwright 核心 viewport visual regression；避免固定「圖片數 = N」這種脆弱 contract | 格式、危險 import、核心視覺 drift 可被 CI 阻擋 |
+| **G｜每篇視覺 + 全繁中 Gate** | Blocking | article.image → topic → domain → fallback；核心文章專屬相關視覺；公開 title / summary / domain / topic 繁中 | 不再整批同圖；raw folder slug 不露出 |
+| **H｜單一正式 Web App / Deploy Source** | Blocking | 以**現況**為起點收斂：Sanctum 已是 root、V2 已在 /v2/、V3 reader 在 /v3/；目標是讓 site/ 成為正式主 build/deploy source，showcase/ 逐步退成 legacy/reference，**不是再次切 root** | 一套主 build 契約生成 root + reader + legacy；不逆向恢復 V2 根首頁 |
+| **I｜Security + Dependency Governance** | Parallel + break-glass baseline | secret / license / high-risk dependency 問題隨時插隊；完整工作再補 SECURITY.md、SAST 主方案、secret scanning / push protection、Dependabot/等價更新、必要時 dependency review | 緊急安全修補不等待 H；完整治理有自動 Gate / exception |
+| **J｜Supply-chain + License / Asset Registry** | Parallel + break-glass baseline | 明確授權風險立即處理；完整補 root LICENSE 決策、THIRD_PARTY_NOTICES、asset/source manifest；SBOM / attestation 留 P5 | 第三方 asset / source 可追溯 |
+| **K｜Agent Skills + Context Governance** | Parallel | 建 research-ingest、review、metadata-curation、architecture-review、site-ui-review、visual-regression、web-performance-a11y、security-review、source-license-review、release-deploy 等 task Skills | AGENTS 只留全域界線；Skill 以 task success / token / rework A/B 驗證 |
+| **L｜Re-baseline + Machine Policy** | Parallel | 新 baseline 記錄 visibility、ruleset、required checks、root routing、deploy source、安全／依賴現況；把可機械檢查規則移進 CI | 不再讓歷史 baseline 冒充 current state |
+| **M｜Research ingestion pipeline** | Parallel（依賴 C/G/L） | 固化 URL → 查證 → metadata → Markdown → 分類 → 圖片 → source/demo/license → index → CI | 完整研究條目自動進分類、搜尋、視覺、來源與網站 |
+
+### 9.4 Safe Required Check 設計原則
+
+修改 \`main-eag-100\` 前，必須先證明 required status 在**所有 PR 類型**都會回報：
+
+\`\`\`text
+pull_request (all paths)
+        ↓
+required-gate (always reports)
+        ↓
+path classifier
+ ├─ site / research / showcase changed → expensive V3 + Pages verification
+ └─ unrelated docs/root-only change     → lightweight integrity / contract checks
+        ↓
+single required status = success / failure
+\`\`\`
+
+不得直接要求一個可能因 \`paths:\` 完全不觸發的 workflow context，否則 docs-only PR 可能永久 Pending。
+
+### 9.5 Waiver / Break-glass 紀錄格式
+
+任何跳過 Blocking Gate 或緊急插隊都要在 PR 留下：
+
+\`\`\`text
+Decision maker:
+Reason:
+Scope:
+Risk accepted:
+Expires / revisit by:
+Deferred verification:
+Follow-up issue / PR:
+\`\`\`
+
+Security、secret、license、production regression、重大 accessibility 修補**不需要等待階段批准**；先止血，再補完整證據與回歸。
+
+### 9.6 明確延後／目前不需要
+
+- 多層多人 OWNERS / reviewer hierarchy。
+- Nx / Turborepo / 大型 monorepo。
+- 完整 Storybook；先用 Atlas / component lab + Playwright visual regression。
+- 付費 RUM / Observability；P5 有真實流量 / SLO 再評估。
+- 社群型 CODE_OF_CONDUCT / SUPPORT escalation；有外部貢獻者後再補。
+
+### 9.7 實施原則
+
+1. A 是**驗證**，不是預設故障。當前證據全綠就記 PASS，不重做已完成工作。
+2. B 先做 safe wrapper / trigger 設計，後改 ruleset，順序不可反。
+3. C–H 是新的大規模 P1 production implementation 前的主要 Blocking Gate；**既有 G0 收尾與必要 bugfix 不被凍結**。
+4. I / J 的最低安全與授權基線立即生效；完整治理可平行。
+5. K / L / M 可平行，但 M 依賴 C/G/L 的資料與政策契約。
+6. Break-glass 永遠優先於里程碑；止血後必須補 waiver / regression evidence。
+7. P0.5 不藉機提前導入 Three.js / GSAP / 電影級 3D。
 
 ## 10. 風險與待決事項
 

@@ -1,20 +1,30 @@
 # 21｜THE OBSERVATORY V3：P0 驗收報告與 P1 交接書
 
-> **版本：P0 closeout candidate｜2026-11-03（Asia/Taipei）**
+> **版本：歷史 P0 交接 + 2026-11-03 現況校正**
 >
-> **審查狀態：待 Owner 審核 P0 手機星圖修正 PR、合併後正式站點複驗，才可標記「P0 已結案」。**
+> **現況規則：** 本文件前半保留 P0 歷史驗收證據；若與 2026-11-03 現況衝突，以本文件 Current Baseline、最新 main、open PR 與 CI 為準。
 >
 > **範圍說明：** 本文件記錄 V3 P0 研究內容館、保留 V2 的部署方式，以及 V2 研究入口與手機研究領域星圖的交互驗收。它**不是** P1 美術定案、也不是 WCAG 認證或效能測試報告。
 
-## 0. 決策摘要
+## 0. Current Baseline（2026-11-03）
 
-**P0 主功能已具備，正式結案只差最後一項手機星圖缺陷的修補與 Owner 複驗。**
+- 正式根入口目前是 Sanctum：\`/Research-/\`。
+- 舊 V2 已歸檔：\`/Research-/v2/\`。
+- V3 研究閱讀／搜尋仍位於：\`/Research-/v3/\`。
+- \`site/scripts/unify-home.mjs\` 明確輸出「One front door: /Research-/; V2 archive: /v2/; V3 reader and search remain」。
+- PR #26、#31、#33 已是後續已完成變更；PR #35 是本基線建立時的首頁修正候選。**PR 是否仍 open 不作永久事實；執行／合併本文件前重新讀取 current main 與 PR #35，若已合併就直接採用新 main。**
+- PR #36 在審查前 HEAD \`8fb9e3695d0b463adfdbad131b103e6ed5b84c8a\` 的 Research integrity、V3 P0、Publish Research Showcase 三組 CI 均 SUCCESS；文件更新後必須看新 HEAD。
+- 下方任何「V2 是 root」「P5 才切 root」「未准任何 P1 工作」均屬**歷史 P0 敘述**，不可當成目前執行命令。
+
+## 0.1 歷史 P0 決策摘要
+
+**以下保留 P0 當時的驗收脈絡，用於追溯，不代表 2026-11-03 的現行路由。**
 
 - **V3 內容館：** Astro 6 靜態輸出、原始 Markdown 站內全文、Pagefind 中文全文搜尋、領域分類、來源 SHA／日期、章節目錄／反向連結與無 JavaScript 閱讀降級。
-- **部署：** V2 根站保留在 `/Research-/`；V3 內容館位於 `/Research-/v3/`。不切換根路徑、不部署新的 3D 世界。
+- **部署（歷史狀態）：** P0 當時 V2 曾保留在 `/Research-/`、V3 在 `/v3/`；**現況已由後續 PR 改為 Sanctum root + `/v2/` legacy + `/v3/` reader。**
 - **閱讀入口：** V2 研究列表的文章標題改為同分頁進入 V3；GitHub 原始碼是獨立的明確標示連結。V3 沒有收錄的來源不製造不存在的站內網址。
 - **Owner 實機驗收：** 使用者回報 P0 五項操作通過；提出的唯一可見問題為 V2 手機星圖：固定桌面 SVG viewBox 壓縮中文／英文標籤、節點過小、空間分配不佳，已附手機截圖。本次修補限定在星圖手機投影、標籤與觸控，**待合併後重新檢查**。
-- **P1 不自動啟動：** 此文件提供 G0 設計研究交接，不等於授權修改 P1 網頁、引入 3D／GSAP 或合併部署。
+- **P1 授權邊界：** 已授權／已進行的 G0 收尾與必要 bugfix 可繼續；新的大規模 P1 production implementation 依 P0.5 Blocking Gates 或 Owner waiver 決定。
 
 ## 1. 建置、程式與資料狀態
 
@@ -85,12 +95,59 @@
 4. **來源隱私邊界：** `THREAT-MODEL.md` 僅排除 V3 發布；GitHub Repository 公開，文件仍可在 GitHub 讀取。若內容真的不能公開，須 Owner 另行處理資料保護與 Repo 可見性，不屬本次 PR。
 5. **版本與文字漂移：** 原規劃書第 9 節是「未實作前的計畫」，本報告是截至本階段實際驗收的狀態；與較早的 V2 README 描述衝突時，以原始提交、最新 CI 與本報告的證據分級為準。
 
-## 4. P0 正式結案程序
+## 4. P0.5 治理與 P1 邊界
 
-1. 本 PR 的 Showcase、Pages、V3、研究完整性 CI 全綠；手機版 E2E／對應證據可檢視。
-2. Owner 審核 PR 變更，准予合併；部署到正式 Pages，V2 根路徑與 V3 子路徑均可讀。
-3. Owner 在手機上重新確認六顆研究星圖節點的閱讀性、觸控與篩選；截圖上的原問題已消失。
-4. 確認上述事項後，**Owner 明確標記 P0 Closeout：PASS**，再啟動獨立 P1 PR。若任一項失敗，維持 `P0 closeout pending` 並只修缺陷；不能直接宣告通過。
+### 4.1 A：Current CI Verification
+
+A 不再假設「目前 CI 有 blocker」。
+
+本輪審查前 PR #36 HEAD \`8fb9e3695d0b463adfdbad131b103e6ed5b84c8a\`（2026-11-03）已取得：
+- Research integrity：SUCCESS
+- V3 P0 build and checks：SUCCESS
+- Publish Research Showcase：SUCCESS
+
+因此在該 SHA 上 A = **PASS evidence**。本文件修改後只需對新的最終 HEAD 重新驗證；若仍全綠，更新 SHA / 日期後關閉 A；只有出現真實 regression 才開修復工作。
+
+### 4.2 Blocking / Parallel / Break-glass
+
+| 類型 | 項目 |
+| --- | --- |
+| **Blocking（新的大規模 P1 production 前）** | C Metadata、D Architecture/ADR、E 模組化/Design System、F Code/Visual Gate、G 視覺/繁中、H 單一 deploy source |
+| **Parallel** | B Safe Required Checks、I Security/Dependency 完整治理、J Supply-chain/License Registry、K Skills、L Re-baseline、M ingestion |
+| **Break-glass** | production bug、security/secret、license/legal、重大 a11y、CI outage；可隨時插隊 |
+
+**既有 G0 收尾與必要首頁／閱讀 bugfix 不被 P0.5 凍結。**
+
+### 4.3 B：Required Checks 的安全前置條件
+
+目前 \`v3-p0-build.yml\` 與 \`publish-showcase.yml\` 的 \`pull_request\` 都有 \`paths:\` 過濾，所以**不能直接把現有 raw workflow context 設成全 Repo Required Check**。
+
+先做：
+1. every-PR always-reporting wrapper（或等價穩定 context）；
+2. path classifier 決定跑昂貴 V3/Pages 或輕量檢查；
+3. 用 root/docs-only PR 與 site/research PR 各驗一次；
+4. 兩類 PR 都會回報明確 status 後，才修改 \`main-eag-100\`。
+
+### 4.4 Waiver / Break-glass 紀錄
+
+\`\`\`text
+Decision maker:
+Reason:
+Scope:
+Risk accepted:
+Expires / revisit by:
+Deferred verification:
+Follow-up issue / PR:
+\`\`\`
+
+Security、secret、license、production regression 不等待 H 或其他治理階段；先止血，再補回歸與追蹤。
+
+### 4.5 P1 開工規則
+
+- **已授權／已進行的 G0 收尾：可繼續。**
+- **低風險 bugfix：可繼續。**
+- **新的大規模 P1 production implementation：Blocking C–H 完成，或 Owner 留下具體 waiver 後才進。**
+- Parallel governance 未完成不會自動凍結所有產品工作，但必須保持可見狀態與 follow-up。
 
 ## 5. P1 美術 G0 接手內容
 
@@ -98,7 +155,7 @@
 
 **必讀已存在的規格（不重寫基礎研究）：**
 
-- [19｜V3 架構與 P0–P5 規劃](19-v3-astro-research-cinema-architecture-and-roadmap.md)：第 6.1、7、9 節。
+- [19｜V3 架構與 P0–P5 規劃](19-v3-astro-research-cinema-architecture-and-roadmap.md)：第 6.1、7、9 節；以 §9 的 Blocking / Parallel / Break-glass 規則為準。
 - [20｜V3 執行書](20-v3-chatgpt-5-6-execution-brief.md)：P1 任務、驗收與權限邊界。
 - [16｜Active Theory 品質基準](16-active-theory-quality-benchmark.md)；[17｜Arctic Waters 創作方法](17-arctic-waters-threejs-creative-workflow.md)；[18｜完整技術組合](18-v3-cinematic-experience-technology-decision.md)。
 - `showcase/design/V2-ART-DIRECTION.md`：色票、金色／青色語義、Evidence Engine 輪廓、不複製參考作品的素材。
@@ -117,10 +174,10 @@
 ### P1 開工界線
 
 - 預期在 `site/src/pages/atlas/` 以獨立 PR 呈現可審查的靜止 HTML／CSS／SVG 與可重現截圖；**本交接文件不授權直接執行 P1 代碼修改**。
-- 不改 `main` V2 首頁、不切換 `/Research-/` 至 V3、不引進 Three.js／GSAP／額外依賴；新依賴或權限變更先請 Owner 決策。
+- **現況 root 已是 Sanctum、V2 已在 `/v2/`；禁止把舊 P0 路由敘述當成回退指令。** 本階段不引進 Three.js／GSAP／額外依賴；新依賴或權限變更先請 Owner 決策。
 - 不使用別人的品牌素材、影片、模型、圖片或原始碼當作網站成品。
 - 以 320、360、393、430、768、1440 CSS px、reduced motion 檢視靜止構圖；不偽稱真機 FPS／LCP。
-- P1 的 Owner 核准是 G0，P2 仍需獨立授權與 PR。
+- P1 的 Owner 核准是 G0，P2 仍需獨立授權與 PR；新的大規模 production 依 Blocking Gate / waiver，既有 G0 收尾與 break-glass 修補不受 Parallel Governance 阻擋。
 
 ## 6. 可核對的檔案與操作
 
@@ -129,7 +186,7 @@
 - V2 手機星圖：`showcase/app.js`、`showcase/styles.css`
 - 手機回歸測試：`site/tests/pages/mobile-constellation.spec.mjs`
 - Pages 整包交叉驗證：`site/scripts/verify-pages-bundle.mjs`
-- 正式站點：`https://waydefu.github.io/Research-/`（V2）、`https://waydefu.github.io/Research-/v3/`（V3）
+- 正式站點：`https://waydefu.github.io/Research-/`（Sanctum root）、`https://waydefu.github.io/Research-/v2/`（legacy V2）、`https://waydefu.github.io/Research-/v3/`（研究閱讀／搜尋）
 - 本文件屬於公開網站研究內容，不儲存病患或任何私密診所資料。
 
 ## 7. Owner 最終簽核欄位
@@ -139,6 +196,6 @@
 | 本 PR 修補程式版 CI | **四組成功、9/9 Pages E2E 通過**；本報告文字更新後仍需最終 HEAD CI 重驗 |
 | 手機星圖正式站點複驗 | **待 Owner** |
 | P0 可否標記 PASS | **待 Owner** |
-| P1 G0 是否准許開工 | **未授權；需 Owner 獨立指示** |
+| P1 G0 / 收尾 | **依後續 Owner 已授權工作與 open PR 現況執行；本歷史欄位不再覆蓋後續授權** |
 
 **終態規則：** 不以「PR 已開」或「CI 綠燈」等同正式完成；Owner 確認 P0 手機缺陷消失後才結案。
