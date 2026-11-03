@@ -245,19 +245,31 @@ context lost、shader 編譯失敗、頁面隱藏 → 停止繪製；重複失�
 ```text
 P0 內容館（已完成主要能力）
   ↓
-P0.5-A 解除目前 CI / 部署 blocker
+P0.5-A 解除 CI / 部署 blocker
   ↓
-P0.5-B 把網站驗收加入 main Required Checks
+P0.5-B Required Checks 強制化
   ↓
-P0.5-C 正式研究 Metadata Schema
+P0.5-C Research Metadata Schema
   ↓
-P0.5-D 每篇研究獨立視覺 + 全繁中 Gate
+P0.5-D Architecture Contract + ADR
   ↓
-P0.5-E site/ 成為唯一正式 Web App / deploy source
+P0.5-E 前端模組化 + Design System
   ↓
-P0.5-F Governance re-baseline
+P0.5-F Lint / Format / Import / Visual Regression Gate
   ↓
-P0.5-G Research ingestion pipeline
+P0.5-G 每篇研究獨立視覺 + 全繁中 Gate
+  ↓
+P0.5-H site/ 單一 Web App / deploy source
+  ↓
+P0.5-I Security + Dependency Governance
+  ↓
+P0.5-J Supply-chain + License / Asset Registry
+  ↓
+P0.5-K Agent Skills + Context Governance
+  ↓
+P0.5-L Governance re-baseline + Machine-checkable Policy
+  ↓
+P0.5-M Research ingestion pipeline
   ↓
 P1 美術 G0
   ↓
@@ -267,45 +279,71 @@ P3 導演 G2
   ↓
 P4 研究功能 G3
   ↓
-P5 真機與切換 G4
+P5 真機、Release Provenance 與正式切換 G4
 ```
 
-**禁止跳級：** P0.5-C～G 不是「之後有空再做」的整理工作，而是 P1 前置條件。否則每新增研究都會放大分類、圖片、語言、部署與測試漂移。
+**禁止跳級：** P0.5-C～M 是 P1 前置基礎，不是裝飾性企業流程。目的是讓每新增一篇研究、每改一次網站，都不再放大分類、圖片、模組、供應鏈、Agent context 與部署漂移。
 
 ### 9.2 P0–P5 主階段
 
 | 階段 | 目標 | 主要交付物 | 通過條件（Gate） |
 | --- | --- | --- | --- |
-| **P0 內容館** | 全部研究在站內可讀，**完全沒有 3D** | `site/` Astro 專案、collection、連結改寫、表格與程式碼樣式、領域頁、Pagefind、CI build | 所有 Markdown 有頁面；壞連結 0；無 JS 可讀；axe 無 serious／critical；中文搜尋通過 |
-| **P0.5 基礎收斂** | 把「研究資料 → 網站 → CI → 部署」收斂成穩定單一系統 | CI blocker 修正、Required Checks、Metadata Schema、文章視覺、繁中 Gate、site/showcase 邊界、治理新基線、ingestion pipeline | 下方 A–G 全數通過；P1 不再承擔資料／部署技術債 |
-| **P1 美術 G0** | 用靜止畫面定案美術 | Design Atlas：3 個方向 ×（首頁桌機、首頁手機、文件頁、搜尋頁）；字體盲測；Evidence Engine 三視角黑白輪廓 | Owner 從靜止畫面選定一個方向；關掉所有光效仍有辨識度 |
-| **P2 3D PoC G1** | 一個精緻場景與一次飛行 | Blender GLB、graph.json 星圖、`首頁 → 文件` 一次鏡頭飛行、Art Direction Lab、品質分級雛形 | `transition:persist` 在目標瀏覽器實測；材質、黑位、構圖自洽 |
-| **P3 導演 G2** | 連續電影 | 首頁開場時間軸、四種模式、可打斷轉場、減少動態版本、跳過開場 | 主觀審查不再是「網頁 + 背景動畫」；任何時刻可直接讀文件 |
-| **P4 研究功能 G3** | 研究館完整 | 反向連結、章節目錄與滾動同步、搜尋篩選、領域頁星域鏡頭、來源標示 | 從任一篇文件 2 次操作內到達相關文件；世界與 DOM 永遠同一狀態 |
-| **P5 真機與切換 G4** | 正式上線 | 裝置矩陣實測、負向測試、TalkBack／VoiceOver 人工測試、效能報告；根路徑切到正式 V3 | Owner 人工驗收；保留可回退版本 |
+| **P0 內容館** | 全部研究在站內可讀，**完全沒有 3D** | `site/` Astro、collection、站內連結、Pagefind、CI build | 所有 Markdown 有頁面；壞連結 0；無 JS 可讀；axe 無 serious／critical；中文搜尋通過 |
+| **P0.5 基礎與治理收斂** | 把「研究資料 → 模組 → UI → CI → 安全 → Agent → 部署」收斂成可持續擴張的單一系統 | A–M 十三個子 Gate | A–M 全數通過，或由 Owner 對特定 Gate 明確豁免 |
+| **P1 美術 G0** | 用靜止畫面定案美術 | Design Atlas、字體盲測、Evidence Engine 黑白輪廓 | Owner 選定方向；移除光效仍有辨識度 |
+| **P2 3D PoC G1** | 一個精緻場景與一次飛行 | Blender GLB、星圖、一次鏡頭飛行、品質分級 | 目標瀏覽器實測；材質、黑位、構圖自洽 |
+| **P3 導演 G2** | 連續電影 | 開場、四模式、可打斷轉場、reduced-motion | 不再只是「網頁 + 背景動畫」；內容始終可直接讀 |
+| **P4 研究功能 G3** | 研究館完整 | 反向連結、目錄、搜尋篩選、關係圖與鏡頭同步 | 任一文章 2 次操作內到相關文件；DOM / world 狀態一致 |
+| **P5 真機與發布 G4** | 正式上線與可驗證 Release | 真機、負向測試、a11y 人工驗證、rollback、release provenance | Owner 人工驗收；正式 artifact 可追溯、可回退 |
 
-### 9.3 P0.5 基礎收斂的七個子階段
+### 9.3 P0.5 十三個子階段
 
-| 子階段 | 順序理由 | 要做什麼 | 完成 Gate |
+| 子階段 | 要解決的問題 | 要做什麼 | 完成 Gate |
 | --- | --- | --- | --- |
-| **P0.5-A｜CI blocker** | 不先修就沒有可信交付線 | 修正 PR #35／同類首頁變更造成的 Pages browser test 漂移：Node DOM constant、SVG/WebP asset policy、固定圖片數假設、scroll threshold 等；**以真實規格更新測試，不為了綠燈回退正確 UI** | Research integrity、V3 build、Pages artifact/browser checks 全綠 |
-| **P0.5-B｜Required Checks** | CI 不強制就等於建議 | 在 `main-eag-100` ruleset 中保留研究完整性，並加入已穩定的 V3 build/browser 與 Pages artifact integrity；部署 job 本身不要求在 PR 執行 | 壞網站不能只靠 Markdown check 綠燈合入 main |
-| **P0.5-C｜Metadata Schema** | 後續分類、搜尋、圖片、繁中都依賴它 | 研究條目正式定義 `publicTitle`、`summary`、`domain`、`topic`、`tags`、`author/creator`、`originalSource`、`demo`、`license`、`verifiedAt`、`image`、`evidenceLevel`；舊文允許 fallback，新文逐步強制 | 新研究不再主要靠 regex 猜分類／摘要；Schema 缺必要欄位可被 CI 發現 |
-| **P0.5-D｜視覺唯一性 + 全繁中 Gate** | 直接解目前「抽象、重複圖、英文 slug 外露」問題 | 圖片優先序改成 `article.image → topic image → domain image → fallback`；每篇核心研究使用專屬相關視覺；UI metadata 必須有繁中 display name / summary，技術專名可保留英文 | 不再出現整批同圖；folder slug 不直接顯示給讀者；新增文章若缺繁中導讀或分類名稱，CI 提醒／阻擋 |
-| **P0.5-E｜單一 Web App / Deploy Source** | 現在 V2/V3 雙 build 容易讓測試互相漂移 | `site/` 成為唯一正式 Web App 與部署來源；`showcase/` 退為 V2 legacy snapshot、design/reference、必要歷史資產。保留 `/v2/` 可讀，但不再讓正式首頁依賴兩套 runtime build 串接 | 一套 build 可以生成正式 root + V3 研究館 + V2 legacy；CI 契約只有一份主真相 |
-| **P0.5-F｜Governance re-baseline** | 舊 baseline 已與現況衝突 | 新增當日 baseline，保留舊檔作歷史證據；更新 repo visibility、ruleset、protected main、Required Checks、已存在 CI 與未解 P0 | Agent 不再讀到「目前 rulesets=[]／main 未保護」這類過時現況 |
-| **P0.5-G｜Research ingestion pipeline** | 研究數量已進入持續成長階段 | 把「URL → 查證 → metadata → Markdown → 分類 → 圖片 → source/demo/license → index → CI」固化；新增研究時主要只提交完整條目，不再手工改 4–6 個索引 | 新增一篇研究能自動出現在分類、搜尋、視覺、來源與網站；重複人工索引最小化 |
+| **A｜CI blocker** | 現在 Pages browser test 與新版 UI 契約漂移 | 修 Node DOM constant、SVG/WebP policy、固定圖片數、scroll threshold 等；**修規格／測試，不為綠燈回退正確 UI** | Research integrity、V3、Pages artifact/browser 全綠 |
+| **B｜Required Checks** | CI 不強制就只是建議 | 將已穩定的 V3/browser 與 Pages artifact integrity 加入 `main-eag-100` required checks；deploy job 不要求在 PR 執行 | 壞網站無法只靠 Markdown check 合入 main |
+| **C｜Metadata Schema** | 現在不少公開資訊靠 regex / folder 猜 | 正式定義 `publicTitle`、`summary`、`domain`、`topic`、`tags`、`creator`、`originalSource`、`demo`、`license`、`verifiedAt`、`image`、`evidenceLevel` | 新研究不再主要靠 regex 推導；缺必要 metadata 可被 CI 發現 |
+| **D｜Architecture Contract + ADR** | 研究結論與正式架構決策混在一起；模組可任意互相依賴 | 建 `docs/architecture/`、`docs/adr/`；定義單向層級：source/content → metadata/domain → components → pages → runtime/effects；重大決策記錄 Context / Decision / Alternatives / Consequences / Status | Agent 能快速知道「目前正式決定」；反向 import / 越層依賴有規則可查 |
+| **E｜前端模組化 + Design System** | `site/src/lib` 偏平、`global.css` / `atlas.css` 膨脹，元件邊界不足 | 拆 `lib/content`、`lib/metadata`、`lib/search`、`components/primitives`、`components/research`、`components/navigation`；CSS 拆 tokens / typography / layout / motion；Atlas 成為 component lab | 共用 UI 不再複製；頁面只組裝公開介面，不直接處理原始資料與跨層細節 |
+| **F｜Code Quality / Visual Gate** | 缺正式 lint/format/import-boundary 與穩定視覺回歸 | 選一套主 lint/format（優先 ESLint + Prettier/Astro）；建立 import boundary check；Playwright 固定 viewport 截圖作核心頁 visual regression，避免靠「圖片數=3」這類脆弱測試 | 格式、危險 import、核心視覺漂移可在 CI 被攔截 |
+| **G｜每篇視覺 + 全繁中 Gate** | 同 topic 共圖、slug/英文資料夾可能露出、文章太抽象 | `article.image → topic → domain → fallback`；核心文章專屬圖；讀者可見 domain/topic/title/summary 全繁中，技術正式名稱可保留英文 | 不再整批同圖；公開頁不顯示 raw folder slug；新研究缺繁中導讀會被發現 |
+| **H｜單一 Web App / Deploy Source** | `showcase/` + `site/` 雙 build 讓 CI 契約漂移 | `site/` 成為正式 Web App / deploy source；`showcase/` 降為 legacy V2 snapshot、design/reference、歷史資產；`/v2/` 保留 | 一套主要 build 產生 root + research + legacy；主部署規格只有一份 |
+| **I｜Security + Dependency Governance** | 目前有 zizmor / pinned Actions，但缺應用層與依賴完整治理 | 補 `SECURITY.md`；選擇 SAST（避免重複掃描工具）；啟用 secret scanning / push protection 能力；Dependabot 或等價依賴更新；依需要加 dependency review；維持最小權限 Actions | 新秘密、已知高風險依賴、危險 workflow / source pattern 有自動 Gate 或清楚例外 |
+| **J｜Supply-chain + License / Asset Registry** | Public repo 尚缺統一權利與第三方資產台帳；採用來源逐漸增加 | 明確決定 root `LICENSE`；必要時 code / docs / asset 分離授權；建立 `THIRD_PARTY_NOTICES.md` 與 asset/source manifest（來源、作者、license、hotlink/vendor、verifiedAt）；P5 再評估 SBOM / artifact attestation | 每個 vendored / published third-party asset 可追溯權利；不能因 GitHub metadata 就當已授權 |
+| **K｜Agent Skills + Context Governance** | 目前只有 research-evidence / research-governance，任務知識仍大量塞在 AGENTS /長文 | 建任務型 Skills：`research-ingest`、`research-review`、`metadata-curation`、`architecture-review`、`site-ui-review`、`visual-regression`、`web-performance-a11y`、`security-review`、`source-license-review`、`release-deploy`；AGENTS 只放全域界線 | Agent 只在任務需要時讀專業規則；Skill 必須以 task success / Token / rework A/B 驗證，不因「已安裝」就視為有效 |
+| **L｜Governance re-baseline + Machine-checkable Policy** | 舊 baseline 已過期，部分規則仍只存在自然語言 | 新 baseline 保留歷史快照；記錄 visibility、ruleset、required checks、部署權限、依賴治理；把可機械檢查的規則移進 CI（metadata、license manifest、Actions pin、禁止路徑、import boundary 等） | Agent 不讀到過時現況；重要治理規則「做錯會紅」，不是只靠提醒 |
+| **M｜Research ingestion pipeline** | 每新增研究仍容易改 4–6 個地方 | 固化 `URL → 查證 → metadata → Markdown → 分類 → 圖片 → source/demo/license → index → CI`；自動更新網站與索引 | 新增完整研究條目後，自動出現在分類、搜尋、視覺、來源與網站；手工索引最小化 |
 
-### 9.4 P0.5 的實施原則
+### 9.4 大型專業 Repo 對標後採用／不採用
 
-1. **A → B 必須最先完成。** 在 CI 尚紅或未強制前，不進大型 metadata／架構重構。
-2. **C → D 必須連續做。** 沒有 schema 就無法可靠強制獨立視覺與繁中。
-3. **E 要在 ingestion 前。** 否則 ingestion 會同時服務兩套網站／部署模型，反而增加複雜度。
-4. **F 可與 C–E 文件工作並行研究，但 Ruleset 實際修改仍需 Owner 明確授權。**
-5. **G 是 P0.5 最後一步。** 先把資料契約與網站唯一來源固定，再自動化新增研究。
-6. P0.5 **不導入 Three.js／GSAP／電影級 3D**；目標是讓 P1 之後只處理美術與互動，不再回頭救底層資料管線。
+| 成熟 Repo 模式 | 本 Repo 決策 |
+| --- | --- |
+| Kubernetes：OWNERS / OWNERS_ALIASES、import restrictions、security contacts、support / contributing | **採思想、不照抄規模。** 單一 Owner 不假造多人審核；用 Architecture Contract、CODEOWNERS、SECURITY.md 與 machine-checkable boundaries 取代 |
+| VS Code 類：明確 source layer 與單向依賴 | **採用。** D / F 建立 architecture + import boundary |
+| Grafana 類：細粒度 CODEOWNERS、Renovate、license tooling、zizmor/actionlint、Playwright / component testing | **選擇性採用。** 依賴、授權、Actions 與 visual regression 留下；暫不為規模感硬上巨大 monorepo / Storybook |
+| 大型 release / supply-chain：SBOM、attestation、provenance | **P5 再強制。** P0.5 先把 lockfile、第三方台帳、license、build source 與 CI gate 穩定 |
 
-**先做 P0／P0.5 的理由：** P0 已建立完整可讀的研究館；P0.5 則把它從「可以運作」提升成「可以持續擴張而不失控」。3D 再怎麼複雜，都不能建立在會漂移的 metadata、雙重 deploy source 或非 required 的 CI 上。
+### 9.5 明確延後／目前不需要
+
+以下不是「漏做」，而是目前規模下投入產出比不佳：
+
+- 多層多人 `OWNERS` / reviewer hierarchy：目前主要維護者單一，先用 ownership map + CODEOWNERS。
+- Nx / Turborepo / 大型 monorepo：只有真正出現多 package / 多 app 共用 build cache 時再評估。
+- 完整 Storybook 平台：先用現有 Atlas / component lab + Playwright visual regression。
+- 付費 RUM / Observability 平台：P5 有實際流量、性能問題或 SLO 後才導入；現階段保留本地／真機量測。
+- 社群型 CODE_OF_CONDUCT / SUPPORT escalation：若 Repo 開始接受外部貢獻者，再補社群治理，不為「看起來像大 Repo」先堆文件。
+
+### 9.6 P0.5 的實施原則
+
+1. **A → B 最先完成。** 沒有可信綠線與強制 Gate，不進大重構。
+2. **C → D → E → F 是資料與模組地基。** 先定資料契約與依賴方向，再拆模組、加 lint/import/visual gate。
+3. **G 在 Design System 之後。** 否則文章視覺與繁中規則會再重做一次。
+4. **H 固定唯一正式 build/deploy source，再做 I / J。** 安全與供應鏈 Gate 必須對準最終交付管線。
+5. **K 必須在 M 前。** 先建立可重用任務 Skills，再讓 ingestion 自動化呼叫穩定流程。
+6. **L 在 M 前做最後治理快照與 policy 收口。**
+7. P0.5 **不導入 Three.js／GSAP／電影級 3D**；P1 之後只處理美術／互動，不再回頭救資料、模組與治理地基。
+
+**先做 P0／P0.5 的理由：** P0 已讓研究館可讀；P0.5 要讓它像成熟工程 Repo 一樣「能持續變大而不失控」。成熟度不以工具數量衡量，而以模組邊界、可追溯性、必要自動 Gate、權利邊界與回退能力衡量。
 
 ## 10. 風險與待決事項
 
