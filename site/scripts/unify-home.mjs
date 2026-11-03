@@ -15,7 +15,7 @@ const old="return './v3/'";
 if(original.split(old).length!==2)throw Error('Unexpected V2 reader routing');
 await writeFile(reader,original.replace(old,"return '../v3/'"));
 const source=await readFile(join(v3,'atlas/sanctum/index.html'),'utf8');
-if(!source.includes('天文觀測神殿')||!source.includes('class="world-backdrop"'))throw Error('Sanctum scene missing');
+if(!source.includes('技術研究與實作知識庫')||!source.includes('class="world-backdrop"'))throw Error('Research knowledge front door or scene missing');
 if(!source.includes('<link rel="canonical" href="https://waydefu.github.io/Research-/"'))throw Error('Canonical home missing');
 const home=source.replaceAll('./assets/','/Research-/v3/atlas/sanctum/assets/');
 if(home.includes('data:image/webp;base64,'))throw Error('Image data URI regression');
