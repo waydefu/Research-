@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 const ROOT='/Research-/',V3=ROOT+'v3/';
 test('one public homepage with the full reviewed Sanctum',async({page})=>{
   await page.goto(ROOT);
-  await expect(page.getByRole('heading',{name:/天文觀測神殿/})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/技術研究與實作知識庫/})).toBeVisible();
   await expect(page.locator('.world-backdrop')).toBeAttached();
   await expect(page.locator('.narrative-glass')).toBeAttached();
   expect(await page.locator('body').innerText()).not.toContain('THE UNKNOWN,');
@@ -15,7 +15,7 @@ test('one public homepage with the full reviewed Sanctum',async({page})=>{
 test('secondary V3 homepage leads to the canonical root',async({page})=>{
   await page.goto(V3);
   await expect(page).toHaveURL(/\/Research-\/$/);
-  await expect(page.getByRole('heading',{name:/天文觀測神殿/})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/技術研究與實作知識庫/})).toBeVisible();
 });
 test('legacy V2 and original P0 research library remain readable',async({page})=>{
   await page.goto(V3+'library/');
