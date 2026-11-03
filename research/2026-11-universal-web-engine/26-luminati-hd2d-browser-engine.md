@@ -1,4 +1,4 @@
-# Luminati／The Bells of Evermere：2.5D 像素遊戲如何做出立體電影光影？
+# Luminati／The Bells of Evermere：Three.js 2.5D 像素遊戲如何做出立體電影光影？
 
 查證日期：2026-11-03（Asia/Taipei）。  
 類型：外部原作與引擎架構研究；**不是 Research- 已採用的技術、已部署功能或真機測試結果**。
