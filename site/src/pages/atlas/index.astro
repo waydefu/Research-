@@ -2,18 +2,17 @@
 import Atlas from '../../layouts/Atlas.astro';
 import SceneArt from '../../components/atlas/SceneArt.astro';
 import { concepts } from '../../lib/atlas-concepts.mjs';
-import { allDocs, BASE } from '../../lib/catalog.mjs';
-const count = allDocs().length;
+import { BASE } from '../../lib/catalog.mjs';
 ---
-<Atlas title="P1 G0｜觀測神殿美術圖集">
+<Atlas title="互動網站構圖與視覺案例">
   <div class="atlas-landing">
     <section class="atlas-lead">
-      <p class="atlas-overline">RESEARCH- · PHASE ONE · ART DIRECTION GATE ZERO</p>
+      <p class="atlas-overline">INTERACTIVE WEB / DESIGN CASE STUDIES</p>
       <p class="atlas-edition">VOL. 01 — OBSERVATORY SANCTUM</p>
       <h1>讓研究有一座<br/><em>值得探索的神殿。</em></h1>
-      <p class="atlas-intro">暗金為核心，冰藍只作極少量的反射。三套截然不同的電影構圖，全部建立在真實的 {count} 份研究文件之上。</p>
+      <p class="atlas-intro">以暗金為主、冰藍為輔，透過三種不同構圖比較文字閱讀、視覺焦點與沉浸敘事的取捨。</p>
       <div class="atlas-actions"><a class="atlas-cta" href={BASE + 'atlas/sanctum/'}>開啟高保真全頁神殿原型 <span aria-hidden="true">↗</span></a><a class="atlas-link" href="#concepts">查看早期構圖 ↓</a><a class="atlas-link" href={BASE + 'search/'}>直接閱讀研究 ↗</a></div>
-      <p class="atlas-note">本輪更新已提供獨立的高保真全頁背景版本：暗金場景貫穿捲動，研究內容以深色漸層玻璃浮現。下方 A／B／C 屬早期 SVG 構圖研究，並非通過 G0 的最終美術。圖片式場景仍是靜態視覺稿，不冒稱 Three.js／Blender 的即時 3D。</p>
+      <p class="atlas-note">這些是靜態網站構圖示例：比較連續背景、漸層玻璃、字體及資訊層級。A／B／C 都不是完成的即時 3D 作品，也不能代替實際裝置的效能及無障礙測試。</p>
     </section>
     <div class="atlas-cover-art" aria-hidden="true"><SceneArt variant="concept-a" instance="atlas-cover"/></div>
   </div>
@@ -30,5 +29,5 @@ const count = allDocs().length;
     <a href={BASE + 'atlas/typography/'}><span>02 / TYPE STUDY</span><strong>繁中字體研究</strong><small>候選字型、長標題、載入與授權限制</small><b aria-hidden="true">↗</b></a>
     <a href={BASE + 'atlas/evidence/'}><span>03 / FORM STUDY</span><strong>Evidence Engine 黑白輪廓</strong><small>三視角；沒有光效仍應能辨認</small><b aria-hidden="true">↗</b></a>
   </section>
-  <div class="atlas-closing"><span>G0 FIRST</span><p>先讓靜止畫面成立，再考慮動畫的存在。</p></div>
+  <div class="atlas-closing"><span>COMPOSITION FIRST</span><p>先讓靜止畫面成立，再考慮動畫的存在。</p></div>
 </Atlas>

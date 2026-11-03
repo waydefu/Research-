@@ -16,6 +16,8 @@ for(const width of [320,393,430]){
       return {hero:hero?.bottom,actions:actions?.bottom,glass:glass?.top,search:search?.bottom,overflow:document.documentElement.scrollWidth-innerWidth};
     });
     expect(positions.search).toBeLessThan(positions.actions);
+    await expect(page.locator('.mobile-discovery-nav')).toBeHidden();
+    await expect(page.locator('.hero-actions .outline-action')).toBeHidden();
     expect(positions.actions).toBeLessThanOrEqual(positions.glass+1);
     expect(positions.overflow).toBeLessThanOrEqual(1);
     await homeMenu.click();

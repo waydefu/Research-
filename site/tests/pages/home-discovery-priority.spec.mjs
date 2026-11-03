@@ -6,23 +6,26 @@ for(const width of [320,360,393,430,768]){
   test('mobile first screen visibly exposes the full catalog at '+width+'px',async({page})=>{
     await page.setViewportSize({width,height:852});
     await page.goto(ROOT);
-    const catalog=page.locator('.mobile-discovery-nav .mobile-library-link');
-    const search=page.locator('.mobile-discovery-nav .mobile-search-link');
+    const catalog=page.locator('.hero-actions .gold-action');
+    const search=page.locator('.hero-discovery button');
+    await expect(page.locator('.mobile-discovery-nav')).toBeHidden();
     await expect(catalog).toBeVisible();
     await expect(search).toBeVisible();
     await expect(catalog).toHaveAttribute('href',LIBRARY);
-    await expect(search).toHaveAttribute('href',SEARCH);
+    await expect(page.locator('.hero-discovery')).toHaveAttribute('action',SEARCH);
     const sizes=await page.evaluate(()=>{
       const root=document.documentElement;
-      const nav=document.querySelector('.mobile-discovery-nav').getBoundingClientRect();
-      const a=document.querySelector('.mobile-library-link').getBoundingClientRect();
-      const b=document.querySelector('.mobile-search-link').getBoundingClientRect();
-      return {navTop:nav.top,navBottom:nav.bottom,aTop:a.top,aHeight:a.height,bHeight:b.height,viewportHeight:innerHeight,overflow:root.scrollWidth-innerWidth};
+      const a=document.querySelector('.hero-actions .gold-action').getBoundingClientRect();
+      const input=document.querySelector('.hero-discovery input').getBoundingClientRect();
+      const button=document.querySelector('.hero-discovery button').getBoundingClientRect();
+      return {aTop:a.top,aBottom:a.bottom,aHeight:a.height,inputTop:input.top,inputHeight:input.height,buttonTop:button.top,buttonHeight:button.height,viewportHeight:innerHeight,overflow:root.scrollWidth-innerWidth};
     });
-    expect(sizes.navTop).toBeGreaterThanOrEqual(0);
-    expect(sizes.navBottom).toBeLessThan(sizes.viewportHeight);
+    expect(sizes.aTop).toBeGreaterThanOrEqual(0);
+    expect(sizes.aBottom).toBeLessThan(sizes.viewportHeight);
     expect(sizes.aHeight).toBeGreaterThanOrEqual(44);
-    expect(sizes.bHeight).toBeGreaterThanOrEqual(44);
+    expect(sizes.buttonHeight).toBeGreaterThanOrEqual(44);
+    expect(Math.abs(sizes.inputTop-sizes.buttonTop)).toBeLessThan(1);
+    expect(Math.abs(sizes.inputHeight-sizes.buttonHeight)).toBeLessThan(1);
     expect(sizes.overflow).toBeLessThanOrEqual(1);
     await catalog.click();
     await expect(page).toHaveURL(LIBRARY);
@@ -45,11 +48,11 @@ test('hero actions are distinct: canonical full library versus on-page topic pre
   await page.setViewportSize({width:393,height:852});
   await page.goto(ROOT);
   await expect(page.locator('.hero-actions .gold-action')).toHaveAttribute('href',LIBRARY);
-  await expect(page.locator('.hero-actions .outline-action')).toHaveAttribute('href','#vault');
-  await expect(page.locator('.hero-actions .gold-action')).toContainText('完整典藏館');
-  await page.locator('.hero-actions .outline-action').click();
-  await expect(page).toHaveURL(/#vault$/);
-  await expect(page.locator('#vault')).toBeVisible();
+  await expect(page.locator('.hero-actions .outline-action')).toBeHidden();
+  await expect(page.locator('.hero-actions .gold-action')).toContainText('全部技術主題');
+  await page.locator('.hero-discovery input').fill('AI 代理');
+  await page.locator('.hero-discovery button').click();
+  await expect(page).toHaveURL(/\/Research-\/v3\/search\//);
 });
 
 test('home follows find → categories → featured reading → reading features',async({page})=>{
@@ -83,7 +86,8 @@ test('full catalog and all category links work without JavaScript',async({browse
   const ctx=await browser.newContext({javaScriptEnabled:false,viewport:{width:393,height:852}});
   const page=await ctx.newPage();
   await page.goto(ROOT);
-  await expect(page.locator('.mobile-library-link')).toBeVisible();
+  await expect(page.locator('.mobile-discovery-nav')).toBeHidden();
+  await expect(page.locator('.hero-actions .gold-action')).toBeVisible();
   await expect(page.locator('.vault-index a')).toHaveCount(4);
   await page.locator('.vault-index a').first().click();
   await expect(page.locator('.domain-introduction h1')).toBeVisible();

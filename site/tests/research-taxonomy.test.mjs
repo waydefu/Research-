@@ -62,6 +62,11 @@ test('original Markdown, stable permalink and source graph survive editorial ren
   assert.equal(graph().nodes.length,docs.length);
 });
 
+test('published article titles are general technology subjects rather than internal project milestones',()=>{
+  for(const d of docs){
+    assert.doesNotMatch(d.publicTitle,/Research-|THE OBSERVATORY|EAG-100|AURORA|\bV[23]\b|專案交接/,d.file);
+  }
+});
 test('an unknown future study still falls back rather than inventing author evidence',()=>{
   const path='research/future-experiment/nextjs-proposal.md';
   const d=enrichResearch({file:path,id:'future-experiment/nextjs-proposal',group:'future-experiment',
