@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { allDocs, getDoc, backlinks, BASE, displayDomain } from '../../lib/catalog.mjs';
+import {visualForDoc} from '../../lib/research-visuals.mjs';
 export async function getStaticPaths() {
   const [research, governance, design] = await Promise.all([
     getCollection('research'), getCollection('governance'), getCollection('design')
@@ -20,6 +21,7 @@ const doc = getDoc(entry.collection, entry.id);
 if (!doc) throw new Error('站內文件不存在：' + entry.collection + '/' + entry.id);
 const { Content, headings } = await render(entry);
 const related = backlinks(doc);
+const researchVisual = visualForDoc(doc);
 const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
 ---
 <Base title={doc.publicTitle} description={doc.summary.slice(0,155)}>
@@ -50,6 +52,10 @@ const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
           <div><dt>來源 SHA</dt><dd class="sha">{doc.sha}</dd></div>
         </dl>
       </header>
+      {researchVisual.src && <figure class="article-research-art" data-pagefind-ignore>
+        <img src={researchVisual.src} alt={researchVisual.alt} width="720" height="480" loading="lazy" decoding="async"/>
+        <figcaption>本站原創技術示意圖，幫助理解研究主題；非作者原作畫面或實測結果。來源：{researchVisual.source}。</figcaption>
+      </figure>}
       {(doc.creator || doc.demos.length || external.length) && (
         <section class="source-studio" aria-label="原作者及研究外部來源" data-pagefind-ignore>
           <div class="section-kicker">SOURCE / INTERACTIVE WORK</div>
