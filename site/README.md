@@ -1,6 +1,6 @@
 # RESEARCH— THE OBSERVATORY｜現行站點與 V3 研究館
 
-> **新接手 Agent 請先看 [HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md)**（2026-11-03 現況、CI、G0、下一個 PR、授權邊界）。不要按歷史 P0 筆記把正式 root 改回 V2。
+> **新接手 Agent 先看 [REPO-MAP.md](./REPO-MAP.md)**（依任務找到負責模組和測試）與 [AGENTS.md](./AGENTS.md)（授權範圍）。[HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md) 是具日期的歷史交接快照；main／PR／CI 必須重新查 GitHub。不要按歷史 P0 筆記把正式 root 改回 V2。
 
 正式首頁為 `/Research-/` 的 Sanctum；原 V2 已歸檔 `/Research-/v2/`，V3 的典藏、搜尋、研究全文保留 `/Research-/v3/`。目前是**靜態**神殿視覺＋Astro/Markdown/Pagefind 內容館，不代表已實作跨頁即時 3D。研究正文從 `../research/`、`../docs/governance/`、`../showcase/design/` 於建置讀取，不複製或修改原 Markdown。
 
