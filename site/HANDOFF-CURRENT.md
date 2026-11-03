@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | Repo | https://github.com/waydefu/Research- | 公開儲存庫 |
 | main 基線 | `50794e998bfba2c07323ee8442f3eaf36c2f0e2f` | 下一位重新查 SHA |
-| 尚未合併 PR | **0 件**（2026-11-03） | PR #31、#32、#33、#34、#35、#36 均已合併 |
+| 尚未合併 PR | 交接檢查開始時為 **0 件**；本交接 [PR #37](https://github.com/waydefu/Research-/pull/37) 已新開 | PR #31～#36 均已合併；接手時重新查 #37 是否已合併 |
 | 正式首頁 | https://waydefu.github.io/Research-/ | 原創暗金天文神殿 Sanctum |
 | 完整典藏 | https://waydefu.github.io/Research-/v3/library/ | Astro V3 父子主題與圖文研究 |
 | 全文搜尋 | https://waydefu.github.io/Research-/v3/search/ | Pagefind |
