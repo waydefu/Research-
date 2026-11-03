@@ -33,6 +33,7 @@
 | [08｜驗收基準與實驗](08-evaluation-and-benchmarks.md) | 完整 A/B、追蹤資料與採用 Gate |
 | [09｜分階段導入路線](09-implementation-roadmap.md) | 不改現況的最小可行方案、升級與回退 |
 | [10｜開源專案精選](10-github-project-catalog.md) | 推薦 GitHub Repo 與用途、採用條件 |
+| [11｜AI Framework Agent Cost](11-ai-framework-agent-cost.md) | Framework 對 Token、時間、LOC、工具使用與 Runtime 的成本影響 |
 | [來源總表](SOURCES.md) | 官方來源、原始碼、研究限制 |
 | [索引證據契約範例](examples/search-result-contract.json) | 可被程式驗證的檢索結果結構 |
 
