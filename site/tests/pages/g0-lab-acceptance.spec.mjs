@@ -123,14 +123,22 @@ for(const width of [320,393]){
   test('G0 simulated mobile navigation has practical touch targets at '+width+'px',async({page})=>{
     await page.setViewportSize({width,height:852});
     await page.goto(ROOT+'v3/library/');
-    const targets=await page.locator('.global-header nav a').evaluateAll(links=>links.map(a=>({
+    const targets=await page.locator('.global-header nav a:visible').evaluateAll(links=>links.map(a=>({
       label:a.textContent.trim(),width:a.getBoundingClientRect().width,height:a.getBoundingClientRect().height
     })));
-    expect(targets.length).toBe(3);
+    // The masthead itself is the home link; the mobile nav needs only two actions.
+    await expect(page.getByRole('link',{name:'返回天文觀測神殿首頁'})).toHaveAttribute('href','/Research-/');
+    expect(targets.length).toBe(2);
     for(const target of targets){
       expect(target.height,target.label+' is too short to tap').toBeGreaterThanOrEqual(36);
       expect(target.width,target.label+' is too narrow to tap').toBeGreaterThanOrEqual(24);
     }
     expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+    const sameRow=await page.evaluate(()=>{
+      const brand=document.querySelector('.global-header .brand').getBoundingClientRect();
+      const nav=document.querySelector('.global-header nav').getBoundingClientRect();
+      return Math.abs(brand.top-nav.top)<8;
+    });
+    expect(sameRow,'Brand and mobile navigation unexpectedly wrapped into two rows').toBe(true);
   });
 }

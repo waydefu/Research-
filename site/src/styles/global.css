@@ -162,3 +162,15 @@ h1,h2,h3{color:#f4e7cf}
   .global-header nav{gap:clamp(.25rem,1.5vw,.75rem)}
   .global-header nav a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 4px}
 }
+
+/* Preserve a single-row masthead at phone width: the logo already links home. */
+@media(max-width:520px){
+  .global-header{flex-wrap:nowrap;gap:6px;padding-inline:12px}
+  .global-header .brand{gap:7px}
+  .global-header .brand-mark{width:34px;height:34px;font-size:23px}
+  .global-header .brand-type{font-size:.78rem;letter-spacing:.13em}
+  .global-header .brand-type small{font-size:.45rem;letter-spacing:.17em;margin-top:3px}
+  .global-header nav{flex-wrap:nowrap;gap:0;margin-left:auto}
+  .global-header nav a:first-child{display:none}
+  .global-header nav a{font-size:.81rem;padding:8px 5px;min-height:40px;white-space:nowrap}
+}
