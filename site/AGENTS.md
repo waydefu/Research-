@@ -1,5 +1,7 @@
 # site/ — THE OBSERVATORY（現行 V3 與正式首頁）
 
+> **工作導航**：先讀 [REPO-MAP.md](./REPO-MAP.md) 選模組與對應測試；本檔只管網站授權和技術邊界。最新 main／PR／CI 一律從 GitHub 即時核對，不採用舊交接快照。
+
 > **接手入口（2026-11-03）**：[HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md)。先重新查 main / open PR / CI；本檔中 P0 限制保留歷史脈絡，不可把 V2 逆向設為 root。
 
 ## 目標
