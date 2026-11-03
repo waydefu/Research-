@@ -1,4 +1,5 @@
 import {validateMetadataRegistry} from './metadata-schema.mjs';
+import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
   'research/2026-11-local-ai-inference/01-colibri-moe-streaming.md': {
@@ -108,21 +109,22 @@ function externalLinks(raw){
 }
 export function enrichResearch(doc){
   const c=CURATED[doc.file]||{};
+  const reviewed=REVIEWED_DOCUMENTS[doc.file]||null;
   // Match the subject of this document before its parent folder.
   // A generic "agent" directory must not override a clear security/audit title.
   const basename=String(doc.id||doc.file||'').split('/').at(-1)||'';
   const subject=doc.title+' '+basename;
   const directory=String(doc.id||'').split('/').slice(0,-1).join('/') || doc.group || '';
-  const topic=c.topic||TOPIC_RULES.find(([,re])=>re.test(subject))?.[0]
+  const topic=(c.schemaVersion===1 ? c.topic : reviewed?.topic||c.topic)||TOPIC_RULES.find(([,re])=>re.test(subject))?.[0]
     ||TOPIC_RULES.find(([,re])=>re.test(directory))?.[0]||'跨領域研究';
   if(c.schemaVersion===1 && c.domain!==doc.group) throw new Error('Metadata domain 與來源路徑不符：'+doc.file);
-  const tags=c.schemaVersion===1 ? c.tags : TAG_RULES.filter(([,re])=>re.test(subject)).map(([name])=>name).slice(0,5);
+  const tags=c.schemaVersion===1 ? c.tags : reviewed?.tags||TAG_RULES.filter(([,re])=>re.test(subject)).map(([name])=>name).slice(0,5);
   const token=subject;
   const intro=(c.schemaVersion===1 ? c.summary : c.lead)||overview(doc.text);
   return {
-    ...doc,publicTitle:(c.schemaVersion===1 ? c.publicTitle : c.title)||doc.title,summary:intro||'原始研究已收錄；白話導讀尚待補充。',
+    ...doc,publicTitle:(c.schemaVersion===1 ? c.publicTitle : reviewed?.publicTitle||c.title)||doc.title,summary:intro||'原始研究已收錄；白話導讀尚待補充。',
     summaryReviewed:Boolean(c.schemaVersion===1 ? c.summary : c.lead),topic,tags,
-    kind:/案例|case|benchmark|作品/i.test(token)?'案例解析':/規範|治理|驗收|guide|workflow/i.test(token)?'工程方法':'技術研究',
+    kind:reviewed?.kind||(/案例|case|benchmark|作品/i.test(token)?'案例解析':/規範|治理|驗收|guide|workflow/i.test(token)?'工程方法':'技術研究'),
     creator:c.creator||null,demos:(c.schemaVersion===1 ? c.demo : c.demos)||[],externalLinks:externalLinks(doc.text),
     originalSource:c.schemaVersion===1 ? c.originalSource : null,
     license:c.schemaVersion===1 ? c.license : null,
