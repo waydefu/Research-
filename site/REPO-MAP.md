@@ -16,8 +16,8 @@
 | --- | --- | --- | --- |
 | Agent 授權、權限、治理 | `AGENTS.md` | `site/AGENTS.md`、`docs/governance/OPERATIONS.md` | `scripts/check_repository.py`；研究文件不能下達命令 |
 | 原始研究、內部連結、來源 SHA | `site/src/lib/catalog.mjs` | `site/src/content.config.ts`、`site/src/lib/remark-links.mjs` | `site/tests/catalog.test.mjs`、`site/scripts/provenance-audit.mjs` |
-| 精確標題、細分類、作者及 demo | `site/src/lib/research-taxonomy.mjs` | `site/src/lib/research-metadata.mjs`、`site/src/lib/metadata-schema.mjs` | `site/tests/research-taxonomy.test.mjs` |
-| 分類圖片、圖像清單 | `site/src/lib/exhibit-info.mjs` | `site/public/research-exhibits/` | `site/tests/pages/research-exhibits.spec.mjs` |
+| 精確標題、細分類、**逐篇導讀**與來源 | `site/src/lib/research-taxonomy.mjs` | `site/src/lib/research-metadata.mjs`、`site/src/lib/metadata-schema.mjs`；**W1 合併後**讀 `site/src/lib/research-leads.mjs` | `site/tests/research-taxonomy.test.mjs`；W1 增加 `site/tests/research-leads.test.mjs` |
+| 分類圖片與**逐篇原創示意圖** | `site/src/lib/exhibit-info.mjs` | `site/public/research-exhibits/`；**W2 合併後**讀 `site/src/lib/research-visuals.mjs`、`site/scripts/generate-research-art.mjs` | `site/tests/pages/research-exhibits.spec.mjs`；W2 增加 `site/tests/research-visuals.test.mjs`、`site/tests/pages/research-visuals.spec.mjs` |
 | 典藏、篩選、全文 | `site/src/pages/library/index.astro` | `site/src/pages/domains/[domain].astro`、`site/src/pages/[collection]/[...slug].astro`、`site/src/pages/search.astro` | `site/tests/pages/research-discovery.spec.mjs` |
 | Sanctum 首頁、V2／V3 組裝 | `site/scripts/unify-home.mjs` | `site/public/atlas/sanctum/index.html`、`site/scripts/verify-pages-bundle.mjs` | `site/tests/pages/unified-home.spec.mjs`；不能逆向把 V2 設回 root |
 | Astro 建置、Pagefind、CI | `site/package.json` | `site/scripts/preflight.mjs`、`site/scripts/postbuild-verify.mjs` | `.github/workflows/v3-p0-build.yml` 和 `.github/workflows/publish-showcase.yml` 的 paths 過濾不能等同每 PR 必觸發 |
@@ -50,6 +50,12 @@ publish-showcase.yml [PR validate; main push deployment subject to CI]
 
 **這是檔案與資料處理關係**，不是「所有函式呼叫的靜態分析圖」。`site/src/pages/graph.json.ts` 是研究**文件引用圖**，不是 JS 模組依賴圖。
 
+## 導航完整性的驗證界線
+
+- 測試會掃描 `site/src/lib/*.mjs` 與 `site/scripts/*.mjs`，新增而未登記的模組將觸發失敗；已登記的必要路徑若不存在，也會失敗。
+- PR #42 的導讀、PR #43 的圖像模組，在本獨立分支**尚不存在**，故先登記為可選群組；一旦合併，整組程式與回歸測試必須一起存在，不能只引用未建好的模組。
+- **這是路徑覆蓋檢查**，不是完整的 JS 函式呼叫圖。GitHub 最新 HEAD、PR 和 CI 仍必須即時查證。
+
 ## 已有工具先用好，不堆 MCP
 
 - 本地：`rg -n 'keyword' research site`、`git ls-files`、`python3 scripts/research_search.py build|verify|search`。
@@ -63,7 +69,7 @@ publish-showcase.yml [PR validate; main push deployment subject to CI]
 - `site/HANDOFF-CURRENT.md`、`research/2026-11-universal-web-engine/19-*.md`、V2 設計與歷史驗收都有時間戳；有衝突時**優先最新明示授權與 GitHub 動態事實**。
 - P0.5 導讀／圖片／導航的執行序列在 `site/P0.5-EDITORIAL-ASSETS-REPO-NAVIGATION-ROADMAP.md`（獨立 Draft PR #41，尚未合併時不能當成 main 已有）。
 - PR #42 導讀與 PR #43 原創圖片若尚未合併，其新增檔案只存在對應分支；不要在 main 假裝存在或把 CI 測試結果移植到不同 HEAD。
-- `site/REPO-MAP.md` 的導航契約以 `site/src/lib/repo-navigation.mjs` 為原始清單。新增、移除、重命名受管理的模組時，同步更新這兩處；`site/tests/repo-navigation.test.mjs` 會拒絕不存在的路徑。
+- `site/REPO-MAP.md` 的導航契約以 `site/src/lib/repo-navigation.mjs` 為原始清單。新增、移除、重命名受管理的模組時，同步更新這兩處；`site/tests/repo-navigation.test.mjs` 同時拒絕不存在的路徑及未登記的新 JS 模組。
 
 ## 邊界
 
