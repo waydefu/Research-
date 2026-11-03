@@ -127,7 +127,7 @@ for(const width of [320,393]){
       label:a.textContent.trim(),width:a.getBoundingClientRect().width,height:a.getBoundingClientRect().height
     })));
     // The masthead itself is the home link; the mobile nav needs only two actions.
-    await expect(page.getByRole('link',{name:'返回天文觀測神殿首頁'})).toHaveAttribute('href','/Research-/');
+    await expect(page.getByRole('link',{name:/RESEARCH— THE OBSERVATORY.*返回天文觀測神殿首頁/})).toHaveAttribute('href','/Research-/');
     expect(targets.length).toBe(2);
     for(const target of targets){
       expect(target.height,target.label+' is too short to tap').toBeGreaterThanOrEqual(36);
