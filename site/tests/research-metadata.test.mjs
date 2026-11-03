@@ -75,3 +75,31 @@ test('reference source index never silently truncates a long cited source list',
   assert.equal(result.externalLinks.length,33);
   assert.equal(result.externalLinks.at(-1).url,'https://example.org/source-33');
 });
+
+test('technical previews do not leak code fences or CLI terminal output',()=>{
+  const md=[
+    '# 層級推論架構',
+    '',
+    '研究者整理了多種記憶體管理策略，並比較不同情況下如何依照模型需求選擇資料存放的位置，避免把單次測量結果當成所有電腦都能達到的速度。',
+    '',
+    '~~~text',
+    'GLM-5.2 · 744B MoE · int4',
+    'ready in 32s',
+    '~~~',
+    '',
+    '這份技術文件也提醒讀者記憶體需求與實際產生文字的速度有所不同，需要查看硬體規格和公開測量的條件。'
+  ].join('\n');
+  const r=enrichResearch({file:'research/lab/inference.md',id:'lab/inference',group:'lab',title:'大型模型推論說明',text:md});
+  assert.match(r.summary,/研究者整理了/);
+  assert.doesNotMatch(r.summary,/~{3}|\x60{3}|ready in 32s|GLM-5/);
+});
+test('Colibri receives beginner-readable headline and context while preserving source',()=>{
+  const file='research/2026-11-local-ai-inference/01-colibri-moe-streaming.md';
+  const r=enrichResearch({file,id:'2026-11-local-ai-inference/01-colibri-moe-streaming',
+    group:'2026-11-local-ai-inference',title:'01 | Colibri VRAM / RAM / NVMe',
+    text:'# 01 | Colibri VRAM / RAM / NVMe'});
+  assert.equal(r.title,'01 | Colibri VRAM / RAM / NVMe');
+  assert.match(r.publicTitle,/記憶體不足時/);
+  assert.match(r.summary,/固態硬碟/);
+  assert.equal(r.summaryReviewed,true);
+});

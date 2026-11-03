@@ -37,9 +37,23 @@ const counts=new Map(topics.map(topic=>[topic,docs.filter(d=>d.topic===topic).le
     <header class="section-heading"><p class="eyebrow">02 / TOPICS</p><h2>細分主題</h2>
       <p>選好方向後，再看更具體的問題：例如網站怎麼顯示 3D、AI 怎麼使用工具，或資料怎麼被搜尋。</p>
     </header>
-    <nav class="topic-index" aria-label="細分主題快速入口">
-      {topics.map(t=><a href={'#all-research'} data-topic-jump={t}><span class="topic-preview"><img src={topicFor(t).image} alt="" loading="lazy" width="720" height="480"/></span><span class="topic-info"><strong>{t}</strong><small>{topicFor(t).why}</small></span><span class="topic-count">{counts.get(t)} 篇</span></a>)}
-    </nav>
+    <div class="topic-index" aria-label="細分主題與研究清單">
+      {topics.map(t=>(
+        <details class="topic-exhibit" data-topic={t}>
+          <summary>
+            <span class="topic-preview"><img src={topicFor(t).image} alt="" loading="lazy" width="720" height="480"/></span>
+            <span class="topic-info"><strong>{t}</strong><small>{topicFor(t).why}</small></span>
+            <span class="topic-count">{counts.get(t)} 篇</span>
+            <span class="topic-expand" aria-hidden="true">＋</span>
+          </summary>
+          <ol class="topic-articles">
+            {docs.filter(d=>d.topic===t).map(d=>(
+              <li><a href={d.href}><strong>{d.publicTitle}</strong><span>{d.summary}</span><small>閱讀完整研究 ↗</small></a></li>
+            ))}
+          </ol>
+        </details>
+      ))}
+    </div>
   </section>
   <section class="recent archive-index" id="all-research">
     <div class="section-heading"><p class="eyebrow">03 / INDEX</p><h2>逐篇探索研究</h2>
@@ -91,9 +105,6 @@ const counts=new Map(topics.map(topic=>[topic,docs.filter(d=>d.topic===topic).le
     form.addEventListener('input',update);
     form.addEventListener('change',update);
     form.addEventListener('reset',()=>requestAnimationFrame(update));
-    for(const link of document.querySelectorAll('[data-topic-jump]')){
-      link.addEventListener('click',()=>{topic.value=link.dataset.topicJump;update()});
-    }
     const params=new URLSearchParams(location.search);
     if(params.has('topic')&&[...topic.options].some(o=>o.value===params.get('topic'))) topic.value=params.get('topic');
     if(params.has('q'))keyword.value=params.get('q');

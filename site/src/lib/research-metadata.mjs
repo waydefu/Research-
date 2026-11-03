@@ -1,5 +1,15 @@
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-local-ai-inference/01-colibri-moe-streaming.md': {
+    title:'Colibri：記憶體不足時，超大型 AI 模型怎麼運作？',
+    lead:'Colibri 把大型 AI 模型的一部分資料留在固態硬碟，需要時才讀進電腦記憶體或顯示卡記憶體。它的目的是減少同時占用的記憶體，但不表示超大型模型能流暢對話；原作者的速度數據尚未經本站實測。',
+    topic:'LLM 模型與推論'
+  },
+  'research/2026-11-local-ai-inference/README.md': {
+    title:'本機 AI 入門：大型模型如何分配記憶體？',
+    lead:'想在自己的電腦跑 AI，卻發現模型太大、記憶體裝不下？這篇先說明顯示卡記憶體、電腦記憶體和固態硬碟如何分工，再介紹 Colibri 的方法與速度限制。',
+    topic:'LLM 模型與推論'
+  },
   'research/2026-11-universal-web-engine/17-arctic-waters-threejs-creative-workflow.md': {
     title:'Arctic Waters：電影級 Three.js 海洋怎麼做？',
     lead:'拆解作者公開描述的製作流程：從模型生成、Blender 修整到瀏覽器即時場景，並清楚區分作者自述與尚未獨立驗證的數據。',
@@ -56,15 +66,32 @@ const TAG_RULES = [
   ['效能',/效能|Performance/i],['介面設計',/UI.UX|介面|美術/i],['資料',/資料庫|Database/i]
 ];
 const plain = value => value.replace(/!\[([^\]]*)\]\([^)]+\)/g,'$1')
-  .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/<[^>]+>/g,'')
-  .replace(/[*_~#]/g,'').replace(/\s+/g,' ').trim();
-function overview(raw){
-  const paragraphs=raw.split(/\n\s*\n/).map(p=>p.trim()).filter(p=>
-    p.length>=55 && p.length<=650 && !/^(#|\||- |\* |>)/.test(p)
-    && !p.includes('\n|') && !p.startsWith('**研究日期') && !p.startsWith('**查證日期')
-  );
-  const line=plain(paragraphs[0]||'');
-  return line.length>190?line.slice(0,187).replace(/[,，；; ]+$/,'')+'…':line;
+  .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1')
+  .replace(/\x60([^\x60]+)\x60/g,'$1')
+  .replace(/<[^>]+>/g,'').replace(/[*_~#]/g,'')
+  .replace(/\s+/g,' ').trim();
+
+function overview(raw) {
+  const lines=String(raw).split(/\r?\n/);
+  const visible=[];let fence=null;
+  for(const line of lines){
+    const edge=line.trim().match(/^(\x60{3,}|~{3,})/);
+    if(edge){
+      if(!fence)fence=edge[1][0];
+      else if(fence===edge[1][0])fence=null;
+      continue;
+    }
+    if(!fence)visible.push(line);
+  }
+  const paragraphs=visible.join('\n').split(/\n\s*\n/).map(x=>x.trim()).filter(p=>{
+    if(p.length<50||p.length>850||!/[\u3400-\u9fff]/.test(p))return false;
+    if(/^(#|\||[-*+] |\d+[.)]\s|>|<|---)/.test(p))return false;
+    if(/^\*\*(研究日期|查證日期|更新日期|上游|範圍|證據原則|授權|定位|最新正式版)/.test(p))return false;
+    if(/(?:^|\n)\s*(?:\||\d+[.)]\s|[-*+]\s)/m.test(p))return false;
+    return true;
+  });
+  const text=plain(paragraphs[0]||'');
+  return text.length>160?text.slice(0,157).replace(/[,，；; ]+$/,'')+'…':text;
 }
 function externalLinks(raw){
   const seen=new Set(),out=[];
