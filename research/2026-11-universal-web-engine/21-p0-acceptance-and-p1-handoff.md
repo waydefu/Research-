@@ -85,12 +85,34 @@
 4. **來源隱私邊界：** `THREAT-MODEL.md` 僅排除 V3 發布；GitHub Repository 公開，文件仍可在 GitHub 讀取。若內容真的不能公開，須 Owner 另行處理資料保護與 Repo 可見性，不屬本次 PR。
 5. **版本與文字漂移：** 原規劃書第 9 節是「未實作前的計畫」，本報告是截至本階段實際驗收的狀態；與較早的 V2 README 描述衝突時，以原始提交、最新 CI 與本報告的證據分級為準。
 
-## 4. P0 正式結案程序
+## 4. P0 Closeout 與 P0.5 基礎收斂
 
-1. 本 PR 的 Showcase、Pages、V3、研究完整性 CI 全綠；手機版 E2E／對應證據可檢視。
-2. Owner 審核 PR 變更，准予合併；部署到正式 Pages，V2 根路徑與 V3 子路徑均可讀。
-3. Owner 在手機上重新確認六顆研究星圖節點的閱讀性、觸控與篩選；截圖上的原問題已消失。
-4. 確認上述事項後，**Owner 明確標記 P0 Closeout：PASS**，再啟動獨立 P1 PR。若任一項失敗，維持 `P0 closeout pending` 並只修缺陷；不能直接宣告通過。
+原本流程是「P0 PASS → 直接 P1 美術」，但 2026-11-03 盤點後已修正：**P0 PASS 後先完成 P0.5，再進 P1。**
+
+### 4.1 P0 Closeout
+
+1. 目前首頁／典藏入口相關 PR 的 Research integrity、V3、Pages browser / artifact CI 全綠。
+2. Owner 審核變更，部署後正式 Pages 可讀。
+3. Owner 在真實手機重新確認首頁入口、分類、閱讀、觸控與搜尋。
+4. 以上完成後標記 **P0 Closeout：PASS**。若 CI 或實機仍失敗，只修 P0 缺陷，不往後跳。
+
+### 4.2 P0.5 執行順序
+
+| 順序 | 子階段 | 為什麼先做 |
+| ---: | --- | --- |
+| 1 | **P0.5-A CI blocker** | 沒有可信綠線就不能安全重構 |
+| 2 | **P0.5-B Required Checks** | 驗收如果不強制，壞網站仍可能進 main |
+| 3 | **P0.5-C Metadata Schema** | 分類、圖片、繁中與 ingestion 都依賴資料契約 |
+| 4 | **P0.5-D 每篇視覺 + 全繁中 Gate** | 直接解抽象、重複圖片、slug 外露 |
+| 5 | **P0.5-E site/showcase 收斂** | 先固定唯一正式 build/deploy source |
+| 6 | **P0.5-F Governance re-baseline** | 讓 Agent 使用最新 repo 真實狀態 |
+| 7 | **P0.5-G Research ingestion pipeline** | 最後把已穩定的資料與網站規則自動化 |
+
+詳細 Gate 以 [19｜V3 架構與規劃書 §9](19-v3-astro-research-cinema-architecture-and-roadmap.md) 與 [20｜V3 執行書 P0.5](20-v3-chatgpt-5-6-execution-brief.md) 為準。
+
+### 4.3 P1 開工硬條件
+
+只有在 P0.5-A～G 都完成或由 Owner 明確豁免某一 Gate 時，才進 P1。**不能一邊做電影級美術，一邊繼續讓 metadata、圖片、CI、部署雙軌漂移。**
 
 ## 5. P1 美術 G0 接手內容
 
@@ -98,7 +120,7 @@
 
 **必讀已存在的規格（不重寫基礎研究）：**
 
-- [19｜V3 架構與 P0–P5 規劃](19-v3-astro-research-cinema-architecture-and-roadmap.md)：第 6.1、7、9 節。
+- [19｜V3 架構與 P0–P5 規劃](19-v3-astro-research-cinema-architecture-and-roadmap.md)：第 6.1、7、9 節；**P1 前必須先完成 §9 的 P0.5。**
 - [20｜V3 執行書](20-v3-chatgpt-5-6-execution-brief.md)：P1 任務、驗收與權限邊界。
 - [16｜Active Theory 品質基準](16-active-theory-quality-benchmark.md)；[17｜Arctic Waters 創作方法](17-arctic-waters-threejs-creative-workflow.md)；[18｜完整技術組合](18-v3-cinematic-experience-technology-decision.md)。
 - `showcase/design/V2-ART-DIRECTION.md`：色票、金色／青色語義、Evidence Engine 輪廓、不複製參考作品的素材。
@@ -120,7 +142,7 @@
 - 不改 `main` V2 首頁、不切換 `/Research-/` 至 V3、不引進 Three.js／GSAP／額外依賴；新依賴或權限變更先請 Owner 決策。
 - 不使用別人的品牌素材、影片、模型、圖片或原始碼當作網站成品。
 - 以 320、360、393、430、768、1440 CSS px、reduced motion 檢視靜止構圖；不偽稱真機 FPS／LCP。
-- P1 的 Owner 核准是 G0，P2 仍需獨立授權與 PR。
+- P1 的 Owner 核准是 G0，P2 仍需獨立授權與 PR；**P0.5 未完成時，不得把 P1 Atlas 當成繞過基礎收斂的捷徑。**
 
 ## 6. 可核對的檔案與操作
 
