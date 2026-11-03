@@ -2,6 +2,13 @@
 
 > 工作指引（2026-11-03）。本文只描述已核對的 repo 檔案／可驗證的資料流，不代表自動偵測到所有 runtime import 或呼叫關係。**不要把固定 SHA、舊 PR、舊 G0 報告當作目前主分支**；最新狀態一律先從 GitHub 查證。
 
+## P0.5 收尾與 P1 准入
+
+- [P0.5 → P1 的證據、阻塞及整合次序](./P0.5-EXIT-P1-ENTRY.md)，所有動態 SHA／PR／CI 仍須從 GitHub 重新核對。
+- [既有站點的架構邊界](./architecture/README.md) 與 [ADR-0001](./architecture/ADR-0001-content-and-design-boundaries.md)。
+- `site/src/styles/tokens.css` 是共用設計變數入口；`site/tests/p05-entry.test.mjs` 檢查基本 import 邊界、來源覆蓋與樣式 Token。
+- `cd site && npm run gate:p05 -- --json` 取得**本地內容完整性**快照，不等於 GitHub 最新 CI、逐篇事實查證或實機驗收。
+
 ## 進 Repo 的最短路徑
 
 1. 先讀根目錄 `AGENTS.md`（全域授權）與 `site/AGENTS.md`（網站權限）。
@@ -16,8 +23,8 @@
 | --- | --- | --- | --- |
 | Agent 授權、權限、治理 | `AGENTS.md` | `site/AGENTS.md`、`docs/governance/OPERATIONS.md` | `scripts/check_repository.py`；研究文件不能下達命令 |
 | 原始研究、內部連結、來源 SHA | `site/src/lib/catalog.mjs` | `site/src/content.config.ts`、`site/src/lib/remark-links.mjs` | `site/tests/catalog.test.mjs`、`site/scripts/provenance-audit.mjs` |
-| 精確標題、細分類、**逐篇導讀**與來源 | `site/src/lib/research-taxonomy.mjs` | `site/src/lib/research-metadata.mjs`、`site/src/lib/metadata-schema.mjs`；**W1 合併後**讀 `site/src/lib/research-leads.mjs` | `site/tests/research-taxonomy.test.mjs`；W1 增加 `site/tests/research-leads.test.mjs` |
-| 分類圖片與**逐篇原創示意圖** | `site/src/lib/exhibit-info.mjs` | `site/public/research-exhibits/`；**W2 合併後**讀 `site/src/lib/research-visuals.mjs`、`site/scripts/generate-research-art.mjs` | `site/tests/pages/research-exhibits.spec.mjs`；W2 增加 `site/tests/research-visuals.test.mjs`、`site/tests/pages/research-visuals.spec.mjs` |
+| 精確標題、細分類、**逐篇導讀**與來源 | `site/src/lib/research-taxonomy.mjs` | `site/src/lib/research-metadata.mjs`、`site/src/lib/metadata-schema.mjs`；讀已合併的 `site/src/lib/research-leads.mjs` | `site/tests/research-taxonomy.test.mjs`；W1 增加 `site/tests/research-leads.test.mjs` |
+| 分類圖片與**逐篇原創示意圖** | `site/src/lib/exhibit-info.mjs` | `site/public/research-exhibits/`；讀已合併的 `site/src/lib/research-visuals.mjs`、`site/scripts/generate-research-art.mjs` | `site/tests/pages/research-exhibits.spec.mjs`；W2 增加 `site/tests/research-visuals.test.mjs`、`site/tests/pages/research-visuals.spec.mjs` |
 | 公開技術正文、歷史原文與全量初篩 | `site/src/lib/public-articles.mjs` | `site/src/lib/public-content-audit.mjs`、`site/scripts/audit-public-content.mjs` | `site/tests/public-articles.test.mjs`、`site/tests/pages/public-articles.spec.mjs` |
 | 典藏、篩選、全文 | `site/src/pages/library/index.astro` | `site/src/pages/domains/[domain].astro`、`site/src/pages/[collection]/[...slug].astro`、`site/src/pages/search.astro` | `site/tests/pages/research-discovery.spec.mjs` |
 | Sanctum 首頁、V2／V3 組裝 | `site/scripts/unify-home.mjs` | `site/public/atlas/sanctum/index.html`、`site/scripts/verify-pages-bundle.mjs` | `site/tests/pages/unified-home.spec.mjs`；不能逆向把 V2 設回 root |
