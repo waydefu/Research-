@@ -1,0 +1,38 @@
+import {test,expect} from '@playwright/test';
+const ROOT='/Research-/',V3=ROOT+'v3/';
+test('one public homepage with the full reviewed Sanctum',async({page})=>{
+  await page.goto(ROOT);
+  await expect(page.getByRole('heading',{name:/天文觀測神殿/})).toBeVisible();
+  await expect(page.locator('.world-backdrop')).toBeAttached();
+  await expect(page.locator('.narrative-glass')).toBeAttached();
+  expect(await page.locator('body').innerText()).not.toContain('THE UNKNOWN,');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href','https://waydefu.github.io/Research-/');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','index,follow');
+  const assets=await page.evaluate(()=>[...document.querySelectorAll('link[rel="preload"][as="image"]')].map(a=>new URL(a.href).pathname));
+  expect(assets).toEqual(expect.arrayContaining([V3+'atlas/sanctum/assets/world-desktop.webp',V3+'atlas/sanctum/assets/world-mobile.webp']));
+  await expect(page.locator('a[href="'+V3+'library/"]')).not.toHaveCount(0);
+});
+test('secondary V3 homepage leads to the canonical root',async({page})=>{
+  await page.goto(V3);
+  await expect(page).toHaveURL(/\/Research-\/$/);
+  await expect(page.getByRole('heading',{name:/天文觀測神殿/})).toBeVisible();
+});
+test('legacy V2 and original P0 research library remain readable',async({page})=>{
+  await page.goto(V3+'library/');
+  await expect(page.getByRole('heading',{name:/研究，不只是收藏答案/})).toBeVisible();
+  await page.goto(ROOT+'v2/');
+  await expect(page.getByRole('heading',{name:/THE UNKNOWN,/})).toBeVisible();
+  const reader=page.locator('#results .result-title[href]').first();
+  await expect(reader).toBeVisible();
+  expect(await reader.getAttribute('href')).toMatch(/^\.\.\/v3\/(research|governance)\//);
+});
+test('no-JS public root keeps original research article links',async({browser})=>{
+  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:393,height:852}});
+  const page=await context.newPage();
+  await page.goto(ROOT);
+  await expect(page.locator('.feature-card')).toHaveCount(3);
+  await expect(page.locator('.vault-index a')).toHaveCount(4);
+  await page.locator('.feature-card').first().click();
+  await expect(page.locator('article[data-pagefind-body]')).toBeVisible();
+  await context.close();
+});

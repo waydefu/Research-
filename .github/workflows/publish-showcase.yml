@@ -1,4 +1,4 @@
-# Publish the generated V2 Showcase at the root and the generated V3 static site under /v3/.
+# Publish Sanctum as the root, archived V2 under /v2/, and V3 research under /v3/.
 # Never publish the repository root; PR checks only build, they cannot deploy.
 # Manual prerequisite (Repo Owner): Settings > Pages > Build and deployment > Source > GitHub Actions.
 name: Publish Research Showcase
@@ -101,7 +101,10 @@ jobs:
         run: |
           mkdir -p showcase/dist/v3
           cp -a site/dist/. showcase/dist/v3/
-      - name: Verify unchanged V2 and complete V3 Pages artifact
+      - name: Stage one Sanctum homepage and archive the previous V2
+        working-directory: site
+        run: node scripts/unify-home.mjs
+      - name: Verify unified homepage and preserved V2/V3 research bundle
         working-directory: site
         run: node scripts/verify-pages-bundle.mjs
       - name: Install Chromium for actual V2-to-V3 navigation checks
