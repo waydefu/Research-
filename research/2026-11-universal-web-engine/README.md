@@ -28,7 +28,8 @@
 19. [19｜THE OBSERVATORY V3：研究全文站內化的完整架構與規劃書（Astro 6 + Three.js）](19-v3-astro-research-cinema-architecture-and-roadmap.md)
 20. [20｜THE OBSERVATORY V3：ChatGPT 5.6 專用執行書](20-v3-chatgpt-5-6-execution-brief.md)
 21. [22｜電影式網頁：捲動敘事、場景素材、玻璃效能與無障礙驗收](22-immersive-scrollytelling-and-asset-performance.md)
-22. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
+22. [23｜threejs-nanites：WebGPU GPU-driven Virtualized Geometry 參考實作](23-threejs-nanites-gpu-driven-geometry.md)
+23. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
 
