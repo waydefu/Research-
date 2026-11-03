@@ -84,6 +84,8 @@ test('G0 Android-like Chromium touch emulation: find content and collapse embedd
   const page=await context.newPage();
   await page.goto(ROOT);
   await expect(page.getByRole('heading',{name:/天文觀測神殿/})).toBeVisible();
+  await expect(page.locator('.site-footer')).toContainText('RESEARCH LIBRARY');
+  await expect(page.locator('.site-footer')).not.toContainText('CONCEPT STUDY');
   await page.goto(ROOT+'v3/library/');
   await page.locator('#library-keyword').fill('Arctic Waters');
   await expect(page.locator('#library-result-count')).toContainText('1 /');
