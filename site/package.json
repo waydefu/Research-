@@ -13,7 +13,8 @@
     "preview": "astro preview",
     "predev": "npm run preflight",
     "e2e": "playwright test",
-    "provenance": "node scripts/provenance-audit.mjs"
+    "provenance": "node scripts/provenance-audit.mjs",
+    "audit:public": "node scripts/audit-public-content.mjs"
   },
   "dependencies": {
     "astro": "^6.0.0",
