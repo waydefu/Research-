@@ -57,6 +57,24 @@ for (const [name, width, height] of [['phone',360,780], ['tablet',768,1024], ['d
     expect(await table.evaluate(el => el.scrollWidth >= el.clientWidth)).toBe(true);
     await table.focus();
     expect(await table.evaluate(el => document.activeElement === el)).toBe(true);
+    if (name === 'desktop') {
+      // A wide monitor must use its actual layout width, rather than leaving
+      // unused space beside a 900px document and clipping whole columns.
+      const size = await page.evaluate(() => {
+        const article = document.querySelector('.reading-layout .document');
+        const wrapper = document.querySelector('.original-record .table-scroll');
+        const grid = wrapper.querySelector('table');
+        return {
+          articleWidth: article.getBoundingClientRect().width,
+          wrapperWidth: wrapper.clientWidth,
+          tableWidth: grid.getBoundingClientRect().width,
+          overflow: wrapper.scrollWidth - wrapper.clientWidth
+        };
+      });
+      expect(size.articleWidth).toBeGreaterThan(900);
+      expect(size.tableWidth).toBeLessThanOrEqual(size.wrapperWidth + 1);
+      expect(size.overflow).toBeLessThanOrEqual(1);
+    }
   });
 }
 test('no JavaScript: reading and navigation remain available', async ({browser}, testInfo) => {
