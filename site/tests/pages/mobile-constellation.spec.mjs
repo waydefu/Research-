@@ -5,7 +5,7 @@ const ids = ['web','agents','security','data','creative','research'];
 for (const width of [320, 360, 393, 430, 760]) {
   test('portrait constellation at '+width+'px: labels, nodes and visibility', async ({page}, info) => {
     await page.setViewportSize({width,height:800});
-    await page.goto('./');
+    await page.goto('./v2/');
     await expect(page.locator('#domain-map .node')).toHaveCount(6);
     await expect(page.locator('#domain-map')).toHaveAttribute('viewBox','0 0 330 530');
     const geometry = await page.locator('#domain-map').evaluate(svg => {
@@ -47,7 +47,7 @@ for (const width of [320, 360, 393, 430, 760]) {
 
 test('all six mobile constellation nodes can be tapped to filter research', async ({page}) => {
   await page.setViewportSize({width:360,height:800});
-  await page.goto('./');
+  await page.goto('./v2/');
   await expect(page.locator('#results-count')).not.toContainText('—');
   for(const id of ids) {
     await page.locator('#domain-map .node[data-domain="'+id+'"]').click();
@@ -59,7 +59,7 @@ test('all six mobile constellation nodes can be tapped to filter research', asyn
 
 test('resizing desktop to phone and back restores the desktop layout', async ({page}) => {
   await page.setViewportSize({width:1280,height:900});
-  await page.goto('./');
+  await page.goto('./v2/');
   await expect(page.locator('#domain-map')).toHaveAttribute('viewBox','0 0 1100 480');
   await expect(page.locator('#domain-map .node[data-domain="web"] text').first()).toContainText('Web / Graphics');
   await page.setViewportSize({width:360,height:800});
