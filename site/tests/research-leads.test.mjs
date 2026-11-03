@@ -23,6 +23,11 @@ test('current public sources have exact-path, nonempty Traditional Chinese edito
     assert.equal(getDoc(d.collection,d.id),d);
   }
 });
+test('public introductions do not present one repository or work-in-progress as the audience',()=>{
+  for(const [file,text] of Object.entries(EDITORIAL_LEADS)){
+    assert.doesNotMatch(text,/Research-|THE OBSERVATORY|EAG-100|AURORA|\bV[23]\b|本專案|本站|此 Repo|這個 Repo/,file);
+  }
+});
 test('historical plans, indexes and source claims do not impersonate completed capabilities',()=>{
   const mustWarn=[
     'research/2026-11-universal-web-engine/18-v3-cinematic-experience-technology-decision.md',

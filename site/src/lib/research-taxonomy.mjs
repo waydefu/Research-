@@ -5,7 +5,7 @@ const raw = {
     [
       "BASELINE-2026-11-02.md",
       "治理稽核與操作",
-      "Research- 初始治理基線（2026-11-02 歷史快照）",
+      "GitHub 治理基線：如何記錄分支保護與驗證證據",
       [
         "治理",
         "稽核"
@@ -14,7 +14,7 @@ const raw = {
     [
       "OPERATIONS.md",
       "治理稽核與操作",
-      "Research- 日常治理、故障處理與回退流程",
+      "GitHub 程式碼庫治理：PR 審查與故障回退",
       [
         "治理",
         "回退"
@@ -122,7 +122,7 @@ const raw = {
     [
       "07-audio-dsp.md",
       "音訊 DSP 與空間音效",
-      "AURORA 空間音訊：DSP 工具、失真與測試設計",
+      "空間音訊工程：DSP、HRTF 與失真測試",
       [
         "DSP",
         "空間音訊",
@@ -369,7 +369,7 @@ const raw = {
     [
       "EAG-100-AUDIT-TEMPLATE.md",
       "治理稽核與操作",
-      "EAG-100 企業級 Agent 治理：空白稽核表",
+      "AI Agent 治理稽核表：權限、證據與風險",
       [
         "治理",
         "稽核"
@@ -378,7 +378,7 @@ const raw = {
     [
       "EAG-100.md",
       "治理稽核與操作",
-      "EAG-100：AI Agent 與 GitHub Repo 治理評分規範",
+      "AI Agent 治理評分方法與控制項",
       [
         "治理",
         "Agent",
@@ -707,7 +707,7 @@ const raw = {
     [
       "18-v3-cinematic-experience-technology-decision.md",
       "網站架構與交付規劃",
-      "THE OBSERVATORY V3：互動網站技術選型草案",
+      "沉浸式互動網站：3D、動畫與框架選型",
       [
         "Astro",
         "設計規劃",
@@ -717,7 +717,7 @@ const raw = {
     [
       "19-v3-astro-research-cinema-architecture-and-roadmap.md",
       "網站架構與交付規劃",
-      "THE OBSERVATORY V3：Astro 研究館架構與階段規劃",
+      "Astro 技術內容網站：架構、全文搜尋與演進",
       [
         "Astro",
         "架構",
@@ -727,7 +727,7 @@ const raw = {
     [
       "20-v3-chatgpt-5-6-execution-brief.md",
       "網站架構與交付規劃",
-      "THE OBSERVATORY V3：Agent 實作指引（歷史草案）",
+      "AI Coding Agent：網站開發規格與驗收方法",
       [
         "Agent",
         "V3",
@@ -737,7 +737,7 @@ const raw = {
     [
       "21-p0-acceptance-and-p1-handoff.md",
       "驗收、測試與交接",
-      "THE OBSERVATORY V3：歷史 P0 驗收與 P1 交接",
+      "靜態內容網站：建置驗收與行動版測試",
       [
         "驗收",
         "交接",
@@ -828,7 +828,7 @@ const raw = {
     [
       "V2-ART-DIRECTION.md",
       "介面設計與視覺系統",
-      "THE OBSERVATORY V2：美術方向與場景敘事提案",
+      "電影式網頁：美術方向與場景敘事原則",
       [
         "UI/UX",
         "美術",
@@ -838,7 +838,7 @@ const raw = {
     [
       "V2-ENGINEERING-ACCEPTANCE.md",
       "驗收、測試與交接",
-      "THE OBSERVATORY V2：工程規格與驗收標準",
+      "高互動網站：工程規格、效能與降級驗收",
       [
         "工程規格",
         "驗收",
@@ -848,7 +848,7 @@ const raw = {
     [
       "V2-FONT-LICENSES.md",
       "授權、字體與素材治理",
-      "THE OBSERVATORY V2：字體授權與來源紀錄",
+      "網站字體與素材：授權和來源查核",
       [
         "字體",
         "授權",
@@ -858,7 +858,7 @@ const raw = {
     [
       "V2-IMPLEMENTATION-REVIEW.md",
       "驗收、測試與交接",
-      "THE OBSERVATORY V2：歷史實作審查與交付限制",
+      "互動網站實作審查：可讀性、效能與限制",
       [
         "審查",
         "V2",
