@@ -469,7 +469,7 @@ const raw = {
     [
       "01-colibri-moe-streaming.md",
       "模型推論與記憶體",
-      "Colibri：大型 MoE 如何分層使用 VRAM、RAM 與 SSD？",
+      "Colibri：記憶體不足時，大型 MoE 如何分層使用 VRAM、RAM 與 SSD？",
       [
         "MoE",
         "VRAM",
