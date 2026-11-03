@@ -37,6 +37,8 @@ A/B/C 不必全部同時安裝；隔離沙盒或另開實驗環境，既有 Herm
 | `Abstention correctness` | 未知／不完整時正確拒絕 | 空索引直接推論不存在 |
 | `p50/p95 latency` | 一次查詢、首次正確證據、整個任務時間 | 只報 cache warm 最佳值 |
 | `Total Token` | 主＋所有子代理/Advisor/重試/cache | 只計主代理 |
+| `Tool discovery / use rate` | MCP / Skill 是否被發現、真正使用，以及是否改善結果 | 只因已安裝就視為有效 |
+| `Generated LOC / config surface` | 初次產出與後續 context / 維護成本 proxy | 把 LOC 當唯一品質指標 |
 | `Cost per success` | 全部模型、工具、計算費／真正通過任務數 | 省 Token 卻多一倍返工 |
 | `Escaped error` | CI 未發現但 PR/人工驗收失敗 | 模型聲稱完成 |
 | `Safety incidents` | 越權操作、外洩、保護檔遭改 | 依賴 prompt 自述 |
@@ -53,6 +55,14 @@ A/B/C 不必全部同時安裝；隔離沙盒或另開實驗環境，既有 Herm
 ## 之前十月的反例
 
 對照[十月歷史測試](../2026-10-retrospective/02-code-intelligence-benchmarks.md)，CBM 曾有生命周期 21/21 PASS，但 Freshness 21/21 FAIL。表示**服務活著 ≠ 資料對**。必須修復後重跑**相同新鮮度測資**才可聲稱問題解決。
+
+## Framework / Stack 的 Agent 成本 A/B
+
+Web 技術選型若主要由 Agent 實作，應把 stack 本身也當成實驗變因。Nolan Lawson 2026-10 的 JavaScript framework benchmark 用同一 spec、同一 Agent、乾淨 Podman container、acceptance tests 與 Lighthouse，同時量 Token、時間、LOC 與 runtime。它的價值是**方法論**，不是通用框架排名。
+
+本 Repo 若比較 Astro / Next / Nuxt / React Router 等，至少要保持相同產品 spec、模型、effort、測試與裝置，跑 3–5 次以上並報 median / variance；MCP / Skills 要另外記錄 discovery rate、use rate 與 cost-per-success delta。
+
+見：[11｜AI Coding 時代的 JavaScript Framework 成本](11-ai-framework-agent-cost.md)。
 
 ## 2026 的代理評測參考專案
 
