@@ -1,8 +1,9 @@
+import {TOPIC_DESCRIPTORS} from './research-taxonomy.mjs';
 // Reader-first exhibit descriptors. Source folder names remain unchanged for stable URLs.
 // Art is locally authored, purpose-specific SVG, never the shared Sanctum background.
 const IMG='/Research-/v3/research-exhibits/';
 export const EXHIBITS={
-  '2026-10-retrospective':{name:'從零理解網頁技術',what:'認識網站如何運作、畫面怎麼產生，以及怎麼檢查速度與相容性。',use:'適合第一次接觸網頁、程式或瀏覽器技術的讀者。',image:IMG+'books.svg'},
+  '2026-10-retrospective':{name:'十月跨領域技術回顧',what:'整理 AI 代理、Web 3D、音訊、影片自動化與工程治理的研究摘要。',use:'適合從不同技術領域回顧研究結果，並辨識尚待查證的候選工具。',image:IMG+'books.svg'},
   '2026-11-information-security':{name:'資訊安全與保護資料',what:'認識網路攻擊、帳號權限、加密與漏洞，理解資料怎樣避免被偷走或誤用。',use:'適合想保護帳號、網站、公司資料或學習基本資安知識的讀者。',image:IMG+'privacy.svg'},
   '2026-11-local-ai-inference':{name:'讓 AI 在自己的電腦與手機運作',what:'研究本機模型、記憶體與執行速度，理解不用全靠雲端也能運行 AI。',use:'適合想在自己的硬體部署模型，或比較效能與成本的讀者。',image:IMG+'chip.svg'},
   '2026-11-systems-analysis-design':{name:'系統分析與需求設計',what:'從釐清需求、畫出流程到設計資料與畫面，學習如何規劃一個能真正運作的系統。',use:'適合資訊管理課程、產品規劃或想從零設計資訊系統的人。',image:IMG+'analysis.svg'},
@@ -29,5 +30,6 @@ export const topicInfo={
   '案例與設計參考':{why:'閱讀真正的網站與作品，分清作者實作與我們的推測。',image:IMG+'studio.svg'},
   '跨領域研究':{why:'包含涉及多項技術、仍待進一步人工分類的研究。',image:IMG+'books.svg'}
 };
+for (const [topic, descriptor] of Object.entries(TOPIC_DESCRIPTORS)) topicInfo[topic] = {why:descriptor.why,image:IMG+descriptor.image};
 export const exhibitFor=group=>EXHIBITS[group]||{name:'其他研究領域',what:'收錄尚未完成分類的研究，提供原文與來源。',use:'可透過關鍵字與技術標籤繼續尋找。',image:IMG+'books.svg'};
 export const topicFor=topic=>topicInfo[topic]||topicInfo['跨領域研究'];
