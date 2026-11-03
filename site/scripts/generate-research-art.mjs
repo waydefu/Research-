@@ -17,7 +17,7 @@ export function generateResearchArt(docs=allDocs()){
     writeFileSync(join(folder,name),renderResearchArt(doc),'utf8');
     manifest.push({
       file:doc.file,src:visual.src,alt:visual.alt,kind:visual.kind,
-      license:visual.license,source:visual.source,motif:visual.motif,originalWork:false
+      license:visual.license,source:visual.source,motif:visual.motif,scene:visual.scene,originalWork:false
     });
   }
   writeFileSync(join(folder,'manifest.json'),JSON.stringify({schemaVersion:1,originalAssets:true,items:manifest},null,2)+'\n','utf8');
