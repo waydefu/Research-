@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, relative, resolve, sep, posix, basename } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { enrichResearch } from './research-metadata.mjs';
 
 // Astro bundles server modules into dist/.prerender; import.meta.url changes there.
 // npm scripts and Astro CLI run from site/, regardless of output chunk location.
@@ -34,7 +35,7 @@ const documents = SOURCES.flatMap(({ collection, folder }) => {
     const group = collection === 'research' ? id.split('/')[0] : collection;
     return { collection, id, file, group, title: asTitle(text, file), text, sha, date, href: BASE + collection + '/' + encodePath(id) + '/' };
   });
-}).sort((a, b) => a.file.localeCompare(b.file, 'zh-TW'));
+}).map(enrichResearch).sort((a, b) => a.file.localeCompare(b.file, 'zh-TW'));
 const byFile = new Map(documents.map(d => [d.file, d]));
 const byText = new Map();
 for (const d of documents) {

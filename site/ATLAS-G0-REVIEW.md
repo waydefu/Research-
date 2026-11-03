@@ -1,5 +1,7 @@
 # P1 G0 — Observatory Sanctum Art Direction Atlas
 
+> **2026-11-03 最新狀態：** P1 交付紀錄與 G0 驗收狀態以 [P1-DELIVERY-G0-ACCEPTANCE.md](./P1-DELIVERY-G0-ACCEPTANCE.md) 為準。本文件保留最初 Atlas G0 的歷史構圖要求與紀錄，較舊的「未合併／未部署」描述不可當成目前站點或 PR 的即時狀態。
+
 > 2026-11-03 · Owner 批准 P0 PASS 並授權 P1 G0 靜態構圖研究。此檔僅記錄 PR 驗收，不構成 G0 通過或 P2 開工許可。
 
 ## 目標

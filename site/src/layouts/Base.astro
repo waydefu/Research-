@@ -15,19 +15,20 @@ const { title = '研究觀測所', description = 'Research-｜可追溯的技術
 <body>
   <a class="skip" href="#main">直接前往正文</a>
   <header class="global-header">
-    <a class="brand" href="/Research-/">
-      <span class="brand-mark" aria-hidden="true">◈</span>
-      <span>研究觀測所 <small>THE OBSERVATORY</small></span>
+    <a class="brand" href="/Research-/" aria-label="RESEARCH— THE OBSERVATORY｜返回天文觀測神殿首頁">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span class="brand-type">RESEARCH—<small>THE OBSERVATORY</small></span>
     </a>
     <nav aria-label="全站導覽">
-      <a href={BASE + 'library/'}>研究典藏</a>
+      <a href="/Research-/">觀測神殿</a>
+      <a href={BASE + 'library/'}>研究分類</a>
       <a href={BASE + 'search/'}>全文搜尋</a>
     </nav>
   </header>
   <main id="main"><slot /></main>
   <footer class="global-footer">
     <span>RESEARCH / VERIFIED SOURCES / OPEN QUESTIONS</span>
-    <span>V3 · P0 內容館 · 非最終美術版本</span>
+    <span>研究觀測神殿 · 技術資料庫 · 來源可追溯</span>
   </footer>
 </body>
 </html>

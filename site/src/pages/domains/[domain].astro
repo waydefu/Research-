@@ -9,13 +9,13 @@ const docs = domainDocs(domain);
 ---
 <Base title={'研究領域｜' + displayDomain(domain)}>
   <section class="domain-page">
-    <a class="back-link" href={BASE}>← 所有領域</a>
+    <a class="back-link" href={BASE + 'library/'}>← 返回典藏目錄</a>
     <p class="eyebrow">RESEARCH / DOMAIN</p>
     <h1>{displayDomain(domain)}</h1>
-    <p class="muted">共 {docs.length} 份文件，均可在站內閱讀。</p>
+    <p class="muted">這個領域共有 {docs.length} 份研究。可依標題與主題快速挑選，再進入完整研究與原始來源。</p>
     <ol class="document-list">
       {docs.map((d,i) =>
-        <li><a href={d.href}><span class="domain-num">{String(i+1).padStart(2,'0')}</span><span>{d.title}</span><small>{d.date}</small></a></li>
+        <li><a href={d.href}><span class="domain-num">{String(i+1).padStart(2,'0')}</span><span class="doc-row-copy"><strong>{d.publicTitle}</strong><span>{d.summary}</span><small>{d.topic} · {d.kind}</small></span><span class="domain-arrow" aria-hidden="true">↗</span></a></li>
       )}
     </ol>
   </section>
