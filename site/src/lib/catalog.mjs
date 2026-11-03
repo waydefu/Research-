@@ -97,7 +97,10 @@ export const graph = () => ({
 const DOMAIN_NAMES = {
   'governance': '專案治理',
   'design': '視覺設計規格',
-  '2026-10-retrospective': '十月技術研究回顧',
+  '2026-10-retrospective': '十月跨領域技術研究',
+  '2026-11-information-security': '資訊安全研究',
+  '2026-11-local-ai-inference': '本機 AI 與模型推論',
+  '2026-11-systems-analysis-design': '系統分析與專案管理',
   '2026-11-agent-engineering': 'AI 代理工程',
   '2026-11-agent-repository-operations': 'Agent 治理與資料索引',
   '2026-11-universal-web-engine': '現代 Web 工程與互動技術',
