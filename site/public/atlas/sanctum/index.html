@@ -518,7 +518,8 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
   .hero-actions .outline-action{display:none!important}
 }
 @media(max-width:520px){
-  .hero{padding:clamp(84px,16svh,145px) 20px 48px!important}
+  /* Lower the mobile copy and search as a group by 20px, without moving the artwork. */
+  .hero{padding:clamp(104px,calc(16svh + 20px),165px) 20px 48px!important}
   .hero h1 .en{font-size:.8rem}
   .hero-desc{font-size:.9rem;line-height:1.6}
   .hero-discovery-row input,.hero-discovery-row button{width:auto;min-height:46px}
