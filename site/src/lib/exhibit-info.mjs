@@ -3,6 +3,9 @@
 const IMG='/Research-/v3/research-exhibits/';
 export const EXHIBITS={
   '2026-10-retrospective':{name:'從零理解網頁技術',what:'認識網站如何運作、畫面怎麼產生，以及怎麼檢查速度與相容性。',use:'適合第一次接觸網頁、程式或瀏覽器技術的讀者。',image:IMG+'books.svg'},
+  '2026-11-information-security':{name:'資訊安全與保護資料',what:'認識網路攻擊、帳號權限、加密與漏洞，理解資料怎樣避免被偷走或誤用。',use:'適合想保護帳號、網站、公司資料或學習基本資安知識的讀者。',image:IMG+'privacy.svg'},
+  '2026-11-local-ai-inference':{name:'讓 AI 在自己的電腦與手機運作',what:'研究本機模型、記憶體與執行速度，理解不用全靠雲端也能運行 AI。',use:'適合想在自己的硬體部署模型，或比較效能與成本的讀者。',image:IMG+'chip.svg'},
+  '2026-11-systems-analysis-design':{name:'系統分析與需求設計',what:'從釐清需求、畫出流程到設計資料與畫面，學習如何規劃一個能真正運作的系統。',use:'適合資訊管理課程、產品規劃或想從零設計資訊系統的人。',image:IMG+'analysis.svg'},
   '2026-11-universal-web-engine':{name:'網站、三維場景與互動設計',what:'研究網頁外觀、動畫、3D 場景與載入效能，包含真實網站案例。',use:'適合想製作網站、互動作品或改善使用體驗的人。',image:IMG+'browser.svg'},
   '2026-11-agent-engineering':{name:'人工智慧代理與工具',what:'了解 AI 如何分步使用工具、分析任務、讀寫資料並檢查成果。',use:'從理解一般聊天 AI 到建立能工作的自動化代理。',image:IMG+'robot.svg'},
   '2026-11-agent-repository-operations':{name:'自動化工作與程式協作',what:'介紹如何安排代理、版本控制、測試、交接與工作流程，減少重複操作。',use:'適合多人協作、長期維護專案或希望自動化重複工作的讀者。',image:IMG+'workflow.svg'},
