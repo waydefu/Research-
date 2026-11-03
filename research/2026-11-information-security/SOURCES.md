@@ -1,31 +1,27 @@
-# SOURCES｜資訊安全 Ch1–Ch3
+# 資料來源與證據界線｜資訊安全
 
-**整理日／核對日：2026-11-03（Asia/Taipei）**。
+整理日期：2026-11-03（Asia/Taipei）。來源 PDF 僅作為研究整理依據，不公開重新散布；頁碼自 PDF 封面起算。
 
-## A. 使用者提供的原始課程教材（非公開檔案）
+## 主要參考文件
 
-| ID | 檔案 | 教材章節 | PDF 頁數 | 本 Repo 的內容 |
-| --- | --- | --- | --- | --- |
-| IS-01 | `CH 01-資訊安全簡介(1).pdf` | 資訊安全簡介 | 32 | [Ch1 整理](01-introduction-to-information-security.md) |
-| IS-02 | `CH 02-資訊中心管理與實體安全.pdf` | 資訊中心管理與實體安全 | 38 | [Ch2 整理](02-data-center-and-physical-security.md) |
-| IS-03 | `CH 03-使用者身分鑑別.pdf` | 使用者身分鑑別 | 50 | [Ch3 整理](03-user-authentication.md) |
+| 原始檔名 | 主題 | 頁數 | 研究文件 |
+| --- | --- | --- | --- |
+| `CH 01-資訊安全簡介(1).pdf` | 安全需求、威脅與風險 | 32 | [資訊安全原則](information-security-principles.md) |
+| `CH 02-資訊中心管理與實體安全.pdf` | 資訊中心與設備保護 | 38 | [基礎設施安全](infrastructure-and-physical-security.md) |
+| `CH 03-使用者身分鑑別.pdf` | 身分認證與密碼安全 | 50 | [數位身分與認證](identity-and-authentication.md) |
 
-頁碼皆為**從 PDF 封面開始計算的第 N 張頁面**，不是其他書籍版面的章節內頁碼。
+## 外部技術指引（部分主張）
 
-原始 PDF 由使用者於先前課程對話提供，目前僅能作為本次整理與內部參照，不能假設外部讀者能開啟，亦不代表具有公開轉載授權。**本 Repo 不上傳課程 PDF 原檔，也不重製完整圖片頁。**
+- [NIST SP 800-63B-4（2025 年正式版）](https://csrc.nist.gov/pubs/sp/800/63/B/4/final)：數位身分認證及認證器管理。
+- [NIST SP 800-63B-4：Authenticators](https://pages.nist.gov/800-63-4/sp800-63b/authenticators/)：密碼驗證與抗釣魚技術。
+- [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)：安全儲存密碼的實務指引。
 
-## B. 外部權威來源（僅核對明確列出的現行安全主張）
+外部指引與歷史敘述的比較見 [安全控制與現代技術差異](security-guidance-evidence-review.md)。
 
-1. [NIST SP 800-63B-4（2025 年 7 月正式版）](https://csrc.nist.gov/pubs/sp/800/63/B/4/final) — 密碼驗證、認證管理；正式版確認。
-2. [NIST SP 800-63B-4：Authenticators](https://pages.nist.gov/800-63-4/sp800-63b/authenticators/) — 單因子密碼最短 15 字、多因子中至少 8 字、不強制例行換密碼或字元組合、WebAuthn 網域綁定與抗釣魚。
-3. [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) — 密碼不得明文儲存；建議唯一 salt 與專用緩慢密碼雜湊演算法。
+## 證據狀態
 
-## C. 證據分類
-
-- **教材內容：**本 Repo 使用自己文字重新表述，分章附對應 PDF 頁碼。
-- **已核對的現代技術指引：**在 [實務差異表](04-textbook-vs-current-practice.md) 中列出 NIST／OWASP 原始連結及範圍。
-- **白話例子與自測題：**輔助記憶，不是課本逐字引文或老師指定考題。
-- **未驗證：**教材舊法規最新有效性、具體資安法規適用範圍、機房工程標準、ISO 版本現況、供應商及設備規格。
-- **未實作：**未安裝或部署認證系統、未變動其他 Repo／環境、未做壓力或安全性測試。
-
-[資訊安全研究入口](README.md)
+- **來源支持：**原始資料中的安全概念、各種備份與身分鑑別分類；研究文件內附 PDF 位置。
+- **有限度外部核對：**NIST／OWASP 對密碼長度、輪換、雜湊與公開金鑰驗證的部分主張；不表示所有內容皆已全面驗證。
+- **整理者判斷：**概念的綜合解釋、風險提示與補充例子，不等同原始資料的逐字結論。
+- **待查證：**台灣法規適用性、國際標準版次、機房工程規範與個別產品安全性。
+- **未實作：**無系統部署、滲透測試、配置變更或安全稽核。
