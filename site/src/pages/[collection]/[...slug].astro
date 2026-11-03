@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { allDocs, getDoc, backlinks, BASE, displayDomain } from '../../lib/catalog.mjs';
 import {visualForDoc} from '../../lib/research-visuals.mjs';
+import {getPublicArticle} from '../../lib/public-articles.mjs';
 export async function getStaticPaths() {
   const [research, governance, design] = await Promise.all([
     getCollection('research'), getCollection('governance'), getCollection('design')
@@ -23,6 +24,7 @@ const { Content, headings } = await render(entry);
 const related = backlinks(doc);
 const researchVisual = visualForDoc(doc);
 const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
+const publicArticle=getPublicArticle(doc.file);
 ---
 <Base title={doc.publicTitle} description={doc.summary.slice(0,155)}>
   <div class="reading-layout">
@@ -30,7 +32,9 @@ const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
       <a class="back-link" href={BASE + 'domains/' + encodeURIComponent(doc.group) + '/'}>← {displayDomain(doc.group)}</a>
       <nav aria-label="本篇目錄">
         <p class="eyebrow">本篇章節</p>
-        {headings.filter(h=>h.depth>1 && h.depth<5).length ? (
+        {publicArticle ? (
+          <ol class="toc">{publicArticle.sections.map((part,i)=><li><a href={'#public-section-'+(i+1)}>{part.heading}</a></li>)}</ol>
+        ) : headings.filter(h=>h.depth>1 && h.depth<5).length ? (
           <ol class="toc">{headings.filter(h=>h.depth>1 && h.depth<5).map(h=><li class={'depth-' + h.depth}><a href={'#' + h.slug}>{h.text}</a></li>)}</ol>
         ) : <p class="muted">本篇沒有子章節。</p>}
       </nav>
@@ -84,8 +88,27 @@ const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
           {!doc.creator && <p class="source-disclaimer">這份研究尚未人工標記原作者；上述為原文提供的外部連結，不代表每一個連結都是創作者官網。</p>}
         </section>
       )}
-      <div class="original-divider"><span>RESEARCH / ORIGINAL TEXT</span><h2>完整研究內容</h2><p>以下保留原有研究正文、原始連結、數據與不確定性說明。</p></div>
-      <div class="article-content"><Content /></div>
+      {publicArticle && <section class="public-article" aria-label="公開技術正文">
+        <p class="public-article-kicker">技術解說 / TECHNICAL GUIDE</p>
+        <p class="public-article-context">以下依原始資料整理可重用的技術方法，尚未逐項獨立驗證外部主張。歷史決策及原始引用保留在下方來源紀錄中。</p>
+        {publicArticle.sections.map((part,i)=><section class="public-article-section" id={'public-section-'+(i+1)}>
+          <h2>{part.heading}</h2>
+          <p>{part.explanation}</p>
+          <p class="public-article-limit"><strong>適用限制：</strong>{part.limit}</p>
+        </section>)}
+      </section>}
+      {publicArticle ? (
+        <details class="original-record" data-pagefind-ignore>
+          <summary>展開完整原始研究（歷史紀錄，不代表現行功能與驗證結果）</summary>
+          <div class="original-divider"><span>RESEARCH / SOURCE RECORD</span><h2>完整原始研究</h2><p>原文與原始引用完整保留；歷史 PR、階段計畫和數據提案均須依日期重新核對。</p></div>
+          <div class="article-content"><Content /></div>
+        </details>
+      ) : (
+        <>
+          <div class="original-divider"><span>RESEARCH / ORIGINAL TEXT</span><h2>完整研究內容</h2><p>以下保留原有研究正文、原始連結、數據與不確定性說明。</p></div>
+          <div class="article-content"><Content /></div>
+        </>
+      )}
       <section class="related">
         <h2>延伸研究與相關引用</h2>
         {related.length ? <ul class="document-list">{related.map(d=><li><a href={d.href}>{d.publicTitle}</a></li>)}</ul> : <p>目前沒有其他研究直接引用本篇。</p>}
