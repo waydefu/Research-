@@ -147,3 +147,12 @@ h1,h2,h3{color:#f4e7cf}
 .search-more:hover{background:rgba(217,181,121,.17)}
 .search-more:disabled{opacity:.7;cursor:wait}
 .search-more[hidden]{display:none}
+
+/* Match the visual identity of the canonical Sanctum header on all reading pages. */
+.global-header .brand{display:inline-flex;align-items:center;gap:13px;min-width:0;width:max-content;flex-shrink:0;text-decoration:none}
+.global-header .brand-mark{position:relative;display:grid;place-items:center;width:40px;height:40px;flex-shrink:0;border:1px solid #cba569;border-radius:50%;box-shadow:inset 0 0 0 4px #090c13,0 0 15px #cfa0612b;font:28px/1 Georgia,serif;color:#f7cd84;transform:rotate(-12deg)}
+.global-header .brand-mark::before,.global-header .brand-mark::after{content:"";position:absolute;inset:6px;border:1px solid rgba(211,168,101,.65);border-radius:50%;transform:rotate(39deg) scaleX(.62)}
+.global-header .brand-mark::after{transform:rotate(-39deg) scaleX(.62)}
+.global-header .brand-type{font:clamp(.85rem,1.15vw,1.04rem)/1.1 Georgia,serif;letter-spacing:.25em;color:#f2d6a2;white-space:nowrap}
+.global-header .brand-type small{display:block;font:.55rem/1.5 Georgia,serif;letter-spacing:.28em;color:#baa47c;margin-top:5px}
+@media(max-width:420px){.global-header{gap:.65rem}.global-header .brand-mark{width:36px;height:36px;font-size:24px}.global-header .brand-type{font-size:.83rem;letter-spacing:.20em}}

@@ -47,6 +47,10 @@ for(const size of sizes){
       });
       expect(evidence.overflow,item.name+' overflow '+JSON.stringify(evidence)).toBeLessThanOrEqual(1);
       expect(evidence.headerVisible,item.name+' missing site header').toBe(true);
+      if(item.name!=='sanctum'){
+        await expect(page.locator('.global-header .brand-type')).toContainText('RESEARCH—');
+        await expect(page.locator('.global-header .brand-mark')).toHaveText('✦');
+      }
       expect(evidence.localResearchLinks,item.name+' lost local navigation').toBeGreaterThan(0);
       expect(evidence.text?.length).toBeGreaterThan(4);
       await testInfo.attach('g0-'+item.name+'-'+size.width+'.json',{
