@@ -425,6 +425,25 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
 .hero-discovery p{font-size:.8rem;color:#bfc7cc;margin:.6rem 0 0}
 .hero-discovery p a{color:#f0d099;text-decoration:underline;text-underline-offset:.2em}
 @media(max-width:520px){.hero-discovery{padding:.8rem;margin-top:1rem}.hero-discovery-row{flex-direction:column}.hero-discovery-row input,.hero-discovery-row button{width:100%;min-height:44px}.hero-discovery label{font-size:.87rem}}
+
+/* P1 Android G0 repair: dynamic search height must NEVER overlap next chapter. */
+@media(max-width:800px){
+  #menuOpenDesktop{display:none!important}
+  #menuOpen{display:grid}
+  .hero{display:block;min-height:0;height:auto;padding:clamp(175px,31svh,320px) 24px 64px;align-items:initial}
+  .hero-left{width:min(100%,560px);padding:0;align-self:auto}
+  .narrative-glass{margin-top:0!important;padding-top:0!important}
+  .hero-actions{position:relative;z-index:2}
+  .hero-discovery{position:relative;z-index:2}
+}
+@media(max-width:520px){
+  .hero{padding:clamp(130px,25svh,265px) 20px 64px!important;min-height:0!important}
+  .hero h1{margin-top:9px}
+  .hero-desc{line-height:1.82}
+  .hero-actions{margin-top:18px;gap:10px}
+  .gold-action,.outline-action{min-height:46px}
+  .narrative-glass .featured{padding-top:38px}
+}
 </style>
 </head>
 <body data-pagefind-ignore>
