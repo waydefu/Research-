@@ -20,8 +20,7 @@ const paths=[
  'research/2026-11-universal-web-engine/14-effects-recipes-and-poc-validation/',
  'research/2026-10-retrospective/01-agent-orchestration/',
  'research/2026-10-retrospective/02-code-intelligence-benchmarks/',
- 'research/2026-11-agent-engineering/05-integration/'
-,
+ 'research/2026-11-agent-engineering/05-integration/',
  'governance/README/',
  'research/2026-11-universal-web-engine/README/',
  'research/2026-11-agent-repository-operations/08-evaluation-and-benchmarks/',
