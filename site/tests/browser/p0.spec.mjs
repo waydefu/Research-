@@ -59,7 +59,7 @@ test('no JavaScript: reading and navigation remain available', async ({browser},
   const page = await context.newPage();
   await page.goto(DOC);
   await expect(page.locator('article .article-content')).not.toBeEmpty();
-  await page.locator('.back-link').click();
+  await page.locator('.reading-sidebar .back-link').click();
   await expect(page.locator('h1')).toContainText('現代 Web 工程與互動技術');
   await page.goto(SEARCH);
   await expect(page.locator('#search-fallback ol li').first()).toBeVisible();
