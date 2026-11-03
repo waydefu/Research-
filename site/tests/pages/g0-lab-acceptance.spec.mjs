@@ -118,3 +118,19 @@ test('G0 reduced motion leaves reading, controls and full references usable',asy
   expect(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
   await context.close();
 });
+
+for(const width of [320,393]){
+  test('G0 simulated mobile navigation has practical touch targets at '+width+'px',async({page})=>{
+    await page.setViewportSize({width,height:852});
+    await page.goto(ROOT+'v3/library/');
+    const targets=await page.locator('.global-header nav a').evaluateAll(links=>links.map(a=>({
+      label:a.textContent.trim(),width:a.getBoundingClientRect().width,height:a.getBoundingClientRect().height
+    })));
+    expect(targets.length).toBe(3);
+    for(const target of targets){
+      expect(target.height,target.label+' is too short to tap').toBeGreaterThanOrEqual(36);
+      expect(target.width,target.label+' is too narrow to tap').toBeGreaterThanOrEqual(24);
+    }
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  });
+}

@@ -156,3 +156,9 @@ h1,h2,h3{color:#f4e7cf}
 .global-header .brand-type{font:clamp(.85rem,1.15vw,1.04rem)/1.1 Georgia,serif;letter-spacing:.25em;color:#f2d6a2;white-space:nowrap}
 .global-header .brand-type small{display:block;font:.55rem/1.5 Georgia,serif;letter-spacing:.28em;color:#baa47c;margin-top:5px}
 @media(max-width:420px){.global-header{gap:.65rem}.global-header .brand-mark{width:36px;height:36px;font-size:24px}.global-header .brand-type{font-size:.83rem;letter-spacing:.20em}}
+
+/* G0 mobile usability: header links remain easy to tap, not just visually legible. */
+@media(max-width:850px){
+  .global-header nav{gap:clamp(.25rem,1.5vw,.75rem)}
+  .global-header nav a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 4px}
+}
