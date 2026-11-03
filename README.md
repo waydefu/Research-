@@ -93,7 +93,7 @@
 ## 資訊系統工程與資訊安全
 
 - [資訊系統架構、商業分析與專案管理](research/2026-11-systems-analysis-design/README.md) — SDLC、商業可行性、WBS、排程與風險控制。
-- [資訊安全原則、實體保護與數位身分](research/2026-11-information-security/README.md) — CIA、威脅分析、資料復原、身份驗證與安全指引。
+- [資訊安全原則、實體保護與數位身分](research/2026-11-information-security/README.md) — CIA、威脅分析、資料復原、身分驗證與安全指引。
 
 **研究定位：**按技術主題分類，保留出處與驗證界線；原始參考 PDF 不在公開 Repo 散布。
 
