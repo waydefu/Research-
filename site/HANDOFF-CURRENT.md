@@ -1,5 +1,7 @@
 # Research-｜下一位 Agent 接手交接書
 
+> **2026-11-04 新收尾入口：** [P0.5 → P1 的現況與 Gate](./P0.5-EXIT-P1-ENTRY.md)。本文件下方保留 2026-11-03 的**歷史快照**；其中的 main SHA、PR、CI 及待辦不代表今天仍有效。
+
 > **歷史交接快照：2026-11-03（Asia/Taipei），最初記錄 main 50794e9／PR #37，現已過期。**
 > **警告：以下動態狀態表僅供歷史追溯，不可作為今天的 main／PR／CI 證據。** 接手先讀 [REPO-MAP.md](./REPO-MAP.md) 找模組，再用 GitHub API 查最新 main／open PR／各 HEAD CI；新進展以當下事實為準。
 >
