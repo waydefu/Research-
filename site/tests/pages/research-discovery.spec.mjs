@@ -5,7 +5,7 @@ const DOC=BASE+'research/2026-11-universal-web-engine/17-arctic-waters-threejs-c
 test('library can narrow by domain, detailed topic, technology and keyword on mobile',async({page})=>{
   await page.setViewportSize({width:360,height:800});
   await page.goto(BASE+'library/');
-  await expect(page.getByRole('heading',{name:/研究，不只是收藏答案/})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/想了解一項技術/})).toBeVisible();
   const entries=page.locator('#library-results li');
   expect(await entries.count()).toBeGreaterThan(60);
   await page.locator('#library-topic').selectOption('3D 場景與 Shader');

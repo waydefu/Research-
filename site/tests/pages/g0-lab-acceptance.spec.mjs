@@ -5,7 +5,7 @@ import {test,expect} from '@playwright/test';
 const ROOT='/Research-/';
 const CASES=[
   {name:'sanctum',path:ROOT,heading:/天文觀測神殿/},
-  {name:'library',path:ROOT+'v3/library/',heading:/研究，不只是收藏答案/},
+  {name:'library',path:ROOT+'v3/library/',heading:/想了解一項技術/},
   {name:'search',path:ROOT+'v3/search/',heading:/搜尋整座研究館/},
   {name:'article',path:ROOT+'v3/research/2026-11-universal-web-engine/17-arctic-waters-threejs-creative-workflow/',heading:/Arctic Waters/}
 ];

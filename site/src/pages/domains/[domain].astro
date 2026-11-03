@@ -1,22 +1,53 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { domains, domainDocs, BASE, displayDomain } from '../../lib/catalog.mjs';
+import { domains, domainDocs, BASE } from '../../lib/catalog.mjs';
+import {exhibitFor,topicFor} from '../../lib/exhibit-info.mjs';
 export function getStaticPaths() {
   return domains().map(domain => ({ params: { domain }, props: { domain } }));
 }
 const { domain } = Astro.props;
 const docs = domainDocs(domain);
+const exhibit=exhibitFor(domain);
+const grouped=new Map();
+for(const item of docs){
+  if(!grouped.has(item.topic))grouped.set(item.topic,[]);
+  grouped.get(item.topic).push(item);
+}
 ---
-<Base title={'研究領域｜' + displayDomain(domain)}>
-  <section class="domain-page">
-    <a class="back-link" href={BASE + 'library/'}>← 返回典藏目錄</a>
-    <p class="eyebrow">RESEARCH / DOMAIN</p>
-    <h1>{displayDomain(domain)}</h1>
-    <p class="muted">這個領域共有 {docs.length} 份研究。可依標題與主題快速挑選，再進入完整研究與原始來源。</p>
-    <ol class="document-list">
-      {docs.map((d,i) =>
-        <li><a href={d.href}><span class="domain-num">{String(i+1).padStart(2,'0')}</span><span class="doc-row-copy"><strong>{d.publicTitle}</strong><span>{d.summary}</span><small>{d.topic} · {d.kind}</small></span><span class="domain-arrow" aria-hidden="true">↗</span></a></li>
-      )}
-    </ol>
+<Base title={'研究領域｜' + exhibit.name}>
+  <section class="domain-page exhibit-page">
+    <a class="back-link" href={BASE + 'library/'}>← 返回全部研究分類</a>
+    <div class="domain-introduction">
+      <img src={exhibit.image} alt="" width="720" height="480"/>
+      <div>
+        <p class="eyebrow">從一個問題開始</p>
+        <h1>{exhibit.name}</h1>
+        <p class="domain-what">{exhibit.what}</p>
+        <p class="domain-usage">{exhibit.use}</p>
+        <p class="domain-total">這裡收錄 {docs.length} 篇研究，以下依具體主題整理。</p>
+      </div>
+    </div>
+    <nav class="domain-topic-nav" aria-label="本領域的主題">
+      {Array.from(grouped.keys()).map((topic,i)=><a href={'#subject-'+i}>{topic}</a>)}
+    </nav>
+    {Array.from(grouped,([topic,entries],i)=>(
+      <section class="domain-topic" id={'subject-'+i} aria-label={topic}>
+        <div class="domain-topic-intro">
+          <img src={topicFor(topic).image} alt="" loading="lazy" width="720" height="480"/>
+          <div>
+            <p class="eyebrow">具體研究主題</p>
+            <h2>{topic}</h2>
+            <p>{topicFor(topic).why}</p>
+            <small>這個主題共有 {entries.length} 篇研究</small>
+          </div>
+        </div>
+        <ol class="document-list">
+          {entries.map(d=><li><a href={d.href}>
+            <span class="doc-row-copy"><strong>{d.publicTitle}</strong><span>{d.summary}</span><small>{d.kind} · 查看完整研究與來源</small></span>
+            <span class="domain-arrow" aria-hidden="true">↗</span>
+          </a></li>)}
+        </ol>
+      </section>
+    ))}
   </section>
 </Base>
