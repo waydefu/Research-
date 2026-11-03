@@ -395,6 +395,24 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
 /* Keep the fixed scene crisp in the hero; reduce blur area on constrained viewports. */
 @media(max-width:800px){.narrative-glass{backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}}
 @media(prefers-reduced-transparency:reduce){.narrative-glass{backdrop-filter:none;-webkit-backdrop-filter:none;background:linear-gradient(180deg,rgba(6,10,17,.90),rgba(4,7,13,.98))}}
+
+/* P1 four-chapter camera-light language; motion is decorative progressive enhancement. */
+.narrative-glass{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.narrative-glass .featured-heading,.narrative-glass .vault-intro{scroll-margin-top:105px}
+@keyframes sanctum-quiet-dolly{
+  from{transform:scale(1.015);opacity:1}
+  to{transform:scale(1.055);opacity:.87}
+}
+@supports (animation-timeline:scroll(root block)){
+  @media(min-width:900px) and (prefers-reduced-motion:no-preference){
+    .world-backdrop::before{
+      animation:sanctum-quiet-dolly linear both;
+      animation-timeline:scroll(root block);
+    }
+  }
+}
+@media(max-width:800px){.narrative-glass{backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}}
+@media(prefers-reduced-transparency:reduce){.narrative-glass{backdrop-filter:none;-webkit-backdrop-filter:none}}
 </style>
 </head>
 <body data-pagefind-ignore>
@@ -517,20 +535,44 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
 })();
 
 
-// Scroll changes only the veil opacity; scrolling and all research links remain native.
+// Four native-scroll chapters: arrival -> selected research -> evidence -> archive.
+// The veil never intercepts input. Static content remains readable without JS.
 (()=>{
- let active=false;
- const update=()=>{
-   active=false;
-   const height=Math.max(420,window.innerHeight*.9);
-   const progress=Math.max(0,Math.min(1,window.scrollY/height));
-   const veil=(.035+progress*.28).toFixed(3);
-   document.body.style.setProperty('--veil-alpha',veil);
+ const chapters=[
+   {selector:null,veil:.035},
+   {selector:'.featured',veil:.15},
+   {selector:'.at-glance',veil:.21},
+   {selector:'.library-vault',veil:.28},
+   {selector:null,veil:.33}
+ ];
+ let queued=false,positions=[];
+ const measure=()=>{
+   const start=scrollY, viewport=innerHeight;
+   const max=Math.max(1,document.documentElement.scrollHeight-viewport);
+   positions=[0];
+   for(let i=1;i<chapters.length-1;i++){
+     const element=document.querySelector(chapters[i].selector);
+     const intended=element?element.getBoundingClientRect().top+start-viewport*.68:positions[i-1]+1;
+     positions.push(Math.max(positions[i-1]+1,Math.min(max-1,intended)));
+   }
+   positions.push(Math.max(positions.at(-1)+1,max));
  };
- const onScroll=()=>{if(!active){active=true;requestAnimationFrame(update)}};
+ const update=()=>{
+   queued=false;
+   const y=scrollY;
+   let i=0;
+   while(i<positions.length-2 && y>=positions[i+1])i++;
+   const range=Math.max(1,positions[i+1]-positions[i]);
+   const progress=Math.max(0,Math.min(1,(y-positions[i])/range));
+   const veil=chapters[i].veil+(chapters[i+1].veil-chapters[i].veil)*progress;
+   document.body.style.setProperty('--veil-alpha',veil.toFixed(3));
+ };
+ const onScroll=()=>{if(!queued){queued=true;requestAnimationFrame(update)}};
+ const onResize=()=>{measure();onScroll()};
  addEventListener('scroll',onScroll,{passive:true});
- addEventListener('resize',onScroll,{passive:true});
- update();
+ addEventListener('resize',onResize,{passive:true});
+ addEventListener('load',onResize,{once:true});
+ measure();update();
 })();
 </script>
 </body>

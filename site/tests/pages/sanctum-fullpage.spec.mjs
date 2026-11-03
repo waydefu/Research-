@@ -23,12 +23,14 @@ for (const width of [320,360,393,430,768,1440]) {
       backgroundPosition:getComputedStyle(document.querySelector('.world-backdrop')).position,
       glass:getComputedStyle(document.querySelector('.narrative-glass')).backdropFilter,
       veil:parseFloat(getComputedStyle(document.body).getPropertyValue('--veil-alpha')),
-      images:Array.from(document.images).every(im=>im.complete&&im.naturalWidth>0)
+      assets:Array.from(document.images).every(im=>im.getAttribute('src')?.startsWith('./assets/'))
     }));
     expect(before.rootWidth,'Horizontal overflow').toBeLessThanOrEqual(width+1);
     expect(before.backgroundPosition).toBe('fixed');
     expect(before.glass).toContain('blur(');
-    expect(before.images,'An editorial image did not load').toBe(true);
+    expect(before.assets,'Editorial assets should be local, cached WebP files').toBe(true);
+    await page.locator('img').evaluateAll(imgs=>imgs.forEach(im=>{im.loading='eager'}));
+    await expect.poll(async()=>page.evaluate(()=>Array.from(document.images).every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
     await page.evaluate(() => window.scrollTo(0, Math.min(1000,document.documentElement.scrollHeight/2)));
     await expect.poll(async()=>await page.evaluate(()=>parseFloat(getComputedStyle(document.body).getPropertyValue('--veil-alpha')))).toBeGreaterThan(before.veil);
     const after = await page.evaluate(() =>({
@@ -95,4 +97,46 @@ test('Sanctum uses one continuous glass narrative instead of boxed content panel
   expect(presentation.articleBackground).toBe('rgba(0, 0, 0, 0)');
   await expect(page.locator('.feature-card')).toHaveCount(3);
   await expect(page.locator('.vault-index a')).toHaveCount(4);
+});
+
+
+test('Sanctum uses cached scene assets and meaningful internal navigation',async ({page})=>{
+  await page.goto(PREVIEW);
+  const result=await page.evaluate(()=>({
+    inlineImages:document.documentElement.outerHTML.includes('data:image/webp;base64,'),
+    resources:[...new Set([...document.images].map(img=>new URL(img.src).pathname))],
+    preloads:[...document.querySelectorAll('link[rel="preload"][as="image"]')].map(x=>({href:x.getAttribute('href'),media:x.media})),
+    researchLinks:[...document.querySelectorAll('.feature-card')].map(a=>({target:a.getAttribute('target'),href:a.getAttribute('href')})),
+    primaryNav:[...document.querySelectorAll('.primary-nav a')].map(x=>x.textContent.trim())
+  }));
+  expect(result.inlineImages).toBe(false);
+  expect(result.resources).toHaveLength(3);
+  expect(result.resources.every(x=>x.startsWith('/Research-/v3/atlas/sanctum/assets/'))).toBe(true);
+  expect(result.preloads).toHaveLength(2);
+  expect(result.preloads.some(x=>x.media.includes('min-width'))).toBe(true);
+  expect(result.preloads.some(x=>x.media.includes('max-width'))).toBe(true);
+  expect(result.researchLinks).toHaveLength(3);
+  for(const link of result.researchLinks){
+    expect(link.target).toBeNull();
+    expect(link.href).toMatch(/^\/Research-\/v3\/research\//);
+  }
+  expect(result.primaryNav).toContain('全文搜尋');
+  expect(result.primaryNav).toContain('研究領域');
+});
+
+test('Sanctum has multiple scroll chapters, without hijacking the page', async ({page})=>{
+  await page.setViewportSize({width:1440,height:900});
+  await page.goto(PREVIEW);
+  const values=[];
+  const max=await page.evaluate(()=>document.documentElement.scrollHeight-innerHeight);
+  for(const distance of [0,Math.round(max*.22),Math.round(max*.52),max]){
+    await page.evaluate(y=>scrollTo(0,y),distance);
+    await expect.poll(async()=>page.evaluate(()=>Number(getComputedStyle(document.body).getPropertyValue('--veil-alpha')))).toBeGreaterThan(0);
+    await page.waitForTimeout(80);
+    values.push(await page.evaluate(()=>Number(getComputedStyle(document.body).getPropertyValue('--veil-alpha'))));
+  }
+  expect(values[0]).toBeCloseTo(.035,2);
+  expect(values[3]).toBeGreaterThan(.30);
+  for(let i=1;i<values.length;i++)expect(values[i]).toBeGreaterThan(values[i-1]);
+  expect(await page.evaluate(()=>getComputedStyle(document.documentElement).overflow)).not.toBe('hidden');
 });
