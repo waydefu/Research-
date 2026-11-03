@@ -51,7 +51,7 @@ const publicArticle=getPublicArticle(doc.file);
         <p class="reading-deck">{doc.summary}</p>
         <p class="editorial-status">{doc.summaryReviewed ? '編輯導讀｜依原文整理；外部主張尚未逐項查證' : '內容概覽｜取自原文，不代表全文結論'}</p>
         <dl class="provenance">
-          <div><dt>原文標題</dt><dd>{doc.title}</dd></div>
+          {!publicArticle && <div><dt>原文標題</dt><dd>{doc.title}</dd></div>}
           <div><dt>最後提交</dt><dd>{doc.date}</dd></div>
           <div><dt>來源 SHA</dt><dd class="sha">{doc.sha}</dd></div>
         </dl>
