@@ -1,0 +1,32 @@
+---
+import '../styles/atlas.css';
+import { BASE } from '../lib/catalog.mjs';
+const { title = 'Design Atlas', description = 'THE OBSERVATORY V3｜P1 G0 靜態美術研究' } = Astro.props;
+const ATLAS = BASE + 'atlas/';
+---
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <meta name="color-scheme" content="dark" />
+  <title>{title}｜THE OBSERVATORY P1 ATLAS</title>
+</head>
+<body class="atlas-body">
+<a class="atlas-skip" href="#atlas-main">跳至主要內容</a>
+<header class="atlas-header">
+  <a class="atlas-brand" href={ATLAS} aria-label="P1 美術圖集首頁"><span class="atlas-brand-symbol" aria-hidden="true">✧</span><span><strong>THE OBSERVATORY</strong><small>DESIGN ATLAS / P1 · G0</small></span></a>
+  <nav class="atlas-nav" aria-label="設計方案">
+    <a href={ATLAS + 'concept-a/'}>A 中央聖殿</a>
+    <a href={ATLAS + 'concept-b/'}>B 偏心觀測</a>
+    <a href={ATLAS + 'concept-c/'}>C 長廊探索</a>
+    <a href={ATLAS + 'typography/'}>字體研究</a>
+    <a href={ATLAS + 'evidence/'}>核心輪廓</a>
+  </nav>
+  <a class="atlas-back" href={BASE}>返回 P0 研究館 <span aria-hidden="true">↗</span></a>
+</header>
+<main id="atlas-main"><slot /></main>
+<footer class="atlas-footer"><span>RESEARCH- / ART DIRECTION STUDIES / 03 NOV 2026</span><span>靜態 HTML · CSS · SVG／非 3D、非最終美術／未部署正式首頁</span><a href={ATLAS}>返回設計圖集 ↑</a></footer>
+</body>
+</html>

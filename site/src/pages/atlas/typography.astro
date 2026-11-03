@@ -1,0 +1,27 @@
+---
+import Atlas from '../../layouts/Atlas.astro';
+---
+<Atlas title="中文字體研究｜P1 G0">
+  <section class="atlas-study">
+    <p class="atlas-overline">02 / TYPOGRAPHY · CHARACTER COVERAGE</p>
+    <h1>中文字體，不只是裝飾。</h1>
+    <p>繁體中文是研究館的主要語言。這裡先比較三組字體的預期氣質、長標題容器與不同字數的排版壓力，正式定案前還要實際自架三套字型並進行字形覆蓋測試。</p>
+    <div class="atlas-study-note"><strong>驗證邊界：</strong>目前沒有在這個 PR 引入字型二進位檔、CDN 或外部腳本；系統缺少該字體時會使用後備 serif。<strong>下列字型樣本並非受控的真正盲測，不能拿外觀看出來的差別作定案依據。</strong>三個候選的官方來源與 SIL OFL 1.1 授權資訊列在下方，芫荽並非完整 Big5 字集。</div>
+    <div class="atlas-type-grid">
+      <article class="atlas-type-tile"><span>SPECIMEN A / 未安裝時使用後備字型</span><div class="atlas-type-noto"><h2>讓每一個未知，<br/>都留下證據。</h2><p>繁體文字測試｜資料來源、技術架構、觀測系統、驗證方法。</p></div><p>Noto Serif TC｜候選明體</p></article>
+      <article class="atlas-type-tile"><span>SPECIMEN B / 未安裝時使用後備字型</span><div class="atlas-type-lxgw"><h2>讓每一個未知，<br/>都留下證據。</h2><p>繁體文字測試｜資料來源、技術架構、觀測系統、驗證方法。</p></div><p>霞鶩文楷 TC｜候選文楷</p></article>
+      <article class="atlas-type-tile"><span>SPECIMEN C / 未安裝時使用後備字型</span><div class="atlas-type-iansui"><h2>讓每一個未知，<br/>都留下證據。</h2><p>繁體文字測試｜資料來源、技術架構、觀測系統、驗證方法。</p></div><p>芫荽 Iansui｜候選臺灣標準字形</p></article>
+    </div>
+    <section class="atlas-source-links">
+      <h2>字型來源與 G0 待辦</h2>
+      <p>授權與字形宣稱應以維護者原始碼庫內的授權文件、字型檔及 Unicode cmap 實際檢查為準；不得只因 CSS 宣告了 font-family 就聲稱字型已正確載入。</p>
+      <ol>
+        <li><a href="https://github.com/notofonts/noto-cjk" target="_blank" rel="noopener noreferrer">Noto CJK 官方原始碼庫</a>｜Noto Serif TC 候選，SIL OFL；正式採用前核對實際字型檔與授權文本。</li>
+        <li><a href="https://github.com/lxgw/LxgwWenkaiTC" target="_blank" rel="noopener noreferrer">霞鶩文楷 TC 官方專案</a>｜SIL OFL 1.1；繁體與舊字形支援，留意授權聲明及衍生字型命名。</li>
+        <li><a href="https://github.com/ButTaiwan/iansui" target="_blank" rel="noopener noreferrer">芫荽官方專案</a>｜SIL OFL 1.1；Beta 版、字集有限，不能保證所有研究字元都有覆蓋。</li>
+      </ol>
+      <p><strong>尚未達成：</strong>自架受控 WOFF2 字型、完整繁中字元 cmap 比對、固定字串匿名盲測、200% 縮放截圖。這些在真正的 G0 字體驗收前必須補齊；目前只提供候選版面及透明的待驗清單。</p>
+      <a class="atlas-cta" href="/Research-/v3/atlas/">返回圖集 ↑</a>
+    </section>
+  </section>
+</Atlas>
