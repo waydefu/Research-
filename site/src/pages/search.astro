@@ -1,67 +1,90 @@
 ---
 import Base from '../layouts/Base.astro';
-import { allDocs, domains, displayDomain } from '../lib/catalog.mjs';
-const docs = allDocs();
+import {allDocs,domains,displayDomain} from '../lib/catalog.mjs';
+import {topicsFor,tagsFor} from '../lib/research-metadata.mjs';
+const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
 ---
-<Base title="全文搜尋">
+<Base title="全文搜尋｜研究觀測所">
   <section class="search-page">
-    <p class="eyebrow">FULL-TEXT / DISCOVERY</p>
+    <p class="eyebrow">RESEARCH / DISCOVERY</p>
     <h1>搜尋整座研究館。</h1>
-    <p>可以搜尋技術名稱、概念與研究原文。搜尋功能需要 JavaScript；下方仍保留完整文件入口。</p>
-    <form id="search-form" role="search">
+    <p>可以搜尋整份研究原文，再用領域、細分主題、技術標籤縮小範圍。研究的完整內容與原始來源不會因此被簡化或省略。</p>
+    <form id="search-form" role="search" autocomplete="off">
       <label for="search-term">研究關鍵字</label>
-      <div class="search-controls"><input id="search-term" type="search" placeholder="例如：WebGPU、Agent、效能……" autocomplete="off"/><button type="submit">搜尋</button></div><label for="domain-filter">領域篩選</label><select id="domain-filter"><option value="">全部領域</option>{domains().map(d=><option value={d}>{displayDomain(d)}</option>)}</select>
+      <div class="search-controls"><input id="search-term" type="search" placeholder="例如：WebGPU、Agent、海洋、效能……"/><button type="submit">搜尋</button></div>
+      <div class="search-facet-grid">
+        <label for="domain-filter">研究領域<select id="domain-filter"><option value="">全部領域</option>{domains().map(d=><option value={d}>{displayDomain(d)}</option>)}</select></label>
+        <label for="topic-filter">細分主題<select id="topic-filter"><option value="">全部主題</option>{topics.map(t=><option value={t}>{t}</option>)}</select></label>
+        <label for="tag-filter">技術標籤<select id="tag-filter"><option value="">全部技術</option>{tags.map(t=><option value={t}>{t}</option>)}</select></label>
+      </div>
     </form>
+    <p class="search-shortcut">不知道關鍵字？也可以直接選分類後按搜尋，或前往 <a href="/Research-/v3/library/">研究典藏索引</a>。</p>
     <div id="search-feedback" role="status" aria-live="polite"></div>
-    <ol id="search-results" class="document-list" aria-label="搜尋結果"></ol>
+    <ol id="search-results" class="document-list research-search-results" aria-label="搜尋結果"></ol>
     <section id="search-fallback">
       <h2>所有研究文件</h2>
-      <p class="muted">如果停用了 JavaScript，仍可直接開啟以下文件。</p>
-      <ol class="document-list">{docs.map(d=><li><a href={d.href}><span>{d.title}</span><small>{displayDomain(d.group)}</small></a></li>)}</ol>
+      <p class="muted">如果停用了 JavaScript，仍可以透過下方連結打開完整文章。</p>
+      <ol class="document-list">{docs.map(d=><li><a href={d.href}><span class="doc-row-copy"><strong>{d.publicTitle}</strong><small>{displayDomain(d.group)} · {d.topic}</small></span></a></li>)}</ol>
     </section>
   </section>
   <script is:inline type="module">
-    const base = '/Research-/v3/';
-    const form = document.getElementById('search-form');
-    const input = document.getElementById('search-term');
-    const domain = document.getElementById('domain-filter');
-    const feedback = document.getElementById('search-feedback');
-    const list = document.getElementById('search-results');
+    const base='/Research-/v3/';
+    const form=document.getElementById('search-form');
+    const input=document.getElementById('search-term');
+    const domain=document.getElementById('domain-filter');
+    const topic=document.getElementById('topic-filter');
+    const tag=document.getElementById('tag-filter');
+    const feedback=document.getElementById('search-feedback');
+    const list=document.getElementById('search-results');
     let searchApi;
-    try {
-      searchApi = await import(base + 'pagefind/pagefind.js');
-      await searchApi.options({ baseUrl: base });
-      document.getElementById('search-fallback').hidden = true;
-      feedback.textContent = '輸入關鍵字，開始搜尋全文。';
-    } catch {
-      feedback.textContent = '全文搜尋尚未就緒，請使用下方文件目錄。';
+    try{
+      searchApi=await import(base+'pagefind/pagefind.js');
+      await searchApi.options({baseUrl:base});
+      document.getElementById('search-fallback').hidden=true;
+      feedback.textContent='輸入關鍵字或選擇分類，開始搜尋全文。';
+    }catch{
+      feedback.textContent='全文搜尋尚未就緒，請使用下方完整研究目錄。';
     }
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-      if (!searchApi) return;
-      const query = input.value.trim();
+    const params=new URLSearchParams(location.search);
+    if(params.get('q'))input.value=params.get('q');
+    for(const [field,key] of [[domain,'domain'],[topic,'topic'],[tag,'tag']]){
+      if(params.has(key)&&[...field.options].some(option=>option.value===params.get(key)))field.value=params.get(key);
+    }
+    async function search(event){
+      if(event)event.preventDefault();
+      if(!searchApi)return;
+      const query=input.value.trim(),filters={};
+      if(domain.value)filters.domain=domain.value;
+      if(topic.value)filters.topic=topic.value;
+      if(tag.value)filters.tag=tag.value;
       list.replaceChildren();
-      if (!query) { feedback.textContent = '請輸入關鍵字。'; return; }
-      feedback.textContent = '搜尋中……';
-      try {
-        const response = await searchApi.search(query, domain.value ? { filters: { domain: domain.value } } : {});
-        const results = await Promise.all(response.results.slice(0, 40).map(r => r.data()));
-        for (const r of results) {
-          const item = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = r.url;
-          const title = document.createElement('span');
-          title.textContent = r.meta?.title || r.url;
-          const small = document.createElement('small');
-          small.textContent = r.url;
-          a.append(title, small);
-          item.append(a); list.append(item);
+      if(!query&&!Object.keys(filters).length){feedback.textContent='請輸入關鍵字或選擇至少一個分類。';return}
+      feedback.textContent='搜尋中……';
+      try{
+        const response=await searchApi.search(query||null,{filters});
+        const results=await Promise.all(response.results.slice(0,50).map(r=>r.data()));
+        for(const r of results){
+          const li=document.createElement('li');
+          const a=document.createElement('a');
+          a.href=r.url;
+          const copy=document.createElement('span');
+          copy.className='doc-row-copy';
+          const title=document.createElement('strong');
+          title.textContent=r.meta?.title||r.url;
+          const summary=document.createElement('span');
+          summary.textContent=(r.excerpt||'').replace(/<[^>]*>/g,'').slice(0,175);
+          const detail=document.createElement('small');
+          detail.textContent='查看研究原文與來源 ↗';
+          copy.append(title,summary,detail);
+          a.append(copy);li.append(a);list.append(li);
         }
-        feedback.textContent = '找到 ' + (response.results.length) + ' 項結果。';
-      } catch {
-        feedback.textContent = '搜尋發生錯誤，請使用完整文件目錄。';
-        document.getElementById('search-fallback').hidden = false;
+        feedback.textContent='找到 '+response.results.length+' 項結果（目前顯示前 '+results.length+' 項）。';
+      }catch{
+        feedback.textContent='搜尋發生錯誤，請使用完整研究目錄。';
+        document.getElementById('search-fallback').hidden=false;
       }
-    });
+    }
+    form.addEventListener('submit',search);
+    if(input.value||domain.value||topic.value||tag.value)search();
   </script>
 </Base>

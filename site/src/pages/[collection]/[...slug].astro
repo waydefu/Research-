@@ -20,32 +20,90 @@ const doc = getDoc(entry.collection, entry.id);
 if (!doc) throw new Error('站內文件不存在：' + entry.collection + '/' + entry.id);
 const { Content, headings } = await render(entry);
 const related = backlinks(doc);
+const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
 ---
-<Base title={doc.title}>
+<Base title={doc.publicTitle} description={doc.summary.slice(0,155)}>
   <div class="reading-layout">
     <aside class="reading-sidebar" aria-label="文件導覽">
       <a class="back-link" href={BASE + 'domains/' + encodeURIComponent(doc.group) + '/'}>← {displayDomain(doc.group)}</a>
       <nav aria-label="本篇目錄">
-        <p class="eyebrow">CONTENTS</p>
+        <p class="eyebrow">本篇章節</p>
         {headings.filter(h=>h.depth>1 && h.depth<5).length ? (
           <ol class="toc">{headings.filter(h=>h.depth>1 && h.depth<5).map(h=><li class={'depth-' + h.depth}><a href={'#' + h.slug}>{h.text}</a></li>)}</ol>
         ) : <p class="muted">本篇沒有子章節。</p>}
       </nav>
+      <a href={BASE + 'search/'} class="sidebar-search-link">搜尋其他研究 ↗</a>
     </aside>
     <article class="document" data-pagefind-body data-pagefind-filter={'domain:' + doc.group}>
       <header class="document-header">
-        <div class="document-kicker">{displayDomain(doc.group)} <span aria-hidden="true">/</span> {doc.id.split('/').at(-1)}</div>
-        <div class="document-title"><h1>{doc.title}</h1></div>
+        <div class="document-kicker">{displayDomain(doc.group)} <span aria-hidden="true">/</span> {doc.kind}</div>
+        <div class="document-taxonomy" aria-label="研究分類">
+          <span data-pagefind-filter={'topic:' + doc.topic}>{doc.topic}</span>
+          {doc.tags.map(tag=><span data-pagefind-filter={'tag:' + tag}>{tag}</span>)}
+        </div>
+        <div class="document-title"><h1>{doc.publicTitle}</h1></div>
+        <p class="reading-deck">{doc.summary}</p>
+        <p class="editorial-status">{doc.summaryReviewed ? '編輯導讀｜依原文與已核對資料整理' : '內容概覽｜取自原文，不代表全文結論'}</p>
         <dl class="provenance">
+          <div><dt>原文標題</dt><dd>{doc.title}</dd></div>
           <div><dt>最後提交</dt><dd>{doc.date}</dd></div>
           <div><dt>來源 SHA</dt><dd class="sha">{doc.sha}</dd></div>
         </dl>
       </header>
+      {(doc.creator || doc.demos.length || external.length) && (
+        <section class="source-studio" aria-label="原作者及研究外部來源" data-pagefind-ignore>
+          <div class="section-kicker">SOURCE / INTERACTIVE WORK</div>
+          <h2>原作者與可操作的示範</h2>
+          <p>保留原始來源與作者資訊；外部作品若允許嵌入，點擊才會載入。沒有嵌入授權或網站阻擋時，請直接到原站觀看。</p>
+          {doc.creator && (
+            <p class="source-original"><span>原作者／作品</span><a href={doc.creator.url} target="_blank" rel="noopener noreferrer">{doc.creator.label} ↗</a></p>
+          )}
+          {doc.demos.map((demo,i)=><div class="demo-record">
+            <h3>{demo.label}</h3><p>{demo.note}</p>
+            <div class="demo-controls">
+              <button class="demo-load" type="button" data-demo-url={demo.url} aria-controls={'demo-'+i} aria-expanded="false">在這裡載入示範</button>
+              <a href={demo.url} target="_blank" rel="noopener noreferrer">到原網站操作 ↗</a>
+            </div>
+            <div class="demo-viewport" id={'demo-'+i} hidden>
+              <iframe title={demo.label} loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="fullscreen" allowfullscreen></iframe>
+              <p>外部作品可能不允許 iframe 嵌入；若畫面空白或顯示拒絕連線，請使用上方原網站連結。</p>
+            </div>
+          </div>)}
+          {external.length>0 && (
+            <details class="source-index">
+              <summary>原文引用的其他外部資料（{external.length}）</summary>
+              <ul>{external.map(item=><li><a href={item.url} target="_blank" rel="noopener noreferrer">{item.label} ↗</a></li>)}</ul>
+            </details>
+          )}
+          {!doc.creator && <p class="source-disclaimer">這份研究尚未人工標記原作者；上述為原文提供的外部連結，不代表每一個連結都是創作者官網。</p>}
+        </section>
+      )}
+      <div class="original-divider"><span>RESEARCH / ORIGINAL TEXT</span><h2>完整研究內容</h2><p>以下保留原有研究正文、原始連結、數據與不確定性說明。</p></div>
       <div class="article-content"><Content /></div>
       <section class="related">
-        <h2>哪些研究引用了本篇？</h2>
-        {related.length ? <ul class="document-list">{related.map(d=><li><a href={d.href}>{d.title}</a></li>)}</ul> : <p>目前沒有其他研究直接引用本篇。</p>}
+        <h2>延伸研究與相關引用</h2>
+        {related.length ? <ul class="document-list">{related.map(d=><li><a href={d.href}>{d.publicTitle}</a></li>)}</ul> : <p>目前沒有其他研究直接引用本篇。</p>}
+        <a class="back-link" href={BASE + 'library/'}>← 返回研究典藏</a>
       </section>
     </article>
   </div>
+  <script is:inline>
+    // Never contact third-party demos until the visitor explicitly asks.
+    const trusted = new Set(['3ditions.drop3.app','threejs.org']);
+    document.querySelectorAll('.demo-load').forEach(button => button.addEventListener('click', () => {
+      const panel = document.getElementById(button.getAttribute('aria-controls'));
+      if (!panel) return;
+      if (button.getAttribute('aria-expanded')==='true') {
+        button.setAttribute('aria-expanded','false'); panel.hidden=true; return;
+      }
+      let target;
+      try { target = new URL(button.dataset.demoUrl); } catch { return; }
+      if (target.protocol !== 'https:' || !trusted.has(target.hostname)) return;
+      const frame=panel.querySelector('iframe');
+      if (!frame.getAttribute('src')) frame.src=target.href;
+      panel.hidden=false;
+      button.setAttribute('aria-expanded','true');
+      button.textContent='收合示範畫面';
+    }));
+  </script>
 </Base>
