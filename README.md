@@ -40,6 +40,14 @@
 
 **狀態：** 官方文件與原始碼研究完成；不是已在其他 Repo 進行安裝或效能實測。十月 Codebase Memory MCP 的 freshness 21/21 FAIL 保留為未解驗證 Gate。
 
+## 2026 年 11 月：Local AI Inference／超大型 MoE（新研究）
+
+**[Local AI Inference 技術庫](research/2026-11-local-ai-inference/README.md)** — 研究 sparse MoE、VRAM / RAM / NVMe 分層、expert streaming、cache、prefetch 與 storage-aware inference。
+
+- [Colibri：超大型 MoE 的 VRAM / RAM / NVMe 分層推論](research/2026-11-local-ai-inference/01-colibri-moe-streaming.md)
+- 已核對 v2.1.0、Apache-2.0、上游硬體表與 benchmark；**「resident 9.9GB」不等於 744B 模型總 RAM 只需 9.9GB**。
+- 本 Repo 未安裝 Colibri、未下載模型、未重跑效能測試。
+
 ## 2026 年 11 月：通用 Web 工程與現代程式技術（新研究）
 
 **[通用 Web 工程完整專題](research/2026-11-universal-web-engine/README.md)** — 不限定小說、AKM 或任何特定網站；涵蓋從 Next.js 到 WebGPU 的完整架構決策。
