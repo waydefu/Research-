@@ -9,6 +9,7 @@ test('Design Atlas prominently opens the current full-page Sanctum preview', asy
   await page.getByRole('link',{name:/開啟高保真全頁神殿原型/}).click();
   await expect(page).toHaveURL(new RegExp('/Research-/v3/atlas/sanctum/'));
   await expect(page.getByRole('heading',{name:/Observatory Sanctum/})).toBeVisible();
+  await expect(page.locator('.hero-discovery input[name="q"]')).toBeVisible();
 });
 
 for (const width of [320,360,393,430,768,1440]) {
@@ -139,4 +140,15 @@ test('Sanctum has multiple scroll chapters, without hijacking the page', async (
   expect(values[3]).toBeGreaterThan(.30);
   for(let i=1;i<values.length;i++)expect(values[i]).toBeGreaterThan(values[i-1]);
   expect(await page.evaluate(()=>getComputedStyle(document.documentElement).overflow)).not.toBe('hidden');
+});
+
+test('homepage search form navigates to an actual full-text query',async({page})=>{
+  await page.setViewportSize({width:393,height:852});
+  await page.goto('/Research-/');
+  const form=page.locator('.hero-discovery');
+  await expect(form.getByText('你想了解什麼？直接搜尋研究')).toBeVisible();
+  await form.locator('input[name="q"]').fill('網站速度');
+  await form.getByRole('button',{name:/搜尋研究/}).click();
+  await expect(page).toHaveURL(/\/Research-\/v3\/search\/\?q=/);
+  await expect(page.locator('#search-term')).toHaveValue('網站速度');
 });

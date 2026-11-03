@@ -19,7 +19,7 @@ test('secondary V3 homepage leads to the canonical root',async({page})=>{
 });
 test('legacy V2 and original P0 research library remain readable',async({page})=>{
   await page.goto(V3+'library/');
-  await expect(page.getByRole('heading',{name:/研究，不只是收藏答案/})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/想了解一項技術/})).toBeVisible();
   await page.goto(ROOT+'v2/');
   await expect(page.getByRole('heading',{name:/THE UNKNOWN,/})).toBeVisible();
   const reader=page.locator('#results .result-title[href]').first();

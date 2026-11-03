@@ -174,3 +174,66 @@ h1,h2,h3{color:#f4e7cf}
   .global-header nav a:first-child{display:none}
   .global-header nav a{font-size:.81rem;padding:8px 5px;min-height:40px;white-space:nowrap}
 }
+
+/* Research exhibits: meaningful illustrations; do not reuse the Sanctum hero as
+   every content page's background. All words and counts come from actual data. */
+body{background:linear-gradient(180deg,#070c14,#0e1721 48%,#070c14)!important}
+.exhibit-list li a{display:grid;grid-template-columns:minmax(140px,200px) minmax(0,1fr) 80px 20px;align-items:center;gap:clamp(.85rem,2vw,1.7rem);padding:1.2rem .25rem}
+.domain-scene{display:block;position:relative;overflow:hidden;aspect-ratio:3/2;border:1px solid rgba(220,177,113,.42);background:#121e2a}
+.domain-scene img,.topic-preview img,.research-item-visual img,.domain-introduction img,.domain-topic-intro img,.article-scene img{display:block;width:100%;height:100%;object-fit:cover}
+.domain-summary{display:flex;flex-direction:column;gap:.35rem;min-width:0;line-height:1.6}
+.domain-summary strong{font:600 clamp(1.12rem,2vw,1.62rem)/1.45 "Noto Serif TC","Songti TC",serif;color:#f2dfbc}
+.domain-summary>span{font-size:.96rem;color:#d2d9db;line-height:1.75}
+.domain-summary>small{font-size:.8rem;color:#b8ab8d;line-height:1.6}
+.exhibit-list li a:hover .domain-scene{border-color:#e7c48c}
+.exhibit-list .domain-count{font-size:.85rem;text-align:right}
+.topic-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:none;gap:.3rem 1.2rem}
+.topic-index a{display:grid;grid-template-columns:92px minmax(0,1fr) auto;align-items:center;gap:.85rem;border-bottom:1px solid rgba(216,170,105,.26);padding:.9rem .2rem;text-decoration:none;color:#f0e2c8}
+.topic-preview{display:block;width:92px;height:65px;overflow:hidden;border:1px solid rgba(216,170,105,.22)}
+.topic-info{display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.topic-info strong{font-size:.94rem;line-height:1.4;font-weight:600}
+.topic-info small{font-size:.77rem;line-height:1.6;color:#b8c3c7}
+.topic-index .topic-count{align-self:center;white-space:nowrap;color:#bda779;font-size:.73rem}
+.research-results li>a{grid-template-columns:116px minmax(0,1fr) 1.2rem;align-items:center;gap:1rem}
+.research-item-visual{display:block;width:116px;height:78px;border:1px solid rgba(216,170,105,.26);overflow:hidden}
+.archive-intro{min-height:58vh;background:linear-gradient(90deg,#080d16 0%,rgba(9,16,24,.95) 55%,rgba(9,16,24,.44)),url('/Research-/v3/research-exhibits/books.svg') 100% 45%/auto 110% no-repeat}
+.domain-introduction{display:grid;grid-template-columns:minmax(180px,360px) minmax(0,1fr);gap:clamp(1.4rem,4vw,4rem);align-items:center;padding:2rem 0 3rem;border-bottom:1px solid rgba(216,170,105,.32)}
+.domain-introduction>img{aspect-ratio:3/2;border:1px solid rgba(216,170,105,.5)}
+.domain-introduction h1{margin:.2rem 0 1rem}
+.domain-what{color:#e2dacd;font-size:clamp(1rem,1.5vw,1.3rem);max-width:58ch;line-height:1.85}
+.domain-usage{font-size:.91rem;color:#c2cbd0;max-width:66ch}
+.domain-total{color:#bfa679;font-size:.85rem}
+.domain-topic-nav{display:flex;flex-wrap:wrap;gap:.7rem;margin:2rem 0 3rem}
+.domain-topic-nav a{display:inline-flex;min-height:40px;align-items:center;padding:.4rem .85rem;border:1px solid rgba(216,170,105,.34);text-decoration:none;color:#e3d4be;font-size:.85rem}
+.domain-topic-nav a:hover{border-color:#e5bd7b;background:rgba(216,170,105,.1)}
+.domain-topic{padding:1rem 0 2.2rem;margin-bottom:1rem;border-bottom:1px solid rgba(216,170,105,.3);scroll-margin-top:95px}
+.domain-topic-intro{display:grid;grid-template-columns:210px minmax(0,1fr);gap:1.5rem;align-items:center;margin-bottom:1.5rem}
+.domain-topic-intro>img{aspect-ratio:3/2;border:1px solid rgba(216,170,105,.25)}
+.domain-topic-intro h2{margin:.2rem 0 .5rem;font-size:clamp(1.3rem,2.2vw,2.2rem)}
+.domain-topic-intro p{color:#cbd3d7;font-size:.94rem;line-height:1.8;margin:.3rem 0}
+.domain-topic-intro small{color:#b9a17b}
+.article-scene{margin:1.3rem 0 1.8rem;aspect-ratio:16/7;max-height:310px;overflow:hidden;border:1px solid rgba(216,170,105,.32)}
+@media(max-width:850px){
+  .exhibit-list li a{grid-template-columns:130px minmax(0,1fr) 43px 14px;gap:.8rem}
+  .topic-index{grid-template-columns:1fr}
+  .archive-intro{background:linear-gradient(90deg,rgba(7,12,20,.96),rgba(9,16,24,.88)),url('/Research-/v3/research-exhibits/books.svg') center/cover no-repeat}
+  .domain-introduction{grid-template-columns:1fr;gap:1rem}
+  .domain-introduction>img{width:min(100%,500px)}
+}
+@media(max-width:520px){
+  .exhibit-list li a{grid-template-columns:90px minmax(0,1fr);gap:.65rem;padding:1rem .1rem}
+  .exhibit-list .domain-count,.exhibit-list .domain-arrow{display:none}
+  .domain-summary strong{font-size:1.03rem}
+  .domain-summary>span{font-size:.84rem}
+  .domain-summary>small{font-size:.76rem}
+  .topic-index a{grid-template-columns:72px minmax(0,1fr);gap:.7rem}
+  .topic-preview{width:72px;height:60px}
+  .topic-index .topic-count{grid-column:2;justify-self:start}
+  .research-results li>a{grid-template-columns:76px minmax(0,1fr);gap:.7rem}
+  .research-item-visual{width:76px;height:66px}
+  .research-item-arrow{display:none}
+  .domain-topic-intro{grid-template-columns:95px minmax(0,1fr);gap:1rem}
+  .domain-topic-intro h2{font-size:1.25rem}
+  .domain-topic-intro p{font-size:.82rem}
+  .article-scene{aspect-ratio:3/2}
+}

@@ -414,6 +414,17 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
 }
 @media(max-width:800px){.narrative-glass{backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}}
 @media(prefers-reduced-transparency:reduce){.narrative-glass{backdrop-filter:none;-webkit-backdrop-filter:none;background:linear-gradient(180deg,rgba(6,10,17,.90),rgba(4,7,13,.98))}}
+
+/* Visible, usable research discovery in the first scene. */
+.hero-discovery{max-width:515px;margin-top:1.45rem;padding:1rem 1.15rem;background:linear-gradient(110deg,rgba(7,12,21,.94),rgba(7,14,25,.76));border-left:2px solid #d9b579;border-top:1px solid rgba(216,170,105,.25);box-shadow:0 12px 32px #0007}
+.hero-discovery label{display:block;font-size:.93rem;font-weight:600;color:#f5dfb9;margin-bottom:.65rem;line-height:1.6}
+.hero-discovery-row{display:flex;gap:.45rem}
+.hero-discovery-row input{flex:1;min-width:0;background:#101c2b;border:1px solid #b08b5b;color:#f5eddc;padding:.65rem .75rem;border-radius:0}
+.hero-discovery-row input::placeholder{color:#b3c1cb}
+.hero-discovery-row button{min-height:44px;padding:.65rem .85rem;background:#d8b679;color:#10141b;border:1px solid #ead1a1;font-size:.85rem;font-weight:700;white-space:nowrap}
+.hero-discovery p{font-size:.8rem;color:#bfc7cc;margin:.6rem 0 0}
+.hero-discovery p a{color:#f0d099;text-decoration:underline;text-underline-offset:.2em}
+@media(max-width:520px){.hero-discovery{padding:.8rem;margin-top:1rem}.hero-discovery-row{flex-direction:column}.hero-discovery-row input,.hero-discovery-row button{width:100%;min-height:44px}.hero-discovery label{font-size:.87rem}}
 </style>
 </head>
 <body data-pagefind-ignore>
@@ -443,7 +454,12 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
       <p class="eyebrow">THE OBSERVATORY</p>
       <h1 id="heroTitle"><span class="zh">天文觀測神殿</span><span class="en">Observatory Sanctum</span></h1>
       <div class="rule" aria-hidden="true"></div>
-      <p class="hero-desc">以天文儀式感與知識觀測為核心，<br>結合研究、驗證與收藏，<br>構築一座可探索的知識觀測館。</p>
+      <p class="hero-desc">想知道 AI 如何自動完成工作、網站如何呈現海洋動畫，或資料怎麼被驗證？從這裡找研究，先看白話解釋，再讀原始證據。</p>
+      <form class="hero-discovery" action="/Research-/v3/search/" method="get" role="search">
+        <label for="hero-query">你想了解什麼？直接搜尋研究</label>
+        <div class="hero-discovery-row"><input id="hero-query" name="q" type="search" placeholder="例如：AI 代理、3D 海洋、網站速度" autocomplete="off" required><button type="submit">搜尋研究 →</button></div>
+        <p>也可以 <a href="/Research-/v3/library/">依圖文主題探索全部研究</a></p>
+      </form>
       <div class="hero-actions">
         <a class="gold-action" href="#vault"><span>進入研究館</span><span aria-hidden="true">→</span></a>
         <a class="outline-action" href="#featured"><span class="action-seal" aria-hidden="true">✧</span>瀏覽精選研究</a>

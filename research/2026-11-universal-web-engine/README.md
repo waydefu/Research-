@@ -30,7 +30,8 @@
 21. [22｜電影式網頁：捲動敘事、場景素材、玻璃效能與無障礙驗收](22-immersive-scrollytelling-and-asset-performance.md)
 22. [23｜threejs-nanites：WebGPU GPU-driven Virtualized Geometry 參考實作](23-threejs-nanites-gpu-driven-geometry.md)
 23. [24｜Polyfork：Agent-native 3D、Parametric Assets 與 Asset-as-Code](24-polyfork-agent-native-3d-assets.md)
-24. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
+24. [25｜Open Design Agent Kit：AI 設計代理與研究觀測所實作方法](25-open-design-agent-kit-and-observatory-adoption.md)
+25. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
 
