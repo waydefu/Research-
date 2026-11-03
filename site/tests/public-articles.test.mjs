@@ -11,11 +11,22 @@ test('inventory covers every published source and never calls automated flags fa
   assert.equal(audit.records.length,new Set(audit.records.map(x=>x.file)).size);
   assert.ok(audit.records.every(x=>['優先整理','人工核對','一般內容候選'].includes(x.priority)));
   assert.ok(audit.records.some(x=>x.priority==='優先整理'));
-  assert.equal(audit.curated,4);
+  assert.equal(audit.curated,12);
 });
-test('pilot has four human-authored technology guides with exact source mapping',()=>{
-  assert.deepEqual(publicBodyCoverage(docs.map(d=>d.file)),{total:87,ready:4,stale:[]});
-  assert.equal(Object.keys(PUBLIC_ARTICLES).length,4);
+test('two editorial batches cover twelve general technology guides with exact source mapping',()=>{
+  assert.deepEqual(publicBodyCoverage(docs.map(d=>d.file)),{total:87,ready:12,stale:[]});
+  assert.equal(Object.keys(PUBLIC_ARTICLES).length,12);
+  const batchTwo=[
+    'research/2026-11-universal-web-engine/18-v3-cinematic-experience-technology-decision.md',
+    'docs/governance/BASELINE-2026-11-02.md',
+    'docs/governance/OPERATIONS.md',
+    'showcase/design/V2-ART-DIRECTION.md',
+    'showcase/design/V2-ENGINEERING-ACCEPTANCE.md',
+    'showcase/design/V2-IMPLEMENTATION-REVIEW.md',
+    'research/2026-10-retrospective/11-adoption-roadmap.md',
+    'research/2026-11-agent-repository-operations/09-implementation-roadmap.md'
+  ];
+  for(const file of batchTwo)assert.ok(PUBLIC_ARTICLES[file],file);
   for(const [file,body] of Object.entries(PUBLIC_ARTICLES)){
     const doc=docs.find(x=>x.file===file);
     assert.ok(doc,file);
