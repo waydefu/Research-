@@ -333,3 +333,37 @@ body{background:linear-gradient(180deg,#070c14,#0e1721 48%,#070c14)!important}
 .original-record[open]{padding-bottom:1.8rem}
 .original-record .original-divider{margin:1rem 0 2rem}
 @media(max-width:520px){.public-article{font-size:1rem}.public-article-section{padding:1rem 0 1.4rem}.original-record>summary{font-size:.9rem}}
+
+/* Desktop source tables: use the available reading canvas before asking for
+   horizontal scrolling. Keep prose columns readable and mobile tables scrollable. */
+@media (min-width: 1024px) {
+  .reading-layout {
+    max-width: 1600px;
+    grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 4rem);
+  }
+  .reading-layout .document { width: 100%; max-width: none; }
+  .reading-layout .document .article-content { max-width: none; }
+  .reading-layout .article-research-art { max-width: 900px; }
+  .reading-layout .article-content .table-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .reading-layout .article-content .table-scroll table {
+    table-layout: fixed;
+    width: 100%;
+    min-width: 0;
+  }
+  .reading-layout .article-content .table-scroll :is(th,td) {
+    min-width: 0;
+    max-width: none;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    vertical-align: top;
+  }
+  .reading-layout .article-content .table-scroll :is(th,td) code:not(pre code) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
