@@ -32,7 +32,13 @@ for (const width of [320,360,393,430,768,1440]) {
     }));
     expect(before.rootWidth,'Horizontal overflow').toBeLessThanOrEqual(width+1);
     expect(before.backgroundPosition).toBe('fixed');
-    expect(before.glass).toContain('blur(');
+    if(width<=520){
+      // Phone uses a continuous transparency gradient: turning on blur at the
+      // section boundary previously made the same world image look cut in two.
+      expect(before.glass).toBe('none');
+    }else{
+      expect(before.glass).toContain('blur(');
+    }
     expect(before.assets,'Every image must be a local WebP or approved SVG exhibit').toBe(true);
     await page.locator('img').evaluateAll(imgs=>imgs.forEach(im=>{im.loading='eager'}));
     await expect.poll(async()=>page.evaluate(()=>Array.from(document.images).every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
