@@ -43,7 +43,7 @@ const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
         </div>
         <div class="document-title"><h1>{doc.publicTitle}</h1></div>
         <p class="reading-deck">{doc.summary}</p>
-        <p class="editorial-status">{doc.summaryReviewed ? '編輯導讀｜依原文與已核對資料整理' : '內容概覽｜取自原文，不代表全文結論'}</p>
+        <p class="editorial-status">{doc.summaryReviewed ? '編輯導讀｜依原文整理；外部主張尚未逐項查證' : '內容概覽｜取自原文，不代表全文結論'}</p>
         <dl class="provenance">
           <div><dt>原文標題</dt><dd>{doc.title}</dd></div>
           <div><dt>最後提交</dt><dd>{doc.date}</dd></div>

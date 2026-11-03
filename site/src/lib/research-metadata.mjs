@@ -127,7 +127,11 @@ export function enrichResearch(doc){
   const intro=(c.schemaVersion===1 ? c.summary : editorialLead||c.lead)||overview(doc.text);
   return {
     ...doc,publicTitle:(c.schemaVersion===1 ? c.publicTitle : reviewed?.publicTitle||c.title)||doc.title,summary:intro||'原始研究已收錄；白話導讀尚待補充。',
-    summaryReviewed:Boolean(c.schemaVersion===1 ? c.summary : editorialLead||c.lead),topic,tags,
+    summaryReviewed:Boolean(c.schemaVersion===1 ? c.summary : editorialLead||c.lead),
+    // Editorial work is not independent verification of external claims.
+    summaryFactChecked:false,
+    summarySource:c.schemaVersion===1&&c.summary?'canonical-v1':editorialLead?'editorial-lead':c.lead?'legacy-curated':'source-excerpt',
+    topic,tags,
     kind:reviewed?.kind||(/案例|case|benchmark|作品/i.test(token)?'案例解析':/規範|治理|驗收|guide|workflow/i.test(token)?'工程方法':'技術研究'),
     creator:c.creator||null,demos:(c.schemaVersion===1 ? c.demo : c.demos)||[],externalLinks:externalLinks(doc.text),
     originalSource:c.schemaVersion===1 ? c.originalSource : null,

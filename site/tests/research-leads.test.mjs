@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {allDocs,getDoc} from '../src/lib/catalog.mjs';
 import {EDITORIAL_LEADS,editorialLeadCoverage} from '../src/lib/research-leads.mjs';
 import {enrichResearch} from '../src/lib/research-metadata.mjs';
+import {readFileSync} from 'node:fs';
 
 const docs=allDocs();
 test('current public sources have exact-path, nonempty Traditional Chinese editorial introductions',()=>{
@@ -16,6 +17,8 @@ test('current public sources have exact-path, nonempty Traditional Chinese edito
     assert.match(text,/[\u3400-\u9fff]/u,d.file);
     assert.equal(d.summary,text,d.file);
     assert.equal(d.summaryReviewed,true,d.file);
+    assert.equal(d.summaryFactChecked,false,d.file);
+    assert.equal(d.summarySource,'editorial-lead',d.file);
     assert.ok(!/^`{3}|^~~~/m.test(text),d.file);
     assert.equal(getDoc(d.collection,d.id),d);
   }
@@ -44,4 +47,11 @@ test('canonical v1 entries still override optional editorial introductions',()=>
   const unknown=enrichResearch({file:'research/future/new-idea.md',group:'future',id:'future/new-idea',
     title:'實驗中的網站',text:'# 實驗中的網站\n\n尚未整理完整原始研究內容。'});
   assert.equal(unknown.summaryReviewed,false);
+  assert.equal(unknown.summaryFactChecked,false);
+  assert.equal(unknown.summarySource,'source-excerpt');
+});
+test('reader label does not confuse editorial drafting with external verification',()=>{
+  const page=readFileSync(new URL('../src/pages/[collection]/[...slug].astro',import.meta.url),'utf8');
+  assert.match(page,/編輯導讀｜依原文整理；外部主張尚未逐項查證/);
+  assert.doesNotMatch(page,/編輯導讀｜依原文與已核對資料整理/);
 });
