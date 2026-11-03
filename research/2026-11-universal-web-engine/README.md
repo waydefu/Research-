@@ -29,7 +29,8 @@
 20. [20｜THE OBSERVATORY V3：ChatGPT 5.6 專用執行書](20-v3-chatgpt-5-6-execution-brief.md)
 21. [22｜電影式網頁：捲動敘事、場景素材、玻璃效能與無障礙驗收](22-immersive-scrollytelling-and-asset-performance.md)
 22. [23｜threejs-nanites：WebGPU GPU-driven Virtualized Geometry 參考實作](23-threejs-nanites-gpu-driven-geometry.md)
-23. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
+23. [24｜Polyfork：Agent-native 3D、Parametric Assets 與 Asset-as-Code](24-polyfork-agent-native-3d-assets.md)
+24. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
 
