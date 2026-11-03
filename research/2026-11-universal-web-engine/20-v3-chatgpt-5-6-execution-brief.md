@@ -128,6 +128,41 @@ Done when
 - 照 AGENTS.md 的回報格式開 PR。
 ```
 
+### P0.5｜基礎收斂：資料、CI、部署與治理（推理強度：High；依序拆成小 PR）
+
+```text
+Goal
+在開始 P1 美術以前，把 Research- 的「研究資料 → 網站 → CI → 部署」收斂成可持續擴張的單一系統。這一階段不做 Three.js、GSAP 或電影級 3D。
+
+Mandatory order
+A. 修目前 CI / Pages browser test blocker；測試跟真實規格對齊，不回退正確 UI 只為綠燈。
+B. CI 穩定後，把 V3 build/browser 與 Pages artifact integrity 加進 main Required Checks。
+C. 建立正式 Research Metadata Schema：publicTitle、summary、domain、topic、tags、creator、source、demo、license、verifiedAt、image、evidenceLevel。
+D. 每篇研究視覺改為 article → topic → domain → fallback；補全繁中 display metadata 並建立 Gate。
+E. 收斂部署：site/ 成為唯一正式 Web App / deploy source；showcase/ 只保留 legacy V2、design/reference 與必要歷史資產。
+F. 建立新的 Governance baseline，保留舊 baseline 作歷史快照。
+G. 建立 Research ingestion pipeline，讓新增完整研究條目後自動進分類、搜尋、圖片、來源與網站。
+
+Constraints
+- 每一項拆成獨立 PR，前一 Gate 未通過不要跳下一項。
+- 不在本階段導入 Three.js、GSAP、Blender asset runtime 或新的電影級效果。
+- Ruleset / Required Checks 屬 Repo 管理設定，修改前需 Owner 明確授權；可以先準備文件與建議值。
+- Metadata migration 必須支援既有文章 fallback，避免一次重寫全部研究。
+- 不允許用 regex / folder slug 作為新文章的唯一公開分類來源。
+- 不允許所有同 topic 文章永遠共用同一張圖；核心研究必須能指定文章視覺。
+- 全繁中 Gate 只約束讀者可見 metadata / UI；Three.js、WebGPU、MCP 等正式技術名稱可以保留英文。
+
+Done when
+- Research integrity、V3 build/browser、Pages artifact/browser 三層驗收都能穩定通過。
+- main 的 Required Checks 能擋下壞網站，不只擋 Markdown 錯誤。
+- 新研究可以用結構化 metadata 明確描述，不主要依賴 regex 推導。
+- 文章視覺可逐篇指定，公開分類與導讀不露出資料夾 slug。
+- 正式網站只有一個主要 build/deploy source。
+- Governance baseline 反映當前 public/private、ruleset、protected main、required checks 的真實狀態。
+- 新增研究的手動多處索引工作被 ingestion pipeline 取代。
+- 完成後才允許執行 P1 美術 G0。
+```
+
 ### P1｜美術 G0：靜止畫面（推理強度：Medium）
 
 ```text
