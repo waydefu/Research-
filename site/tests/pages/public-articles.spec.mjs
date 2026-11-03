@@ -21,7 +21,27 @@ const paths=[
  'research/2026-10-retrospective/01-agent-orchestration/',
  'research/2026-10-retrospective/02-code-intelligence-benchmarks/',
  'research/2026-11-agent-engineering/05-integration/'
-];
+,
+ 'governance/README/',
+ 'research/2026-11-universal-web-engine/README/',
+ 'research/2026-11-agent-repository-operations/08-evaluation-and-benchmarks/',
+ 'research/2026-11-agent-repository-operations/EAG-100/',
+ 'research/2026-11-agent-repository-operations/EAG-100-AUDIT-TEMPLATE/',
+ 'research/2026-11-local-ai-inference/01-colibri-moe-streaming/',
+ 'research/2026-11-universal-web-engine/12-github-creative-ecosystem/',
+ 'research/2026-11-universal-web-engine/16-active-theory-quality-benchmark/',
+ 'research/2026-11-universal-web-engine/17-arctic-waters-threejs-creative-workflow/',
+ 'research/2026-11-universal-web-engine/22-immersive-scrollytelling-and-asset-performance/',
+ 'research/2026-11-universal-web-engine/26-luminati-hd2d-browser-engine/',
+ 'research/2026-11-agent-repository-operations/11-ai-framework-agent-cost/',
+ 'research/2026-11-universal-web-engine/23-threejs-nanites-gpu-driven-geometry/',
+ 'research/2026-11-universal-web-engine/24-polyfork-agent-native-3d-assets/',
+ 'research/2026-11-agent-repository-operations/01-governance-and-authority/',
+ 'research/2026-11-universal-web-engine/10-creative-direction-and-reference-sites/',
+ 'research/2026-11-agent-repository-operations/07-security-and-ci/',
+ 'research/2026-11-local-ai-inference/README/',
+ 'research/2026-11-systems-analysis-design/business-case-and-feasibility/',
+ 'research/2026-11-universal-web-engine/01-framework-selection/'];
 for(const slug of paths){
  test('mobile article leads with general technology; original remains opt-in: '+slug,async({page})=>{
   await page.setViewportSize({width:393,height:852});
