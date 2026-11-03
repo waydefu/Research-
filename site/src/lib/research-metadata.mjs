@@ -40,9 +40,9 @@ const TOPIC_RULES = [
   ['網站效能與無障礙', /性能|效能|accessibility|無障礙|lcp|inp|cls|performance/i],
   ['搜尋、索引與 RAG', /search|搜尋|fts5|rag|索引|檢索|retriev|向量|embedding/i],
   ['LLM 模型與推論', /llm|model|模型|moe|推論|tokens?|量化|qwen/i],
+  ['安全、權限與稽核', /安全|security|auth|授權|audit|稽核|威脅|風險/i],
   ['Agent 工作流程', /agent|代理|orchestrat|mcp|hermes|子代理|skill/i],
   ['GitHub 與自動化', /github|ci.?cd|actions|workflow|自動化|流水線/i],
-  ['安全、權限與稽核', /安全|security|auth|授權|audit|稽核|威脅|風險/i],
   ['資料庫與資料品質', /database|資料庫|sql|資料品質|etl|data/i],
   ['專案治理與規格', /治理|governance|規劃|規範|評估|評分|驗收|測試/i],
   ['案例與設計參考', /case|案例|作品|參考|benchmark|比較/i]
@@ -74,15 +74,20 @@ function externalLinks(raw){
     if(parsed.protocol!=='https:' || parsed.hostname==='github.com'&&parsed.pathname.startsWith('/waydefu/Research-'))continue;
     if(!label||seen.has(url))continue;
     seen.add(url);out.push({label:label.slice(0,90),url});
-    if(out.length>=12)break;
   }
   return out;
 }
 export function enrichResearch(doc){
   const c=CURATED[doc.file]||{};
-  const token=doc.title+' '+doc.id;
-  const topic=c.topic||TOPIC_RULES.find(([,re])=>re.test(token))?.[0]||'跨領域研究';
-  const tags=TAG_RULES.filter(([,re])=>re.test(token)).map(([name])=>name).slice(0,5);
+  // Match the subject of this document before its parent folder.
+  // A generic "agent" directory must not override a clear security/audit title.
+  const basename=String(doc.id||doc.file||'').split('/').at(-1)||'';
+  const subject=doc.title+' '+basename;
+  const directory=String(doc.id||'').split('/').slice(0,-1).join('/') || doc.group || '';
+  const topic=c.topic||TOPIC_RULES.find(([,re])=>re.test(subject))?.[0]
+    ||TOPIC_RULES.find(([,re])=>re.test(directory))?.[0]||'跨領域研究';
+  const tags=TAG_RULES.filter(([,re])=>re.test(subject)).map(([name])=>name).slice(0,5);
+  const token=subject;
   const intro=c.lead||overview(doc.text);
   return {
     ...doc,publicTitle:c.title||doc.title,summary:intro||'原始研究已收錄；白話導讀尚待補充。',

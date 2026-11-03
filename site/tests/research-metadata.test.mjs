@@ -40,3 +40,38 @@ test('facets remain deterministic and recognize optional tags',()=>{
   assert.deepEqual(topicsFor(docs),['3D 場景與 Shader','Agent 工作流程'].sort((a,b)=>a.localeCompare(b,'zh-TW')));
   assert.ok(tagsFor(docs).includes('WebGL'));
 });
+
+test('article title and basename override an unrelated parent directory',()=>{
+  const safety=enrichResearch({
+    file:'research/2026-11-agent-repository-operations/23-report.md',
+    id:'2026-11-agent-repository-operations/23-report',
+    group:'2026-11-agent-repository-operations',
+    title:'安全與稽核：執行邊界驗證',text:'# 安全與稽核'
+  });
+  assert.equal(safety.topic,'安全、權限與稽核');
+  assert.equal(safety.kind,'技術研究');
+  assert.ok(!safety.tags.includes('Agent'));
+  const mixed=enrichResearch({
+    file:'research/2026-11-agent-repository-operations/agent-security.md',
+    id:'2026-11-agent-repository-operations/agent-security',
+    group:'2026-11-agent-repository-operations',
+    title:'Agent 系統安全與稽核',text:'# Agent 系統安全與稽核'
+  });
+  assert.equal(mixed.topic,'安全、權限與稽核');
+  const fallback=enrichResearch({
+    file:'research/2026-11-agent-repository-operations/general.md',
+    id:'2026-11-agent-repository-operations/general',
+    group:'2026-11-agent-repository-operations',
+    title:'一般設計筆記',text:'# 一般設計筆記'
+  });
+  assert.equal(fallback.topic,'Agent 工作流程');
+});
+test('reference source index never silently truncates a long cited source list',()=>{
+  const references=Array.from({length:33},(_,i)=>'[參考 '+(i+1)+'](https://example.org/source-'+(i+1)+')').join('\n');
+  const result=enrichResearch({
+    file:'research/lab/reference-audit.md',id:'lab/reference-audit',group:'lab',
+    title:'來源完整性',text:'# 來源完整性\n'+references
+  });
+  assert.equal(result.externalLinks.length,33);
+  assert.equal(result.externalLinks.at(-1).url,'https://example.org/source-33');
+});

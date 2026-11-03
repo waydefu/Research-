@@ -58,3 +58,66 @@ test('library and curated article remain available without JavaScript',async({br
   await expect(page.locator('.demo-record a').first()).toBeVisible();
   await context.close();
 });
+
+test('mobile demo open-close-reopen unloads the heavy external iframe',async({page})=>{
+  await page.setViewportSize({width:393,height:852});
+  await page.route(/https:\/\/(?:3ditions\.drop3\.app|threejs\.org)\//,route=>route.abort());
+  await page.goto(DOC);
+  const button=page.locator('.demo-load').first();
+  const panel=page.locator('.demo-viewport').first();
+  const frame=panel.locator('iframe');
+  await expect(button).toHaveText('在這裡載入示範');
+  await expect(button).toHaveAttribute('aria-expanded','false');
+  await expect(frame).not.toHaveAttribute('src',/https:/);
+  await button.click();
+  await expect(frame).toHaveAttribute('src',/3ditions\.drop3\.app/);
+  await expect(button).toHaveAttribute('aria-expanded','true');
+  await expect(panel).toBeVisible();
+  await button.click();
+  await expect(panel).toBeHidden();
+  await expect(frame).not.toHaveAttribute('src',/3ditions\.drop3\.app/);
+  expect(await frame.getAttribute('src')).toBeNull();
+  await expect(button).toHaveText('在這裡載入示範');
+  await expect(button).toHaveAttribute('aria-expanded','false');
+  await button.click();
+  await expect(frame).toHaveAttribute('src',/3ditions\.drop3\.app/);
+  await expect(panel).toBeVisible();
+  await expect(button).toHaveText('收合示範畫面');
+});
+
+test('reference case exposes the entire deduplicated list of citations',async({page})=>{
+  await page.goto(BASE+'research/2026-11-universal-web-engine/10-creative-direction-and-reference-sites/');
+  const index=page.locator('.source-index');
+  await expect(index.locator('summary')).toContainText(/完整 33 筆/);
+  await index.locator('summary').click();
+  await expect(index.locator('li')).toHaveCount(33);
+  const urls=await index.locator('a').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
+  expect(new Set(urls).size).toBe(33);
+});
+
+test('search results beyond fifty remain reachable through progressive loading',async({page})=>{
+  // Deterministic fixture covers >50 matches even if the real corpus is smaller.
+  const mockJs=[
+    "export async function options(){return true}",
+    "export async function search(){return {results:Array.from({length:61},(_,i)=>({data:async()=>({url:'/Research-/v3/research/mock/report-'+i+'/',meta:{title:'測試研究 '+i},plain_excerpt:'研究示例 '+i})}))}}"
+  ].join('\n');
+  await page.route('**/pagefind/pagefind.js',route=>route.fulfill({
+    status:200,contentType:'text/javascript',body:mockJs
+  }));
+  await page.goto(BASE+'search/');
+  await page.locator('#search-term').fill('研究');
+  await page.getByRole('button',{name:'搜尋'}).click();
+  await expect(page.locator('#search-results a')).toHaveCount(25);
+  const more=page.getByRole('button',{name:'載入更多研究'});
+  await expect(more).toBeVisible();
+  await more.click();
+  await expect(page.locator('#search-results a')).toHaveCount(50);
+  await expect(more).toBeVisible();
+  await more.click();
+  await expect(page.locator('#search-results a')).toHaveCount(61);
+  await expect(more).toBeHidden();
+  await expect(page.locator('#search-feedback')).toContainText('已顯示 61 項');
+  await expect(page.locator('#search-results a').last()).toHaveAttribute('href','/Research-/v3/research/mock/report-60/');
+  const links=await page.locator('#search-results a').evaluateAll(nodes=>nodes.map(a=>a.href));
+  expect(new Set(links).size).toBe(61);
+});

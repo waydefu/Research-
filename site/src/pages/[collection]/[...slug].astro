@@ -71,7 +71,7 @@ const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
           </div>)}
           {external.length>0 && (
             <details class="source-index">
-              <summary>原文引用的其他外部資料（{external.length}）</summary>
+              <summary>原文引用的其他外部資料（完整 {external.length} 筆，已去重）</summary>
               <ul>{external.map(item=><li><a href={item.url} target="_blank" rel="noopener noreferrer">{item.label} ↗</a></li>)}</ul>
             </details>
           )}
@@ -94,7 +94,13 @@ const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
       const panel = document.getElementById(button.getAttribute('aria-controls'));
       if (!panel) return;
       if (button.getAttribute('aria-expanded')==='true') {
-        button.setAttribute('aria-expanded','false'); panel.hidden=true; return;
+        // Hiding a live iframe does not stop its WebGL/audio/CPU execution.
+        // Unload the nested browsing context when the visitor closes the demo.
+        panel.hidden=true;
+        panel.querySelector('iframe')?.removeAttribute('src');
+        button.setAttribute('aria-expanded','false');
+        button.textContent='在這裡載入示範';
+        return;
       }
       let target;
       try { target = new URL(button.dataset.demoUrl); } catch { return; }

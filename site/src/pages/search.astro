@@ -21,6 +21,7 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
     <p class="search-shortcut">不知道關鍵字？也可以直接選分類後按搜尋，或前往 <a href="/Research-/v3/library/">研究典藏索引</a>。</p>
     <div id="search-feedback" role="status" aria-live="polite"></div>
     <ol id="search-results" class="document-list research-search-results" aria-label="搜尋結果"></ol>
+    <button id="search-load-more" class="search-more" type="button" hidden>載入更多研究</button>
     <section id="search-fallback">
       <h2>所有研究文件</h2>
       <p class="muted">如果停用了 JavaScript，仍可以透過下方連結打開完整文章。</p>
@@ -36,6 +37,9 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
     const tag=document.getElementById('tag-filter');
     const feedback=document.getElementById('search-feedback');
     const list=document.getElementById('search-results');
+    const loadMore=document.getElementById('search-load-more');
+    const PAGE_SIZE=25;
+    let matches=[],shown=0,serial=0,loading=false;
     let searchApi;
     try{
       searchApi=await import(base+'pagefind/pagefind.js');
@@ -50,19 +54,14 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
     for(const [field,key] of [[domain,'domain'],[topic,'topic'],[tag,'tag']]){
       if(params.has(key)&&[...field.options].some(option=>option.value===params.get(key)))field.value=params.get(key);
     }
-    async function search(event){
-      if(event)event.preventDefault();
-      if(!searchApi)return;
-      const query=input.value.trim(),filters={};
-      if(domain.value)filters.domain=domain.value;
-      if(topic.value)filters.topic=topic.value;
-      if(tag.value)filters.tag=tag.value;
-      list.replaceChildren();
-      if(!query&&!Object.keys(filters).length){feedback.textContent='請輸入關鍵字或選擇至少一個分類。';return}
-      feedback.textContent='搜尋中……';
+    async function appendNextPage(){
+      if(loading||shown>=matches.length)return;
+      loading=true;loadMore.disabled=true;
+      const current=serial,chunk=matches.slice(shown,shown+PAGE_SIZE);
       try{
-        const response=await searchApi.search(query||null,{filters});
-        const results=await Promise.all(response.results.slice(0,50).map(r=>r.data()));
+        // Pagefind provides all result refs, but loads details only for this page.
+        const results=await Promise.all(chunk.map(result=>result.data()));
+        if(current!==serial)return;
         for(const r of results){
           const li=document.createElement('li');
           const a=document.createElement('a');
@@ -72,18 +71,51 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
           const title=document.createElement('strong');
           title.textContent=r.meta?.title||r.url;
           const summary=document.createElement('span');
-          summary.textContent=(r.excerpt||'').replace(/<[^>]*>/g,'').slice(0,175);
+          summary.textContent=(r.plain_excerpt||r.excerpt||'').replace(/<[^>]*>/g,'').slice(0,175);
           const detail=document.createElement('small');
           detail.textContent='查看研究原文與來源 ↗';
           copy.append(title,summary,detail);
           a.append(copy);li.append(a);list.append(li);
         }
-        feedback.textContent='找到 '+response.results.length+' 項結果（目前顯示前 '+results.length+' 項）。';
+        shown+=results.length;
+        loadMore.hidden=shown>=matches.length;
+        feedback.textContent='找到 '+matches.length+' 項結果（已顯示 '+shown+' 項）。';
       }catch{
+        if(current!==serial)return;
+        feedback.textContent='載入下一批研究失敗，請再試一次。已顯示 '+shown+' 項。';
+      }finally{
+        if(current===serial){loading=false;loadMore.disabled=false;}
+      }
+    }
+    async function search(event){
+      if(event)event.preventDefault();
+      if(!searchApi)return;
+      const current=++serial;
+      matches=[];shown=0;loading=false;
+      loadMore.hidden=true;loadMore.disabled=false;
+      const query=input.value.trim(),filters={};
+      if(domain.value)filters.domain=domain.value;
+      if(topic.value)filters.topic=topic.value;
+      if(tag.value)filters.tag=tag.value;
+      list.replaceChildren();
+      if(!query&&!Object.keys(filters).length){feedback.textContent='請輸入關鍵字或選擇至少一個分類。';return}
+      feedback.textContent='搜尋中……';
+      try{
+        const response=await searchApi.search(query||null,{filters});
+        if(current!==serial)return;
+        matches=response.results;
+        if(!matches.length){
+          feedback.textContent='找到 0 項結果。可修改關鍵字或移除篩選條件。';
+          return;
+        }
+        await appendNextPage();
+      }catch{
+        if(current!==serial)return;
         feedback.textContent='搜尋發生錯誤，請使用完整研究目錄。';
         document.getElementById('search-fallback').hidden=false;
       }
     }
+    loadMore.addEventListener('click',appendNextPage);
     form.addEventListener('submit',search);
     if(input.value||domain.value||topic.value||tag.value)search();
   </script>
