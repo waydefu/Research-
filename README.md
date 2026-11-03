@@ -90,6 +90,10 @@
 
 > 重要：十月的歷史實測與本次查證分開標記。尤其 **Codebase Memory MCP 的 freshness 21/21 FAIL**，不能只憑其它 PASS 就放行正式啟用；候選工具也不表示已安裝或已通過驗收。
 
+## 課程研究｜系統分析與設計 Ch1–Ch3
+
+- [系統分析與設計三章摘要、課程概念對照與來源頁碼](research/2026-11-systems-analysis-design/README.md) — Ch1 資訊系統／SDLC、Ch2 商業個案／可行性、Ch3 專案管理／風險。使用者提供的教材轉述，非外部查證或產業標準；原始 PDF 未公開上傳。
+
 ## 研究入口
 
 - [總覽與研究結論](research/2026-11-agent-engineering/README.md)
