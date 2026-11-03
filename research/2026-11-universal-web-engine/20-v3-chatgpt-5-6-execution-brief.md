@@ -65,7 +65,7 @@ Astro 6（output: 'static'）+ TypeScript 6、<ClientRouter /> + transition:pers
 - research/、docs/、showcase/ 是唯讀資料來源：不修改、不複製進 site/；連結問題在內容管線中處理。
 - 研究文件之間的連結改寫成站內路由；外部官方來源保留外部連結；本 repo 的 PR／Ruleset 網址顯示為純文字。
 - docs/governance/THREAT-MODEL.md 不在網站展示：不產生頁面、不進搜尋與星圖，其他文件連到它時顯示純文字。
-- 網站部署在 /Research-/v3/（astro base），P5 切換前不動根路徑的 V2。
+- **現況：** 正式 root 已是 Sanctum `/Research-/`、legacy V2 在 `/Research-/v2/`、V3 reader/search 在 `/Research-/v3/`。不得依歷史 P0 說明把 V2 恢復成 root。
 - 3D 模型、貼圖、字體必須原創或具可再散布授權，授權記錄放在 site/ASSETS.md。不使用 Active Theory、Arctic Waters 或任何參考截圖的素材、輪廓與程式碼。
 
 ## 品質規則
@@ -282,7 +282,7 @@ Done when
 - 鍵盤、單指觸控、200% 縮放都能完成「搜尋 → 開啟文件 → 跳到相關文件」。
 ```
 
-### P5｜真機驗收與切換 G4（推理強度：Medium）
+### P5｜真機驗收與發布 G4（推理強度：Medium）
 
 ```text
 Goal
