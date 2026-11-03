@@ -1,6 +1,7 @@
 # Research-｜下一位 Agent 接手交接書
 
-> **現行交接快照：2026-11-03（Asia/Taipei）**
+> **歷史交接快照：2026-11-03（Asia/Taipei），最初記錄 main 50794e9／PR #37，現已過期。**
+> **警告：以下動態狀態表僅供歷史追溯，不可作為今天的 main／PR／CI 證據。** 接手先讀 [REPO-MAP.md](./REPO-MAP.md) 找模組，再用 GitHub API 查最新 main／open PR／各 HEAD CI；新進展以當下事實為準。
 >
 > **交接先讀**：本檔 → site/AGENTS.md → 目前 GitHub main／open PR／Actions → 19 號 P0.5 計畫 → Owner 最新授權。本快照不會自動更新；動態狀態以 GitHub 當場查核為準。
 
