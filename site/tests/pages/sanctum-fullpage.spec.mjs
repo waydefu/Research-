@@ -122,7 +122,8 @@ test('Sanctum uses cached scene assets and meaningful internal navigation',async
     expect(link.href).toMatch(/^\/Research-\/v3\/research\//);
   }
   expect(result.primaryNav).toContain('全文搜尋');
-  expect(result.primaryNav).toContain('研究領域');
+  expect(result.primaryNav).toContain('研究分類');
+  expect(result.primaryNav[0]).toBe('完整典藏館');
 });
 
 test('Sanctum has multiple scroll chapters, without hijacking the page', async ({page})=>{
