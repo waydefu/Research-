@@ -24,6 +24,24 @@
 - **Islands**：只在需要互動的元件 Hydrate；適合內容多、互動少的頁面。
 - **PPR／Cache Components**：依 Next 版本設定與快取策略，需逐路由驗證，不可等同所有頁面永遠靜態。
 
+## 新增選型維度：Agent Cost（2026-11-03）
+
+Nolan Lawson 的 2026-10 benchmark 讓 Opus 5.5 / high effort 以同一份 Pokédex spec 在乾淨 container 中分別使用多個 framework 實作，原則上各跑 5 次，再比較 API 成本、Token、時間、LOC 與 Lighthouse。
+
+在這個**偏 content-heavy、低互動** workload 中，Astro、Hono+htmx、Nuxt 的 Agent 成本相對低；Astro 同時產生極少 client JS。Vanilla + Vite 並沒有自動成為最低成本，表示 framework 的明確慣例也可能替 Agent 壓縮解法搜尋空間。
+
+但這不能變成通用排名：作者只測一種 app，Lighthouse 偏向 page-load / MPA，複雜 SPA 互動沒有被充分量測，且 framework / MCP / model 版本都會變。
+
+因此本 Repo 後續框架決策新增：
+
+- Token / wall time。
+- task pass rate / repair count。
+- MCP / Skill discovery + use rate。
+- generated LOC / config surface。
+- Runtime / accessibility。
+
+詳細方法與數據：[AI Framework Agent Cost](../2026-11-agent-repository-operations/11-ai-framework-agent-cost.md)。
+
 ## 快速決策
 
 1. **公開內容比例非常高？** → Astro / Nuxt / Next；以 JS 傳輸、真實內容編輯流程測。
