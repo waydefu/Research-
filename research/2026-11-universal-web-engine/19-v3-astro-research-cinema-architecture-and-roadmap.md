@@ -238,18 +238,74 @@ context lost、shader 編譯失敗、頁面隱藏 → 停止繪製；重複失�
 
 ## 9. 分階段規劃
 
-每個階段都是**獨立、小範圍的 PR**，Owner 審查通過才進下一階段。V3 在 P5 之前部署到預覽子路徑 `/Research-/v3/`，V2 繼續在根路徑。Owner 已同意在 **P0 完成後**以獨立 PR 修改部署 workflow；該 PR 仍需 Owner 審查後才合併。
+每個階段都是**獨立、小範圍的 PR**，Owner 審查通過才進下一階段。原始 P0–P5 架構保留，但依 2026-11-03 實際 Repo 狀態，在 P0 與 P1 之間新增 **P0.5 基礎收斂層**。原因是目前瓶頸已從「缺研究／缺頁面」轉成「CI 契約、資料模型、視覺唯一性、單一部署來源與治理一致性」。
+
+### 9.1 唯一正確執行順序
+
+```text
+P0 內容館（已完成主要能力）
+  ↓
+P0.5-A 解除目前 CI / 部署 blocker
+  ↓
+P0.5-B 把網站驗收加入 main Required Checks
+  ↓
+P0.5-C 正式研究 Metadata Schema
+  ↓
+P0.5-D 每篇研究獨立視覺 + 全繁中 Gate
+  ↓
+P0.5-E site/ 成為唯一正式 Web App / deploy source
+  ↓
+P0.5-F Governance re-baseline
+  ↓
+P0.5-G Research ingestion pipeline
+  ↓
+P1 美術 G0
+  ↓
+P2 3D PoC G1
+  ↓
+P3 導演 G2
+  ↓
+P4 研究功能 G3
+  ↓
+P5 真機與切換 G4
+```
+
+**禁止跳級：** P0.5-C～G 不是「之後有空再做」的整理工作，而是 P1 前置條件。否則每新增研究都會放大分類、圖片、語言、部署與測試漂移。
+
+### 9.2 P0–P5 主階段
 
 | 階段 | 目標 | 主要交付物 | 通過條件（Gate） |
 | --- | --- | --- | --- |
-| **P0 內容館** | 全部研究在站內可讀，**完全沒有 3D** | `site/` Astro 專案、三個 collection、連結改寫、表格與程式碼樣式、領域頁、Pagefind、CI build | 所有 Markdown 都有頁面；壞連結 0；本 Repo GitHub 檔案連結 0；無 JS 可讀；axe 無嚴重問題；中文搜尋人工抽測通過 |
+| **P0 內容館** | 全部研究在站內可讀，**完全沒有 3D** | `site/` Astro 專案、collection、連結改寫、表格與程式碼樣式、領域頁、Pagefind、CI build | 所有 Markdown 有頁面；壞連結 0；無 JS 可讀；axe 無 serious／critical；中文搜尋通過 |
+| **P0.5 基礎收斂** | 把「研究資料 → 網站 → CI → 部署」收斂成穩定單一系統 | CI blocker 修正、Required Checks、Metadata Schema、文章視覺、繁中 Gate、site/showcase 邊界、治理新基線、ingestion pipeline | 下方 A–G 全數通過；P1 不再承擔資料／部署技術債 |
 | **P1 美術 G0** | 用靜止畫面定案美術 | Design Atlas：3 個方向 ×（首頁桌機、首頁手機、文件頁、搜尋頁）；字體盲測；Evidence Engine 三視角黑白輪廓 | Owner 從靜止畫面選定一個方向；關掉所有光效仍有辨識度 |
-| **P2 3D PoC G1** | 一個精緻場景與一次飛行 | Blender GLB、graph.json 星圖、`首頁 → 文件` 一次鏡頭飛行、Art Direction Lab、品質分級雛形 | `transition:persist` 在 Chrome Android 與 iOS Safari 實測不重建 canvas；材質、黑位、構圖自洽 |
+| **P2 3D PoC G1** | 一個精緻場景與一次飛行 | Blender GLB、graph.json 星圖、`首頁 → 文件` 一次鏡頭飛行、Art Direction Lab、品質分級雛形 | `transition:persist` 在目標瀏覽器實測；材質、黑位、構圖自洽 |
 | **P3 導演 G2** | 連續電影 | 首頁開場時間軸、四種模式、可打斷轉場、減少動態版本、跳過開場 | 主觀審查不再是「網頁 + 背景動畫」；任何時刻可直接讀文件 |
 | **P4 研究功能 G3** | 研究館完整 | 反向連結、章節目錄與滾動同步、搜尋篩選、領域頁星域鏡頭、來源標示 | 從任一篇文件 2 次操作內到達相關文件；世界與 DOM 永遠同一狀態 |
-| **P5 真機與切換 G4** | 正式上線 | 裝置矩陣實測、負向測試、TalkBack／VoiceOver 人工測試、效能報告；根路徑切到 V3，V2 移到 `/v2/` | Owner 人工驗收後才切換；保留 V2 回退至少一個版本週期 |
+| **P5 真機與切換 G4** | 正式上線 | 裝置矩陣實測、負向測試、TalkBack／VoiceOver 人工測試、效能報告；根路徑切到正式 V3 | Owner 人工驗收；保留可回退版本 |
 
-**先做 P0 的理由：** 它單獨就達成「研究全文站內化、不靠 GitHub 連結」，而且之後永遠是所有降級路徑的終點。3D 再怎麼延期，網站都已經可用。
+### 9.3 P0.5 基礎收斂的七個子階段
+
+| 子階段 | 順序理由 | 要做什麼 | 完成 Gate |
+| --- | --- | --- | --- |
+| **P0.5-A｜CI blocker** | 不先修就沒有可信交付線 | 修正 PR #35／同類首頁變更造成的 Pages browser test 漂移：Node DOM constant、SVG/WebP asset policy、固定圖片數假設、scroll threshold 等；**以真實規格更新測試，不為了綠燈回退正確 UI** | Research integrity、V3 build、Pages artifact/browser checks 全綠 |
+| **P0.5-B｜Required Checks** | CI 不強制就等於建議 | 在 `main-eag-100` ruleset 中保留研究完整性，並加入已穩定的 V3 build/browser 與 Pages artifact integrity；部署 job 本身不要求在 PR 執行 | 壞網站不能只靠 Markdown check 綠燈合入 main |
+| **P0.5-C｜Metadata Schema** | 後續分類、搜尋、圖片、繁中都依賴它 | 研究條目正式定義 `publicTitle`、`summary`、`domain`、`topic`、`tags`、`author/creator`、`originalSource`、`demo`、`license`、`verifiedAt`、`image`、`evidenceLevel`；舊文允許 fallback，新文逐步強制 | 新研究不再主要靠 regex 猜分類／摘要；Schema 缺必要欄位可被 CI 發現 |
+| **P0.5-D｜視覺唯一性 + 全繁中 Gate** | 直接解目前「抽象、重複圖、英文 slug 外露」問題 | 圖片優先序改成 `article.image → topic image → domain image → fallback`；每篇核心研究使用專屬相關視覺；UI metadata 必須有繁中 display name / summary，技術專名可保留英文 | 不再出現整批同圖；folder slug 不直接顯示給讀者；新增文章若缺繁中導讀或分類名稱，CI 提醒／阻擋 |
+| **P0.5-E｜單一 Web App / Deploy Source** | 現在 V2/V3 雙 build 容易讓測試互相漂移 | `site/` 成為唯一正式 Web App 與部署來源；`showcase/` 退為 V2 legacy snapshot、design/reference、必要歷史資產。保留 `/v2/` 可讀，但不再讓正式首頁依賴兩套 runtime build 串接 | 一套 build 可以生成正式 root + V3 研究館 + V2 legacy；CI 契約只有一份主真相 |
+| **P0.5-F｜Governance re-baseline** | 舊 baseline 已與現況衝突 | 新增當日 baseline，保留舊檔作歷史證據；更新 repo visibility、ruleset、protected main、Required Checks、已存在 CI 與未解 P0 | Agent 不再讀到「目前 rulesets=[]／main 未保護」這類過時現況 |
+| **P0.5-G｜Research ingestion pipeline** | 研究數量已進入持續成長階段 | 把「URL → 查證 → metadata → Markdown → 分類 → 圖片 → source/demo/license → index → CI」固化；新增研究時主要只提交完整條目，不再手工改 4–6 個索引 | 新增一篇研究能自動出現在分類、搜尋、視覺、來源與網站；重複人工索引最小化 |
+
+### 9.4 P0.5 的實施原則
+
+1. **A → B 必須最先完成。** 在 CI 尚紅或未強制前，不進大型 metadata／架構重構。
+2. **C → D 必須連續做。** 沒有 schema 就無法可靠強制獨立視覺與繁中。
+3. **E 要在 ingestion 前。** 否則 ingestion 會同時服務兩套網站／部署模型，反而增加複雜度。
+4. **F 可與 C–E 文件工作並行研究，但 Ruleset 實際修改仍需 Owner 明確授權。**
+5. **G 是 P0.5 最後一步。** 先把資料契約與網站唯一來源固定，再自動化新增研究。
+6. P0.5 **不導入 Three.js／GSAP／電影級 3D**；目標是讓 P1 之後只處理美術與互動，不再回頭救底層資料管線。
+
+**先做 P0／P0.5 的理由：** P0 已建立完整可讀的研究館；P0.5 則把它從「可以運作」提升成「可以持續擴張而不失控」。3D 再怎麼複雜，都不能建立在會漂移的 metadata、雙重 deploy source 或非 required 的 CI 上。
 
 ## 10. 風險與待決事項
 
