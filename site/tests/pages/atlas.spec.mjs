@@ -6,9 +6,11 @@ const ATLAS = BASE + 'atlas/';
 const cases = ['concept-a','concept-b','concept-c'];
 const viewports = [320,360,393,430,768,1440];
 
-test('atlas entry exposes 3 distinct concepts and real P0 reading link', async ({ page }) => {
+test('atlas entry presents public visual design studies with general technical wording', async ({ page }) => {
   await page.goto(ATLAS);
   await expect(page.getByRole('heading', { name: /讓研究有一座/ })).toBeVisible();
+  await expect(page.locator('.atlas-overline').first()).toContainText('DESIGN CASE STUDIES');
+  await expect(page.locator('body')).not.toContainText('PHASE ONE');
   for (const slug of cases) {
     expect(await page.locator('.atlas-option-image[href="' + ATLAS + slug + '/"]').count()).toBe(1);
   }

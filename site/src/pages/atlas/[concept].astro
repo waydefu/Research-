@@ -9,16 +9,16 @@ export function getStaticPaths() {
 const concept = getConcept(Astro.props.slug);
 if (!concept) throw new Error('Unknown concept');
 const docs = allDocs();
-const doc = docs.find(d => d.file.endsWith('19-v3-astro-research-cinema-architecture-and-roadmap.md')) ?? docs[0];
+const doc = docs.find(d => d.file.endsWith('01-framework-selection.md')) ?? docs[0];
 const sourceExcerpt = doc.text.split('\n').map(s => s.trim()).find(s => s.length > 55 && !/^[#>|*-]/.test(s))?.replace(/[*_]/g,'').slice(0,168) ?? doc.title;
 const sampleDomains = domains().slice(0,4);
 const sampleDocs = docs.filter(d => /README\.md$/.test(d.file)).slice(0,3);
 const articleHeadings = doc.text.split('\n').filter(line => /^##\s+/.test(line)).slice(0,3).map(line => line.replace(/^##\s+/,''));
 ---
-<Atlas title={concept.title + '｜P1 G0'}>
+<Atlas title={concept.title + '｜互動網頁構圖研究'}>
 <div class={'atlas-concept '+concept.slug}>
   <header class="atlas-case-heading">
-    <div><p class="atlas-overline">OBSERVATORY SANCTUM / COMPOSITION {concept.code}</p><h1>{concept.title}</h1><p class="atlas-case-en">{concept.subtitle}</p></div>
+    <div><p class="atlas-overline">INTERACTIVE WEB / COMPOSITION {concept.code}</p><h1>{concept.title}</h1><p class="atlas-case-en">{concept.subtitle}</p></div>
     <div class="atlas-case-meta"><p>{concept.description}</p><strong>{concept.principle}</strong></div>
   </header>
   <nav class="atlas-case-nav" aria-label="本方案預覽畫面"><a href="#home-scene">01 首頁</a><a href="#article-scene">02 文章閱讀</a><a href="#search-scene">03 搜尋與探索</a></nav>
@@ -48,18 +48,18 @@ const articleHeadings = doc.text.split('\n').filter(line => /^##\s+/.test(line))
         <div class="atlas-document-body">
           <p class="atlas-overline">THE ARCHIVE / DOCUMENT 001</p>
           <p class="atlas-doc-domain">{displayDomain(doc.group)}</p>
-          <h2>{doc.title}</h2>
+          <h2>{doc.publicTitle}</h2>
           <p class="atlas-doc-source">來源：{doc.file} <span>·</span> 最後修訂：{doc.date}</p>
           <div class="atlas-doc-divider"></div>
-          <p class="atlas-doc-para">{sourceExcerpt}</p>
+          <p class="atlas-doc-para">{doc.summary}</p>
           <a class="atlas-cta" href={doc.href}>閱讀完整原文 <span aria-hidden="true">↗</span></a>
         </div>
-        <aside class="atlas-doc-aside"><span class="atlas-overline">CATALOGUE / 目錄預覽</span><ol>{articleHeadings.map(heading=><li>{heading}</li>)}</ol><p>以上章節取自真實 Markdown；完整目錄與閱讀功能以 P0 頁面為準。</p></aside>
+        <aside class="atlas-doc-aside"><span class="atlas-overline">CATALOGUE / 目錄預覽</span><ol>{articleHeadings.map(heading=><li>{heading}</li>)}</ol><p>以上為技術文章的章節示例；可到完整閱讀頁檢視目錄與來源。</p></aside>
       </div>
     </div>
   </section>
   <section class="atlas-presentation" id="search-scene" data-scene="search" aria-label={concept.title + ' 搜尋原型'}>
-    <div class="atlas-frame-top"><span>03 / SEARCH</span><span>REAL SOURCE INDEX · LIVE SEARCH IN P0</span></div>
+    <div class="atlas-frame-top"><span>03 / SEARCH</span><span>REAL SOURCE INDEX · LIVE SEARCH DEMONSTRATION</span></div>
     <div class="atlas-prototype atlas-prototype-search">
       <div class="atlas-search-art"><SceneArt variant={concept.slug} instance="search"/></div>
       <div class="atlas-search-inner">
@@ -69,7 +69,7 @@ const articleHeadings = doc.text.split('\n').filter(line => /^##\s+/.test(line))
         <a class="atlas-search-launch" href={BASE + 'search/'}><span aria-hidden="true">⌕</span><span>開啟正式全文搜尋</span><span aria-hidden="true">↗</span></a>
         <div class="atlas-pills">{sampleDomains.map(d=><a href={BASE + 'domains/' + encodeURIComponent(d) + '/'}>{displayDomain(d)} <small>{domainDocs(d).length}</small></a>)}</div>
         <ol class="atlas-results">
-          {sampleDocs.map((d,i)=><li><a href={d.href}><span class="atlas-result-num">0{i+1}</span><span>{d.title}<small>{displayDomain(d.group)}</small></span><span aria-hidden="true">↗</span></a></li>)}
+          {sampleDocs.map((d,i)=><li><a href={d.href}><span class="atlas-result-num">0{i+1}</span><span>{d.publicTitle}<small>{displayDomain(d.group)}</small></span><span aria-hidden="true">↗</span></a></li>)}
         </ol>
       </div>
     </div>
