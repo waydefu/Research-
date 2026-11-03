@@ -12,7 +12,7 @@
 - 舊 V2 已歸檔：\`/Research-/v2/\`。
 - V3 研究閱讀／搜尋仍位於：\`/Research-/v3/\`。
 - \`site/scripts/unify-home.mjs\` 明確輸出「One front door: /Research-/; V2 archive: /v2/; V3 reader and search remain」。
-- PR #26、#31、#33 已是後續已完成變更；PR #35 為目前首頁修正工作。
+- PR #26、#31、#33 已是後續已完成變更；PR #35 是本基線建立時的首頁修正候選。**PR 是否仍 open 不作永久事實；執行／合併本文件前重新讀取 current main 與 PR #35，若已合併就直接採用新 main。**
 - PR #36 在審查前 HEAD \`8fb9e3695d0b463adfdbad131b103e6ed5b84c8a\` 的 Research integrity、V3 P0、Publish Research Showcase 三組 CI 均 SUCCESS；文件更新後必須看新 HEAD。
 - 下方任何「V2 是 root」「P5 才切 root」「未准任何 P1 工作」均屬**歷史 P0 敘述**，不可當成目前執行命令。
 
