@@ -37,6 +37,7 @@
 - [A/B 指標：Recall@k、p95、總 Token、正確率](research/2026-11-agent-repository-operations/08-evaluation-and-benchmarks.md)
 - [導入路線：Phase 0–5，必要時才增加資料庫或代理](research/2026-11-agent-repository-operations/09-implementation-roadmap.md)
 - [GitHub 開源方案精選](research/2026-11-agent-repository-operations/10-github-project-catalog.md) · [37 項原始來源](research/2026-11-agent-repository-operations/SOURCES.md)
+- [AI Framework Agent Cost：同一 Web 任務下的 Token、時間、LOC、MCP/Skill 與 Runtime 成本](research/2026-11-agent-repository-operations/11-ai-framework-agent-cost.md)
 
 **狀態：** 官方文件與原始碼研究完成；不是已在其他 Repo 進行安裝或效能實測。十月 Codebase Memory MCP 的 freshness 21/21 FAIL 保留為未解驗證 Gate。
 
