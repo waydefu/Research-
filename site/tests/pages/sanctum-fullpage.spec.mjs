@@ -65,3 +65,34 @@ test('Sanctum has no JavaScript dependency for content and research links',async
   await expect(page.locator('.feature-card').first()).toHaveAttribute('href',/\/Research-\/v3\/research\//);
   await context.close();
 });
+
+test('Sanctum uses one continuous glass narrative instead of boxed content panels', async ({ page }) => {
+  await page.setViewportSize({width:1440,height:900});
+  await page.goto(PREVIEW);
+  const narrative=page.locator('.narrative-glass');
+  await expect(narrative.locator('.featured')).toHaveCount(1);
+  await expect(narrative.locator('.at-glance')).toHaveCount(1);
+  await expect(narrative.locator('.library-vault')).toHaveCount(1);
+  const presentation=await page.evaluate(() => {
+    const narrative=document.querySelector('.narrative-glass');
+    const featured=getComputedStyle(document.querySelector('.featured'));
+    const vault=getComputedStyle(document.querySelector('.library-vault'));
+    const card=getComputedStyle(document.querySelector('.feature-card'));
+    return {
+      narrativeGradient:getComputedStyle(narrative).backgroundImage,
+      featuredRadius:featured.borderTopLeftRadius,
+      featuredBorder:featured.borderTopWidth,
+      vaultRadius:vault.borderTopLeftRadius,
+      vaultBorder:vault.borderTopWidth,
+      articleBackground:card.backgroundColor,
+    };
+  });
+  expect(presentation.narrativeGradient).toContain('linear-gradient');
+  expect(presentation.featuredRadius).toBe('0px');
+  expect(presentation.featuredBorder).toBe('0px');
+  expect(presentation.vaultRadius).toBe('0px');
+  expect(presentation.vaultBorder).toBe('0px');
+  expect(presentation.articleBackground).toBe('rgba(0, 0, 0, 0)');
+  await expect(page.locator('.feature-card')).toHaveCount(3);
+  await expect(page.locator('.vault-index a')).toHaveCount(4);
+});
