@@ -1,6 +1,7 @@
 import { allDocs, resolveLocal, ROOT } from '../src/lib/catalog.mjs';
 import { mkdirSync, copyFileSync, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
+import {generateResearchArt} from './generate-research-art.mjs';
 
 const docs = allDocs();
 if (!docs.length) throw new Error('來源研究庫是空的');
@@ -24,4 +25,5 @@ for (const d of docs) {
   }
 }
 if (docs.some(d => d.file.endsWith('THREAT-MODEL.md'))) throw new Error('威脅模型不得進入公開內容');
-console.log('P0 preflight: ' + docs.length + ' Markdown files, ' + count + ' linked asset copies; all checked.');
+const art=generateResearchArt(docs);
+console.log('P0 preflight: ' + docs.length + ' Markdown files, ' + count + ' linked asset copies; ' + art.written + ' original article diagrams; all checked.');
