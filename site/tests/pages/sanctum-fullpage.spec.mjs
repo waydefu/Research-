@@ -158,7 +158,7 @@ test('homepage search form navigates to an actual full-text query',async({page})
   const form=page.locator('.hero-discovery');
   await expect(form.getByText('你想了解什麼？直接搜尋研究')).toBeVisible();
   await form.locator('input[name="q"]').fill('網站速度');
-  await form.getByRole('button',{name:/搜尋研究/}).click();
+  await form.getByRole('button',{name:'搜尋',exact:true}).click();
   await expect(page).toHaveURL(/\/Research-\/v3\/search\/\?q=/);
   await expect(page.locator('#search-term')).toHaveValue('網站速度');
 });
