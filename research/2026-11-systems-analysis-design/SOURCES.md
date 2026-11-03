@@ -1,30 +1,23 @@
-# SOURCES｜系統分析與設計 Ch1–Ch3 課程研究
+# 資料來源與證據界線｜資訊系統工程
 
-**整理／內容核對日期：**2026-11-03（Asia/Taipei）。  
-**來源型態：**使用者提供的課程 PDF。原始檔並非 GitHub 可公開連結的上游文檔，本倉庫不重新分發附件。
+整理日期：2026-11-03（Asia/Taipei）。來源為提供的原始參考 PDF。以下是可追溯之來源檔名與研究範圍；PDF 頁碼從封面第 1 頁起算。
 
-| ID | 原始附件檔名 | 標題（封面） | PDF 頁數 | 整理內容 |
-| --- | --- | --- | --- | --- |
-| C1 | `SA_Ch1.pdf` | *Chapter 1 — Introduction to Systems Analysis & Design* | 40 | [Ch1 筆記](01-introduction-to-systems-analysis-and-design.md) |
-| C2 | `SA_Ch2.pdf` | *Chapter 2 — Analyzing the Business Case* | 36 | [Ch2 筆記](02-analyzing-the-business-case.md) |
-| C3 | `SA_Ch3.pdf` | *Chapter 3 — Managing Systems Projects* | 37 | [Ch3 筆記](03-managing-systems-projects.md) |
+| 原始檔名 | 主題 | 頁數 | 研究文件 |
+| --- | --- | --- | --- |
+| `SA_Ch1.pdf` | Introduction to Systems Analysis & Design | 40 | [資訊系統架構與開發方法](information-systems-and-development.md) |
+| `SA_Ch2.pdf` | Analyzing the Business Case | 36 | [商業分析與可行性](business-case-and-feasibility.md) |
+| `SA_Ch3.pdf` | Managing Systems Projects | 37 | [專案排程與風險](project-planning-and-risk.md) |
 
-## 頁碼約定
+## 來源定位
 
-各章標示的「PDF 第 N 頁」均指**實際 PDF 的第 N 張頁面（從封面起算）**；其後投影片頁尾常由 1 開始，因此投影片標示與 PDF 頁碼會相差 1。跨頁範圍亦以 PDF 頁序為準。
+- 系統五要素、SDLC 與開發方法：`SA_Ch1.pdf`，PDF 第 5–7、24–31 頁。
+- 系統請求、四種可行性與初步調查：`SA_Ch2.pdf`，PDF 第 7–10、21–23、29–36 頁。
+- WBS、甘特圖、PERT/CPM 與關鍵路徑：`SA_Ch3.pdf`，PDF 第 5–15 頁。
+- 風險辨識、分析與應對：`SA_Ch3.pdf`，PDF 第 24–29 頁。
 
-## 內容溯源與信心
+## 證據狀態
 
-- **SOURCE（教材明載）**：核心定義、流程、名詞、表格分類等，已依提供的 PDF 轉述。對應頁碼標示在各章段落。
-- **EXPLANATION（整理者補充）**：白話說明、記憶口訣、快速自測與示例，供學習理解；不應誤引為教材原文。
-- **NOT VERIFIED EXTERNALLY（未外部查證）**：未逐項以當前官方標準、課本原書、最新工具版本或外部學術資源交叉驗證；原教材含圖的細節如未進入摘要，不能反推不存在。
-- **NO IMPLEMENTATION（未實作）**：研究筆記未對其他 GitHub 專案、系統配置或開發流程作任何變更；未作 Benchmark。
-- **COPYRIGHT（再散布界線）**：僅以自己的文字摘要和標註檔名／頁碼，不將課程 PDF、整頁投影片或長篇原文推送到此公開 Repo。
-
-## 本次摘要的主要查核區
-
-- Ch1：資訊系統五組成（PDF 5–7）、SDLC（24–27）、Agile／Prototype（30–31）。
-- Ch2：Systems Request 六理由（PDF 9）、四大可行性（21–23）、初步調查五步（29–35）。
-- Ch3：Gantt/PERT/WBS（PDF 5–15）、風險流程與策略（24–29）、管理問題與敏捷思維（35–37）。
-
-以上只用作**課程研究檢索起點**。若要引用為通用產業研究，需補充獨立的一手來源與重新查證日期。
+- **來源支持：**專有名詞、分類與流程的轉述，見各文件頁碼。
+- **研究者綜合：**跨領域理解、概念關係及適用性說明，不等同來源原文。
+- **尚未驗證：**與現行產業標準或工具版本的全面一致性，及實際組織採用後的成效。
+- **版權：**僅保留引用來源的檔名與頁碼，不上傳或重製完整原始簡報。
