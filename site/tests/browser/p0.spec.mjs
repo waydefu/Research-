@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 const BASE = '/Research-/v3/';
+const HOME = BASE + 'library/';
 const DOC = BASE + 'research/2026-11-universal-web-engine/19-v3-astro-research-cinema-architecture-and-roadmap/';
 const DOMAIN = BASE + 'domains/2026-11-universal-web-engine/';
 const SEARCH = BASE + 'search/';
@@ -35,7 +36,7 @@ test('search domain filter respects actual document domain', async ({page}) => {
 for (const [name, width, height] of [['phone',360,780], ['tablet',768,1024], ['desktop',1440,900]]) {
   test('readable and no horizontal page overflow: ' + name, async ({page}, testInfo) => {
     await page.setViewportSize({width,height});
-    for (const [label,url] of [['home',BASE], ['document',DOC], ['search',SEARCH], ['domain',DOMAIN]]) {
+    for (const [label,url] of [['home',HOME], ['document',DOC], ['search',SEARCH], ['domain',DOMAIN]]) {
       await page.goto(url);
       expect(await page.locator('h1').first().isVisible()).toBe(true);
       const overflow = await page.evaluate(() => ({
@@ -74,7 +75,7 @@ test('reduced motion: no smooth scroll and readable content', async ({browser}, 
   await page.screenshot({path:testInfo.outputPath('reduced-motion-document.png'),fullPage:true});
   await context.close();
 });
-for (const [label,url] of [['home',BASE],['document',DOC],['search',SEARCH],['domain',DOMAIN]]) {
+for (const [label,url] of [['home',HOME],['document',DOC],['search',SEARCH],['domain',DOMAIN]]) {
   test('axe WCAG 2.2 serious/critical scan: ' + label, async ({page}) => {
     await page.goto(url);
     const results = await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze();
