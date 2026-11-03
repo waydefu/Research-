@@ -128,38 +128,46 @@ Done when
 - 照 AGENTS.md 的回報格式開 PR。
 ```
 
-### P0.5｜基礎收斂：資料、CI、部署與治理（推理強度：High；依序拆成小 PR）
+### P0.5｜基礎與治理收斂（推理強度：High；每個字母拆成獨立 PR）
 
 ```text
 Goal
-在開始 P1 美術以前，把 Research- 的「研究資料 → 網站 → CI → 部署」收斂成可持續擴張的單一系統。這一階段不做 Three.js、GSAP 或電影級 3D。
+在 P1 美術以前，把 Research- 從「可用研究站」提升成可長期擴張的專業工程 Repo。這一階段不做 Three.js、GSAP 或電影級 3D。
 
 Mandatory order
-A. 修目前 CI / Pages browser test blocker；測試跟真實規格對齊，不回退正確 UI 只為綠燈。
-B. CI 穩定後，把 V3 build/browser 與 Pages artifact integrity 加進 main Required Checks。
-C. 建立正式 Research Metadata Schema：publicTitle、summary、domain、topic、tags、creator、source、demo、license、verifiedAt、image、evidenceLevel。
-D. 每篇研究視覺改為 article → topic → domain → fallback；補全繁中 display metadata 並建立 Gate。
-E. 收斂部署：site/ 成為唯一正式 Web App / deploy source；showcase/ 只保留 legacy V2、design/reference 與必要歷史資產。
-F. 建立新的 Governance baseline，保留舊 baseline 作歷史快照。
-G. 建立 Research ingestion pipeline，讓新增完整研究條目後自動進分類、搜尋、圖片、來源與網站。
+A. 修目前 CI / Pages browser test blocker，讓測試跟真實 UI 規格一致。
+B. 將穩定的 V3/browser + Pages artifact checks 加入 main Required Checks。
+C. 建立正式 Research Metadata Schema。
+D. 建立 Architecture Contract + ADR；定義 source/content → metadata/domain → components → pages → runtime/effects 單向邊界。
+E. 拆前端模組與 Design System：content/metadata/search、primitives/research/navigation、tokens/typography/layout/motion。
+F. 建立 lint / format / import-boundary / visual-regression Gate；避免脆弱的固定 DOM/圖片數測試。
+G. 每篇文章支援專屬視覺；建立全繁中 public metadata Gate。
+H. 收斂 site/ 為唯一正式 Web App / deploy source；showcase/ 只留 legacy/reference/history。
+I. 補 Security + Dependency Governance：SECURITY.md、SAST 選型、secret scanning/push protection、Dependabot/等價更新、必要時 dependency review。
+J. 補 Supply-chain + License / Asset Registry：root license 決策、THIRD_PARTY_NOTICES、asset/source manifest；SBOM/attestation 留到 P5 強制。
+K. 擴充 task-specific Agent Skills；AGENTS 只保留全域邊界，Skill 用 A/B 驗證 ROI。
+L. Governance re-baseline，並把能自動化的政策變成 CI Gate。
+M. 建立 Research ingestion pipeline。
 
 Constraints
-- 每一項拆成獨立 PR，前一 Gate 未通過不要跳下一項。
-- 不在本階段導入 Three.js、GSAP、Blender asset runtime 或新的電影級效果。
-- Ruleset / Required Checks 屬 Repo 管理設定，修改前需 Owner 明確授權；可以先準備文件與建議值。
-- Metadata migration 必須支援既有文章 fallback，避免一次重寫全部研究。
-- 不允許用 regex / folder slug 作為新文章的唯一公開分類來源。
-- 不允許所有同 topic 文章永遠共用同一張圖；核心研究必須能指定文章視覺。
-- 全繁中 Gate 只約束讀者可見 metadata / UI；Three.js、WebGPU、MCP 等正式技術名稱可以保留英文。
+- 每一項獨立 PR；前一 Gate 未通過不要跳級。
+- Ruleset、GitHub security setting、Pages、workflow 權限變更需 Owner 明確授權。
+- 不為模仿大型 Repo 硬上 monorepo、Storybook、多層 OWNERS 或付費 observability。
+- Security 工具避免功能重疊；一種風險類別先選一個主掃描器。
+- License 不可用單一 MIT 粗暴覆蓋第三方研究、圖片、字體、3D asset；先定義 code/docs/assets 權利邊界。
+- Metadata migration 支援舊文章 fallback，但新文章不可只靠 regex / folder slug。
+- Skill 安裝不等於有效；必須量 task success、Token、wall time、rework。
+- 所有讀者可見 UI/metadata 使用繁中；正式技術名稱可保留英文。
 
 Done when
-- Research integrity、V3 build/browser、Pages artifact/browser 三層驗收都能穩定通過。
-- main 的 Required Checks 能擋下壞網站，不只擋 Markdown 錯誤。
-- 新研究可以用結構化 metadata 明確描述，不主要依賴 regex 推導。
-- 文章視覺可逐篇指定，公開分類與導讀不露出資料夾 slug。
+- 壞網站、壞 metadata、越層 import、核心視覺漂移與高風險供應鏈問題都有對應 Gate。
+- 正式架構決策可從 ADR 快速讀懂，不需要重讀大量研究才能知道「最後選什麼」。
+- 共用 UI / CSS /資料處理有穩定模組邊界。
 - 正式網站只有一個主要 build/deploy source。
-- Governance baseline 反映當前 public/private、ruleset、protected main、required checks 的真實狀態。
-- 新增研究的手動多處索引工作被 ingestion pipeline 取代。
+- public repo 的 code/docs/assets 授權與第三方來源能被追溯。
+- Agent 任務使用對應 Skill，而不是把所有規則塞進巨大 AGENTS.md。
+- Governance baseline 反映真實 ruleset / required checks / dependency / security 狀態。
+- 新研究可透過 ingestion pipeline 自動進分類、搜尋、圖片、來源與網站。
 - 完成後才允許執行 P1 美術 G0。
 ```
 
