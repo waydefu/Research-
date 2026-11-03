@@ -55,3 +55,39 @@
 - [ ] PR #31 維持 Draft，不自行合併、不部署。
 
 **來源**：上列 PR 與 GitHub Actions 均為 Repository 原始紀錄；需重查最新 HEAD，不能沿用舊提交的綠燈當新提交證據。
+
+## 六、2026-11-03 G0 視覺／瀏覽器證據完成記錄
+
+**候選 HEAD（取證時）**：`7a796a4ffcadad3357e62615aadfc326665fe476`；仍是 PR #31 Draft，**未合併、未部署**。先前交付基線 `d97048f` 是審查修補基準，**不能代替此版的 CI**。
+
+### 實際取得的畫面
+
+- [Pages CI 與截圖證據（53/53 PASS）](https://github.com/waydefu/Research-/actions/runs/41595653259)；[截圖 Artifact #13212166972](https://github.com/waydefu/Research-/actions/runs/41595653259/artifacts/13212166972)，GitHub 預計保留至 2026-11-10。
+- Playwright Chromium **6 個寬度（320、360、393、430、768、1440）× 首頁／典藏／搜尋／研究文章 4 類頁面，共 24 組頂部截圖**。
+- 額外有手機 393 與桌面 1440 各 4 個捲動敘事位置（進場／精選／典藏／結尾），**共 8 張過渡證據**；其餘測試截圖為輔助。
+- 在本輪檢查中，已實際檢視至少 320、393、768、1440 的版面與手機／桌面敘事拼圖：**未見文字或主視覺被橫向裁掉**，暗金主題與神殿背景能延續到閱讀頁，手機標題有依寬度自然換行。
+- 指出並修正三個實際 G0 細節：正式首頁頁尾過時的「P1 CONCEPT STUDY」字樣、內頁品牌標識不一致、手機導覽觸控尺寸及換行；改成品牌標識連到首頁、手機保留分類和搜尋兩個 40px 高導覽目標。修正過程還發現 aria-label 與可見品牌名稱不一致，已修補並由 axe 重新驗證。
+- 上述是**使用 Chromium CI 產出的真實渲染截圖進行的畫面審視**，不是 Photoshop 示意圖；但仍非在 Android／iOS 物理裝置上觀察，因此不得推論實際 GPU、發熱或字體載入完全等同。
+
+### 新版候選的功能與無障礙結果
+
+| 證據 | 結果 |
+| --- | --- |
+| [Pages 整合與 Chromium Playwright](https://github.com/waydefu/Research-/actions/runs/41595653259) | **53/53 PASS**，含六種 viewport、同站內頁、模擬觸控、第三方示範開啟／卸載及 320/393px 40px 導覽目標 |
+| [V3 P0 QA](https://github.com/waydefu/Research-/actions/runs/41595652880) | **11/11 PASS**，含 20 種繁中搜尋案例、無 JS、WCAG 2.2 axe serious／critical 掃描 |
+| [研究完整性](https://github.com/waydefu/Research-/actions/runs/41595652838) | **SUCCESS**；共 84 篇研究、全部來源路由及 Pagefind 正常 |
+| 頁面資料與單元測試 | **12/12 PASS**，分類、超過 50 筆結果、引用來源完整性保留 |
+| PR 正式部署工作 | **skipped**，未發布此版本 |
+
+### 實機／最終簽核結論（不可省略）
+
+**G0 桌面與手機寬度視覺／功能模擬：已完成、可供 Owner 審查。**  
+**G0 實體 Android／iPhone：未完成；沒有可連接的物理裝置、PR 專用可訪問實機預覽 URL、性能 traces、外站真實 iframe 截圖。**  
+**G0 字體盲測與原 Atlas 3D 三視角：仍是舊 Gate 的待處理條件，未藉 Chromium 測試消除。**  
+**G0 最終判定：HOLD / BLOCKED，不得自動寫成 PASS，亦不得自行允許 P2。**
+
+已新增 [G0 實機測試操作與證據格式](./G0-REAL-DEVICE-PROTOCOL.md)，涵蓋 POCO／Android Chrome 與真 iPhone Safari、研究長文、鍵盤／觸控、3D iframe、長時間熱負載、Core Web Vitals 與現場紀錄要求。需要在**相同 PR SHA** 的可訪問測試網址上由物理裝置執行並提交證據，才可完成實機 Gate。
+
+外部技術標準參考：[web.dev CWV 門檻定義](https://web.dev/articles/defining-core-web-vitals-thresholds)、[Chrome Android remote debugging](https://developer.chrome.com/docs/devtools/remote-debugging/)、[Apple iOS Web Inspector](https://developer.apple.com/documentation/safari-developer-tools/inspecting-ios)。
+
+**提醒：** 若本文件後又有新提交，需以新 HEAD 重新檢查工作流程結論；本段只代表以上特定版號的紀錄。
