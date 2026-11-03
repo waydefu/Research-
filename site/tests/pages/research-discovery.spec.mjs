@@ -8,11 +8,11 @@ test('library can narrow by domain, detailed topic, technology and keyword on mo
   await expect(page.getByRole('heading',{name:/想了解一項技術/})).toBeVisible();
   const entries=page.locator('#library-results li');
   expect(await entries.count()).toBeGreaterThan(60);
-  await page.locator('#library-topic').selectOption('3D 場景與 Shader');
+  await page.locator('#library-topic').selectOption('互動作品與設計案例');
   const visible=entries.locator('visible=true');
   const count=await visible.count();
   expect(count).toBeGreaterThan(0);
-  for(const topic of await visible.evaluateAll(nodes=>nodes.map(n=>n.dataset.topic)))expect(topic).toBe('3D 場景與 Shader');
+  for(const topic of await visible.evaluateAll(nodes=>nodes.map(n=>n.dataset.topic)))expect(topic).toBe('互動作品與設計案例');
   await page.locator('#library-keyword').fill('Arctic Waters');
   await expect(page.locator('#library-result-count')).toContainText('1 /');
   const horizontal=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
@@ -24,7 +24,7 @@ test('library can narrow by domain, detailed topic, technology and keyword on mo
 test('document keeps original research, shows author and only loads third-party demo on click',async({page})=>{
   await page.route(/https:\/\/(?:3ditions\.drop3\.app|threejs\.org)\//,route=>route.abort());
   await page.goto(DOC);
-  await expect(page.getByRole('heading',{name:/Arctic Waters：電影級 Three\.js/})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/Arctic Waters：Three\.js 海洋作品的製作流程/})).toBeVisible();
   await expect(page.locator('article .article-content')).not.toBeEmpty();
   await expect(page.locator('.source-original a')).toHaveAttribute('href',/3ditions\.drop3\.app/);
   const frames=page.locator('.demo-viewport iframe');
@@ -39,7 +39,7 @@ test('document keeps original research, shows author and only loads third-party 
 test('search has topic and technology filters without losing keyword search',async({page})=>{
   await page.goto(BASE+'search/');
   await expect(page.locator('#search-feedback')).toContainText('輸入關鍵字');
-  await page.locator('#topic-filter').selectOption('3D 場景與 Shader');
+  await page.locator('#topic-filter').selectOption('即時 3D 渲染與 Shader');
   await page.locator('#search-term').fill('Three.js');
   await page.getByRole('button',{name:'搜尋'}).click();
   await expect(page.locator('#search-feedback')).toContainText(/找到 \d+ 項結果/);

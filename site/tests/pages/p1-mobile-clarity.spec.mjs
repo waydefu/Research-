@@ -26,9 +26,9 @@ for(const width of [320,393,430]){
 }
 test('topic disclosure lists every article in place without search or script',async({page})=>{
   await page.goto(BASE+'library/');
-  const target=page.locator('.topic-exhibit[data-topic="LLM 模型與推論"]');
+  const target=page.locator('.topic-exhibit[data-topic="模型推論與記憶體"]');
   await expect(target).toBeVisible();
-  const count=await page.locator('#library-results li[data-topic="LLM 模型與推論"]').count();
+  const count=await page.locator('#library-results li[data-topic="模型推論與記憶體"]').count();
   expect(count).toBeGreaterThan(0);
   await expect(target.locator('.topic-articles a').first()).not.toBeVisible();
   const initial=page.url();
@@ -43,7 +43,7 @@ test('topic articles work without JavaScript and keep direct article links',asyn
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:360,height:780}});
   const page=await context.newPage();
   await page.goto(BASE+'library/');
-  const target=page.locator('.topic-exhibit[data-topic="LLM 模型與推論"]');
+  const target=page.locator('.topic-exhibit[data-topic="模型推論與記憶體"]');
   await target.locator('summary').click();
   await expect(target.locator('a').first()).toBeVisible();
   await target.locator('a').first().click();
