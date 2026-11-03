@@ -14,7 +14,7 @@ test('repo navigation contains supported areas and all linked modules/tests actu
     assert.ok(section.paths.includes(section.entry),section.id);
     assert.ok(section.checks.length>0,section.id);
     for(const p of [...section.paths,...section.checks]){
-      assert.ok(!p.startsWith('/') && !p.includes('..'),p);
+      assert.ok(!p.startsWith('/') && !p.split('/').includes('..'),p);
       assert.ok(existsSync(resolve(root,p)),section.id+': missing '+p);
     }
   }
