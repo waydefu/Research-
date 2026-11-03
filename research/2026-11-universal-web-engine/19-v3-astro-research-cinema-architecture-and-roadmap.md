@@ -12,7 +12,7 @@
 - 正式根入口目前已由後續 PR 切成 Sanctum：\`/Research-/\`。
 - 舊 V2 已歸檔到 \`/Research-/v2/\`；V3 研究館仍位於 \`/Research-/v3/\`。
 - \`site/scripts/unify-home.mjs\` 是目前 root / V2 / V3 組裝事實來源之一。
-- PR #26、#31、#33 已完成後續首頁／內容整合作業；PR #35 仍是目前首頁修正工作。
+- PR #26、#31、#33 已完成後續首頁／內容整合作業；PR #35 是本基線建立時的首頁修正候選。**PR 狀態屬動態資料，不在規劃文件中寫死：執行或合併本計畫前必須重新讀取 current main 與 PR #35；若 #35 已合併，就以其內容作為新的 main 現況。**
 - PR #36 在本輪審查前的 HEAD \`8fb9e3695d0b463adfdbad131b103e6ed5b84c8a\`（2026-11-03）曾取得 \`Research integrity\`、\`V3 P0 build and checks\`、\`Publish Research Showcase\` 三組 SUCCESS。**本文件後續再修改後必須以新的最終 HEAD 重新判斷，不可沿用舊 SHA 的綠燈。**
 - 因此 P0.5-A 是「現況驗證 Gate」，不是預設存在的修復工作；若當前 main / PR HEAD 已通過，就記錄證據並關閉 A。
 - 任何「P5 才切 root」「V2 仍是正式根首頁」等文字均視為 2026-11-02 的歷史計畫，不再是目前執行指令。
