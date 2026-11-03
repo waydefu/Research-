@@ -97,6 +97,17 @@ Astro 6（output: 'static'）+ TypeScript 6、<ClientRouter /> + transition:pers
 （P0 建立 site/package.json 後補上實際指令）
 ```
 
+## 2.5 執行前 Current-State Rule（2026-11-03 新增）
+
+本執行書含 2026-11-02 的歷史步驟。**任何 Agent 開工前必須先讀 current main、相關 open PR、實際 workflow 與最新 CI；歷史規劃不得覆蓋已完成現況。**
+
+目前已知 current-state：
+- 正式 root 已是 Sanctum \`/Research-/\`。
+- V2 已歸檔 \`/Research-/v2/\`。
+- V3 reader / search 保留在 \`/Research-/v3/\`。
+- PR #36 先前 HEAD \`8fb9e3695d0b463adfdbad131b103e6ed5b84c8a\` 的三組 CI 曾全部 SUCCESS；新 HEAD 仍需重跑確認。
+- 看到「P5 才切 root」「V2 是正式 root」等內容，視為歷史上下文，不執行逆向切換。
+
 ## 3. 分階段任務提示詞
 
 每段直接貼進新對話。內容刻意只寫目標、背景、限制與完成條件，做法交給模型。
@@ -128,48 +139,63 @@ Done when
 - 照 AGENTS.md 的回報格式開 PR。
 ```
 
-### P0.5｜基礎與治理收斂（推理強度：High；每個字母拆成獨立 PR）
+### P0.5｜基礎與治理收斂（High；Blocking / Parallel / Break-glass）
 
-```text
+\`\`\`text
 Goal
-在 P1 美術以前，把 Research- 從「可用研究站」提升成可長期擴張的專業工程 Repo。這一階段不做 Three.js、GSAP 或電影級 3D。
+在新的大規模 P1 production implementation 前，完成必要 Blocking Gates，同時允許既有 G0 收尾、低風險 bugfix 與治理工作平行。Security / secret / license / production regression 採 break-glass，不得排隊等里程碑。
 
-Mandatory order
-A. 修目前 CI / Pages browser test blocker，讓測試跟真實 UI 規格一致。
-B. 將穩定的 V3/browser + Pages artifact checks 加入 main Required Checks。
-C. 建立正式 Research Metadata Schema。
-D. 建立 Architecture Contract + ADR；定義 source/content → metadata/domain → components → pages → runtime/effects 單向邊界。
-E. 拆前端模組與 Design System：content/metadata/search、primitives/research/navigation、tokens/typography/layout/motion。
-F. 建立 lint / format / import-boundary / visual-regression Gate；避免脆弱的固定 DOM/圖片數測試。
-G. 每篇文章支援專屬視覺；建立全繁中 public metadata Gate。
-H. 收斂 site/ 為唯一正式 Web App / deploy source；showcase/ 只留 legacy/reference/history。
-I. 補 Security + Dependency Governance：SECURITY.md、SAST 選型、secret scanning/push protection、Dependabot/等價更新、必要時 dependency review。
-J. 補 Supply-chain + License / Asset Registry：root license 決策、THIRD_PARTY_NOTICES、asset/source manifest；SBOM/attestation 留到 P5 強制。
-K. 擴充 task-specific Agent Skills；AGENTS 只保留全域邊界，Skill 用 A/B 驗證 ROI。
-L. Governance re-baseline，並把能自動化的政策變成 CI Gate。
-M. 建立 Research ingestion pipeline。
+Start by verifying current state
+1. Read current main, open PRs, site/scripts/unify-home.mjs and workflow triggers.
+2. Read exact current PR HEAD CI.
+3. If Research integrity + V3 + Pages are green, record SHA/date and mark A PASS. Do NOT reopen a solved blocker.
+4. Treat Sanctum at /Research-/ and V2 at /v2/ as current routing facts.
+
+Blocking before NEW large P1 production work
+C. Research Metadata Schema.
+D. Architecture Contract + ADR.
+E. Frontend modularization + Design System.
+F. lint / format / import-boundary / visual-regression gates.
+G. per-article visuals + Traditional-Chinese public metadata gate.
+H. converge the CURRENT unified deployment toward one formal Web App / build source; never revert V2 to root.
+
+Parallel governance
+B. Design a required status that reports on every PR before touching ruleset. Current V3/Pages workflows use pull_request.paths; do not make those raw contexts globally required.
+I. Security + dependency full governance.
+J. Supply-chain + license / asset registry.
+K. task-specific Agent Skills.
+L. current-state governance baseline + machine-checkable policy.
+M. research ingestion pipeline (depends on C/G/L contracts).
+
+Break-glass
+- production regression
+- security vulnerability / leaked secret
+- license / legal issue
+- critical accessibility regression
+- CI outage that blocks safe delivery
+
+These may interrupt any phase. Record:
+Decision maker / Reason / Scope / Risk accepted / Revisit date / Deferred verification / Follow-up PR or issue.
+
+Required-check safety
+Use an every-PR wrapper or equivalent stable context:
+pull_request(all paths) -> path classifier -> expensive checks when relevant / lightweight checks otherwise -> one required status.
+Verify at least one docs/root-only PR and one site/research PR before adding it to main-eag-100.
 
 Constraints
-- 每一項獨立 PR；前一 Gate 未通過不要跳級。
-- Ruleset、GitHub security setting、Pages、workflow 權限變更需 Owner 明確授權。
-- 不為模仿大型 Repo 硬上 monorepo、Storybook、多層 OWNERS 或付費 observability。
-- Security 工具避免功能重疊；一種風險類別先選一個主掃描器。
-- License 不可用單一 MIT 粗暴覆蓋第三方研究、圖片、字體、3D asset；先定義 code/docs/assets 權利邊界。
-- Metadata migration 支援舊文章 fallback，但新文章不可只靠 regex / folder slug。
-- Skill 安裝不等於有效；必須量 task success、Token、wall time、rework。
-- 所有讀者可見 UI/metadata 使用繁中；正式技術名稱可保留英文。
+- Existing approved G0 closeout is not frozen by unfinished Parallel Governance.
+- Ruleset / GitHub Security / Pages / workflow permission changes still require Owner authorization.
+- Security and license minimum baseline applies immediately; full tooling may be parallel.
+- Do not add heavyweight enterprise tooling just for appearance.
+- Do not introduce Three.js / GSAP / cinematic 3D in P0.5.
 
 Done when
-- 壞網站、壞 metadata、越層 import、核心視覺漂移與高風險供應鏈問題都有對應 Gate。
-- 正式架構決策可從 ADR 快速讀懂，不需要重讀大量研究才能知道「最後選什麼」。
-- 共用 UI / CSS /資料處理有穩定模組邊界。
-- 正式網站只有一個主要 build/deploy source。
-- public repo 的 code/docs/assets 授權與第三方來源能被追溯。
-- Agent 任務使用對應 Skill，而不是把所有規則塞進巨大 AGENTS.md。
-- Governance baseline 反映真實 ruleset / required checks / dependency / security 狀態。
-- 新研究可透過 ingestion pipeline 自動進分類、搜尋、圖片、來源與網站。
-- 完成後才允許執行 P1 美術 G0。
-```
+- A has current SHA/date evidence, not an assumed failure.
+- Safe required-gate design cannot leave path-filtered PRs permanently Pending.
+- Blocking C-H are complete or carry explicit Owner waiver.
+- Current root/V2/V3 routing is documented consistently.
+- Parallel I-M each has state, owner/decision, and follow-up evidence.
+\`\`\`
 
 ### P1｜美術 G0：靜止畫面（推理強度：Medium）
 
@@ -260,7 +286,7 @@ Done when
 
 ```text
 Goal
-產出可供 Owner 決定是否正式切換的真機證據，並準備切換 PR（不自行合併或部署）。
+產出可供 Owner 決定是否正式發布 P5 體驗的真機證據；**根入口目前已是 Sanctum，不再把「切 root」當成 P5 任務**。P5 只處理最終 3D／導演功能的正式發布與回退。
 
 Context
 - 規格：19 號文件第 8 節；research/2026-11-universal-web-engine/13-design-performance-and-architecture.md 第 7 節的量測協定與第 7.5 節負向測試。
@@ -271,7 +297,7 @@ Constraints
 
 Done when
 - 負向測試 10 項逐項結果。
-- 切換 PR：根路徑改為 V3，V2 移到 /v2/ 作為回退；PR 標明需要 Owner 批准的 workflow 與 Pages 變更。
+- 發布 PR：維持目前 root Sanctum、`/v2/` legacy、`/v3/` reader 的既有路由契約；若未來要改 URL 架構必須另立 ADR / migration。PR 標明需要 Owner 批准的 workflow 與 Pages 變更。
 ```
 
 ## 4. 驗收與審查提示詞
