@@ -12,7 +12,7 @@ test('atlas entry exposes 3 distinct concepts and real P0 reading link', async (
   for (const slug of cases) {
     expect(await page.locator('.atlas-option-image[href="' + ATLAS + slug + '/"]').count()).toBe(1);
   }
-  await expect(page.getByRole('link', {name:/直接閱讀研究/})).toHaveAttribute('href',BASE+'search/');
+  await expect(page.getByRole('link', {name:/返回 P0 研究館/})).toHaveAttribute('href',BASE);
 });
 
 for (const slug of cases) {
