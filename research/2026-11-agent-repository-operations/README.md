@@ -45,5 +45,6 @@
 
 - [EGM、Advisor、Jev](../2026-11-agent-engineering/README.md)：模型角色與設計審查，不能代替治理。
 - [現代 Web 工程](../2026-11-universal-web-engine/README.md)：框架／部署／Web 專案技術選型。
+- [Polyfork Agent-native 3D](../2026-11-universal-web-engine/24-polyfork-agent-native-3d-assets.md)：domain-specific MCP / REST 如何把結構化資產搜尋、variant 與 preview 暴露給 Agent；若採用仍需以 task success / Token / 人工返工 A/B 驗證。
 
 > 所有「推薦」均屬研究結論；不代表已獲許可在任何開發環境中安裝、運行或合併。

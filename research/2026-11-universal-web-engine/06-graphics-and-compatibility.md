@@ -44,6 +44,12 @@
 - **WebGPU Compatibility Mode** 允許受限特徵集合在舊圖形 API 上運行，Chrome 146 官方提過以 Android OpenGL ES 3.1 起步；是否支援仍以實際 Adapter 為準。
 - **Gaussian Splatting** 可用於照片感場景重建，但對需要精確碰撞、可編輯 mesh、邊界清楚的工程模型並非萬能替代品。
 
+## Agent-native 3D 資產與 Asset-as-Code
+
+- [Polyfork：MCP / REST、Three.js ES module、typed knobs、kits、procedural terrain 與授權邊界](24-polyfork-agent-native-3d-assets.md) 是目前技術庫的 Agent-native asset 參考。
+- 適合作為場景基礎素材層，不取代 Three.js renderer、資產壓縮工具或大型幾何渲染架構。
+- 免費 low-poly 若直接由 Polyfork CDN hotlink，可依官方授權供 world builder / agent 使用；若 mirror、自架 CDN、proxy 或重新散布 asset 檔案，需重新檢查 Platform License。
+
 ## 大型幾何／Virtualized Geometry 參考
 
 - [threejs-nanites：GPU-driven cluster LOD、HZB、software rasterizer、impostor、streaming、temporal upscaling](23-threejs-nanites-gpu-driven-geometry.md) 是目前技術庫的大型場景參考實作。

@@ -77,6 +77,7 @@
 - [14｜十種代表特效：原創偽碼、瓶頸、降級，以及五個 PoC 驗收](research/2026-11-universal-web-engine/14-effects-recipes-and-poc-validation.md)
 - [15｜55 個來源條目、證據等級、限制與導入先後順序](research/2026-11-universal-web-engine/15-creative-web-evidence-and-adoption.md)
 - [23｜threejs-nanites：WebGPU GPU-driven Virtualized Geometry / Massive Scene Rendering](research/2026-11-universal-web-engine/23-threejs-nanites-gpu-driven-geometry.md)
+- [24｜Polyfork：Agent-native 3D、Parametric Assets / Asset-as-Code / MCP](research/2026-11-universal-web-engine/24-polyfork-agent-native-3d-assets.md)
 
 **證據限制：** 非 28 個站逐頁操作、非跨裝置實機 Benchmark；GitHub API 授權 metadata 不代替 LICENSE 法律審查；無 FPS、Bundle 體積、功耗數據時明確保留 Unknown。**已建立規格，不代表安裝、部署或通過 EAG-100。**
 
