@@ -61,7 +61,7 @@ publish-showcase.yml [PR validate; main push deployment subject to CI]
 ## 導航完整性的驗證界線
 
 - 測試會掃描 `site/src/lib/*.mjs` 與 `site/scripts/*.mjs`，新增而未登記的模組將觸發失敗；已登記的必要路徑若不存在，也會失敗。
-- PR #42 的導讀、PR #43 的圖像模組，在本獨立分支**尚不存在**，故先登記為可選群組；一旦合併，整組程式與回歸測試必須一起存在，不能只引用未建好的模組。
+- PR #42 導讀與 PR #43 圖像模組已於此前合併至 main；導航的可選群組是為支援不同分支組合而保留，模組存在時測試仍要求對應回歸一起存在。
 - **這是路徑覆蓋檢查**，不是完整的 JS 函式呼叫圖。GitHub 最新 HEAD、PR 和 CI 仍必須即時查證。
 
 ## 已有工具先用好，不堆 MCP
@@ -75,8 +75,8 @@ publish-showcase.yml [PR validate; main push deployment subject to CI]
 
 - GitHub API 現查的 main SHA、PR HEAD、Actions result 才是動態事實。
 - `site/HANDOFF-CURRENT.md`、`research/2026-11-universal-web-engine/19-*.md`、V2 設計與歷史驗收都有時間戳；有衝突時**優先最新明示授權與 GitHub 動態事實**。
-- P0.5 導讀／圖片／導航的執行序列在 `site/P0.5-EDITORIAL-ASSETS-REPO-NAVIGATION-ROADMAP.md`（獨立 Draft PR #41，尚未合併時不能當成 main 已有）。
-- PR #42 導讀與 PR #43 原創圖片若尚未合併，其新增檔案只存在對應分支；不要在 main 假裝存在或把 CI 測試結果移植到不同 HEAD。
+- P0.5 導讀／圖片／導航的歷史執行序列在 `site/P0.5-EDITORIAL-ASSETS-REPO-NAVIGATION-ROADMAP.md`；PR #41 已合併，但歷史規劃不能代替最新 Gate，應先讀 `site/P0.5-EXIT-P1-ENTRY.md`。
+- PR #42／#43 的導讀與原創示意圖已整合，仍不可將舊 PR 的 CI 套用到新 HEAD；若在舊分支檢查，需重新核對實際存在的模組及來源。
 - `site/REPO-MAP.md` 的導航契約以 `site/src/lib/repo-navigation.mjs` 為原始清單。新增、移除、重命名受管理的模組時，同步更新這兩處；`site/tests/repo-navigation.test.mjs` 同時拒絕不存在的路徑及未登記的新 JS 模組。
 
 ## 邊界
