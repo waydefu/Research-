@@ -1,3 +1,4 @@
+import {validateMetadataRegistry} from './metadata-schema.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
   'research/2026-11-local-ai-inference/01-colibri-moe-streaming.md': {
@@ -42,6 +43,7 @@ export const CURATED = {
     topic:'網站效能與無障礙'
   }
 };
+validateMetadataRegistry(CURATED);
 const TOPIC_RULES = [
   ['3D 場景與 Shader', /three.?js|webgl|webgpu|shader|渲染|3d|glb|blender|sdf|nanite|gpu/i],
   ['動畫與互動', /motion|gsap|動畫|動效|滾動|捲動|scroll|transition|rive/i],
@@ -113,14 +115,20 @@ export function enrichResearch(doc){
   const directory=String(doc.id||'').split('/').slice(0,-1).join('/') || doc.group || '';
   const topic=c.topic||TOPIC_RULES.find(([,re])=>re.test(subject))?.[0]
     ||TOPIC_RULES.find(([,re])=>re.test(directory))?.[0]||'跨領域研究';
-  const tags=TAG_RULES.filter(([,re])=>re.test(subject)).map(([name])=>name).slice(0,5);
+  if(c.schemaVersion===1 && c.domain!==doc.group) throw new Error('Metadata domain 與來源路徑不符：'+doc.file);
+  const tags=c.schemaVersion===1 ? c.tags : TAG_RULES.filter(([,re])=>re.test(subject)).map(([name])=>name).slice(0,5);
   const token=subject;
-  const intro=c.lead||overview(doc.text);
+  const intro=(c.schemaVersion===1 ? c.summary : c.lead)||overview(doc.text);
   return {
-    ...doc,publicTitle:c.title||doc.title,summary:intro||'原始研究已收錄；白話導讀尚待補充。',
-    summaryReviewed:Boolean(c.lead),topic,tags,
+    ...doc,publicTitle:(c.schemaVersion===1 ? c.publicTitle : c.title)||doc.title,summary:intro||'原始研究已收錄；白話導讀尚待補充。',
+    summaryReviewed:Boolean(c.schemaVersion===1 ? c.summary : c.lead),topic,tags,
     kind:/案例|case|benchmark|作品/i.test(token)?'案例解析':/規範|治理|驗收|guide|workflow/i.test(token)?'工程方法':'技術研究',
-    creator:c.creator||null,demos:c.demos||[],externalLinks:externalLinks(doc.text)
+    creator:c.creator||null,demos:(c.schemaVersion===1 ? c.demo : c.demos)||[],externalLinks:externalLinks(doc.text),
+    originalSource:c.schemaVersion===1 ? c.originalSource : null,
+    license:c.schemaVersion===1 ? c.license : null,
+    verifiedAt:c.schemaVersion===1 ? c.verifiedAt : null,
+    image:c.schemaVersion===1 ? c.image : null,
+    evidenceLevel:c.schemaVersion===1 ? c.evidenceLevel : 'unverified'
   };
 }
 export const topicsFor=docs=>[...new Set(docs.map(d=>d.topic))].sort((a,b)=>a.localeCompare(b,'zh-TW'));
