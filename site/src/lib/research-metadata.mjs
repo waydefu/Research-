@@ -1,5 +1,6 @@
 import {validateMetadataRegistry} from './metadata-schema.mjs';
 import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
+import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
   'research/2026-11-local-ai-inference/01-colibri-moe-streaming.md': {
@@ -120,10 +121,17 @@ export function enrichResearch(doc){
   if(c.schemaVersion===1 && c.domain!==doc.group) throw new Error('Metadata domain 與來源路徑不符：'+doc.file);
   const tags=c.schemaVersion===1 ? c.tags : reviewed?.tags||TAG_RULES.filter(([,re])=>re.test(subject)).map(([name])=>name).slice(0,5);
   const token=subject;
-  const intro=(c.schemaVersion===1 ? c.summary : c.lead)||overview(doc.text);
+  // Canonical v1 remains authoritative. Current documents use individually reviewed,
+  // source-bounded introductions; preserve old CURATED author/demo references.
+  const editorialLead=EDITORIAL_LEADS[doc.file]||null;
+  const intro=(c.schemaVersion===1 ? c.summary : editorialLead||c.lead)||overview(doc.text);
   return {
     ...doc,publicTitle:(c.schemaVersion===1 ? c.publicTitle : reviewed?.publicTitle||c.title)||doc.title,summary:intro||'原始研究已收錄；白話導讀尚待補充。',
-    summaryReviewed:Boolean(c.schemaVersion===1 ? c.summary : c.lead),topic,tags,
+    summaryReviewed:Boolean(c.schemaVersion===1 ? c.summary : editorialLead||c.lead),
+    // Editorial work is not independent verification of external claims.
+    summaryFactChecked:false,
+    summarySource:c.schemaVersion===1&&c.summary?'canonical-v1':editorialLead?'editorial-lead':c.lead?'legacy-curated':'source-excerpt',
+    topic,tags,
     kind:reviewed?.kind||(/案例|case|benchmark|作品/i.test(token)?'案例解析':/規範|治理|驗收|guide|workflow/i.test(token)?'工程方法':'技術研究'),
     creator:c.creator||null,demos:(c.schemaVersion===1 ? c.demo : c.demos)||[],externalLinks:externalLinks(doc.text),
     originalSource:c.schemaVersion===1 ? c.originalSource : null,
