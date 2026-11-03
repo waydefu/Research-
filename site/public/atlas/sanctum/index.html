@@ -518,8 +518,22 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
   .hero-actions .outline-action{display:none!important}
 }
 @media(max-width:520px){
-  /* Lower the mobile copy and search as a group by 20px, without moving the artwork. */
-  .hero{padding:clamp(104px,calc(16svh + 20px),165px) 20px 48px!important}
+  /* Mobile art-directed opening: keep the central observatory unobstructed.
+     The text starts after the image's focal area; there is no second scene image. */
+  .hero{
+    padding:clamp(380px,58svh,620px) 20px 104px!important;
+    min-height:0!important;
+    background:linear-gradient(180deg,transparent 0%,rgba(3,7,13,.06) 32%,rgba(3,7,13,.64) 78%,rgba(3,7,13,.77) 100%);
+  }
+  /* Fade into the very same fixed image. A blurred layer beginning at the
+     section boundary previously produced a conspicuous horizontal seam. */
+  .narrative-glass{
+    margin-top:-104px!important;
+    padding-top:104px!important;
+    background:linear-gradient(180deg,rgba(3,6,12,0) 0px,rgba(3,6,12,.58) 120px,rgba(3,6,12,.84) 310px,rgba(3,6,12,.92) 680px);
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
   .hero h1 .en{font-size:.8rem}
   .hero-desc{font-size:.9rem;line-height:1.6}
   .hero-discovery-row input,.hero-discovery-row button{width:auto;min-height:46px}

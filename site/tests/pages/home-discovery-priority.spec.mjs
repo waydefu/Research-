@@ -3,7 +3,7 @@ import {test,expect} from '@playwright/test';
 const ROOT='/Research-/',LIBRARY=ROOT+'v3/library/',SEARCH=ROOT+'v3/search/';
 
 for(const width of [320,360,393,430,768]){
-  test('mobile first screen visibly exposes the full catalog at '+width+'px',async({page})=>{
+  test('mobile hero preserves its central art while retaining usable discovery at '+width+'px',async({page})=>{
     await page.setViewportSize({width,height:852});
     await page.goto(ROOT);
     const catalog=page.locator('.hero-actions .gold-action');
@@ -18,10 +18,22 @@ for(const width of [320,360,393,430,768]){
       const a=document.querySelector('.hero-actions .gold-action').getBoundingClientRect();
       const input=document.querySelector('.hero-discovery input').getBoundingClientRect();
       const button=document.querySelector('.hero-discovery button').getBoundingClientRect();
-      return {aTop:a.top,aBottom:a.bottom,aHeight:a.height,inputTop:input.top,inputHeight:input.height,buttonTop:button.top,buttonHeight:button.height,viewportHeight:innerHeight,overflow:root.scrollWidth-innerWidth};
+      const copy=document.querySelector('.hero-left').getBoundingClientRect();
+      const scene=getComputedStyle(document.querySelector('.world-backdrop'),'::before');
+      const glass=getComputedStyle(document.querySelector('.narrative-glass'));
+      const headerMenu=document.querySelector('#menuOpen').getBoundingClientRect();
+      return {aTop:a.top,aBottom:a.bottom,aHeight:a.height,inputTop:input.top,inputHeight:input.height,buttonTop:button.top,buttonHeight:button.height,copyTop:copy.top,background:scene.backgroundImage,glassBlur:glass.backdropFilter,headerMenuHeight:headerMenu.height,viewportHeight:innerHeight,overflow:root.scrollWidth-innerWidth};
     });
     expect(sizes.aTop).toBeGreaterThanOrEqual(0);
-    expect(sizes.aBottom).toBeLessThan(sizes.viewportHeight);
+    if(width<=520){
+      // The image, not the headline, owns the central 60% of the mobile screen.
+      expect(sizes.copyTop,'headline must not cover observatory focal area').toBeGreaterThanOrEqual(sizes.viewportHeight*.64);
+      expect(sizes.background).toContain('world-mobile.webp');
+      expect(sizes.glassBlur,'mobile glass must not start with an abrupt blur seam').toBe('none');
+    } else {
+      expect(sizes.aBottom).toBeLessThan(sizes.viewportHeight);
+    }
+    expect(sizes.headerMenuHeight).toBeGreaterThanOrEqual(35);
     expect(sizes.aHeight).toBeGreaterThanOrEqual(44);
     expect(sizes.buttonHeight).toBeGreaterThanOrEqual(44);
     expect(Math.abs(sizes.inputTop-sizes.buttonTop)).toBeLessThan(1);

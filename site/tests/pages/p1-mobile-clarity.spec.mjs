@@ -18,6 +18,7 @@ for(const width of [320,393,430]){
     expect(positions.search).toBeLessThan(positions.actions);
     await expect(page.locator('.mobile-discovery-nav')).toBeHidden();
     await expect(page.locator('.hero-actions .outline-action')).toBeHidden();
+    // Transparent glass can overlap the final hero padding, but never actionable controls.
     expect(positions.actions).toBeLessThanOrEqual(positions.glass+1);
     expect(positions.overflow).toBeLessThanOrEqual(1);
     await homeMenu.click();
