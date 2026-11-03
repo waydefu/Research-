@@ -46,7 +46,12 @@ for (const [name, width, height] of [['phone',360,780], ['tablet',768,1024], ['d
       await page.screenshot({path: testInfo.outputPath(name + '-' + label + '.png'), fullPage: true});
     }
     await page.goto(DOC);
-    const table = page.locator('.table-scroll').first();
+    // The default page now shows a general technical guide. Historical tables
+    // remain fully accessible after the reader opens the preserved source record.
+    const sourceRecord=page.locator('details.original-record');
+    await expect(sourceRecord).toHaveCount(1);
+    await sourceRecord.locator('summary').click();
+    const table = sourceRecord.locator('.table-scroll').first();
     await expect(table).toBeVisible();
     expect(await table.getAttribute('tabindex')).toBe('0');
     expect(await table.evaluate(el => el.scrollWidth >= el.clientWidth)).toBe(true);
