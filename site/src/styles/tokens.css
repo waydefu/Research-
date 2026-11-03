@@ -1,2 +1,5 @@
 /* Canonical reading-system tokens (split from global.css without value changes). */
 :root{color-scheme:dark;--bg:#0a101d;--surface:#121d2d;--ink:#eef3f4;--muted:#9eacb9;--cyan:#40d4de;--gold:#e4b451;--line:#2b3948;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;font-synthesis:none}
+
+/* Active reading-world override. Keep original cascading values intact. */
+:root{--bg:#080b11;--surface:#101723;--ink:#f0e6d4;--muted:#c0c7cc;--cyan:#91b9d0;--gold:#d9b579;--line:rgba(214,171,102,.29)}
