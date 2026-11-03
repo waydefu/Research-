@@ -1,6 +1,6 @@
 # site/ — THE OBSERVATORY Agent 規範
 
-> **先導航**：[REPO-MAP.md](./REPO-MAP.md) → 只讀任務相關原始碼與測試。歷史資料：[HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md)。main／PR／CI 務必當場核對 GitHub，不引用過時 SHA 宣稱現況。
+> **先導航**：[REPO-MAP.md](./REPO-MAP.md) → 只讀任務相關原始碼與測試。P0.5 → P1 結案 Gate：[P0.5-EXIT-GATE.md](./P0.5-EXIT-GATE.md)。歷史資料：[HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md)。main／PR／CI 務必當場核對 GitHub，不引用過時 SHA 宣稱現況。
 
 ## 現況與權限
 
