@@ -44,6 +44,12 @@
 - **WebGPU Compatibility Mode** 允許受限特徵集合在舊圖形 API 上運行，Chrome 146 官方提過以 Android OpenGL ES 3.1 起步；是否支援仍以實際 Adapter 為準。
 - **Gaussian Splatting** 可用於照片感場景重建，但對需要精確碰撞、可編輯 mesh、邊界清楚的工程模型並非萬能替代品。
 
+## 大型幾何／Virtualized Geometry 參考
+
+- [threejs-nanites：GPU-driven cluster LOD、HZB、software rasterizer、impostor、streaming、temporal upscaling](23-threejs-nanites-gpu-driven-geometry.md) 是目前技術庫的大型場景參考實作。
+- 它適合研究「大量 instance + 超高幾何量」的渲染架構；一般網站先做資產壓縮、LOD、culling、lazy loading，不應直接把 Nanite-style pipeline 當預設方案。
+- 上游 benchmark 與 38B / 1T full-detail triangle 數字只能視為作者環境證據；正式採用仍需本地真機 PoC。
+
 原始來源：
 https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API
 https://developer.chrome.com/blog/new-in-webgpu-146
