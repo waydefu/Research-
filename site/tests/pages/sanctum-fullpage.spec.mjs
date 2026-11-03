@@ -8,7 +8,7 @@ test('Design Atlas prominently opens the current full-page Sanctum preview', asy
   await expect(page.getByRole('link',{name:/開啟高保真全頁神殿原型/})).toHaveAttribute('href',PREVIEW);
   await page.getByRole('link',{name:/開啟高保真全頁神殿原型/}).click();
   await expect(page).toHaveURL(new RegExp('/Research-/v3/atlas/sanctum/'));
-  await expect(page.getByRole('heading',{name:/Observatory Sanctum/})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/技術研究與實作知識庫/})).toBeVisible();
   await expect(page.locator('.hero-discovery input[name="q"]')).toBeVisible();
 });
 
@@ -24,12 +24,16 @@ for (const width of [320,360,393,430,768,1440]) {
       backgroundPosition:getComputedStyle(document.querySelector('.world-backdrop')).position,
       glass:getComputedStyle(document.querySelector('.narrative-glass')).backdropFilter,
       veil:parseFloat(getComputedStyle(document.body).getPropertyValue('--veil-alpha')),
-      assets:Array.from(document.images).every(im=>im.getAttribute('src')?.startsWith('./assets/'))
+      assets:Array.from(document.images).every(im=>{
+        const src=im.getAttribute('src')||'';
+        return (src.startsWith('./assets/')&&src.endsWith('.webp')) ||
+          /^\/Research-\/v3\/research-exhibits\/[a-z-]+\.svg$/.test(src);
+      })
     }));
     expect(before.rootWidth,'Horizontal overflow').toBeLessThanOrEqual(width+1);
     expect(before.backgroundPosition).toBe('fixed');
     expect(before.glass).toContain('blur(');
-    expect(before.assets,'Editorial assets should be local, cached WebP files').toBe(true);
+    expect(before.assets,'Every image must be a local WebP or approved SVG exhibit').toBe(true);
     await page.locator('img').evaluateAll(imgs=>imgs.forEach(im=>{im.loading='eager'}));
     await expect.poll(async()=>page.evaluate(()=>Array.from(document.images).every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
     await page.evaluate(() => window.scrollTo(0, Math.min(1000,document.documentElement.scrollHeight/2)));
@@ -62,7 +66,7 @@ test('Sanctum has no JavaScript dependency for content and research links',async
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:393,height:852}});
   const page=await context.newPage();
   await page.goto(PREVIEW);
-  await expect(page.getByRole('heading',{name:/Observatory Sanctum/})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/技術研究與實作知識庫/})).toBeVisible();
   await expect(page.locator('.feature-card')).toHaveCount(3);
   await expect(page.locator('.vault-index a')).toHaveCount(4);
   await expect(page.locator('.feature-card').first()).toHaveAttribute('href',/\/Research-\/v3\/research\//);
@@ -111,8 +115,13 @@ test('Sanctum uses cached scene assets and meaningful internal navigation',async
     primaryNav:[...document.querySelectorAll('.primary-nav a')].map(x=>x.textContent.trim())
   }));
   expect(result.inlineImages).toBe(false);
-  expect(result.resources).toHaveLength(3);
-  expect(result.resources.every(x=>x.startsWith('/Research-/v3/atlas/sanctum/assets/'))).toBe(true);
+  const scenes=result.resources.filter(x=>x.startsWith('/Research-/v3/atlas/sanctum/assets/'));
+  const exhibits=result.resources.filter(x=>x.startsWith('/Research-/v3/research-exhibits/'));
+  expect(scenes).toHaveLength(3);
+  expect(scenes.every(x=>x.endsWith('.webp'))).toBe(true);
+  expect(exhibits).toHaveLength(4);
+  expect(exhibits.every(x=>x.endsWith('.svg'))).toBe(true);
+  expect(new Set(exhibits).size).toBe(4);
   expect(result.preloads).toHaveLength(2);
   expect(result.preloads.some(x=>x.media.includes('min-width'))).toBe(true);
   expect(result.preloads.some(x=>x.media.includes('max-width'))).toBe(true);

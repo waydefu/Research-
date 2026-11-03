@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#080b11">
-<meta name="description" content="Research- 研究觀測所：暗金天文神殿、可搜尋的研究典藏，以及完整原始資料與來源索引。">
+<meta name="description" content="Research- 技術研究與實作知識庫：從零了解人工智慧、網站設計與軟體工程，搜尋完整研究、實作案例與原始來源。">
 <link rel="preload" as="image" href="./assets/world-desktop.webp" type="image/webp" fetchpriority="high" media="(min-width: 801px)">
 <link rel="preload" as="image" href="./assets/world-mobile.webp" type="image/webp" fetchpriority="high" media="(max-width: 800px)">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://waydefu.github.io/Research-/">
-<title>天文觀測神殿｜RESEARCH—THE OBSERVATORY</title>
+<title>技術研究與實作知識庫｜RESEARCH— THE OBSERVATORY</title>
 <style>
 :root{
  color-scheme:dark;--void:#080b11;--navy:#142236;--gold:#d9b579;--gold-light:#f5deb4;--gold-dim:#98774b;--ink:#f0e6d4;--muted:#bac0c6;--ice:#91b9d0;--border:rgba(214,171,102,.42);
@@ -486,6 +486,16 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
   .vault-copy .vault-name{font-size:.99rem;line-height:1.45}
   .vault-description{font-size:.7rem;line-height:1.6}
 }
+
+/* Research purpose takes visual precedence over the celestial art direction. */
+.hero h1 .zh{font-size:clamp(1.9rem,3vw,3.45rem);letter-spacing:.015em;line-height:1.4;max-width:15ch;overflow-wrap:anywhere}
+.hero h1 .en{font-family:var(--sans);font-size:clamp(.85rem,1.15vw,1.05rem);letter-spacing:.045em;line-height:1.7;color:#e2cb9e;margin-top:12px}
+@media(max-width:800px){.hero h1 .zh{font-size:clamp(1.8rem,5vw,2.75rem);max-width:16ch}}
+@media(max-width:520px){
+  .hero h1 .zh{font-size:clamp(1.55rem,6.7vw,2.15rem);letter-spacing:0;line-height:1.5}
+  .hero h1 .en{font-size:.88rem;letter-spacing:.01em;margin-top:8px}
+  .hero .eyebrow{font-family:var(--sans);letter-spacing:.09em}
+}
 </style>
 </head>
 <body data-pagefind-ignore>
@@ -495,7 +505,7 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
 <main id="main">
 <div class="hero-world" id="home">
   <header class="header">
-    <a class="logo" href="#home" aria-label="Observatory Sanctum 首頁"><span class="logo-mark" aria-hidden="true">✦</span><span class="logo-type">RESEARCH—<small>THE OBSERVATORY</small></span></a>
+    <a class="logo" href="#home" aria-label="RESEARCH— THE OBSERVATORY｜返回首頁"><span class="logo-mark" aria-hidden="true">✦</span><span class="logo-type">RESEARCH—<small>THE OBSERVATORY</small></span></a>
     <nav class="primary-nav" aria-label="主要導覽">
       <a class="nav-catalog" href="/Research-/v3/library/">完整典藏館</a>
       <a href="#vault">研究分類</a>
@@ -515,10 +525,10 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
   </nav>
   <section class="hero" aria-labelledby="heroTitle">
     <div class="hero-left">
-      <p class="eyebrow">THE OBSERVATORY</p>
-      <h1 id="heroTitle"><span class="zh">天文觀測神殿</span><span class="en">Observatory Sanctum</span></h1>
+      <p class="eyebrow">天文觀測所 · RESEARCH—</p>
+      <h1 id="heroTitle"><span class="zh">技術研究與實作知識庫</span><span class="en">人工智慧、網站設計與軟體工程</span></h1>
       <div class="rule" aria-hidden="true"></div>
-      <p class="hero-desc">想知道 AI 如何自動完成工作、網站如何呈現海洋動畫，或資料怎麼被驗證？從這裡找研究，先看白話解釋，再讀原始證據。</p>
+      <p class="hero-desc">這裡收錄人工智慧、網頁互動、軟體工程、資料管理與系統安全研究。先用白話理解用途，再深入實作方法、原作者與證據來源。</p>
       <form class="hero-discovery" action="/Research-/v3/search/" method="get" role="search">
         <label for="hero-query">你想了解什麼？直接搜尋研究</label>
         <div class="hero-discovery-row"><input id="hero-query" name="q" type="search" placeholder="例如：AI 代理、3D 海洋、網站速度" autocomplete="off" required><button type="submit">搜尋研究 →</button></div>
@@ -617,14 +627,14 @@ body{background:#080b11;min-height:100%;--veil-alpha:.05}
 })();
 
 
-// Four native-scroll chapters: arrival -> selected research -> evidence -> archive.
+// Native-scroll chapters: welcome → browse topics → featured studies → reading features.
 // The veil never intercepts input. Static content remains readable without JS.
 (()=>{
  const chapters=[
    {selector:null,veil:.035},
-   {selector:'.featured',veil:.15},
-   {selector:'.at-glance',veil:.21},
-   {selector:'.library-vault',veil:.28},
+   {selector:'.library-vault',veil:.15},
+   {selector:'.featured',veil:.21},
+   {selector:'.at-glance',veil:.28},
    {selector:null,veil:.33}
  ];
  let queued=false,positions=[];

@@ -4,7 +4,7 @@ import {test,expect} from '@playwright/test';
 // Android/iOS hardware validation, nor subjective visual signoff.
 const ROOT='/Research-/';
 const CASES=[
-  {name:'sanctum',path:ROOT,heading:/天文觀測神殿/},
+  {name:'sanctum',path:ROOT,heading:/技術研究與實作知識庫/},
   {name:'library',path:ROOT+'v3/library/',heading:/想了解一項技術/},
   {name:'search',path:ROOT+'v3/search/',heading:/搜尋整座研究館/},
   {name:'article',path:ROOT+'v3/research/2026-11-universal-web-engine/17-arctic-waters-threejs-creative-workflow/',heading:/Arctic Waters/}
@@ -87,7 +87,7 @@ test('G0 Android-like Chromium touch emulation: find content and collapse embedd
   });
   const page=await context.newPage();
   await page.goto(ROOT);
-  await expect(page.getByRole('heading',{name:/天文觀測神殿/})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/技術研究與實作知識庫/})).toBeVisible();
   await expect(page.locator('.site-footer')).toContainText('RESEARCH LIBRARY');
   await expect(page.locator('.site-footer')).not.toContainText('CONCEPT STUDY');
   await page.goto(ROOT+'v3/library/');

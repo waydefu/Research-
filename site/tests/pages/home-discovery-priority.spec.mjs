@@ -54,13 +54,6 @@ test('hero actions are distinct: canonical full library versus on-page topic pre
 
 test('home follows find → categories → featured reading → reading features',async({page})=>{
   await page.goto(ROOT);
-  const order=await page.evaluate(()=>[
-    document.querySelector('.hero-discovery'),
-    document.querySelector('#vault'),
-    document.querySelector('#featured'),
-    document.querySelector('.at-glance')
-  ].map(node=>node?.compareDocumentPosition(document.querySelector('.at-glance'))));
-  expect(order.slice(0,3).every(pos=>Boolean(pos&Node.DOCUMENT_POSITION_FOLLOWING))).toBeTruthy();
   const indices=await page.evaluate(()=>Array.from(document.querySelectorAll('.hero-discovery,#vault,#featured,.at-glance')).map(el=>el.classList.contains('hero-discovery')?'search':el.id||'help'));
   expect(indices).toEqual(['search','vault','featured','help']);
   const categories=page.locator('.vault-index li');

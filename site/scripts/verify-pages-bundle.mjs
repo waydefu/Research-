@@ -32,7 +32,7 @@ assert(existsSync(join(legacy, 'data/research-index.json')), 'V2 research index 
 assert(existsSync(join(published, '.nojekyll')), 'GitHub Pages .nojekyll marker missing');
 assert(readFileSync(join(legacy,'reader-links.js'),'utf8').includes("return '../v3/'"),'Archived V2 reader routing broken');
 const home=readFileSync(join(published,'index.html'),'utf8');
-assert(home.includes('天文觀測神殿')&&home.includes('class="world-backdrop"'),'Root not Sanctum');
+assert(home.includes('技術研究與實作知識庫')&&home.includes('class="world-backdrop"'),'Root not Sanctum');
 assert(!home.includes('THE UNKNOWN,'),'V2 must not remain the main home');
 assert(home.includes('href="https://waydefu.github.io/Research-/"'),'Primary canonical absent');
 assert(!home.includes('content="noindex"'),'Root must be indexable');
