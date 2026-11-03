@@ -933,7 +933,7 @@ export const TOPIC_DESCRIPTORS = Object.freeze({
     "image": "workflow.svg"
   },
   "網頁效能與無障礙": {
-    "why": "量測網站速度、可及性與相容性",
+    "why": "理解 Core Web Vitals、頁面載入速度、互動延遲、無障礙與各種裝置的相容性",
     "image": "workflow.svg"
   },
   "網站安全、測試與部署": {
