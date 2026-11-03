@@ -35,6 +35,15 @@
 - 不應以單次主觀體驗就宣稱「某模型全面勝過某模型」。
 - 低價／免費模型也有額度、授權、隱私與使用條款；需先確認再自動化部署。
 
+## 2026-11 延伸研究
+
+本篇保留十月本地 LLM 歷史摘要；新的超大型 sparse MoE / storage-aware inference 研究獨立放在：
+
+- [Local AI Inference 技術庫](../2026-11-local-ai-inference/README.md)
+- [Colibri：VRAM / RAM / NVMe 分層、Expert Streaming 與 Cache](../2026-11-local-ai-inference/01-colibri-moe-streaming.md)
+
+這兩條路線不要混為一談：一般 GGUF / llama.cpp 重點多為模型常駐與 CPU/GPU offload；Colibri 的核心問題是 **MoE routed experts 如何在 VRAM / RAM / disk 間分層**。
+
 **本文件只是研究摘要，未變更手機或 Hermes 設定。**
 
 ### 來源
