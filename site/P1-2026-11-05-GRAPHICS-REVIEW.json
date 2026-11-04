@@ -34,8 +34,8 @@
     },
     {
       "path": "research/2026-11-universal-web-engine/29-rendering-ceiling-benchmark-and-adoption-gates.md",
-      "sourceBlobSha": "56451a8fb4bd70fffebcfe6fae015a5e0347f906",
-      "sourceRevision": "1eb7401d31b6158952bb5819ee701023f616ae56",
+      "sourceBlobSha": "391eeeae961a3cdeae83a584dad9e365a49244db",
+      "sourceRevision": "abd18e0a3fe4cf261658276e4f39efc06dc07597",
       "reviewedOn": "2026-11-05",
       "verifiedScope": "理論幀預算、RenderTarget 容量估算和採用門檻不是 Benchmark；官方 API 只用來界定能力、限制與應如何設計待執行實驗。",
       "externallyVerifiedAllClaims": false,
