@@ -16,8 +16,8 @@ export const REPO_NAVIGATION = Object.freeze([
   {
     id:'metadata',title:'繁中標題、分類與證據',intent:'標題分類錯誤、來源不可信、導讀與原文混淆',
     entry:'site/src/lib/research-taxonomy.mjs',
-    paths:['site/src/lib/research-taxonomy.mjs','site/src/lib/research-metadata.mjs','site/src/lib/metadata-schema.mjs','site/src/lib/public-articles.mjs','site/src/lib/public-content-audit.mjs','site/RESEARCH-CURATION.md'],
-    checks:['site/tests/research-taxonomy.test.mjs','site/tests/research-metadata.test.mjs','site/tests/metadata-schema.test.mjs','site/tests/public-articles.test.mjs','site/tests/pages/public-articles.spec.mjs'],
+    paths:['site/src/lib/research-taxonomy.mjs','site/src/lib/research-metadata.mjs','site/src/lib/metadata-schema.mjs','site/src/lib/public-articles.mjs','site/src/lib/public-content-audit.mjs','site/src/lib/source-review.mjs','site/RESEARCH-CURATION.md'],
+    checks:['site/tests/research-taxonomy.test.mjs','site/tests/research-metadata.test.mjs','site/tests/metadata-schema.test.mjs','site/tests/public-articles.test.mjs','site/tests/issue59-source-review.test.mjs','site/tests/pages/public-articles.spec.mjs'],
     optionalPaths:['site/src/lib/research-leads.mjs'],
     optionalChecks:['site/tests/research-leads.test.mjs']
   },
