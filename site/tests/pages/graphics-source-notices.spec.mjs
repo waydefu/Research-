@@ -13,7 +13,7 @@ for(const slug of sourceSlugs){
     await expect(panel).toBeVisible();
     await expect(panel).toContainText('尚未實測');
     await expect(panel).toContainText('並未逐項獨立驗證');
-    await expect(panel.getByRole('link').first()).toHaveAttribute('href',/^https:\/\//);
+    // Evidence links live inside a collapsed native details disclosure.\n    await panel.locator('summary').click();\n    await expect(panel.getByRole('link').first()).toHaveAttribute('href',/^https:\/\//);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
   });
 }
