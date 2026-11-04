@@ -3,6 +3,8 @@
 **研究日期：2026-11-02（Asia/Taipei）**　**範圍：通用，不針對小說、遊戲網站或特定品牌**  
 **研究狀態：** 官方文件／原始專案交叉研究已整理；**沒有宣稱完成同場景基準測試**。不代表已在其他 Repo 安裝或實作。
 
+**2026-11-05 增量：**新增第 27–29 篇 Three.js r187 極限渲染專題（能力、Shader 配方、GPU 驗收），並把既有第 26 篇 Luminati 補進目錄。這三篇僅是研究，不表示本庫或任何其他產品已實裝 WebGPU SSGI、路徑追蹤、FFT 海洋或真機測試。舊版選型表仍保留其原查證時間。
+
 > 核心觀念：**先挑正確的網站架構與資料邊界，再挑渲染引擎和特效。** 高相容、性能、安全、可維護性應同時考慮。
 
 ## 完整研究目錄
@@ -31,7 +33,11 @@
 22. [23｜threejs-nanites：WebGPU GPU-driven Virtualized Geometry 參考實作](23-threejs-nanites-gpu-driven-geometry.md)
 23. [24｜Polyfork：Agent-native 3D、Parametric Assets 與 Asset-as-Code](24-polyfork-agent-native-3d-assets.md)
 24. [25｜Open Design Agent Kit：AI 設計代理與研究觀測所實作方法](25-open-design-agent-kit-and-observatory-adoption.md)
-25. [SOURCES｜原本通用 Web 技術的來源與查證索引](SOURCES.md)
+25. [26｜Luminati：Three.js HD-2D 像素遊戲與渲染架構](26-luminati-hd2d-browser-engine.md)
+26. [27｜Three.js r187：WebGPU／TSL、SSGI、SSR、路徑追蹤與畫質天花板](27-threejs-r187-ultra-rendering-ceiling.md)
+27. [28｜進階 Shader：海洋、峽灣大氣、GI、反射、HD-2D 分層配方](28-advanced-shader-pipeline-and-hd2d-recipes.md)
+28. [29｜效能驗收：GPU 時間、資產串流、手機回退、開源技術分級](29-rendering-ceiling-benchmark-and-adoption-gates.md)
+29. [SOURCES｜通用 Web 技術與最新渲染來源查證索引](SOURCES.md)
 
 ## 版本快照（2026-11-02 查證）
 

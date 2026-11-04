@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "title": "2026-11-05 新增圖形技術研究之獨立範圍審查",
+  "reviewDate": "2026-11-05",
+  "scope": "增量登記 3 篇研究；不修改 2026-11-04 Issue #59 的已審閱原文或完整驗證範圍",
+  "items": [
+    {
+      "path": "research/2026-11-universal-web-engine/27-threejs-r187-ultra-rendering-ceiling.md",
+      "sourceBlobSha": "c00689cc8c95a438b02d20f332caea119941806e",
+      "sourceRevision": "1eb7401d31b6158952bb5819ee701023f616ae56",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "官方 r187 發版、WebGPURenderer/TSL 與部分效果節點存在性，僅支持文件中指定 API；高畫質可行性不等於任何 GPU 效能實測。",
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN",
+      "remainingWork": "需原創固定場景和桌機／Android／iOS 真機進行 Shader correctness、GPU time、功耗、熱降頻、視覺盲測和跨後端回退測試；目前並未執行。",
+      "knownSources": [
+        "https://threejs.org/manual/pages/webgpurenderer",
+        "https://github.com/mrdoob/three.js/releases/tag/r187"
+      ]
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/28-advanced-shader-pipeline-and-hd2d-recipes.md",
+      "sourceBlobSha": "b1ece85f98dbc73c43fa8dfb83323a0edf9d34ed",
+      "sourceRevision": "1eb7401d31b6158952bb5819ee701023f616ae56",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "海水、霧、反射與 HD-2D 配方為工程推導；目前只對照官方 shader/TSL 管線與 API 行為，沒有執行對照場景或錯誤注入。",
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN",
+      "remainingWork": "需原創固定場景和桌機／Android／iOS 真機進行 Shader correctness、GPU time、功耗、熱降頻、視覺盲測和跨後端回退測試；目前並未執行。",
+      "knownSources": [
+        "https://threejs.org/manual/pages/webgpu-postprocessing.html",
+        "https://threejs.org/docs/pages/SSGINode.html"
+      ]
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/29-rendering-ceiling-benchmark-and-adoption-gates.md",
+      "sourceBlobSha": "391eeeae961a3cdeae83a584dad9e365a49244db",
+      "sourceRevision": "abd18e0a3fe4cf261658276e4f39efc06dc07597",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "理論幀預算、RenderTarget 容量估算和採用門檻不是 Benchmark；官方 API 只用來界定能力、限制與應如何設計待執行實驗。",
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN",
+      "remainingWork": "需原創固定場景和桌機／Android／iOS 真機進行 Shader correctness、GPU time、功耗、熱降頻、視覺盲測和跨後端回退測試；目前並未執行。",
+      "knownSources": [
+        "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API",
+        "https://threejs.org/docs/pages/KTX2Loader.html"
+      ]
+    }
+  ]
+}

@@ -4,8 +4,8 @@ test('all research cards have distinct generated illustrations and usable source
   await page.goto(BASE+'library/');
   const imgs=page.locator('#library-results .research-item-visual img');
   const urls=await imgs.evaluateAll(nodes=>nodes.map(img=>img.getAttribute('src')));
-  expect(urls.length).toBe(87);
-  expect(new Set(urls).size).toBe(87);
+  expect(urls.length).toBe(90);
+  expect(new Set(urls).size).toBe(90);
   for(const url of urls) expect(url).toMatch(/^\/Research-\/v3\/research-figures\/research-[0-9a-f]{8}\.svg$/);
   await imgs.first().scrollIntoViewIfNeeded();
   await expect.poll(()=>imgs.first().evaluate(img=>img.complete&&img.naturalWidth>0)).toBeTruthy();

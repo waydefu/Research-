@@ -1,6 +1,9 @@
 // Editorial introductions only. Each entry is tied to one real source path, not an inferred fact.
 // Preserve original Markdown, source provenance, author and demos. Do not claim external testing.
 export const EDITORIAL_LEADS = Object.freeze({
+  "research/2026-11-universal-web-engine/27-threejs-r187-ultra-rendering-ceiling.md": "從官方 Three.js r187、WebGPU 渲染器和 TSL 出發，分析 PBR、SSGI、SSR、景深、陰影與 GPU 路徑追蹤的實際能力。比較可玩即時畫質與漸進式照片渲染，清楚標示 API 相容與尚未實測的性能。",
+  "research/2026-11-universal-web-engine/28-advanced-shader-pipeline-and-hd2d-recipes.md": "拆解海浪 Fresnel、Beer-Lambert、海岸泡沫、SSGI、SSR、體積霧與像素角色抗鋸齒的工程設計。整理 Frame Graph、降級方案與三個可重現 PoC；配方是設計推導，不是已部署程式。",
+  "research/2026-11-universal-web-engine/29-rendering-ceiling-benchmark-and-adoption-gates.md": "將 Three.js 高階視覺拆成行動裝置、桌面高畫質、研究級 Ultra 與漸進式照片模式；提供 Buffer 記憶體估算、效能診斷、資產壓縮、裝置測試欄位與 Go/No-go 標準，不虛構 FPS。",
   "docs/governance/BASELINE-2026-11-02.md": "說明如何為 GitHub 程式碼庫留下有日期的治理基線，包括分支保護、CI 與風險紀錄。適合學習稽核證據怎麼保存；歷史快照不能代替當前設定或實際安全驗證。",
   "docs/governance/OPERATIONS.md": "這份操作手冊說明研究更新、PR 審查、文件驗證與故障回退的步驟。遇到 CI 失敗、資料被改壞或代理越權時，可依此確認處理責任；尚未演練的恢復目標不能當成既有保證。",
   "docs/governance/README.md": "提供程式碼庫治理的閱讀路線，串聯權限規範、稽核基線、工具選型、故障處理與回退。遇到不熟悉的治理項目時，可由索引找到對應文件，再核對當下設定。",

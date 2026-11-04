@@ -8,7 +8,7 @@ import {readFileSync} from 'node:fs';
 const docs=allDocs();
 test('current public sources have exact-path, nonempty Traditional Chinese editorial introductions',()=>{
   const coverage=editorialLeadCoverage(docs.map(d=>d.file));
-  assert.equal(coverage.total,87);
+  assert.equal(coverage.total,90);
   assert.deepEqual(coverage.missing,[]);
   assert.deepEqual(coverage.stale,[]);
   for(const d of docs){
@@ -18,7 +18,7 @@ test('current public sources have exact-path, nonempty Traditional Chinese edito
     assert.equal(d.summary,text,d.file);
     assert.equal(d.summaryReviewed,true,d.file);
     assert.equal(d.summaryFactChecked,false,d.file);
-    assert.equal(d.summarySource,'editorial-lead',d.file);
+    assert.equal(d.summarySource,/\/(27-threejs-r187-|28-advanced-shader-|29-rendering-ceiling-)/.test(d.file)?'canonical-v1':'editorial-lead',d.file);
     assert.ok(!/^`{3}|^~~~/m.test(text),d.file);
     assert.equal(getDoc(d.collection,d.id),d);
   }

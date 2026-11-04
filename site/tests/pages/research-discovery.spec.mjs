@@ -130,7 +130,7 @@ test('archived-original search is explicit, complete and retains provenance with
   expect(response.ok()).toBe(true);
   const index=await response.json();
   expect(index.scope).toBe('archived-original-markdown');
-  expect(index.documents).toHaveLength(87);
+  expect(index.documents).toHaveLength(90);
   expect(index.documents.some(d=>d.file.includes('THREAT-MODEL.md'))).toBe(false);
   const curated=index.documents.find(d=>d.file==='docs/governance/OPERATIONS.md');
   expect(curated?.text.length).toBeGreaterThan(100);
