@@ -367,3 +367,20 @@ body{background:linear-gradient(180deg,#070c14,#0e1721 48%,#070c14)!important}
     overflow-wrap: anywhere;
   }
 }
+
+
+/* Evidence status is part of reading, not another opaque promotional card. */
+.source-review {
+  margin-block: 1.35rem 2rem;
+  padding: .2rem 0 .4rem 1.1rem;
+  border-inline-start: 2px solid var(--gold);
+  color: var(--ink);
+}
+.source-review h2 { font-size: clamp(1.05rem, 2vw, 1.26rem); margin: 0 0 .55rem; }
+.source-review p { margin: .55rem 0; line-height: 1.75; }
+.source-review .source-review-note { color: var(--muted); }
+.source-review summary { cursor: pointer; color: var(--gold); }
+.source-review a { overflow-wrap: anywhere; }
+@media (max-width: 480px) {
+  .source-review { padding-inline-start: .7rem; }
+}
