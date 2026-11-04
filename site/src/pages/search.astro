@@ -8,8 +8,9 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
   <section class="search-page">
     <p class="eyebrow">RESEARCH / DISCOVERY</p>
     <h1>搜尋整座研究館。</h1>
-    <p>可以搜尋整份研究原文，再用領域、細分主題、技術標籤縮小範圍。研究的完整內容與原始來源不會因此被簡化或省略。</p>
+    <p>公開閱讀頁面搜尋優先顯示已編輯技術正文。若要查找保留的歷史 Markdown（包含過去的 PR、方案及未驗證主張），請切換至「歷史原始研究」；兩種結果不會混為一談。</p>
     <form id="search-form" role="search" autocomplete="off">
+      <fieldset class="search-scope"><legend>搜尋範圍</legend><label><input type="radio" name="search-scope" value="public" checked/> 公開閱讀頁面</label><label><input type="radio" name="search-scope" value="original"/> 歷史原始研究（全文；未重新查證）</label></fieldset>
       <label for="search-term">研究關鍵字</label>
       <div class="search-controls"><input id="search-term" type="search" placeholder="例如：WebGPU、Agent、海洋、效能……"/><button type="submit">搜尋</button></div>
       <div class="search-facet-grid">
@@ -32,6 +33,8 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
     const base='/Research-/v3/';
     const form=document.getElementById('search-form');
     const input=document.getElementById('search-term');
+    const scopes=[...document.querySelectorAll('input[name="search-scope"]')];
+    const selectedScope=()=>scopes.find(r=>r.checked)?.value||'public';
     const domain=document.getElementById('domain-filter');
     const topic=document.getElementById('topic-filter');
     const tag=document.getElementById('tag-filter');
@@ -40,7 +43,23 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
     const loadMore=document.getElementById('search-load-more');
     const PAGE_SIZE=25;
     let matches=[],shown=0,serial=0,loading=false;
-    let searchApi;
+    let searchApi,originalDocs;
+    const norm=value=>String(value||'').normalize('NFKC').toLocaleLowerCase('zh-TW');
+    async function loadOriginalDocs(){
+      if(originalDocs)return originalDocs;
+      const response=await fetch(base+'original-search-index.json');
+      if(!response.ok)throw new Error('原文索引無法載入');
+      const index=await response.json();
+      if(index.scope!=='archived-original-markdown'||!Array.isArray(index.documents))throw new Error('原文索引格式錯誤');
+      originalDocs=index.documents;
+      return originalDocs;
+    }
+    function snippet(doc,terms){
+      const text=String(doc.text||'').replace(/[\r\n\t]+/g,' ').replace(/[#*`>\[\]]/g,' ').replace(/\s+/g,' ').trim();
+      const at=terms.length?norm(text).indexOf(terms[0]):-1;
+      const start=Math.max(0,at<0?0:at-45);
+      return (start?'…':'')+text.slice(start,start+160)+(text.length>start+160?'…':'');
+    }
     try{
       searchApi=await import(base+'pagefind/pagefind.js');
       await searchApi.options({baseUrl:base});
@@ -51,6 +70,7 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
     }
     const params=new URLSearchParams(location.search);
     if(params.get('q'))input.value=params.get('q');
+    if(params.get('scope')==='original')scopes.find(r=>r.value==='original').checked=true;
     for(const [field,key] of [[domain,'domain'],[topic,'topic'],[tag,'tag']]){
       if(params.has(key)&&[...field.options].some(option=>option.value===params.get(key)))field.value=params.get(key);
     }
@@ -73,7 +93,7 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
           const summary=document.createElement('span');
           summary.textContent=(r.plain_excerpt||r.excerpt||'').replace(/<[^>]*>/g,'').slice(0,175);
           const detail=document.createElement('small');
-          detail.textContent='查看研究原文與來源 ↗';
+          detail.textContent=r.originalFile?'歷史原始研究｜未重新查證｜'+r.originalFile+'｜'+(r.originalDate||'日期未知'):'查看研究原文與來源 ↗';
           copy.append(title,summary,detail);
           a.append(copy);li.append(a);list.append(li);
         }
@@ -89,7 +109,7 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
     }
     async function search(event){
       if(event)event.preventDefault();
-      if(!searchApi)return;
+      if(!searchApi&&selectedScope()!=='original')return;
       const current=++serial;
       matches=[];shown=0;loading=false;
       loadMore.hidden=true;loadMore.disabled=false;
@@ -101,9 +121,27 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
       if(!query&&!Object.keys(filters).length){feedback.textContent='請輸入關鍵字或選擇至少一個分類。';return}
       feedback.textContent='搜尋中……';
       try{
-        const response=await searchApi.search(query||null,{filters});
-        if(current!==serial)return;
-        matches=response.results;
+        if(selectedScope()==='original'){
+          const docs=await loadOriginalDocs();
+          if(current!==serial)return;
+          document.getElementById('search-fallback').hidden=true;
+          const terms=norm(query).split(/\s+/).filter(Boolean);
+          const found=docs.filter(doc=>{
+            if(filters.domain&&doc.group!==filters.domain)return false;
+            if(filters.topic&&doc.topic!==filters.topic)return false;
+            if(filters.tag&&!doc.tags.includes(filters.tag))return false;
+            const text=norm(doc.title+' '+doc.publicTitle+' '+doc.text);
+            return terms.every(term=>text.includes(term));
+          });
+          matches=found.map(doc=>({data:async()=>({
+            url:doc.href,meta:{title:doc.publicTitle},
+            plain_excerpt:snippet(doc,terms),originalFile:doc.file,originalDate:doc.date
+          })}));
+        }else{
+          const response=await searchApi.search(query||null,{filters});
+          if(current!==serial)return;
+          matches=response.results;
+        }
         if(!matches.length){
           feedback.textContent='找到 0 項結果。可修改關鍵字或移除篩選條件。';
           return;
@@ -117,6 +155,16 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
     }
     loadMore.addEventListener('click',appendNextPage);
     form.addEventListener('submit',search);
+    scopes.forEach(r=>r.addEventListener('change',()=>{
+      if(input.value.trim()||domain.value||topic.value||tag.value)search();
+      else feedback.textContent=r.value==='original'?'歷史原文可能含過期資訊；請輸入關鍵字或選擇分類。':'輸入關鍵字或選擇分類，搜尋公開閱讀頁面。';
+    }));
     if(input.value||domain.value||topic.value||tag.value)search();
   </script>
+  <style>
+    .search-scope{display:flex;align-items:center;flex-wrap:wrap;gap:.65rem 1.25rem;border:1px solid var(--line);padding:.8rem 1rem;margin:0 0 1rem;border-radius:.65rem}
+    .search-scope legend{padding:0 .4rem;color:var(--ink);font-weight:600}
+    .search-scope label{display:inline-flex;gap:.5rem;align-items:center;line-height:1.6;cursor:pointer}
+    .search-scope input{accent-color:var(--gold);width:1.05rem;height:1.05rem}
+  </style>
 </Base>
