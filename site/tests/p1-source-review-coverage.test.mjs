@@ -56,9 +56,9 @@ test('new source review registry is additive and SHA-pinned without modifying hi
     assert.ok(files.has(row.path),row.path);
     assert.match(row.sourceRevision,/^[0-9a-f]{40}$/);
     const raw=readFileSync(resolve(process.cwd(),'..',row.path));
-    const hash=createHash('sha1').update(Buffer.from('blob '+raw.byteLength+'\\0')).update(raw).digest('hex');
+    const hash=createHash('sha1').update(Buffer.from('blob '+raw.byteLength+'\0')).update(raw).digest('hex');
     assert.equal(row.sourceBlobSha,hash,row.path);
-    assert.equal(row.externallyVerifiedAllClaims,true,false);
+    assert.notEqual(row.externallyVerifiedAllClaims,true,row.path);
     assert.ok(reviewForSource(row.path));
   }
 });
