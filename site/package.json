@@ -14,7 +14,8 @@
     "predev": "npm run preflight",
     "e2e": "playwright test",
     "provenance": "node scripts/provenance-audit.mjs",
-    "audit:public": "node scripts/audit-public-content.mjs"
+    "audit:public": "node scripts/audit-public-content.mjs",
+    "gate:p05": "node scripts/p05-entry-report.mjs"
   },
   "dependencies": {
     "astro": "^6.0.0",

@@ -1,4 +1,4 @@
-:root{color-scheme:dark;--bg:#0a101d;--surface:#121d2d;--ink:#eef3f4;--muted:#9eacb9;--cyan:#40d4de;--gold:#e4b451;--line:#2b3948;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;font-synthesis:none}
+@import './tokens.css';
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:6rem}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.8;font-size:16px}a{color:inherit;text-decoration-thickness:.06em;text-underline-offset:.23em}a:hover{color:var(--gold)}a:focus-visible,button:focus-visible,input:focus-visible,.table-scroll:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}button,input{font:inherit}button{cursor:pointer}.skip{position:absolute;left:1rem;top:-6rem;padding:.5rem 1rem;z-index:100;background:#fff;color:#000}.skip:focus{top:1rem}
 .global-header{display:flex;align-items:center;justify-content:space-between;gap:2rem;min-height:88px;padding:1.1rem clamp(1.2rem,4vw,5rem);border-bottom:1px solid var(--line)}.global-header nav{display:flex;gap:1.6rem;flex-wrap:wrap}.global-header nav a{text-decoration:none;font-size:.9rem;color:#d0dbe1}.brand{display:flex;align-items:center;gap:.9rem;line-height:1.2;text-decoration:none;font-weight:650;letter-spacing:.06em}.brand small{display:block;margin-top:.45rem;letter-spacing:.15em;font-size:.58rem;color:var(--muted)}.brand-mark{font-size:2.2rem;color:var(--gold)}
 .global-footer{border-top:1px solid var(--line);padding:2rem clamp(1rem,4vw,5rem);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;color:var(--muted);font-size:.7rem;letter-spacing:.12em}.eyebrow{font-size:.72rem;letter-spacing:.22em;color:var(--cyan);font-weight:650}.muted{color:var(--muted)}h1,h2,h3{line-height:1.35;overflow-wrap:anywhere}h1,h2{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600}
@@ -18,7 +18,7 @@
 
 /* P1 cinematic reading continuity: same dark-gold world as the Sanctum home.
    Minimal motion; native DOM remains readable on mobile, without GPU effects. */
-:root{--bg:#080b11;--surface:#101723;--ink:#f0e6d4;--muted:#c0c7cc;--cyan:#91b9d0;--gold:#d9b579;--line:rgba(214,171,102,.29)}
+/* Active reading palette is centralized in tokens.css. */
 body{background:linear-gradient(180deg,rgba(5,8,14,.91) 0%,rgba(6,9,15,.96) 60%,#080b11 100%),url('/Research-/v3/atlas/sanctum/assets/world-desktop.webp') center top/cover fixed no-repeat;background-color:#080b11}
 .global-header{position:sticky;top:0;z-index:30;min-height:74px;padding:1rem clamp(1.1rem,4vw,4.5rem);border-bottom:1px solid rgba(214,171,102,.20);background:rgba(7,10,17,.90);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .global-header nav{gap:clamp(.75rem,2vw,1.7rem)}
