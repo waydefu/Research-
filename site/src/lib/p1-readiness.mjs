@@ -7,8 +7,7 @@ import {EDITORIAL_LEADS} from './research-leads.mjs';
 import {visualForDoc} from './research-visuals.mjs';
 import {reviewForSource,REVIEW_COUNT} from './source-review.mjs';
 
-export function p1ReadinessInventory(){
-  const docs=allDocs();
+export function p1ReadinessInventory(docs=allDocs()){
   const known=new Set(docs.map(d=>d.file));
   const files=docs.map(doc=>{
     const artwork=visualForDoc(doc);
