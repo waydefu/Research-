@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import remarkLinks from './src/lib/remark-links.mjs';
 import rehypeTables from './src/lib/rehype-tables.mjs';
 
@@ -7,6 +8,7 @@ export default defineConfig({
   base: '/Research-/v3/',
   trailingSlash: 'always',
   markdown: {
+    processor: unified(),
     remarkPlugins: [remarkLinks],
     rehypePlugins: [rehypeTables],
     shikiConfig: { theme: 'github-dark' }
