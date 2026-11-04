@@ -6,13 +6,13 @@ const docs=allDocs();
 
 test('every existing research document has a distinct content-linked original SVG',()=>{
   const coverage=visualCoverage(docs);
-  assert.equal(docs.length,87);
-  assert.equal(coverage.total,87);
-  assert.equal(coverage.known,87);
+  assert.equal(docs.length,90);
+  assert.equal(coverage.total,90);
+  assert.equal(coverage.known,90);
   assert.deepEqual(coverage.unknown,[]);
-  assert.equal(coverage.filenames.length,87);
+  assert.equal(coverage.filenames.length,90);
   const images=docs.map(d=>visualForDoc(d));
-  assert.equal(new Set(images.map(a=>a.src)).size,87);
+  assert.equal(new Set(images.map(a=>a.src)).size,90);
   for(const art of images){
     assert.ok(art.src.startsWith(ART_BASE),art.sourceFile);
     assert.equal(art.kind,'original-diagram');

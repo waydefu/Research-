@@ -116,7 +116,7 @@ test('high-end Three.js research has accurate searchable metadata and distinct c
     const data=CURATED[path];
     assert.equal(data.schemaVersion,1);
     assert.equal(data.domain,'2026-11-universal-web-engine');
-    assert.equal(data.topic,'3D 場景與 Shader');
+    assert.equal(data.topic,'即時 3D 渲染與 Shader');
     assert.equal(data.verifiedAt,'2026-11-05');
     assert.ok(data.tags.includes('Three.js'));
     assert.equal(data.demo.length,1);
@@ -124,7 +124,7 @@ test('high-end Three.js research has accurate searchable metadata and distinct c
     hrefs.add(data.demo[0].url);
     const doc=enrichResearch({file:path,id:'2026-11-universal-web-engine/'+file.replace(/\.md$/,''),group:'2026-11-universal-web-engine',
       title:'研究原始標題',text:'# 研究原始標題'});
-    assert.equal(doc.topic,'3D 場景與 Shader');
+    assert.equal(doc.topic,'即時 3D 渲染與 Shader');
     assert.equal(doc.publicTitle,data.publicTitle);
     assert.equal(doc.summaryReviewed,true);
   }

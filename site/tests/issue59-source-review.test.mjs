@@ -7,6 +7,7 @@ import {allDocs} from '../src/lib/catalog.mjs';
 import {getPublicArticle} from '../src/lib/public-articles.mjs';
 
 const reviewed=JSON.parse(readFileSync(resolve(process.cwd(),'P1-ISSUE59-REVIEW.json'),'utf8'));
+const graphics=JSON.parse(readFileSync(resolve(process.cwd(),'P1-2026-11-05-GRAPHICS-REVIEW.json'),'utf8'));
 
 test('Issue #59: exactly every unpublished public technical body has one dated review disposition',()=>{
   const docs=allDocs(),missing=docs.filter(d=>!getPublicArticle(d.file)).map(d=>d.file).sort();
@@ -16,7 +17,10 @@ test('Issue #59: exactly every unpublished public technical body has one dated r
   assert.equal(reviewed.issue,59);
   assert.equal(reviewed.items.length,47);
   assert.equal(new Set(registered).size,registered.length,'duplicate source');
-  assert.deepEqual(registered,missing,'no missing, renamed, added, or stale source record');
+  assert.deepEqual(registered,missing.filter(p=>!graphics.items.some(row=>row.path===p)),
+    'historical Issue #59 source review remains unchanged');
+  assert.deepEqual([...registered,...graphics.items.map(x=>x.path)].sort(),missing,
+    'new sources must have an independently dated review register');
   assert.ok(reviewed.items.every(x=>x.reviewedOn&&x.remainingWork),'all items need a review date and next action');
 });
 
@@ -72,5 +76,28 @@ test('Issue #59: no release-facing source decision silently masquerades as fully
     assert.notEqual(row.dispositionStatus,'fully-verified');
     assert.equal(row.externallyVerifiedAllClaims,false);
     assert.ok(!/全部.*通過獨立查證/.test(row.publicNotice),row.path);
+  }
+});
+
+test('new graphics research has separate 2026-11-05 scoped review and exact source identity',()=>{
+  assert.equal(graphics.schemaVersion,1);
+  assert.equal(graphics.reviewDate,'2026-11-05');
+  assert.equal(graphics.items.length,3);
+  assert.equal(new Set(graphics.items.map(x=>x.path)).size,3);
+  for(const row of graphics.items){
+    assert.ok(row.path.startsWith('research/2026-11-universal-web-engine/2'),row.path);
+    const raw=readFileSync(resolve(process.cwd(),'..',row.path));
+    const sha=createHash('sha1')
+      .update(Buffer.from('blob '+raw.byteLength+'\0'))
+      .update(raw).digest('hex');
+    assert.equal(row.sourceBlobSha,sha,'recorded research source changed: '+row.path);
+    assert.match(row.sourceRevision,/^[0-9a-f]{40}$/);
+    assert.equal(row.reviewedOn,'2026-11-05');
+    assert.equal(row.externallyVerifiedAllClaims,false);
+    assert.equal(row.benchmarkStatus,'NOT_RUN');
+    assert.ok(row.verifiedScope.length>20);
+    assert.ok(row.remainingWork.length>20);
+    assert.ok(row.knownSources.length>=2);
+    assert.ok(row.knownSources.every(u=>u.startsWith('https://')));
   }
 });
