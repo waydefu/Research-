@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "purpose": "2026-11-05 起新增研究的逐篇有限查證登記；不修改 Issue #59 歷史 47 份或 2026-11-05 圖形研究 3 份，亦不代表任何來源已全面外部驗證。",
+  "requiredFields": [
+    "path",
+    "reviewedOn",
+    "verifiedScope",
+    "publicNotice",
+    "remainingWork",
+    "knownSources"
+  ],
+  "items": []
+}
