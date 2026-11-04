@@ -146,3 +146,27 @@ test('archived-original search is explicit, complete and retains provenance with
   await page.getByRole('button',{name:'搜尋'}).click();
   await expect(page.locator('#search-feedback')).toContainText('找到 0 項結果');
 });
+
+
+test('Issue #59 evidence overlay tells readers exactly which historic version or claim is not validated',async({page})=>{
+  await page.setViewportSize({width:393,height:852});
+  await page.goto(BASE+'research/2026-11-universal-web-engine/09-reference-stacks-and-migration/');
+  const evidence=page.getByRole('region',{name:'原始研究的來源審核與限制'});
+  await expect(evidence).toBeVisible();
+  await expect(evidence).toContainText('Astro 6');
+  await expect(evidence).toContainText('不是');
+  await expect(evidence).toContainText('採用前核對');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+
+  await page.goto(BASE+'research/2026-11-information-security/information-security-principles/');
+  const safety=page.getByRole('region',{name:'原始研究的來源審核與限制'});
+  await expect(safety).toContainText('ISO/IEC 27001');
+  await expect(safety).toContainText('教學頁碼');
+  await expect(safety.getByRole('link',{name:/iso.org/})).toHaveCount(1);
+});
+
+test('Issue #59 applies evidence overlay only to original-only records, not already curated public guides',async({page})=>{
+  await page.goto(DOC);
+  await expect(page.getByRole('region',{name:'原始研究的來源審核與限制'})).toHaveCount(0);
+  await expect(page.getByRole('heading',{name:/Arctic Waters/})).toBeVisible();
+});
