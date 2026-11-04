@@ -1,7 +1,7 @@
 // Independent evidence registers are editorial overlays. A registered
 // disposition is not comprehensive external verification of the source.
-import issue59 from '../../P1-ISSUE59-REVIEW.json';
-import graphics from '../../P1-2026-11-05-GRAPHICS-REVIEW.json';
+import issue59 from '../../P1-ISSUE59-REVIEW.json' with {type:'json'};
+import graphics from '../../P1-2026-11-05-GRAPHICS-REVIEW.json' with {type:'json'};
 
 const rows=[...issue59.items];
 const known=new Set(rows.map(row=>row.path));
