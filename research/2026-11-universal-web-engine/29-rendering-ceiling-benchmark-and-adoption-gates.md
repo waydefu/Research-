@@ -158,4 +158,4 @@ visual_review_author, visual_review_notes, pass_fail, evidence_link
 | GPU-driven Nanite-style LOD 理念 | [threejs-nanites](https://github.com/VictorZakharov/threejs-nanites)、[本庫既有研究](23-threejs-nanites-gpu-driven-geometry.md) | 2026-11-05 | B：上游文件＋歷史研究 |
 | 本文 Profile/成本/PoC 順序 | **研究作者工程推導** | 2026-11-05 | C：尚未實測 |
 
-**不要把上述「理論量、官方範例、上游自報數據、作者推導」混成同一種測試成績。** 本報告沒有聲稱第三方實作為本 Repo 已安裝依賴，也沒有更動任何遊戲、網站、CI、Secrets 或 GitHub Rulesets。
+**不要把上述「理論量、官方範例、上游自報數據、作者推導」混成同一種測試成績。** 本報告沒有聲稱第三方實作為任何讀者的執行環境已安裝依賴，也沒有更動任何遊戲、網站、CI、Secrets 或 GitHub Rulesets。
