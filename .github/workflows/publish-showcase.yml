@@ -26,8 +26,11 @@ on:
 permissions:
   contents: read
 
+# Keep PR builds separate from production deployment. With a single shared
+# concurrency group, a new pending PR run can replace and cancel a queued
+# main push run even when cancel-in-progress is false.
 concurrency:
-  group: research-showcase-production
+  group: research-showcase-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'production' }}
   cancel-in-progress: false
 
 jobs:
