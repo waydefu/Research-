@@ -177,6 +177,17 @@ color = sceneColor × transmittance + fogColor × (1-transmittance)
 - 以 `GPU timer`（可用時）和 frame interval 分開記錄；無 GPU timer 的欄位留 Unknown。
 - 無需目標資產授權時**不要**抓取第三方遊戲貼圖當自己的測試素材。改用原創基準場景。
 
+### GLSL 編譯、連結與精度回歸
+
+WebGL2 自訂頂點與片段 Shader 的共享 uniform 名稱、型別、精度、輸出結構必須相容；即使 `renderer.info.render.calls > 0`，仍可能存在單一材質的 link/validate failure。**驗收時收集 WebGL warning/error、program compile/link log，對水面及體積效果輸出 effect-only 的像素差異**。尤其要測試以下負向案例：
+
+- 模擬頂點／片段 `uTime` precision 不一致，確認 CI 能抓到失敗並阻止 release。
+- 故意輸入不存在的 Shader import、錯誤 uniform 或少一張 depth texture，確認不是默默退回背景色。
+- 視角從正交切透視、DPR 改變與 framebuffer resize 時，檢查 shader 的 projection/depth/uniforms、history clear 與 target disposal。
+- WebGPU Node/TSL 不要偷用舊 GLSL `ShaderMaterial`；對應 backend 未實作時提供可見替代而不是黑畫面。
+
+這是**測試設計**，不是聲稱已執行上述錯誤注入。平台來源：[WebGPURenderer Migration](https://threejs.org/manual/pages/webgpurenderer)、[Three.js ShaderMaterial](https://threejs.org/docs/pages/ShaderMaterial.html)。
+
 ## 8｜可直接立項的三個高價值 PoC
 
 **PoC-W｜水面影像正確性：**`W0 Gerstner+Fresnel+foam` vs `W1+SSR/probe+depth` vs `W2 FFT Compute`。用同一峽灣與天氣、相機路徑與動態船隻。必須通過 Shader compile、近岸遮擋與反射缺失回退。

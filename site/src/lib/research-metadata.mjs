@@ -13,7 +13,7 @@ export const CURATED = {
     creator:null,
     originalSource:{label:'Three.js 官方 WebGPURenderer 文件',url:'https://threejs.org/manual/pages/webgpurenderer'},
     demo:[{label:'官方 WebGPU SSGI 互動示範',url:'https://threejs.org/examples/webgpu_postprocessing_ssgi.html',note:'Three.js 官方範例；瀏覽器需支援相應後端，嵌入可用性未驗證'}],
-    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'primary'
+    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'secondary'
   },
   'research/2026-11-universal-web-engine/28-advanced-shader-pipeline-and-hd2d-recipes.md': {
     schemaVersion:1,
@@ -25,7 +25,7 @@ export const CURATED = {
     creator:null,
     originalSource:{label:'Three.js 官方 WebGPU RenderPipeline 指引',url:'https://threejs.org/manual/pages/webgpu-postprocessing.html'},
     demo:[{label:'Three.js 官方 SSR 反射示範',url:'https://threejs.org/examples/webgpu_postprocessing_ssr.html',note:'官方示範場景，使用的第三方模型素材由範例自行標示作者及授權'}],
-    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'primary'
+    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'secondary'
   },
   'research/2026-11-universal-web-engine/29-rendering-ceiling-benchmark-and-adoption-gates.md': {
     schemaVersion:1,
@@ -37,7 +37,7 @@ export const CURATED = {
     creator:null,
     originalSource:{label:'Three.js 官方 WebGPURenderer 文件',url:'https://threejs.org/manual/pages/webgpurenderer'},
     demo:[{label:'WebGPU 路徑追蹤作者展示',url:'https://gkjohnson.github.io/three-gpu-pathtracer/index.html',note:'第三方開源作品示範；依裝置支援 WebGPU，非本站效能實測'}],
-    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'primary'
+    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'secondary'
   },
   'research/2026-11-local-ai-inference/01-colibri-moe-streaming.md': {
     title:'Colibri：記憶體不足時，超大型 AI 模型怎麼運作？',
