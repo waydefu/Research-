@@ -1,5 +1,33 @@
-/* Canonical reading-system tokens (split from global.css without value changes). */
-:root{color-scheme:dark;--bg:#0a101d;--surface:#121d2d;--ink:#eef3f4;--muted:#9eacb9;--cyan:#40d4de;--gold:#e4b451;--line:#2b3948;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;font-synthesis:none}
+/* P1 design-token baseline: one declaration and explicit semantic layers.
+   Values of all existing --bg/--gold/... reading variables are unchanged. */
+:root{
+  color-scheme:dark;
+  /* Original research design direction, retained for future artwork decisions. */
+  --palette-space-0:#0a101d;
+  --palette-surface-0:#121d2d;
+  --palette-ink-primary:#eef3f4;
+  --palette-ink-muted:#9eacb9;
+  --palette-cyan-plasma:#40d4de;
+  --palette-gold-primary:#e4b451;
+  --palette-line-base:#2b3948;
 
-/* Active reading-world override. Keep original cascading values intact. */
-:root{--bg:#080b11;--surface:#101723;--ink:#f0e6d4;--muted:#c0c7cc;--cyan:#91b9d0;--gold:#d9b579;--line:rgba(214,171,102,.29)}
+  /* Current public reading world; deliberately darker and softer than concept. */
+  --reading-bg:#080b11;
+  --reading-surface:#101723;
+  --reading-ink:#f0e6d4;
+  --reading-muted:#c0c7cc;
+  --reading-cyan:#91b9d0;
+  --reading-gold:#d9b579;
+  --reading-line:rgba(214,171,102,.29);
+
+  /* Backwards compatible CSS API used throughout existing Astro pages. */
+  --bg:var(--reading-bg);
+  --surface:var(--reading-surface);
+  --ink:var(--reading-ink);
+  --muted:var(--reading-muted);
+  --cyan:var(--reading-cyan);
+  --gold:var(--reading-gold);
+  --line:var(--reading-line);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  font-synthesis:none;
+}
