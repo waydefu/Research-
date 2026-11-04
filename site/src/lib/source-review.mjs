@@ -13,7 +13,7 @@ for(const row of graphics.items){
   rows.push({
     path:row.path,
     dispositionReviewedOn:row.reviewedOn,
-    publicNotice:'這是有範圍限制的圖形工程研究，僅核對特定官方功能及來源；所有外部主張並未逐項獨立驗證。',
+    publicNotice:'這是有範圍限制的圖形工程研究，僅核對特定官方功能及來源；效能尚未實測，所有外部主張並未逐項獨立驗證。',
     dispositionReason:row.verifiedScope,
     additionalEvidenceScope:null,
     adoptionGate:row.remainingWork,
