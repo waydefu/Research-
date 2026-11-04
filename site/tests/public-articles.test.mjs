@@ -11,11 +11,14 @@ test('inventory covers every published source and never calls automated flags fa
   assert.equal(audit.records.length,new Set(audit.records.map(x=>x.file)).size);
   assert.ok(audit.records.every(x=>['優先整理','人工核對','一般內容候選'].includes(x.priority)));
   assert.ok(audit.records.some(x=>x.priority==='優先整理'));
-  assert.equal(audit.curated,12);
+  assert.equal(audit.curated,40);
+  // P0.5 publication gate: any original containing internal repository markers
+  // must have a separately authored public technical body, preserving its source.
+  assert.deepEqual(audit.records.filter(x=>x.internalHits>0&&x.publicBody!=='已完成技術正文').map(x=>x.file),[]);
 });
-test('two editorial batches cover twelve general technology guides with exact source mapping',()=>{
-  assert.deepEqual(publicBodyCoverage(docs.map(d=>d.file)),{total:87,ready:12,stale:[]});
-  assert.equal(Object.keys(PUBLIC_ARTICLES).length,12);
+test('P0.5 closeout covers forty technical guides with unaltered original files with exact source mapping',()=>{
+  assert.deepEqual(publicBodyCoverage(docs.map(d=>d.file)),{total:87,ready:40,stale:[]});
+  assert.equal(Object.keys(PUBLIC_ARTICLES).length,40);
   const batchTwo=[
     'research/2026-11-universal-web-engine/18-v3-cinematic-experience-technology-decision.md',
     'docs/governance/BASELINE-2026-11-02.md',
@@ -27,6 +30,25 @@ test('two editorial batches cover twelve general technology guides with exact so
     'research/2026-11-agent-repository-operations/09-implementation-roadmap.md'
   ];
   for(const file of batchTwo)assert.ok(PUBLIC_ARTICLES[file],file);
+  const batchThree=[
+    'docs/governance/REPO-TOOLING.md',
+    'docs/governance/RULESETS.md',
+    'docs/governance/TOKEN-ACCOUNTING.md',
+    'research/2026-11-universal-web-engine/15-creative-web-evidence-and-adoption.md',
+    'research/2026-11-universal-web-engine/14-effects-recipes-and-poc-validation.md',
+    'research/2026-10-retrospective/01-agent-orchestration.md',
+    'research/2026-10-retrospective/02-code-intelligence-benchmarks.md',
+    'research/2026-11-agent-engineering/05-integration.md'
+  ];
+  assert.equal(batchThree.length,8);
+  for(const file of batchThree)assert.ok(PUBLIC_ARTICLES[file],file);
+  // Third batch includes the final project-specific history normalization.
+  // This is not a claim that all 87 source bodies were rewritten.
+  const allGuides=new Set(Object.keys(PUBLIC_ARTICLES));
+  const uncurated=docs.filter(x=>!allGuides.has(x.file));
+  assert.equal(uncurated.length,47);
+  assert.ok(uncurated.every(x=>auditPublicDocs([x]).records[0].internalHits===0),
+    'no uncurated source may expose internal repository narrative by default');
   for(const [file,body] of Object.entries(PUBLIC_ARTICLES)){
     const doc=docs.find(x=>x.file===file);
     assert.ok(doc,file);
