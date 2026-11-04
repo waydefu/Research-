@@ -51,7 +51,20 @@ for(const width of [393,1440]){
     expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
 
     await page.emulateMedia({reducedMotion:'reduce'});
-    await expect(page.locator('.exhibit-list .domain-scene img').first()).toHaveCSS('transition-duration','0s');
-    await expect(page.locator('.exhibit-list .domain-scene img').first()).toHaveCSS('transform','none');
+    // The existing global accessibility policy uses .01ms !important rather
+    // than a literal 0s. Assert effectively zero motion, not CSS serialization.
+    const reducedMotion=await page.locator('.exhibit-list .domain-scene img').first().evaluate(img=>{
+      const computed=getComputedStyle(img);
+      return {
+        durationSeconds:computed.transitionDuration.split(',').map(value=>{
+          const duration=value.trim();
+          return duration.endsWith('ms') ? parseFloat(duration)/1000 : parseFloat(duration);
+        }),
+        transform:computed.transform
+      };
+    });
+    expect(reducedMotion.durationSeconds.length).toBeGreaterThan(0);
+    expect(reducedMotion.durationSeconds.every(n=>Number.isFinite(n) && n<=0.001)).toBe(true);
+    expect(reducedMotion.transform).toBe('none');
   });
 }
