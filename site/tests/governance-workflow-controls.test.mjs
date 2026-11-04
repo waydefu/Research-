@@ -28,7 +28,9 @@ function checkPagesWorkflow(text){
   const errors=[];
   if(!/name:\s*V2 \+ V3 static Pages artifact integrity/.test(text))errors.push('Pages build evidence job missing');
   if(/pull_request_target\s*:/.test(text))errors.push('unsafe pull_request_target');
-  if(!text.includes("github.event_name != 'pull_request' && github.ref == 'refs/heads/main'"))
+  // The artifact upload AND the deploy job have independent main-only guards.
+  const guard="github.event_name != 'pull_request' && github.ref == 'refs/heads/main'";
+  if(text.split(guard).length-1!==2)
     errors.push('Pages production deployment not guarded');
   if(!/needs:\s*build/.test(text))errors.push('deployment not gated by verified build');
   if(!/pages:\s*write/.test(text)||!/id-token:\s*write/.test(text))errors.push('deployment identity contract changed');
