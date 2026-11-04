@@ -77,3 +77,10 @@ Core Web Vitals、手機 FPS、GPU 熱負載與外部網站 iframe 的真實可�
 - Pagefind JS API：https://pagefind.app/docs/js-api-filtering/
 - MDN iframe sandbox：https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
 - MDN frame restrictions：https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
+
+## 2026-11-04｜雙層搜尋契約
+
+- **公開閱讀頁面**：既有 Pagefind 索引已編輯技術正文；未編輯的來源依原頁面現狀索引，並保留事實未驗的界線。不可宣稱此層包含全部歷史 Markdown。
+- **歷史原始研究**：使用者主動切換後才下載 `original-search-index.json`，由目前 87 篇公開來源的原始 Markdown 及來源 SHA 生成；可找回被 Pagefind 排除的歷史文本。歷史結果標示「未重新查證」，不等於最新推薦。
+- 兩層共用分類／標籤篩選，但互不混合排序；歷史查詢不載入第三方腳本，搜尋片段使用 `textContent` 渲染。原文資料來源包括原本就公開的治理／設計 Markdown，威脅模型則維持排除。
+- 建置後 `postbuild-verify.mjs` 核對 87 篇原文的 SHA、來源路由、文字一致性；Playwright 驗證需由人主動切換並且無 JS 仍保留文章導覽。

@@ -121,3 +121,28 @@ test('search results beyond fifty remain reachable through progressive loading',
   const links=await page.locator('#search-results a').evaluateAll(nodes=>nodes.map(a=>a.href));
   expect(new Set(links).size).toBe(61);
 });
+
+
+test('archived-original search is explicit, complete and retains provenance without exposing the excluded threat model',async({page})=>{
+  await page.goto(BASE+'search/');
+  expect(await page.evaluate(()=>performance.getEntriesByType('resource').some(e=>e.name.includes('original-search-index.json')))).toBe(false);
+  const response=await page.request.get(BASE+'original-search-index.json');
+  expect(response.ok()).toBe(true);
+  const index=await response.json();
+  expect(index.scope).toBe('archived-original-markdown');
+  expect(index.documents).toHaveLength(87);
+  expect(index.documents.some(d=>d.file.includes('THREAT-MODEL.md'))).toBe(false);
+  const curated=index.documents.find(d=>d.file==='docs/governance/OPERATIONS.md');
+  expect(curated?.text.length).toBeGreaterThan(100);
+  expect(curated.sha).toMatch(/^[a-f0-9]{40}$/);
+  await page.locator('input[name="search-scope"][value="original"]').check();
+  await page.locator('#search-term').fill('Research-');
+  await page.getByRole('button',{name:'搜尋'}).click();
+  await expect(page.locator('#search-feedback')).toContainText(/找到 \d+ 項結果/);
+  await expect(page.locator('#search-results a').first()).toBeVisible();
+  await expect(page.locator('#search-results li').first()).toContainText('歷史原始研究｜未重新查證');
+  await expect(page.locator('#search-results a').first()).toHaveAttribute('href',/^\/Research-\/v3\//);
+  await page.locator('#search-term').fill('不應存在的測試關鍵字xyz987654');
+  await page.getByRole('button',{name:'搜尋'}).click();
+  await expect(page.locator('#search-feedback')).toContainText('找到 0 項結果');
+});

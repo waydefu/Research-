@@ -1,5 +1,5 @@
 import { allDocs, resolveLocal, ROOT } from '../src/lib/catalog.mjs';
-import { mkdirSync, copyFileSync, existsSync } from 'node:fs';
+import { mkdirSync, copyFileSync, existsSync, writeFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import {generateResearchArt} from './generate-research-art.mjs';
 
@@ -25,5 +25,16 @@ for (const d of docs) {
   }
 }
 if (docs.some(d => d.file.endsWith('THREAT-MODEL.md'))) throw new Error('威脅模型不得進入公開內容');
-const art=generateResearchArt(docs);
+// The primary Pagefind index intentionally ignores archived text for edited public articles.
+// Keep a separate, opt-in and source-exact original corpus; never claim it was fact-checked.
+ const originalIndex={
+   schemaVersion:1,scope:'archived-original-markdown',
+   documents:docs.map(d=>({
+     file:d.file,href:d.href,title:d.title,publicTitle:d.publicTitle,group:d.group,
+     topic:d.topic,tags:d.tags,sha:d.sha,date:d.date,text:d.text
+   }))
+ };
+ writeFileSync(join(ROOT,'site/public/original-search-index.json'),
+   JSON.stringify(originalIndex)+'\n','utf8');
+ const art=generateResearchArt(docs);
 console.log('P0 preflight: ' + docs.length + ' Markdown files, ' + count + ' linked asset copies; ' + art.written + ' original article diagrams; all checked.');
