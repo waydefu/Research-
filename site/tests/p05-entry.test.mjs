@@ -39,9 +39,13 @@ test('D: site library modules never directly import page, layout or view styles'
 test('E: shared design tokens are a single imported file with original dark-gold palette',()=>{
   const global=read('src/styles/global.css'),tokens=read('src/styles/tokens.css');
   assert.ok(global.startsWith("@import './tokens.css';\n"));
-  assert.ok(tokens.includes('--gold:#e4b451'));
-  assert.ok(tokens.includes('--cyan:#40d4de'));
-  assert.ok(tokens.includes('--bg:#0a101d'));
+  assert.ok(tokens.includes('--palette-gold-primary:#e4b451'));
+  assert.ok(tokens.includes('--palette-cyan-plasma:#40d4de'));
+  assert.ok(tokens.includes('--palette-space-0:#0a101d'));
+  assert.ok(tokens.includes('--reading-gold:#d9b579'));
+  assert.ok(tokens.includes('--reading-bg:#080b11'));
+  assert.ok(tokens.includes('--gold:var(--reading-gold)'));
+  assert.equal((tokens.match(/:root\s*\{/g)||[]).length,1,'canonical design tokens cannot silently override each other');
   assert.ok(tokens.includes('Noto Sans TC'));
   assert.ok(!/^:root\{/m.test(global),'global styles must not duplicate canonical root tokens');
 });

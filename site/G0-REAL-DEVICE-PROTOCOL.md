@@ -1,5 +1,8 @@
 # G0 真實裝置與性能驗收｜現場操作手冊
 
+> **2026-11-04 P1 進場重新取證入口**：[P0.5-EXIT-P1-ENTRY.md](./P0.5-EXIT-P1-ENTRY.md)。本文件下方 PR #31 的 Draft、舊 Preview URL 等皆為歷史測試程序。**最新主線已到 #53、main `ddd77321fd4075be3815538b78255a1b898b9dcc`；後續任何新 PR 都須按實際 SHA 獨立取證。** 未連線實際 Android／iOS 的 FPS、熱與 Safari 結果必須記 Unknown，不可由模擬 viewport 或 Chromium 截圖冒稱通過。手動驗收完成後填入 [P1 設計／實機基線](./P1-DESIGN-SYSTEM-BASELINE.md) 的取證記錄與 Owner 結論。
+
+
 > **2026-11-03 接手更新：** 本手冊起草時以 PR #31 Draft 為例，該 PR 現已合併。下一位請先參照 [HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md) 核對正式 main／Pages SHA，再用**相同當前 SHA**的網址執行真機測試。下文所有「PR #31 尚未部署」是歷史前提，不可照字面執行。
 
 **版本**：2026-11-03，Research- P1／PR #31。此文件是可重現測試規程，**不是已完成的裝置測量**。  
