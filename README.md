@@ -1,5 +1,7 @@
 # Research — AI 工程技術研究庫
 
+> **2026-11-04 P1 入口**：[當前狀態、主分支驗證及剩餘阻塞](site/CURRENT-STATUS.md)。本 Repo **公開**，正式 Pages 已上線；下方 11/02 的未合併／main 未保護描述若有衝突，均為歷史快照。
+
 這是以**可追溯來源、可驗證結論與實際採用評估**為核心的個人研究 Repository。
 
 > 最新研究：**2026-11｜AI Coding 代理工程** — EGM、Claude Code 多模型協作／Advisor、Imagine 視覺化、Jev（JEV）決策路由。
@@ -17,10 +19,10 @@
 
 **[研究庫治理中心](docs/governance/README.md)**：已提出唯讀文件完整性 CI、PR／Issue 模板、CODEOWNERS，以及現況風險與 GitHub Rulesets 操作手冊。
 
-- [目前稽核基線](docs/governance/BASELINE-2026-11-02.md)：主分支缺乏保護，P0 有尚未解決的缺口。
+- [目前稽核基線](docs/governance/BASELINE-2026-11-02.md)：當時主分支未保護，**此為歷史基線**，目前 Ruleset 已啟用但 P0 仍有其他風險。
 - [GitHub 管理設定待決](docs/governance/RULESETS.md)：必經 PR、Required Status Checks，需要 Repo Owner 另行確認並設定。
 - [威脅模型](docs/governance/THREAT-MODEL.md) · [回退手冊](docs/governance/OPERATIONS.md)。
-- **目前只是工作分支中的提案，尚未合併，也未完成 EAG-100 驗收。**
+- **2026-11-04 更新：治理基線及 `main-eag-100` Ruleset 已合併／啟用；EAG-100 整體驗收仍未完成。** 當前證據及剩餘風險見 [當前狀態](site/CURRENT-STATUS.md)。
 
 ## 2026 年 11 月：AI Agent 專案治理、搜尋索引與額度最佳化（新研究）
 
