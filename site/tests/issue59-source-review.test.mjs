@@ -24,7 +24,7 @@ test('Issue #59: source blob hashes are immutable; all claimed evidence is scope
     '索引／模板已盤點（不是技術正文）',
     '官方來源指定主張已交叉核對',
     '原文已審閱，主張待進一步核實',
-    '歷史案例已辨識（實測不能外推)'
+    '歷史案例已辨識（實測不能外推）'
   ]);
   for(const row of reviewed.items){
     assert.ok(allowed.has(row.reviewClass),row.path);
