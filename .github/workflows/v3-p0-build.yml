@@ -38,19 +38,12 @@ jobs:
           node --version
           npm --version
       # Dependency tree is locked in site/package-lock.json; no PR write permissions.
-      # Temporary read-only package-lock generation for a controlled migration.
-      # Remove this probe after committing the resulting lockfile.
-      - name: Migration probe - generate lockfile candidate (read-only CI)
-        working-directory: site
-        run: |
-          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
-          echo 'P1_ASTRO7_LOCK_START'
-          base64 -w0 package-lock.json
-          echo
-          echo 'P1_ASTRO7_LOCK_END'
       - name: Install locked dependencies (npm ci)
         working-directory: site
         run: npm ci --no-audit --no-fund
+      - name: Audit all npm dependencies (high and critical block)
+        working-directory: site
+        run: npm audit --audit-level=high
       - name: Astro and catalog tests
         working-directory: site
         run: npm run check
