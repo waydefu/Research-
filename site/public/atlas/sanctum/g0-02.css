@@ -1,0 +1,212 @@
+/* P1 / G0-02 — Sanctum art direction: editorial hierarchy, believable scene
+   lighting, and an uninterrupted mobile observatory. No new image, font,
+   JavaScript runtime, tracking, or scroll controller. Owner review required. */
+:root {
+  --g002-gold: #d9b579;
+  --g002-ice: #91b9d0;
+  --g002-paper: #f5e9d7;
+  --g002-display: "Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  --g002-text: "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+/* Lighting is behind all DOM controls. One source image remains fixed for
+   the entire journey; the cyan is a rim light, not a second primary color. */
+.world-backdrop::after {
+  background:
+    radial-gradient(ellipse 27% 39% at 72% 28%,rgba(227,171,91,.14),transparent 88%),
+    radial-gradient(ellipse 21% 34% at 87% 47%,rgba(71,150,177,.085),transparent 83%),
+    linear-gradient(90deg,rgba(3,6,12,.75),rgba(3,6,12,.34) 34%,rgba(3,6,12,.04) 67%,rgba(3,6,12,.30)),
+    linear-gradient(180deg,rgba(3,6,12,.20),transparent 32%,rgba(3,6,12,.10) 73%,rgba(3,6,12,.54));
+}
+.hero-left {position:relative}
+.hero-left::before {
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  inset:-2.5rem -5rem -2rem -2rem;
+  background:radial-gradient(ellipse at 24% 50%,rgba(3,7,14,.51),rgba(3,7,14,.21) 58%,transparent 78%);
+}
+.hero .eyebrow {
+  font:600 .69rem/1.7 var(--g002-text);
+  letter-spacing:.22em;
+  color:#e8c28a;
+}
+.hero h1 .zh {
+  font-family:var(--g002-display);
+  font-weight:600;
+  line-height:1.42;
+  letter-spacing:.055em;
+  text-wrap:balance;
+  color:var(--g002-paper);
+  text-shadow:0 2px 22px rgba(0,0,0,.70),0 0 28px rgba(198,139,63,.16);
+}
+.hero h1 .en {
+  font-family:var(--g002-text);
+  font-weight:450;
+  letter-spacing:.085em;
+  color:#dfc28f;
+}
+.hero-desc {
+  max-width:43ch;line-height:1.9;letter-spacing:.025em;
+  color:#ece6dc;
+  text-wrap:pretty;
+}
+.hero .rule {
+  width:min(215px,60%);
+  background:linear-gradient(90deg,#edc891,#e0b270 48%,rgba(223,181,120,.06));
+  box-shadow:0 0 21px rgba(223,168,93,.28);
+}
+.hero-discovery-row input {
+  border-color:rgba(227,188,125,.8);
+  background:rgba(8,16,27,.94);
+}
+.hero-discovery-row input:focus-visible,
+.hero-discovery-row button:focus-visible {
+  outline:2px solid var(--g002-ice);
+  outline-offset:3px;
+}
+.hero-discovery-row button {
+  background:linear-gradient(125deg,#f0d6a6,#d9ae6e);
+  color:#10151e;
+}
+.hero-actions .gold-action {
+  text-shadow:0 0 11px rgba(240,190,112,.26);
+}
+.hero-caption {letter-spacing:.19em}
+
+/* A vertical illuminated directory, not four independent boxed cards. */
+.hero-dock {
+  background:linear-gradient(90deg,rgba(5,11,20,.88),rgba(8,16,26,.72));
+  border:0;outline:0;border-radius:0;
+  box-shadow:0 24px 66px rgba(0,0,0,.3);
+  padding:8px clamp(14px,1.6vw,25px) 8px clamp(22px,1.8vw,32px);
+}
+.hero-dock::before {
+  display:block;content:"";position:absolute;left:0;top:8%;bottom:8%;
+  width:1px;height:auto;border:0;border-radius:0;
+  background:linear-gradient(180deg,transparent,#f0c986 34%,rgba(145,185,208,.4) 71%,transparent);
+  box-shadow:0 0 17px rgba(233,183,103,.32);
+}
+.hero-dock::after {display:none}
+.hero-dock .dock-item {border-bottom-color:rgba(220,177,109,.24)}
+.hero-dock .dock-copy strong {font-weight:600;letter-spacing:.04em}
+.hero-dock .dock-copy small {color:#c5c2bc}
+.hero-dock .dock-item:focus-visible {
+  outline:2px solid var(--g002-ice);outline-offset:2px;
+}
+
+/* The introduction, taxonomy and selected studies form a single editorial
+   sequence. Existing authored artwork is reused in place, not repeated as wallpaper. */
+.narrative-glass {
+  background:
+    radial-gradient(ellipse 75% 24% at 80% 19%,rgba(64,135,157,.075),transparent 88%),
+    linear-gradient(180deg,rgba(4,8,14,0) 0%,
+      rgba(5,9,16,.27) 8%,rgba(5,9,16,.60) 27%,
+      rgba(4,8,14,.73) 63%,rgba(3,6,12,.88) 100%);
+}
+.narrative-glass .vault-intro h2,
+.narrative-glass .featured h2 {
+  font-family:var(--g002-display);font-weight:600;
+  letter-spacing:.055em;line-height:1.4;
+  color:var(--g002-paper);
+  text-wrap:balance;
+}
+.vault-overline,
+.narrative-glass .featured-heading::before {
+  font-family:var(--g002-text);
+  font-weight:600;
+  letter-spacing:.15em;
+  color:#e2b97d;
+}
+.narrative-glass .vault-intro {
+  position:relative;
+  padding-bottom:clamp(22px,3vw,43px);
+  border-bottom:1px solid rgba(217,181,121,.22);
+}
+.narrative-glass .vault-intro::after {
+  content:"";position:absolute;left:0;bottom:-1px;width:clamp(58px,9vw,126px);height:1px;
+  background:linear-gradient(90deg,#f1d39e,rgba(145,185,208,.35),transparent);
+}
+.narrative-glass .vault-intro-guide p {
+  color:#d2d6d8;
+  max-width:43ch;line-height:1.85;
+}
+.narrative-glass .vault-index a {
+  gap:clamp(.85rem,2vw,1.5rem);
+  transition:background .22s ease,padding .22s ease;
+}
+.narrative-glass .vault-index a:hover,
+.narrative-glass .vault-index a:focus-visible {
+  background:linear-gradient(90deg,rgba(215,169,95,.095),transparent 78%);
+}
+.vault-picture {
+  border:1px solid rgba(215,170,105,.22);
+  box-shadow:0 10px 35px rgba(0,0,0,.16);
+}
+.vault-picture img {
+  filter:saturate(.88) contrast(1.08);
+  transition:transform .4s ease,filter .4s ease;
+}
+.vault-index a:hover img,
+.vault-index a:focus-visible img {transform:scale(1.035);filter:saturate(1.03) contrast(1.08)}
+.vault-copy .vault-name {letter-spacing:.025em;font-family:var(--g002-display)}
+.vault-description {color:#c7d0d6}
+.narrative-glass .feature-card {border-bottom-color:rgba(215,172,109,.28)}
+.narrative-glass .feature-card:first-child {border-top-color:rgba(215,172,109,.38)}
+.narrative-glass .card-category {font-family:var(--g002-text);font-weight:600}
+.narrative-glass .card-copy h3 {font-family:var(--g002-display);font-weight:600;letter-spacing:.03em}
+.narrative-glass .card-art img {filter:saturate(.9) contrast(1.07)}
+.narrative-glass .feature-card:focus-visible,
+.narrative-glass .vault-index a:focus-visible {outline:2px solid var(--g002-ice);outline-offset:2px}
+
+@media (min-width:1101px) {
+  .hero {gap:clamp(30px,4vw,70px)}
+  .hero-left {width:min(42%,590px)}
+  .hero h1 .zh {font-size:clamp(2.15rem,3.2vw,3.65rem)}
+  .hero-dock {width:clamp(270px,23%,340px)}
+}
+@media (max-width:800px) {
+  /* Narrow layouts keep the original mobile illustration unobstructed. */
+  .world-backdrop::after {
+    background:
+      radial-gradient(ellipse 55% 22% at 52% 28%,rgba(225,172,96,.065),transparent 85%),
+      linear-gradient(180deg,rgba(3,7,13,.035),rgba(3,7,13,.12) 32%,rgba(3,7,13,.35) 72%,rgba(3,7,13,.67));
+  }
+  .hero-left::before {
+    inset:-18px -14px -24px;
+    background:linear-gradient(180deg,transparent,rgba(3,7,13,.12) 28%,rgba(3,7,13,.46) 95%);
+  }
+  .hero h1 .zh {font-size:clamp(1.8rem,5vw,2.75rem)}
+  .hero .eyebrow {letter-spacing:.12em}
+  .narrative-glass {backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+}
+@media (max-width:520px) {
+  /* No change to the approved 58svh image-first hero start or the 104px
+     glass overlap. This phase may never put letters on the focal apparatus. */
+  .hero-left {max-width:100%}
+  .hero-left::before {inset:-10px -12px -18px}
+  .hero h1 .zh {
+    font-size:clamp(1.56rem,6.3vw,2rem);
+    letter-spacing:.015em;line-height:1.45;
+  }
+  .hero h1 .en {letter-spacing:.015em;font-size:.79rem;line-height:1.65}
+  .hero .eyebrow {font-size:.66rem;line-height:1.5}
+  .hero-desc {font-size:.9rem;line-height:1.72}
+  .hero-discovery-row input {font-size:16px}
+  .narrative-glass {
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+    background:linear-gradient(180deg,rgba(3,6,12,0) 0px,
+      rgba(3,6,12,.58) 120px,rgba(3,6,12,.85) 310px,rgba(3,6,12,.94) 680px);
+  }
+  .narrative-glass .vault-intro {padding-bottom:24px;margin-bottom:20px}
+  .narrative-glass .vault-intro h2 {font-size:clamp(1.95rem,7vw,2.35rem);letter-spacing:.03em}
+  .narrative-glass .featured h2 {font-size:clamp(1.85rem,7vw,2.2rem)}
+  .vault-copy .vault-name {font-size:.99rem}
+  .narrative-glass .vault-index a {gap:10px}
+}
+@media (prefers-reduced-motion:reduce) {
+  .vault-picture img,.hero-dock .dock-item,.narrative-glass .vault-index a {
+    transition:none!important;transform:none!important;
+  }
+}
+@media (prefers-reduced-transparency:reduce) {
+  .hero-dock {background:rgba(5,10,18,.96);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .narrative-glass {background:linear-gradient(180deg,rgba(6,10,17,.94),rgba(4,7,13,.99))}
+}
