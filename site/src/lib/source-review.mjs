@@ -28,7 +28,7 @@ if(ongoing.schemaVersion!==1||!Array.isArray(ongoing.items))
   throw new Error('Invalid ongoing source review registry');
 for(const row of ongoing.items){
   if(!row.path||known.has(row.path))throw new Error('Duplicate or blank ongoing source review: '+row.path);
-  if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(row.reviewedOn||''))throw new Error('Source review date required: '+row.path);
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(row.reviewedOn||''))throw new Error('Source review date required: '+row.path);
   for(const field of ['publicNotice','verifiedScope','remainingWork']){
     if(typeof row[field]!=='string'||row[field].trim().length<25)
       throw new Error('Source review missing '+field+': '+row.path);
