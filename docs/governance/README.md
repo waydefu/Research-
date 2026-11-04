@@ -1,5 +1,7 @@
 # Research-｜治理控制中心
 
+> **2026-11-04 入口**：[目前狀態](../../site/CURRENT-STATUS.md)。本 Repo 已公開，並透過 GitHub Pages 服務靜態網站；本頁 11/02 的資訊是歷史基線，非即時總結。
+
 **治理依據：** [EAG-100 v1.0](../../research/2026-11-agent-repository-operations/EAG-100.md)，研究自訂量表，非官方企業認證。
 
 ## GitHub 事實（2026-11-02 已查證）
