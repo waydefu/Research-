@@ -47,3 +47,12 @@
 - 當個人 Repo 無法強制 Ruleset 時，是否可接受「開發自律 + 低信任」的暫時等級，而不宣稱 Enterprise 合格？
 
 這些尚未決策，因此本 PR 不會設定 GitHub Rulesets。
+## 2026-11-04｜P1 進場治理修補：現存必要狀態檢查的涵蓋範圍
+
+GitHub Ruleset `main-eag-100`（#26319641）已是 Active，且要求既有 `Markdown, JSON and governance integrity` job 必過。但該 job 原先只做研究資料檢查；網站工作流程具路徑過濾，不能直接設為全 PR 必過的 Required Check。GitHub 官方說明指出，路徑過濾導致整個必過 workflow 沒跑時，Required Check 可能長期 Pending。
+
+**本工作包不修改 GitHub Ruleset**，而是保留上述穩定必要 job 名稱、`pull_request` 無 paths 過濾與唯讀權限，將 `npm audit --audit-level=high`、`npm run check`、`npm run build`、`npm run provenance`、`npm run e2e`、V2 showcase tests 全部放進**同一個必過工作**。一旦這個 PR 通過並合入 main，未來所有 PR（含只改文件者）都會經過完整網站 Gate。此方案會增加 Actions 時間，但不需管理權限、不需推測 status check 綁定。
+
+**持續限制：** 現行 Ruleset 必須有人審核數仍為 0，未強制解決 review threads，strict up-to-date 為 false；單一 Owner 無第二名合格審核者時不應強行設 1 人核准而死鎖。若日後有第二位可審者，再由 Owner 在 GitHub Settings 調整 review count、conversation resolution 與 strict merge，並做負向測試。不能聲稱目前已調整。
+
+**驗收：** 此 PR 應在最新 HEAD 達成 Research integrity PASS；但 PR 時 CI 成功尚不是 merge 後的規則驗證，需在另一個 docs-only PR 中確認必要 Context 仍執行，且模擬測試失敗時無法合併（不得真的破壞 main）。

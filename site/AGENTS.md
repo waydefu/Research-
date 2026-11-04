@@ -23,3 +23,9 @@
 `npm run check` → `npm run build` → `npm run provenance` → `npm run e2e`（含 Pagefind 繁中、無 JS、axe、360／768／1440 px、reduced-motion）。Gate 未過不得宣稱完成；CI PASS 不取代實機。
 
 Draft PR 需記錄：變更與授權範圍、最新 HEAD／CI、原文／素材溯源、未測部分、Owner 待決事項。不得自行合併或部署。
+
+## P1 必過檢查（2026-11-04 新增提案）
+
+- 本工作包將未過濾的 `Research integrity / Markdown, JSON and governance integrity` job 擴大為完整 P1 website gate。因該 job 已列入 main-eag-100 Required Checks，所有 PR 的網站測試、來源核對和高風險 npm advisory 都必須成功（待本 PR 合併後生效）。
+- `V3 P0 build and checks` 與 `Publish Research Showcase` 仍提供額外建置證據，但因 paths filter 不把它們當成全路徑必過的唯一來源。
+- 實際硬性拒絕效果必須在合併後用不同路徑測試 PR 證明；CI PASS 不代表真機、人工美術或第三方權利查核通過。

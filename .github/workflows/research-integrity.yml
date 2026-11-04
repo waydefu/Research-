@@ -18,12 +18,13 @@ jobs:
   integrity:
     name: Markdown, JSON and governance integrity
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 40
     steps:
       - name: Checkout (pinned v5.0.1, Node.js 24)
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
           persist-credentials: false
+          fetch-depth: 0 # Exact original SHA/date and source provenance need Git history
       - name: Check documents without dependencies
         run: python3 scripts/check_repository.py
       - name: Build and verify real repository search index
@@ -38,3 +39,44 @@ jobs:
         with:
           advanced-security: false
           version: v1.7.0
+
+      # This job name is already required by main-eag-100. Keep this job name and
+      # unfiltered pull_request trigger; any failure must fail the required check.
+      # Site CI cannot be a path-filtered required job (skipped workflows can stall).
+      - name: Set up Node.js 22 for mandatory website tests (pinned)
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '22'
+      - name: Install locked V3 dependencies
+        working-directory: site
+        run: npm ci --no-audit --no-fund
+      - name: Audit npm dependency supply chain (high and critical findings block)
+        working-directory: site
+        run: npm audit --audit-level=high
+      - name: Verify Astro, metadata, search and content unit contracts
+        working-directory: site
+        run: npm run check
+      - name: Build V3 and both search indexes
+        working-directory: site
+        run: npm run build
+      - name: Verify exact Markdown source provenance
+        working-directory: site
+        run: npm run provenance
+      - name: Install Chromium and required dependencies
+        working-directory: site
+        run: npx playwright install --with-deps chromium
+      - name: Run P0-P1 browser, keyboard, accessibility, no-JS and viewport checks
+        working-directory: site
+        run: npm run e2e
+      - name: Validate original V2 showcase
+        run: npm --prefix showcase run check
+      - name: Save mandatory browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: required-p1-browser-evidence
+          path: |
+            site/test-results/
+            site/playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
