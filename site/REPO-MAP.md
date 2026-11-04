@@ -9,7 +9,7 @@
 - [P0.5 → P1 的證據、阻塞及整合次序](./P0.5-EXIT-P1-ENTRY.md)，所有動態 SHA／PR／CI 仍須從 GitHub 重新核對。
 - [既有站點的架構邊界](./architecture/README.md) 與 [ADR-0001](./architecture/ADR-0001-content-and-design-boundaries.md)。
 - `site/src/styles/tokens.css` 是共用設計變數入口；`site/tests/p05-entry.test.mjs` 檢查基本 import 邊界、來源覆蓋與樣式 Token。
-- `cd site && npm run gate:p05 -- --json` 取得**本地內容完整性**快照，不等於 GitHub 最新 CI、逐篇事實查證或實機驗收。
+- `site/src/lib/p1-readiness.mjs` 是各來源的 P1 證據狀態計算；使用 `cd site && node scripts/p1-readiness-report.mjs --json --strict` 驗證分類、導讀、圖片與限定審查登記。其 `structuralPass` 不代表真機、美術、授權或逐句事實核實。\n- `site/scripts/p1-readiness-report.mjs` 是該報表的 CLI 入口，新研究若漏登記則 required CI 會失敗。\n- `cd site && npm run gate:p05 -- --json` 取得**本地內容完整性**快照，不等於 GitHub 最新 CI、逐篇事實查證或實機驗收。
 
 ## 進 Repo 的最短路徑
 
