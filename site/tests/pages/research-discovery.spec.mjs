@@ -162,11 +162,12 @@ test('Issue #59 evidence overlay tells readers exactly which historic version or
   const safety=page.getByRole('region',{name:'原始研究的來源審核與限制'});
   await expect(safety).toContainText('ISO/IEC 27001');
   await expect(safety).toContainText('教學頁碼');
-  await expect(safety.getByRole('link',{name:/iso.org/})).toHaveCount(1);
+  await safety.locator('summary').click();
+  await expect(safety.getByRole('link',{name:/iso.org/})).toBeVisible();
 });
 
 test('Issue #59 applies evidence overlay only to original-only records, not already curated public guides',async({page})=>{
   await page.goto(DOC);
   await expect(page.getByRole('region',{name:'原始研究的來源審核與限制'})).toHaveCount(0);
-  await expect(page.locator('article h1')).toContainText('Arctic Waters');
+  await expect(page.locator('article .document-title h1')).toContainText('Arctic Waters');
 });
