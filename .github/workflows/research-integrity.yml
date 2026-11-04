@@ -43,10 +43,10 @@ jobs:
       # This job name is already required by main-eag-100. Keep this job name and
       # unfiltered pull_request trigger; any failure must fail the required check.
       # Site CI cannot be a path-filtered required job (skipped workflows can stall).
-      - name: Set up Node.js 22 for mandatory website tests (pinned)
+      - name: Set up Node.js 24 for mandatory website tests (pinned)
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Install locked V3 dependencies
         working-directory: site
         run: npm ci --no-audit --no-fund
