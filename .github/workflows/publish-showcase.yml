@@ -46,10 +46,10 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0 # V3 per-document source SHA/date requires real Git history
-      - name: Set up Node.js 22 without npm dependencies
+      - name: Set up Node.js 24 without npm dependencies
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5 / Node.js 24 action runtime
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Run showcase syntax and lifecycle tests
         run: npm --prefix showcase run check
       - name: Build actual repository Markdown into a static website
