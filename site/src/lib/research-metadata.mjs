@@ -3,6 +3,42 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/27-threejs-r187-ultra-rendering-ceiling.md': {
+    schemaVersion:1,
+    publicTitle:'Three.js r187 畫質上限：WebGPU、TSL、全域光與路徑追蹤',
+    summary:'從官方 Three.js r187、WebGPU 渲染器和 TSL 出發，分析 PBR、SSGI、SSR、景深、陰影與 GPU 路徑追蹤的實際能力。比較可玩即時畫質與漸進式照片渲染，清楚標示 API 相容與尚未實測的性能。',
+    domain:'2026-11-universal-web-engine',
+    topic:'3D 場景與 Shader',
+    tags:['Three.js','WebGPU','TSL','Shader','全域光'],
+    creator:null,
+    originalSource:{label:'Three.js 官方 WebGPURenderer 文件',url:'https://threejs.org/manual/pages/webgpurenderer'},
+    demo:[{label:'官方 WebGPU SSGI 互動示範',url:'https://threejs.org/examples/webgpu_postprocessing_ssgi.html',note:'Three.js 官方範例；瀏覽器需支援相應後端，嵌入可用性未驗證'}],
+    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'primary'
+  },
+  'research/2026-11-universal-web-engine/28-advanced-shader-pipeline-and-hd2d-recipes.md': {
+    schemaVersion:1,
+    publicTitle:'高階 Shader 配方：海水、峽灣霧、反射、HD-2D',
+    summary:'拆解海浪 Fresnel、Beer-Lambert、海岸泡沫、SSGI、SSR、體積霧與像素角色抗鋸齒的工程設計。整理 Frame Graph、降級方案與三個可重現 PoC；配方是設計推導，不是已部署程式。',
+    domain:'2026-11-universal-web-engine',
+    topic:'3D 場景與 Shader',
+    tags:['Three.js','Shader','WebGPU','HD-2D','海水'],
+    creator:null,
+    originalSource:{label:'Three.js 官方 WebGPU RenderPipeline 指引',url:'https://threejs.org/manual/pages/webgpu-postprocessing.html'},
+    demo:[{label:'Three.js 官方 SSR 反射示範',url:'https://threejs.org/examples/webgpu_postprocessing_ssr.html',note:'官方示範場景，使用的第三方模型素材由範例自行標示作者及授權'}],
+    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'primary'
+  },
+  'research/2026-11-universal-web-engine/29-rendering-ceiling-benchmark-and-adoption-gates.md': {
+    schemaVersion:1,
+    publicTitle:'3D 高畫質怎麼驗收？GPU 成本、真機與降級關卡',
+    summary:'將 Three.js 高階視覺拆成行動裝置、桌面高畫質、研究級 Ultra 與漸進式照片模式；提供 Buffer 記憶體估算、效能診斷、資產壓縮、裝置測試欄位與 Go/No-go 標準，不虛構 FPS。',
+    domain:'2026-11-universal-web-engine',
+    topic:'3D 場景與 Shader',
+    tags:['Three.js','GPU','WebGPU','效能','效能驗收'],
+    creator:null,
+    originalSource:{label:'Three.js 官方 WebGPURenderer 文件',url:'https://threejs.org/manual/pages/webgpurenderer'},
+    demo:[{label:'WebGPU 路徑追蹤作者展示',url:'https://gkjohnson.github.io/three-gpu-pathtracer/index.html',note:'第三方開源作品示範；依裝置支援 WebGPU，非本站效能實測'}],
+    license:null,verifiedAt:'2026-11-05',image:null,evidenceLevel:'primary'
+  },
   'research/2026-11-local-ai-inference/01-colibri-moe-streaming.md': {
     title:'Colibri：記憶體不足時，超大型 AI 模型怎麼運作？',
     lead:'Colibri 把大型 AI 模型的一部分資料留在固態硬碟，需要時才讀進電腦記憶體或顯示卡記憶體。它的目的是減少同時占用的記憶體，但不表示超大型模型能流暢對話；原作者的速度數據尚未經本站實測。',

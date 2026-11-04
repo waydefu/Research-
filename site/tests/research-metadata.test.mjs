@@ -103,3 +103,29 @@ test('Colibri receives beginner-readable headline and context while preserving s
   assert.match(r.summary,/固態硬碟/);
   assert.equal(r.summaryReviewed,true);
 });
+
+test('high-end Three.js research has accurate searchable metadata and distinct credited demos',()=>{
+  const files=[
+    '27-threejs-r187-ultra-rendering-ceiling.md',
+    '28-advanced-shader-pipeline-and-hd2d-recipes.md',
+    '29-rendering-ceiling-benchmark-and-adoption-gates.md'
+  ];
+  const hrefs=new Set();
+  for(const file of files){
+    const path='research/2026-11-universal-web-engine/'+file;
+    const data=CURATED[path];
+    assert.equal(data.schemaVersion,1);
+    assert.equal(data.domain,'2026-11-universal-web-engine');
+    assert.equal(data.topic,'3D 場景與 Shader');
+    assert.equal(data.verifiedAt,'2026-11-05');
+    assert.ok(data.tags.includes('Three.js'));
+    assert.equal(data.demo.length,1);
+    assert.ok(!hrefs.has(data.demo[0].url));
+    hrefs.add(data.demo[0].url);
+    const doc=enrichResearch({file:path,id:'2026-11-universal-web-engine/'+file.replace(/\.md$/,''),group:'2026-11-universal-web-engine',
+      title:'研究原始標題',text:'# 研究原始標題'});
+    assert.equal(doc.topic,'3D 場景與 Shader');
+    assert.equal(doc.publicTitle,data.publicTitle);
+    assert.equal(doc.summaryReviewed,true);
+  }
+});

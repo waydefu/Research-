@@ -85,3 +85,32 @@
 - **需再查**：版本動態更新、部署平台限制、真實設備與營運費用。
 
 若未來要聲稱「新方案比舊方案快 50%」，必須有可重現的測試方法、硬體、版本、測資、結果與誤差範圍。
+
+
+## F. Three.js r187 進階 Shader／極限畫質研究（2026-11-05 增量）
+
+此節專門支持新增的 [27｜渲染能力上限](27-threejs-r187-ultra-rendering-ceiling.md)、[28｜進階 Shader 配方](28-advanced-shader-pipeline-and-hd2d-recipes.md)、[29｜量測與採用關卡](29-rendering-ceiling-benchmark-and-adoption-gates.md)。保留既有 A–E 來源原文。**最後核對：2026-11-05（Asia/Taipei）。**
+
+| 主張／用途 | 來源（原始或官方） | 證據層級與限制 |
+| --- | --- | --- |
+| Three.js r187 = 2026-10-30 release | https://github.com/mrdoob/three.js/releases/tag/r187 | 官方 release；最新狀態隨時間更新 |
+| WebGPU renderer、WebGL2 fallback、TSL / 舊 GLSL 限制 | https://threejs.org/manual/pages/webgpurenderer | 官方 API；experimental / backend 不保證功能等價 |
+| 新 RenderPipeline、MRT、tone mapping、velocity | https://threejs.org/manual/pages/webgpu-postprocessing.html | 官方 API；與舊 EffectComposer 不同 |
+| SSGI 螢幕空間 GI 與 samples/pixel | https://threejs.org/docs/pages/SSGINode.html | 官方 API；不是 Lumen 或全場景 GI |
+| SSR / DoF 示範存在性 | https://threejs.org/examples/webgpu_postprocessing_ssr.html | 官方範例；不保證跨硬體效能 |
+| 高品質 DoF 範例 | https://threejs.org/examples/webgpu_postprocessing_dof.html | 官方範例；未真機測 |
+| SSS Contact Shadow 的畫面內遮蔽限制 | https://threejs.org/docs/pages/SSSNode.html | 官方 API；不取代主 Shadow |
+| TRAA 依賴 depth/velocity、MSAA 互斥 | https://threejs.org/docs/pages/TRAANode.html | 官方 API；ghosting 需實測 |
+| WebGPU ComputeNode 與能力限制 | https://threejs.org/docs/pages/ComputeNode.html | 官方 API；WebGL2 fallback 非全部 compute 等價 |
+| PBR 多層材質 | https://threejs.org/docs/pages/MeshPhysicalMaterial.html | 官方 API；開啟不同通道有 per-pixel 成本 |
+| PMREM image-based lighting | https://threejs.org/docs/pages/PMREMGenerator.html | 官方 API；HDR 資產來源需另核對 |
+| 紋理／輸出線性色彩工作流 | https://threejs.org/manual/pages/color-management.html | 官方手冊；自訂 Shader 要自行處理 |
+| WebGPU 跨瀏覽器與 HTTPS | https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API | 平台文件；Limited Availability |
+| WebGL2 GPU timer 可選 | https://developer.mozilla.org/en-US/docs/Web/API/EXT_disjoint_timer_query | 平台文件；不能拿 RAF 取代 GPU time |
+| Geometry / meshopt / glTF 壓縮 | https://github.com/zeux/meshoptimizer/blob/master/gltf/README.md | 上游文件；新壓縮需 loader 支援 |
+| KTX2 Basis 轉碼 | https://threejs.org/docs/pages/KTX2Loader.html | 官方 loader；不代表所有格式萬能 |
+| BVH 與 raycast 加速 | https://github.com/gkjohnson/three-mesh-bvh | 上游開源；用途不等於全域光 |
+| Progressive GPU path tracing | https://github.com/gkjohnson/three-gpu-pathtracer | 上游自述；WebGPU 必要、未在本 Repo 實跑 |
+| Virtualized geometry / Nanite-style | https://github.com/VictorZakharov/threejs-nanites | 上游研究；不是 UE 官方 Nanite |
+
+**效果配方、畫質等級、GPU 預算和 Go/No-go 門檻屬本次作者工程推導。** 研究不包含套件安裝、其他 Repo 修改或裝置 benchmark；第三方授權／素材需要逐項另查。
