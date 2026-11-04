@@ -40,3 +40,13 @@
 - 經 Owner 核准 Golden 後才在新 PR 加入像素差異比對門檻；避免假 Golden 帶來永遠變綠的測試。
 - 新增來源的 metadata、圖像、授權、外部事實及 3D shader 性能需各自驗證，不能以 `structuralPass` 當 EAG-100 或 G0 最終完成證明。
 - P2–P5 的 GPU／導演／研究互動／發布是**不同里程碑**；本包不自動安裝或啟動新的 3D runtime。
+
+## 5. 新增研究的確定性收錄路徑
+
+1. 在 `research/` 寫入合法來源 Markdown，保留 H1、來源 URL、查核日期；原文不要因網站排版而覆寫。
+2. 在 `site/src/lib/research-taxonomy.mjs` 登錄繁中標題、細分類與標籤；在 `site/src/lib/research-leads.mjs` 加上具限制的白話導讀。圖片由既有原創 SVG 生成器自動提供。
+3. 針對**尚無獨立通用技術正文**的新研究，在 `site/P1-ONGOING-SOURCE-REVIEW.json` 新增一筆 `path/sourceBlobSha/sourceRevision/reviewedOn/verifiedScope/publicNotice/remainingWork/knownSources`。保留原 Issue #59 的 47 筆與圖形研究 3 筆不變；來源真值未查核時明示缺口、不得填已全面查證。
+4. 執行 `node scripts/p1-readiness-report.mjs --strict --json`，確認新來源沒有漏 Metadata、導讀、示意圖與限定審查。新增的合成來源負向測試保證未登錄時 `structuralPass=false`，但不會修改真實 Markdown。
+5. 使用 CI 的 build／Pagefind／SHA／E2E 核對實際研究總數；人工仍要驗證外部主張、作者身分與授權，不能把機械覆蓋當成已核實。
+
+此收錄流程提供 **fail-closed 的結構檢查與真人決策欄位**，不是全自動生成事實、授權或科學結論。
