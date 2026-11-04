@@ -11,7 +11,8 @@ const reviewed=JSON.parse(readFileSync(resolve(process.cwd(),'P1-ISSUE59-REVIEW.
 test('Issue #59: exactly every unpublished public technical body has one dated review disposition',()=>{
   const docs=allDocs(),missing=docs.filter(d=>!getPublicArticle(d.file)).map(d=>d.file).sort();
   const registered=reviewed.items.map(x=>x.path).sort();
-  assert.equal(reviewed.schemaVersion,1);
+  assert.equal(reviewed.schemaVersion,2);
+  assert.match(reviewed.dispositionCompletedAt,/^2026-11-04$/);
   assert.equal(reviewed.issue,59);
   assert.equal(reviewed.items.length,47);
   assert.equal(new Set(registered).size,registered.length,'duplicate source');
@@ -35,6 +36,16 @@ test('Issue #59: source blob hashes are immutable; all claimed evidence is scope
     assert.equal(row.sourceBlobSha,sha,'source changed after human review: '+row.path);
     assert.match(row.sourceRevision,/^[0-9a-f]{40}$/);
     assert.equal(row.externallyVerifiedAllClaims,false,'spot-check != full independent verification: '+row.path);
+    assert.equal(row.dispositionStatus,'accepted-with-scope',row.path);
+    assert.ok(['bounded-evidence','index-or-template','historical-reference','context-limited'].includes(row.dispositionType),row.path);
+    assert.ok(row.dispositionReason?.length>30,row.path);
+    assert.ok(row.publicNotice?.length>25,row.path);
+    assert.ok(row.adoptionGate?.length>20,row.path);
+    assert.ok(row.dispositionReviewedOn?.length>=10,row.path);
+    assert.ok(Array.isArray(row.additionalEvidenceUrls),row.path);
+    assert.ok(row.additionalEvidenceUrls.every(u=>u.startsWith('https://')),row.path);
+    if(row.additionalEvidenceUrls.length)assert.ok(row.additionalEvidenceScope?.length>15,row.path);
+    else assert.equal(row.additionalEvidenceScope,null,row.path);
     assert.ok(Array.isArray(row.evidenceUrls));
     if(row.reviewClass==='官方來源指定主張已交叉核對'){
       assert.ok(row.verifiedScope&&row.verifiedScope.length>25,row.path);
@@ -44,5 +55,22 @@ test('Issue #59: source blob hashes are immutable; all claimed evidence is scope
       assert.equal(row.verifiedScope,null,row.path);
       assert.deepEqual(row.evidenceUrls,[],row.path);
     }
+  }
+});
+
+test('Issue #59: no release-facing source decision silently masquerades as fully verified',()=>{
+  const unique=new Set(reviewed.items.map(x=>x.path));
+  assert.equal(unique.size,47);
+  const counts=reviewed.items.reduce((m,x)=>{m[x.dispositionType]=(m[x.dispositionType]||0)+1;return m;},{});
+  assert.deepEqual(counts,{
+    'index-or-template':11,'bounded-evidence':19,'context-limited':10,'historical-reference':7
+  });
+  const oldAstro=reviewed.items.find(x=>x.path.endsWith('/09-reference-stacks-and-migration.md'));
+  assert.match(oldAstro.publicNotice,/Astro 6/);
+  assert.match(oldAstro.publicNotice,/最新/);
+  for(const row of reviewed.items){
+    assert.notEqual(row.dispositionStatus,'fully-verified');
+    assert.equal(row.externallyVerifiedAllClaims,false);
+    assert.ok(!/全部.*通過獨立查證/.test(row.publicNotice),row.path);
   }
 });
