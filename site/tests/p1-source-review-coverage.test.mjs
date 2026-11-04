@@ -1,3 +1,7 @@
+import ongoing from '../P1-ONGOING-SOURCE-REVIEW.json' with {type:'json'};
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {allDocs} from '../src/lib/catalog.mjs';
@@ -42,4 +46,19 @@ test('Three.js r187 scoped reviews are actually visible to public article render
     assert.equal(row.evidenceUrls.length>=2,true);
   }
   assert.equal(reviewForSource('research/unknown.md'),null);
+});
+
+test('new source review registry is additive and SHA-pinned without modifying historic reviews',()=>{
+  assert.equal(ongoing.schemaVersion,1);
+  assert.ok(Array.isArray(ongoing.items));
+  const files=new Set(allDocs().map(doc=>doc.file));
+  for(const row of ongoing.items){
+    assert.ok(files.has(row.path),row.path);
+    assert.match(row.sourceRevision,/^[0-9a-f]{40}$/);
+    const raw=readFileSync(resolve(process.cwd(),'..',row.path));
+    const hash=createHash('sha1').update(Buffer.from('blob '+raw.byteLength+'\\0')).update(raw).digest('hex');
+    assert.equal(row.sourceBlobSha,hash,row.path);
+    assert.equal(row.externallyVerifiedAllClaims,true,false);
+    assert.ok(reviewForSource(row.path));
+  }
 });
