@@ -154,7 +154,7 @@ test('Issue #59 evidence overlay tells readers exactly which historic version or
   const evidence=page.getByRole('region',{name:'原始研究的來源審核與限制'});
   await expect(evidence).toBeVisible();
   await expect(evidence).toContainText('Astro 6');
-  await expect(evidence).toContainText('不是');
+  await expect(evidence).toContainText('當時版本');
   await expect(evidence).toContainText('採用前核對');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
 
@@ -168,5 +168,5 @@ test('Issue #59 evidence overlay tells readers exactly which historic version or
 test('Issue #59 applies evidence overlay only to original-only records, not already curated public guides',async({page})=>{
   await page.goto(DOC);
   await expect(page.getByRole('region',{name:'原始研究的來源審核與限制'})).toHaveCount(0);
-  await expect(page.getByRole('heading',{name:/Arctic Waters/})).toBeVisible();
+  await expect(page.locator('article h1')).toContainText('Arctic Waters');
 });
