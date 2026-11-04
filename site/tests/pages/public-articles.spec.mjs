@@ -1,10 +1,18 @@
 import {test,expect} from '@playwright/test';
-const BASE='/Research-/v3/research/2026-11-universal-web-engine/';
+const BASE='/Research-/v3/';
 const paths=[
- '19-v3-astro-research-cinema-architecture-and-roadmap/',
- '20-v3-chatgpt-5-6-execution-brief/',
- '21-p0-acceptance-and-p1-handoff/',
- '25-open-design-agent-kit-and-observatory-adoption/'
+ 'research/2026-11-universal-web-engine/19-v3-astro-research-cinema-architecture-and-roadmap/',
+ 'research/2026-11-universal-web-engine/20-v3-chatgpt-5-6-execution-brief/',
+ 'research/2026-11-universal-web-engine/21-p0-acceptance-and-p1-handoff/',
+ 'research/2026-11-universal-web-engine/25-open-design-agent-kit-and-observatory-adoption/',
+ 'research/2026-11-universal-web-engine/18-v3-cinematic-experience-technology-decision/',
+ 'governance/BASELINE-2026-11-02/',
+ 'governance/OPERATIONS/',
+ 'design/V2-ART-DIRECTION/',
+ 'design/V2-ENGINEERING-ACCEPTANCE/',
+ 'design/V2-IMPLEMENTATION-REVIEW/',
+ 'research/2026-10-retrospective/11-adoption-roadmap/',
+ 'research/2026-11-agent-repository-operations/09-implementation-roadmap/'
 ];
 for(const slug of paths){
  test('mobile article leads with general technology; original remains opt-in: '+slug,async({page})=>{
@@ -30,7 +38,7 @@ test('technical guide and archived original work without JavaScript; other artic
  await expect(page.locator('.public-article h2').first()).toBeVisible();
  await page.locator('.original-record summary').click();
  await expect(page.locator('.original-record .article-content')).toBeVisible();
- await page.goto(BASE+'17-arctic-waters-threejs-creative-workflow/');
+ await page.goto(BASE+'research/2026-11-universal-web-engine/17-arctic-waters-threejs-creative-workflow/');
  await expect(page.locator('.public-article')).toHaveCount(0);
  await expect(page.locator('.article-content')).toBeVisible();
  await context.close();
