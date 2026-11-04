@@ -29,10 +29,10 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Set up Node.js 22 (pinned)
+      - name: Set up Node.js 24 (pinned)
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Check runtime
         run: |
           node --version
