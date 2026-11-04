@@ -65,7 +65,9 @@ test('technical guide and archived original work without JavaScript; other artic
  await expect(page.locator('.public-article h2').first()).toBeVisible();
  await page.locator('.original-record summary').click();
  await expect(page.locator('.original-record .article-content')).toBeVisible();
- await page.goto(BASE+'research/2026-11-universal-web-engine/17-arctic-waters-threejs-creative-workflow/');
+ // Use an actual non-curated information-security article, not a former
+ // sample that became curated when the public body collection expanded.
+ await page.goto(BASE+'research/2026-11-information-security/information-security-principles/');
  await expect(page.locator('.public-article')).toHaveCount(0);
  await expect(page.locator('.article-content')).toBeVisible();
  await context.close();
