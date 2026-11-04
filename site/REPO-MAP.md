@@ -4,6 +4,8 @@
 
 ## P0.5 收尾與 P1 准入
 
+- 先開 [CURRENT-STATUS.md](./CURRENT-STATUS.md) 核對當期 main／PR／部署，再讀以下歷史 Gate；已合併的 #49～#53 不可重做。
+
 - [P0.5 → P1 的證據、阻塞及整合次序](./P0.5-EXIT-P1-ENTRY.md)，所有動態 SHA／PR／CI 仍須從 GitHub 重新核對。
 - [既有站點的架構邊界](./architecture/README.md) 與 [ADR-0001](./architecture/ADR-0001-content-and-design-boundaries.md)。
 - `site/src/styles/tokens.css` 是共用設計變數入口；`site/tests/p05-entry.test.mjs` 檢查基本 import 邊界、來源覆蓋與樣式 Token。
