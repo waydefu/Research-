@@ -1,0 +1,69 @@
+/* P1 / G0-01: static cinematic continuity for the existing V3 research reader.
+   No new runtime, external assets, scroll hijacking or changes to Sanctum/V2.
+   Visual sign-off is required before this becomes a production design baseline. */
+
+#main {
+  background:
+    radial-gradient(ellipse 76% 52rem at 96% 6%, rgba(64,212,222,.045), transparent 74%),
+    radial-gradient(ellipse 70% 60rem at 5% 56%, rgba(228,180,81,.045), transparent 78%);
+}
+
+/* The library entrance dissolves into the research index, rather than
+   ending like a detached promotional banner. Text stays a normal DOM layer. */
+#main .archive-intro { isolation:isolate; }
+#main .archive-intro::after {
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:clamp(4rem,13vh,9rem);
+  background:linear-gradient(180deg,transparent,rgba(8,13,22,.92));
+  pointer-events:none;
+  z-index:0;
+}
+#main .archive-intro > * { position:relative; z-index:1; }
+
+/* Editorial rules provide rhythm without introducing another set of cards. */
+#main .section-heading {position:relative;padding-bottom:1.2rem;border-bottom:1px solid rgba(217,181,121,.19)}
+#main .section-heading::after {
+  content:"";
+  position:absolute;
+  bottom:-1px;
+  left:0;
+  width:clamp(3rem,7vw,5.5rem);
+  height:1px;
+  background:var(--gold);
+}
+#main .topic-exhibit {background:transparent}
+#main .topic-exhibit[open] {background:linear-gradient(90deg,rgba(15,30,42,.48),rgba(15,30,42,.05) 90%)}
+#main :is(.library,.recent,.domain-page,.search-page,.domain-topic,.public-article-section) {scroll-margin-top:6rem}
+
+/* Use physical objects from each research topic as the visual emphasis.
+   Motion occurs on deliberate pointer/focus interaction only. */
+#main :is(.domain-scene,.topic-preview,.research-item-visual) {isolation:isolate}
+#main :is(.exhibit-list li a,.research-results li>a,.topic-exhibit summary) {
+  transition:background-color .2s ease;
+}
+#main :is(.exhibit-list li a,.research-results li>a):is(:hover,:focus-visible),
+#main .topic-exhibit summary:is(:hover,:focus-visible) {
+  background-color:rgba(207,170,113,.055);
+}
+#main :is(.domain-scene img,.topic-preview img,.research-item-visual img) {
+  transform:scale(1);
+  transition:transform .45s cubic-bezier(.18,.72,.28,1);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  #main :is(.exhibit-list li a,.research-results li>a,.topic-exhibit summary):hover
+    :is(.domain-scene img,.topic-preview img,.research-item-visual img) {transform:scale(1.035)}
+}
+@media (prefers-reduced-motion:reduce) {
+  #main :is(.exhibit-list li a,.research-results li>a,.topic-exhibit summary,
+    .domain-scene img,.topic-preview img,.research-item-visual img) {
+    transition:none;
+    transform:none;
+  }
+}
+@media (max-width:520px) {
+  /* On phones retain the approved central image/text hierarchy; no parallax. */
+  #main .archive-intro::after {height:4.5rem}
+  #main .section-heading {padding-bottom:.9rem}
+}
