@@ -18,7 +18,7 @@
     "gate:p05": "node scripts/p05-entry-report.mjs"
   },
   "dependencies": {
-    "astro": "^6.0.0",
+    "astro": "^7.4.5",
     "pagefind": "^1.6.0"
   },
   "devDependencies": {
