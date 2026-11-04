@@ -2,6 +2,8 @@
 
 > 核對日期：2026-11-04（Asia/Taipei）。本文件是**帶日期的可回溯快照**，不是自動更新的 API。每次執行前，先讀 [main commits](https://github.com/waydefu/Research-/commits/main)、[Open PR](https://github.com/waydefu/Research-/pulls)、[GitHub Actions](https://github.com/waydefu/Research-/actions)，不可只靠舊 SHA 推定現況。
 
+> **2026-11-04 後續工程／稽核狀態（優先於本文下方早期快照）：** #54–#58 已進 `main` 且最新 SHA 的 [完整必過測試](https://github.com/waydefu/Research-/actions/runs/41809620133) 與 [Pages 部署](https://github.com/waydefu/Research-/actions/runs/41809620167) 成功；#60 已合併，新增 [#59 逐檔來源稽核](P1-ISSUE59-REVIEW.md)。#59 在 GitHub 標示 Completed 僅代表 47/47 原始來源的分類、具體處置與查證界線已登記，**絕不代表 47 份全文外部主張均獨立驗證**。後續每篇閱讀卡顯示限定證據和採用條件（本分支合併並部署後才生效）。以下 #54～#56「未合併／BLOCKED」段落為 2026-11-04 較早時點的歷史快照，不可照字面重做。
+
 ## 已確認的主線（基線 main：`ddd77321fd4075be3815538b78255a1b898b9dcc`）
 
 - P0.5 原先遺漏：PR #51 以 #49 工作分支為 Base，雖顯示 merged 卻沒進 main；已由 [PR #53](https://github.com/waydefu/Research-/pull/53) 以 main 為 Base 補回 28 篇，並正式合併。

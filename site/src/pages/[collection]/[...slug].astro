@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { allDocs, getDoc, backlinks, BASE, displayDomain } from '../../lib/catalog.mjs';
 import {visualForDoc} from '../../lib/research-visuals.mjs';
 import {getPublicArticle} from '../../lib/public-articles.mjs';
+import {reviewForSource} from '../../lib/source-review.mjs';
 export async function getStaticPaths() {
   const [research, governance, design] = await Promise.all([
     getCollection('research'), getCollection('governance'), getCollection('design')
@@ -25,6 +26,7 @@ const related = backlinks(doc);
 const researchVisual = visualForDoc(doc);
 const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
 const publicArticle=getPublicArticle(doc.file);
+const sourceReview=reviewForSource(doc.file);
 ---
 <Base title={doc.publicTitle} description={doc.summary.slice(0,155)}>
   <div class="reading-layout">
@@ -56,6 +58,19 @@ const publicArticle=getPublicArticle(doc.file);
           <div><dt>來源 SHA</dt><dd class="sha">{doc.sha}</dd></div>
         </dl>
       </header>
+      {sourceReview && <section class="source-review" aria-label="原始研究的來源審核與限制">
+        <h2>來源審核與適用界線</h2>
+        <p><strong>逐檔處置已記錄</strong><span aria-hidden="true"> · </span><time>{sourceReview.dispositionReviewedOn}</time></p>
+        <p>{sourceReview.publicNotice}</p>
+        <p class="source-review-note">{sourceReview.dispositionReason}</p>
+        {sourceReview.additionalEvidenceScope && <p>本輪補充核對：{sourceReview.additionalEvidenceScope}</p>}
+        <p class="source-review-note"><strong>採用前核對：</strong>{sourceReview.adoptionGate}</p>
+        {(sourceReview.evidenceUrls.length>0||sourceReview.additionalEvidenceUrls.length>0) && <details>
+          <summary>本輪採用的外部依據（只支持相應主張）</summary>
+          <ul>{[...new Set([...sourceReview.evidenceUrls,...sourceReview.additionalEvidenceUrls])].map(url=>
+            <li><a href={url} rel="noopener noreferrer" target="_blank">{new URL(url).hostname} ↗</a></li>)}</ul>
+        </details>}
+      </section>}
       {researchVisual.src && <figure class="article-research-art" data-pagefind-ignore>
         <img src={researchVisual.src} alt={researchVisual.alt} width="720" height="480" loading="lazy" decoding="async"/>
         <figcaption>本站原創技術示意圖，幫助理解研究主題；非作者原作畫面或實測結果。來源：{researchVisual.source}。</figcaption>

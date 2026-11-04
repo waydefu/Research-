@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "title": "Issue #59 實證分級登記",
   "issue": 59,
   "sourceCommit": "7d75fa961afec6115342aaef73786205358a5a29",
@@ -16,7 +16,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "curriculum_or_source_material",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-information-security 研究的導覽索引；此頁的章節連結與主題分類不能取代個別來源的時效及事實查證。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "如涉及機房規格、法律或正式資安控制，需核最新設備規格／司法管轄及標準。"
     },
     {
       "path": "research/2026-11-information-security/SOURCES.md",
@@ -28,7 +36,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "curriculum_or_source_material",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-information-security 的來源與查證邊界；上游網址與當時版本屬可追溯入口，正式採用前仍須核對最新變化。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "如涉及機房規格、法律或正式資安控制，需核最新設備規格／司法管轄及標準。"
     },
     {
       "path": "research/2026-11-information-security/identity-and-authentication.md",
@@ -43,7 +59,15 @@
       ],
       "remainingWork": "需要原始課程 PDF、當地法規及設施規格才能對教材頁碼或法律/溫濕度主張逐一驗證",
       "kind": "curriculum_or_source_material",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "NIST 單因子密碼至少 15 字、MFA 可 8 字、禁止常規週期輪換；OWASP Argon2id/唯一 salt；FIDO2 domain binding 的主張已對照（課程原 PDF 全文未核）。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "如涉及機房規格、法律或正式資安控制，需核最新設備規格／司法管轄及標準。"
     },
     {
       "path": "research/2026-11-information-security/information-security-principles.md",
@@ -55,7 +79,17 @@
       "evidenceUrls": [],
       "remainingWork": "需要原始課程 PDF、當地法規及設施規格才能對教材頁碼或法律/溫濕度主張逐一驗證",
       "kind": "curriculum_or_source_material",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "CIA、ISMS、ISO/IEC 27001 屬一般概念；國際標準可核實，但教學 PDF 頁碼、台灣法律責任仍不得當現行法規引用。",
+      "publicNotice": "ISO/IEC 27001 的 ISMS 概念有正式來源；教學頁碼及具體法規沒有獨立核實。",
+      "additionalEvidenceScope": "ISO/IEC 27001:2022 官方要求 ISMS；不延伸至原教學頁碼與當地法規",
+      "additionalEvidenceUrls": [
+        "https://www.iso.org/standard/27001"
+      ],
+      "adoptionGate": "如涉及機房規格、法律或正式資安控制，需核最新設備規格／司法管轄及標準。"
     },
     {
       "path": "research/2026-11-information-security/infrastructure-and-physical-security.md",
@@ -67,7 +101,15 @@
       "evidenceUrls": [],
       "remainingWork": "需要原始課程 PDF、當地法規及設施規格才能對教材頁碼或法律/溫濕度主張逐一驗證",
       "kind": "curriculum_or_source_material",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "備份、UPS 和復原方法可作基礎教學；20–25°C／40–60% 是原教材例子，不是所有機房適用的環境標準。",
+      "publicNotice": "機房溫濕度與法規為教學原例，不能直接作為所有機房或任何法域的規範。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "如涉及機房規格、法律或正式資安控制，需核最新設備規格／司法管轄及標準。"
     },
     {
       "path": "research/2026-11-information-security/security-guidance-evidence-review.md",
@@ -83,7 +125,15 @@
       ],
       "remainingWork": "需要原始課程 PDF、當地法規及設施規格才能對教材頁碼或法律/溫濕度主張逐一驗證",
       "kind": "curriculum_or_source_material",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "針對 NIST 密碼長度／輪換／字元組合、OWASP 雜湊、FIDO2 抗釣魚作項目式核對；機房溫濕度、台灣法律、原教學 PDF 頁碼仍需人工查證。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "如涉及機房規格、法律或正式資安控制，需核最新設備規格／司法管轄及標準。"
     },
     {
       "path": "research/2026-11-agent-repository-operations/02-search-routing.md",
@@ -95,7 +145,17 @@
       "evidenceUrls": [],
       "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
       "kind": "vendor_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "ripgrep、SCIP 和 Zoekt 有上游文件支持其用途；工具選擇優先順序是研究策略，不是跨環境的效能實測排名。",
+      "publicNotice": "這是研究提案或教材筆記，尚未核實所有外部主張與適用條件。",
+      "additionalEvidenceScope": "Sourcegraph 區分搜尋型與精確導航，SCIP 使用索引資料",
+      "additionalEvidenceUrls": [
+        "https://sourcegraph.com/docs/code-navigation"
+      ],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-repository-operations/03-index-database-design.md",
@@ -107,7 +167,18 @@
       "evidenceUrls": [],
       "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
       "kind": "vendor_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "SQLite FTS5 的 trigram tokenizer 可核；多層索引與原子切換屬架構設計，Codebase Memory 的 10 倍聲稱與舊 21/21 freshness FAIL 必須區分。",
+      "publicNotice": "這是研究提案或教材筆記，尚未核實所有外部主張與適用條件。",
+      "additionalEvidenceScope": "SQLite FTS5 trigram tokenizer 和 SCIP indexer 格式",
+      "additionalEvidenceUrls": [
+        "https://www.sqlite.org/fts5.html",
+        "https://sourcegraph.com/docs/code-navigation/writing-an-indexer"
+      ],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-repository-operations/04-cost-context-and-routing.md",
@@ -121,7 +192,15 @@
       ],
       "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
       "kind": "vendor_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "LiteLLM 缺 PostgreSQL 資料庫時 budgets 無硬限制、特定 max_budget fail open；上游文件確認。其他模型成本節省幅度未實測。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-repository-operations/05-memory-and-rag.md",
@@ -136,7 +215,15 @@
       ],
       "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
       "kind": "vendor_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Datapace 2026-09 pilot 為 10 題／單 seed；沒有證實通用記憶模型排名。其他基準及部署效能仍未重測。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-repository-operations/06-agent-workflows.md",
@@ -151,7 +238,15 @@
       ],
       "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
       "kind": "vendor_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "EGM 上游使用獨立上下文的 reviewer，且需人批准設計；僅核對這項模式，非聲稱本 Repo 已實裝 Harness。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-repository-operations/10-github-project-catalog.md",
@@ -163,7 +258,15 @@
       "evidenceUrls": [],
       "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
       "kind": "vendor_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "專案清單是 2026-11-02 候選地圖，不代表每一套開源工具的授權、維護與安全公告都已驗收。",
+      "publicNotice": "此清單是技術候選，不代表每個外部 Repo 的最新版本、授權或安全狀態已驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-repository-operations/README.md",
@@ -175,7 +278,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "vendor_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-agent-repository-operations 研究的導覽索引；此頁的章節連結與主題分類不能取代個別來源的時效及事實查證。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-repository-operations/SOURCES.md",
@@ -187,7 +298,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "vendor_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-agent-repository-operations 的來源與查證邊界；上游網址與當時版本屬可追溯入口，正式採用前仍須核對最新變化。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/02-nextjs-deep-dive.md",
@@ -202,7 +321,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Next 官方 2026-10-14 安全公告初始修補 16.4.1/15.5.28；GitHub v16.4.3 為 10/23 正式發版。今日最新版本仍應於採用當天再查。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/03-frontend-ui-and-state.md",
@@ -216,7 +343,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "React 19.3 於 2026-09-09 將 ViewTransition 穩定化；此項與官方相符。UI 套件個別授權及最新版未全查。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/04-backend-data-and-auth.md",
@@ -230,7 +365,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Prisma 官方 2026-11-03 Release status 仍載明 ORM 8 為 RC，且 npm latest 為 8.0.0-rc.30；未測實際遷移與 DB/ORM 授權邊界。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/05-runtime-build-and-dx.md",
@@ -245,7 +388,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "TypeScript 6 於 2026-03-23 正式、Vite 8 於 2026-03-12 正式使用 Rolldown；此兩項與官方相符，其餘工具版本尚未逐項核對。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/06-graphics-and-compatibility.md",
@@ -259,7 +410,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "MDN 目前標示 WebGPU Limited availability、HTTPS secure context；不能聲稱全部手機支援。Polyfork CDN 授權另待個案查核。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/07-performance-and-accessibility.md",
@@ -273,7 +432,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Google 公開 Core Web Vitals good LCP≤2.5s、INP≤200ms、CLS≤0.1；這是門檻不是本站實測值。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/08-security-testing-and-deployment.md",
@@ -287,7 +454,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Next 2026-10-14 官方公告三種風險（cache typed arrays RCE、SVG sharp RCE、Server Actions DoS）及原版修補；本文提到的 CI 只屬範例非已全採用。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/09-reference-stacks-and-migration.md",
@@ -299,7 +474,15 @@
       "evidenceUrls": [],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "三套架構與權重是未實測方案；Astro 6 是當時研究參考，現在已非最新已部署技術選擇，須重查官方版本。",
+      "publicNotice": "本篇示例的 Astro 6 是研究當時版本，採用前必須查最新穩定版、安全公告與相容性；配置及性能均未實測。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/11-motion-graphics-and-rendering.md",
@@ -313,7 +496,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "MDN WebGPU 瀏覽器支援不足以列為 Baseline，必須支援 WebGL/DOM 降級；Renderer 效能、特效規格未在本 Repo 實測。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/13-design-performance-and-architecture.md",
@@ -328,7 +519,15 @@
       ],
       "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "WCAG 2.2 AA 2.5.7 拖曳替代與 2.5.8 24×24 CSS px（有例外）；CWV good 門檻亦與原始文件一致。性能預算不代表實測。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-universal-web-engine/SOURCES.md",
@@ -340,7 +539,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "version_or_performance",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-universal-web-engine 的來源與查證邊界；上游網址與當時版本屬可追溯入口，正式採用前仍須核對最新變化。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-engineering/01-egm.md",
@@ -355,7 +562,15 @@
       ],
       "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
       "kind": "agent_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Google EGM 官方 Repo 支援 Codex/Claude 外掛、Elephant/Goldfish 上下文分工、非 Google 正式支援產品；當前宿主安裝仍未驗證。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-engineering/02-claude-code-multi-model.md",
@@ -369,7 +584,15 @@
       ],
       "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
       "kind": "agent_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Claude Code Advisor 為實驗性、接收完整對話與工具結果、不可當 fresh-context 子代理；需要目標帳號與實際用量測試。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-engineering/03-imagine.md",
@@ -381,7 +604,17 @@
       "evidenceUrls": [],
       "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
       "kind": "agent_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Anthropic 官方證實 Claude Custom Visuals；公開轉載的 Imagine 規範及其五模組不能當作可獨立安裝的官方 SDK。",
+      "publicNotice": "Custom Visuals 是 Claude 對話中的功能；第三方流傳的 Imagine 截圖不代表可公開安裝的官方 SDK。",
+      "additionalEvidenceScope": "Claude web/desktop 的 Custom Visuals beta 是官方聊天內功能",
+      "additionalEvidenceUrls": [
+        "https://support.claude.com/en/articles/13979539-custom-visuals-in-chat-and-cowork"
+      ],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-engineering/04-jev.md",
@@ -395,7 +628,15 @@
       ],
       "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
       "kind": "agent_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Jev Claude Code 插件上游宣稱 typed choice/score/yes-no 並以 shadow mode 為預設；不代表已在使用者宿主安裝或完成安全測試。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-engineering/06-claim-check.md",
@@ -407,7 +648,18 @@
       "evidenceUrls": [],
       "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
       "kind": "agent_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Claude Code Advisor 與 Subagents 功能可由官方文檔核實；社群作者身份、貼文來源與效能／成本結論尚無獨立證據。",
+      "publicNotice": "官方功能和社群推測已明確分層，不能據此證實社群貼文作者、截圖來源或測速。",
+      "additionalEvidenceScope": "Claude Advisor／Subagents 官方文件所述的現有功能",
+      "additionalEvidenceUrls": [
+        "https://code.claude.com/docs/en/advisor",
+        "https://code.claude.com/docs/en/sub-agents"
+      ],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-engineering/README.md",
@@ -419,7 +671,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "agent_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-agent-engineering 研究的導覽索引；此頁的章節連結與主題分類不能取代個別來源的時效及事實查證。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-agent-engineering/SOURCES.md",
@@ -431,7 +691,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "agent_tool_claim",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-agent-engineering 的來源與查證邊界；上游網址與當時版本屬可追溯入口，正式採用前仍須核對最新變化。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "research/2026-11-systems-analysis-design/README.md",
@@ -443,7 +711,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "curriculum_source_missing",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-systems-analysis-design 研究的導覽索引；此頁的章節連結與主題分類不能取代個別來源的時效及事實查證。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "若要核對 PDF 頁碼或作正式課程引述，須取得原教材並核其版本。"
     },
     {
       "path": "research/2026-11-systems-analysis-design/SOURCES.md",
@@ -455,7 +731,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "curriculum_source_missing",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-11-systems-analysis-design 的來源與查證邊界；上游網址與當時版本屬可追溯入口，正式採用前仍須核對最新變化。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "若要核對 PDF 頁碼或作正式課程引述，須取得原教材並核其版本。"
     },
     {
       "path": "research/2026-11-systems-analysis-design/information-systems-and-development.md",
@@ -467,7 +751,15 @@
       "evidenceUrls": [],
       "remainingWork": "課程教材歸納與一般概念應保留來源 PDF 的頁碼，但目前未取得本輪可核對的教材全文",
       "kind": "curriculum_source_missing",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "SDLC、資訊系統五要素等是課程筆記；原 PDF 全文與圖表本輪無法對照，不能聲稱教材頁碼或跨組織適用性全面查核。",
+      "publicNotice": "這是研究提案或教材筆記，尚未核實所有外部主張與適用條件。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "若要核對 PDF 頁碼或作正式課程引述，須取得原教材並核其版本。"
     },
     {
       "path": "research/2026-11-systems-analysis-design/project-planning-and-risk.md",
@@ -479,7 +771,15 @@
       "evidenceUrls": [],
       "remainingWork": "課程教材歸納與一般概念應保留來源 PDF 的頁碼，但目前未取得本輪可核對的教材全文",
       "kind": "curriculum_source_missing",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "context-limited",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "WBS、PERT/CPM、風險應對是課程概念；原 PDF 頁碼未重核，項目成本、工期與 ROI 的實際數值仍需專案實證。",
+      "publicNotice": "這是研究提案或教材筆記，尚未核實所有外部主張與適用條件。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "若要核對 PDF 頁碼或作正式課程引述，須取得原教材並核其版本。"
     },
     {
       "path": "research/2026-10-retrospective/03-agent-skills-and-governance.md",
@@ -491,7 +791,15 @@
       "evidenceUrls": [],
       "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "historical-reference",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留十月 Agent Skills 與小說專案治理案例，不推論其他 Repo 已相同配置。",
+      "publicNotice": "本篇是歷史研究，當時的工具狀態、性能與案例不代表現在仍適用。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/2026-10-retrospective/04-ui-design-skills.md",
@@ -503,7 +811,15 @@
       "evidenceUrls": [],
       "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "historical-reference",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留十月 UI/UX Skills 的比較與候選，正式引用元件前逐一核對版本與授權。",
+      "publicNotice": "本篇是歷史研究，當時的工具狀態、性能與案例不代表現在仍適用。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/2026-10-retrospective/05-web-motion-3d.md",
@@ -515,7 +831,15 @@
       "evidenceUrls": [],
       "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "historical-reference",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留歷史 Web Motion／3D 研究與遊戲工具案例，不推論所有裝置達目標 FPS。",
+      "publicNotice": "本篇是歷史研究，當時的工具狀態、性能與案例不代表現在仍適用。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/2026-10-retrospective/06-secure-agent-cicd.md",
@@ -527,7 +851,15 @@
       "evidenceUrls": [],
       "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "historical-reference",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留十月 CI、權限與供應鏈管理案例，不作今日 GitHub 權限實況。",
+      "publicNotice": "本篇是歷史研究，當時的工具狀態、性能與案例不代表現在仍適用。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/2026-10-retrospective/07-audio-dsp.md",
@@ -539,7 +871,15 @@
       "evidenceUrls": [],
       "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "historical-reference",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留音訊 DSP 工具比較與失真觀察，缺統一素材/硬體條件不能當可重現性能基準。",
+      "publicNotice": "本篇是歷史研究，當時的工具狀態、性能與案例不代表現在仍適用。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/2026-10-retrospective/08-local-llm-models.md",
@@ -551,7 +891,15 @@
       "evidenceUrls": [],
       "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "historical-reference",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留特定手機上本地 LLM 6–10 tokens/s 的觀察，不作所有量化、裝置或版本的吞吐排名。",
+      "publicNotice": "本篇是歷史研究，當時的工具狀態、性能與案例不代表現在仍適用。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/2026-10-retrospective/09-video-automation.md",
@@ -566,7 +914,15 @@
       ],
       "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Remotion 官方授權頁：個人或最多 3 人組織有條件可使用免費授權，4+ 人合作或自動化產品需核實收費條款。這是上游條款，非個案法律意見。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/2026-10-retrospective/10-candidate-backlog.md",
@@ -578,7 +934,15 @@
       "evidenceUrls": [],
       "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "historical-reference",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留歷史候選清單，未測工具不得宣稱已安裝或已滿足安全/商用授權要求。",
+      "publicNotice": "本篇是歷史研究，當時的工具狀態、性能與案例不代表現在仍適用。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/2026-10-retrospective/README.md",
@@ -590,7 +954,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "historical_case",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "保留 2026-10-retrospective 研究的導覽索引；此頁的章節連結與主題分類不能取代個別來源的時效及事實查證。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "引用歷史實測或選型成績前應以一致環境及最新版本重新測試。"
     },
     {
       "path": "research/RESEARCH-TEMPLATE.md",
@@ -602,7 +974,15 @@
       "evidenceUrls": [],
       "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
       "kind": "template",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "index-or-template",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "空白研究模板供填寫方法、來源及採用決策；沒有可供核實的具體技術主張，不應變成已審核文章。",
+      "publicNotice": "本頁為來源索引、導覽或研究模板，並非獨立完成驗證的技術指南。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "當此來源轉為現行部署建議、benchmark 或商業資產使用，應重新核上游版本／授權／安全公告與實測。"
     },
     {
       "path": "showcase/design/V2-FONT-LICENSES.md",
@@ -618,7 +998,17 @@
       ],
       "remainingWork": "尚待逐項核實原始授權與實際部署邊界",
       "kind": "other",
-      "externallyVerifiedAllClaims": false
+      "externallyVerifiedAllClaims": false,
+      "dispositionStatus": "accepted-with-scope",
+      "dispositionType": "bounded-evidence",
+      "dispositionReviewedOn": "2026-11-04",
+      "dispositionReason": "Google Fonts 官方 OFL.txt 核對 Instrument Serif、Manrope、IBM Plex Mono 都是 SIL OFL 1.1，IBM Plex Mono 保留 Reserved Font Name Plex；只核授權文字，未重新審核本地字形檔/所有商標權。其他外部聲稱、真機／授權／最新版仍維持未驗。",
+      "publicNotice": "已有部分一手技術主張的交叉核對，但全文及最新版本並未全數驗證。",
+      "additionalEvidenceScope": null,
+      "additionalEvidenceUrls": [],
+      "adoptionGate": "散布字型檔時應保留正確 OFL 授權及 Reserved Font Name 規範。"
     }
-  ]
+  ],
+  "dispositionCompletedAt": "2026-11-04",
+  "dispositionScope": "47/47 原文完成用途／風險與公開閱讀的處置判定；不表示 47/47 全文主張獨立驗證。"
 }
