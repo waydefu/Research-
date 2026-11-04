@@ -1,0 +1,624 @@
+{
+  "schemaVersion": 1,
+  "title": "Issue #59 實證分級登記",
+  "issue": 59,
+  "sourceCommit": "7d75fa961afec6115342aaef73786205358a5a29",
+  "createdOn": "2026-11-04",
+  "scope": "47 原文來源逐檔風險分級；指定主張的官方來源交叉核對。絕非 47 篇全文逐條獨立驗證或結案證書。",
+  "items": [
+    {
+      "path": "research/2026-11-information-security/README.md",
+      "sourceBlobSha": "2bcd12803179d26c121e93e60dc7cf3984dc9eb9",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "curriculum_or_source_material",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-information-security/SOURCES.md",
+      "sourceBlobSha": "7f6f03f24024514765781f1b25b160be186a37aa",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "curriculum_or_source_material",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-information-security/identity-and-authentication.md",
+      "sourceBlobSha": "75db9be38336f4f1617427664fd28311996d74ee",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "NIST 單因子密碼至少 15 字、MFA 可 8 字、禁止常規週期輪換；OWASP Argon2id/唯一 salt；FIDO2 domain binding 的主張已對照（課程原 PDF 全文未核）",
+      "evidenceUrls": [
+        "https://pages.nist.gov/800-63-4/sp800-63b/authenticators/",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+      ],
+      "remainingWork": "需要原始課程 PDF、當地法規及設施規格才能對教材頁碼或法律/溫濕度主張逐一驗證",
+      "kind": "curriculum_or_source_material",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-information-security/information-security-principles.md",
+      "sourceBlobSha": "8fad46a1455121260c56b2ffbdfd79d97fca0417",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "需要原始課程 PDF、當地法規及設施規格才能對教材頁碼或法律/溫濕度主張逐一驗證",
+      "kind": "curriculum_or_source_material",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-information-security/infrastructure-and-physical-security.md",
+      "sourceBlobSha": "35e8aa284b6468f7de2481f2ef24f453c8048400",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "需要原始課程 PDF、當地法規及設施規格才能對教材頁碼或法律/溫濕度主張逐一驗證",
+      "kind": "curriculum_or_source_material",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-information-security/security-guidance-evidence-review.md",
+      "sourceBlobSha": "8c0fd02371acc0413d07642be567dbb5cb01832b",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "針對 NIST 密碼長度／輪換／字元組合、OWASP 雜湊、FIDO2 抗釣魚作項目式核對；機房溫濕度、台灣法律、原教學 PDF 頁碼仍需人工查證",
+      "evidenceUrls": [
+        "https://csrc.nist.gov/pubs/sp/800/63/B/4/final",
+        "https://pages.nist.gov/800-63-4/sp800-63b/authenticators/",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+      ],
+      "remainingWork": "需要原始課程 PDF、當地法規及設施規格才能對教材頁碼或法律/溫濕度主張逐一驗證",
+      "kind": "curriculum_or_source_material",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/02-search-routing.md",
+      "sourceBlobSha": "da0ac7c715ff523c5743bbab8a71052f99e11016",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
+      "kind": "vendor_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/03-index-database-design.md",
+      "sourceBlobSha": "ad58db71e0d171928a00a9e2a548be496aa77e8b",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
+      "kind": "vendor_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/04-cost-context-and-routing.md",
+      "sourceBlobSha": "e2ef260e85badc012a5e14f4bdd401bea430b3c7",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "LiteLLM 缺 PostgreSQL 資料庫時 budgets 無硬限制、特定 max_budget fail open；上游文件確認。其他模型成本節省幅度未實測",
+      "evidenceUrls": [
+        "https://docs.litellm.ai/docs/proxy/users"
+      ],
+      "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
+      "kind": "vendor_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/05-memory-and-rag.md",
+      "sourceBlobSha": "c31533516a1c706330f825dfe7ef61eab0b1adaa",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Datapace 2026-09 pilot 為 10 題／單 seed；沒有證實通用記憶模型排名。其他基準及部署效能仍未重測",
+      "evidenceUrls": [
+        "https://github.com/datapace-ai/agent-memory-benchmark",
+        "https://github.com/datapace-ai/agent-memory-benchmark/blob/main/results/README.md"
+      ],
+      "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
+      "kind": "vendor_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/06-agent-workflows.md",
+      "sourceBlobSha": "ac47d04ebde6b6278f73a73905b70263721dca08",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "EGM 上游使用獨立上下文的 reviewer，且需人批准設計；僅核對這項模式，非聲稱本 Repo 已實裝 Harness",
+      "evidenceUrls": [
+        "https://github.com/google/elephant-goldfish-model",
+        "https://github.com/google/elephant-goldfish-model/blob/main/docs/designs/architecture.md"
+      ],
+      "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
+      "kind": "vendor_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/10-github-project-catalog.md",
+      "sourceBlobSha": "d4e2834a18003f0a9a3dacb4d3140c8bb3caeae6",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "方法論與候選工具清單保留；未在同環境跑過 A/B、License/Release 與權限負向測試",
+      "kind": "vendor_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/README.md",
+      "sourceBlobSha": "02b958ef5d876fad6278689d749dcb42294d46d0",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "vendor_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/SOURCES.md",
+      "sourceBlobSha": "84cdfc2e62789179f735148df4a1846ffa6bcffa",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "vendor_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/02-nextjs-deep-dive.md",
+      "sourceBlobSha": "6e2687e40e851e3eef6503fef1c0facfceebdba5",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Next 官方 2026-10-14 安全公告初始修補 16.4.1/15.5.28；GitHub v16.4.3 為 10/23 正式發版。今日最新版本仍應於採用當天再查",
+      "evidenceUrls": [
+        "https://nextjs.org/blog/nextjs-security-update-october-14-2026",
+        "https://github.com/vercel/next.js/releases/tag/v16.4.3"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/03-frontend-ui-and-state.md",
+      "sourceBlobSha": "43058cadce6329e74bc5c5fe84918108b3163f38",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "React 19.3 於 2026-09-09 將 ViewTransition 穩定化；此項與官方相符。UI 套件個別授權及最新版未全查",
+      "evidenceUrls": [
+        "https://react.dev/blog/2026/09/09/react-19-3"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/04-backend-data-and-auth.md",
+      "sourceBlobSha": "06d37137c08f1e065a5a8575c9defb93b4d29202",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Prisma 官方 2026-11-03 Release status 仍載明 ORM 8 為 RC，且 npm latest 為 8.0.0-rc.30；未測實際遷移與 DB/ORM 授權邊界",
+      "evidenceUrls": [
+        "https://www.prisma.io/docs/orm/release-status"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/05-runtime-build-and-dx.md",
+      "sourceBlobSha": "df0214af1e8072ded387d607f32e758464b75226",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "TypeScript 6 於 2026-03-23 正式、Vite 8 於 2026-03-12 正式使用 Rolldown；此兩項與官方相符，其餘工具版本尚未逐項核對",
+      "evidenceUrls": [
+        "https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/",
+        "https://vite.dev/blog/announcing-vite8"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/06-graphics-and-compatibility.md",
+      "sourceBlobSha": "5f4b95dcd6a48fff57761add08c01fe75e1c07d4",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "MDN 目前標示 WebGPU Limited availability、HTTPS secure context；不能聲稱全部手機支援。Polyfork CDN 授權另待個案查核",
+      "evidenceUrls": [
+        "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/07-performance-and-accessibility.md",
+      "sourceBlobSha": "4f5d27a6fd3f5e9c68884c8db0c7c2517646ca56",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Google 公開 Core Web Vitals good LCP≤2.5s、INP≤200ms、CLS≤0.1；這是門檻不是本站實測值",
+      "evidenceUrls": [
+        "https://web.dev/articles/vitals"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/08-security-testing-and-deployment.md",
+      "sourceBlobSha": "5edc224eb776db3761fb5068efe2ce6031c9723c",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Next 2026-10-14 官方公告三種風險（cache typed arrays RCE、SVG sharp RCE、Server Actions DoS）及原版修補；本文提到的 CI 只屬範例非已全採用",
+      "evidenceUrls": [
+        "https://nextjs.org/blog/nextjs-security-update-october-14-2026"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/09-reference-stacks-and-migration.md",
+      "sourceBlobSha": "038058a078461513aa732b799cb83c461777ee69",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/11-motion-graphics-and-rendering.md",
+      "sourceBlobSha": "c129c4e9589efcfe466bf3e6b26c5bba924e0d28",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "MDN WebGPU 瀏覽器支援不足以列為 Baseline，必須支援 WebGL/DOM 降級；Renderer 效能、特效規格未在本 Repo 實測",
+      "evidenceUrls": [
+        "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/13-design-performance-and-architecture.md",
+      "sourceBlobSha": "2a97d31b3c0a569e09a7c259a97fcd56f1c3258c",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "WCAG 2.2 AA 2.5.7 拖曳替代與 2.5.8 24×24 CSS px（有例外）；CWV good 門檻亦與原始文件一致。性能預算不代表實測",
+      "evidenceUrls": [
+        "https://www.w3.org/TR/WCAG22/",
+        "https://web.dev/articles/vitals"
+      ],
+      "remainingWork": "技術可作研究參考，但動態套件版本、特定主機性能與第三方素材權利需於採用前重查",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/SOURCES.md",
+      "sourceBlobSha": "0b78f5541b08b30d7048cb574401eb1e1f1c45d5",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "version_or_performance",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-engineering/01-egm.md",
+      "sourceBlobSha": "0d39d4cecba9fa162ea583e95b9672ba9306aa22",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Google EGM 官方 Repo 支援 Codex/Claude 外掛、Elephant/Goldfish 上下文分工、非 Google 正式支援產品；當前宿主安裝仍未驗證",
+      "evidenceUrls": [
+        "https://github.com/google/elephant-goldfish-model",
+        "https://github.com/google/elephant-goldfish-model/blob/main/docs/harnesses.md"
+      ],
+      "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
+      "kind": "agent_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-engineering/02-claude-code-multi-model.md",
+      "sourceBlobSha": "5800930fba2b6d9fed1e805158f66387fde57161",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Claude Code Advisor 為實驗性、接收完整對話與工具結果、不可當 fresh-context 子代理；需要目標帳號與實際用量測試",
+      "evidenceUrls": [
+        "https://code.claude.com/docs/en/advisor"
+      ],
+      "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
+      "kind": "agent_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-engineering/03-imagine.md",
+      "sourceBlobSha": "116f68a417e72bd71dd92db6a1bd8c372a0e20bd",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
+      "kind": "agent_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-engineering/04-jev.md",
+      "sourceBlobSha": "9652a8047fa4b60b010a65f79004a136a56c82ee",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Jev Claude Code 插件上游宣稱 typed choice/score/yes-no 並以 shadow mode 為預設；不代表已在使用者宿主安裝或完成安全測試",
+      "evidenceUrls": [
+        "https://github.com/weiping/jev-claude-code"
+      ],
+      "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
+      "kind": "agent_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-engineering/06-claim-check.md",
+      "sourceBlobSha": "9af6d15121b1b964357fff8590fae67772ead115",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "第三方 Agent 工具或社群主張需核最新版本/支援宿主；不宣稱已安裝",
+      "kind": "agent_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-engineering/README.md",
+      "sourceBlobSha": "742786e756756997fa2d524d6aaf6b904bd099b5",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "agent_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-agent-engineering/SOURCES.md",
+      "sourceBlobSha": "2367ae759ca8570c27f4e78ab656a47eef729bdb",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "agent_tool_claim",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-systems-analysis-design/README.md",
+      "sourceBlobSha": "3bdb48362950ee3e0031d7b219c5a5c5c95f542b",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "curriculum_source_missing",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-systems-analysis-design/SOURCES.md",
+      "sourceBlobSha": "aceb48ea1fee4c9b3c939eb34d37d9257fb696e6",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "curriculum_source_missing",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-systems-analysis-design/information-systems-and-development.md",
+      "sourceBlobSha": "efb72ac29ea29232e8ddcd81a42e2a24e62d7765",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "課程教材歸納與一般概念應保留來源 PDF 的頁碼，但目前未取得本輪可核對的教材全文",
+      "kind": "curriculum_source_missing",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-11-systems-analysis-design/project-planning-and-risk.md",
+      "sourceBlobSha": "e98e5aa56718d4eb2b2f10b0bd3ddc311aa2edf9",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "原文已審閱，主張待進一步核實",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "課程教材歸納與一般概念應保留來源 PDF 的頁碼，但目前未取得本輪可核對的教材全文",
+      "kind": "curriculum_source_missing",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/03-agent-skills-and-governance.md",
+      "sourceBlobSha": "b0f8ce55b9645c1594f1855dbd54a3da5ce074e8",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "歷史案例已辨識（實測不能外推）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/04-ui-design-skills.md",
+      "sourceBlobSha": "615b9ec992e14aaeed196ed3de07e72641c79fc7",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "歷史案例已辨識（實測不能外推）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/05-web-motion-3d.md",
+      "sourceBlobSha": "4b1b2cc07caa76d8dde239c68a0fa91087f9dad1",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "歷史案例已辨識（實測不能外推）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/06-secure-agent-cicd.md",
+      "sourceBlobSha": "1ef19c728d1d0bfb52e9b582fea88ab63953af9a",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "歷史案例已辨識（實測不能外推）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/07-audio-dsp.md",
+      "sourceBlobSha": "58816fb212e97363e938fd6c23d66b845afe8824",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "歷史案例已辨識（實測不能外推）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/08-local-llm-models.md",
+      "sourceBlobSha": "d1a58063677161f6d057aafe8a1193c9006b8ad6",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "歷史案例已辨識（實測不能外推）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/09-video-automation.md",
+      "sourceBlobSha": "512968f3561a7f4b1bc9d812f94349cec2f655dc",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Remotion 官方授權頁：個人或最多 3 人組織有條件可使用免費授權，4+ 人合作或自動化產品需核實收費條款。這是上游條款，非個案法律意見",
+      "evidenceUrls": [
+        "https://www.remotion.dev/docs/license/pricing",
+        "https://www.remotion.dev/docs/license/faq"
+      ],
+      "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/10-candidate-backlog.md",
+      "sourceBlobSha": "717ae5a02a17e70c1a6565c5e7b46143dd3ce3a2",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "歷史案例已辨識（實測不能外推）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "十月個人研究/實測屬歷史快照，不應呈現為 2026-11 最新環境或外部通用 benchmark",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/2026-10-retrospective/README.md",
+      "sourceBlobSha": "3312ff155f8a4a88c70f4dc90f80b66986e170ef",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "historical_case",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "research/RESEARCH-TEMPLATE.md",
+      "sourceBlobSha": "a4876a63b95d891e65eec6f44c681d4f9084ca99",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "索引／模板已盤點（不是技術正文）",
+      "verifiedScope": null,
+      "evidenceUrls": [],
+      "remainingWork": "確認每個關聯外部來源仍有效；索引不應按正文做 87 篇通用改寫",
+      "kind": "template",
+      "externallyVerifiedAllClaims": false
+    },
+    {
+      "path": "showcase/design/V2-FONT-LICENSES.md",
+      "sourceBlobSha": "0e32e8fe10d668d61949722480d653cdcfab147e",
+      "sourceRevision": "7d75fa961afec6115342aaef73786205358a5a29",
+      "reviewedOn": "2026-11-04",
+      "reviewClass": "官方來源指定主張已交叉核對",
+      "verifiedScope": "Google Fonts 官方 OFL.txt 核對 Instrument Serif、Manrope、IBM Plex Mono 都是 SIL OFL 1.1，IBM Plex Mono 保留 Reserved Font Name Plex；只核授權文字，未重新審核本地字形檔/所有商標權",
+      "evidenceUrls": [
+        "https://github.com/google/fonts/blob/main/ofl/instrumentserif/OFL.txt",
+        "https://github.com/google/fonts/blob/main/ofl/manrope/OFL.txt",
+        "https://github.com/google/fonts/blob/main/ofl/ibmplexmono/OFL.txt"
+      ],
+      "remainingWork": "尚待逐項核實原始授權與實際部署邊界",
+      "kind": "other",
+      "externallyVerifiedAllClaims": false
+    }
+  ]
+}
