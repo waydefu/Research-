@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {p1ReadinessInventory} from '../src/lib/p1-readiness.mjs';
+import {allDocs} from '../src/lib/catalog.mjs';
 
 test('P1 inventory covers all files without silently marking source claims verified',()=>{
   const audit=p1ReadinessInventory();
@@ -17,4 +18,18 @@ test('P1 inventory covers all files without silently marking source claims verif
   assert.equal(audit.humanApprovedGraphics,0);
   assert.equal(audit.physicalDevicesValidated,0);
   assert.equal(audit.goldenScreenshotApproved,false);
+});
+
+test('future undocumented research fails editorial and source-review intake without changing disk',()=>{
+  const original=allDocs();
+  const invented={...original[0],
+    file:'research/new-unsourced-domain/unreviewed-article.md',
+    publicTitle:'尚未登記的新研究'};
+  const result=p1ReadinessInventory([...original,invented]);
+  assert.equal(result.structuralPass,false);
+  assert.ok(result.faults.missingMetadata.includes(invented.file));
+  assert.ok(result.faults.missingLead.includes(invented.file));
+  assert.ok(result.faults.missingIllustration.includes(invented.file));
+  assert.ok(result.faults.missingBoundedReview.includes(invented.file));
+  assert.equal(allDocs().length,original.length,'test must not add any real research source');
 });
