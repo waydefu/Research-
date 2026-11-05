@@ -800,6 +800,7 @@ const raw = {
     ["30-viper11-clouds-terrain-cinematic-rendering.md","即時 3D 渲染與 Shader","VIPER 11：可穿越體積雲、真實地形與電影級鏡頭",["Three.js","WebGL2","體積雲","地形 LOD","HDR"]],
     ["31-brinewater-browser-open-world-and-agent-workflow.md","互動作品與設計案例","Brinewater：瀏覽器開放世界與 AI Agent 開發案例",["開放世界","交通模擬","Agent","Git Worktree","視覺驗收"]],
     ["32-aurea-residences-immersive-luxury-web-ux-review.md","介面設計與視覺系統","ÁUREA Residences：精品住宅網站的視覺與互動驗收",["UI/UX","精品網站","視覺敘事","捲動互動","跨裝置驗收"]],
+    ["33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md","AI 3D 重建與生成","UniForge3D：少量多視角照片如何重建完整 3D 資產？",["UniForge3D","多視角重建","3D 生成","VGGT","GLB","授權"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -949,6 +950,10 @@ export const TOPIC_DESCRIPTORS = Object.freeze({
   "即時 3D 渲染與 Shader": {
     "why": "比較 WebGL/WebGPU、著色器與即時場景引擎",
     "image": "browser.svg"
+  },
+  "AI 3D 重建與生成": {
+    "why": "研究照片到三維資產的幾何重建、生成補完、模型推論與素材品質驗收",
+    "image": "chip.svg"
   },
   "3D 資產與幾何最佳化": {
     "why": "研究 3D 模型、LOD、可見性裁剪與素材管線",

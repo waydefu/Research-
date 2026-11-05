@@ -58,6 +58,25 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md",
+      "sourceBlobSha": "e225457c4492e774d47306a278c44a7def0088db",
+      "sourceRevision": "0cf47d3d10218f37ab531135c2ae8f56a27ce13b",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "已逐項核對論文方法與作者比較敘述、官方 README、infer.py、setup.sh、主推論管線、view_router.py、pipeline.json 及 MIT LICENSE；作者效能與幾何準確度尚未獨立重現。",
+      "publicNotice": "本文根據論文與官方程式碼整理聯合重建、視角選擇及 GLB 資產管線；未實際執行模型，沒有獨立品質、VRAM、效能、資產商用權利的驗證。原碼 MIT 不適用於全部模型權重。",
+      "remainingWork": "建立固定照片資料集與指定 NVIDIA CUDA 主機測試，留下輸入／GLB／checkpoint SHA、VRAM、耗時、幾何與紋理品質；逐項確認 VGGT 衍生非商用權重及 BRIA RMBG-2.0 商用授權後才評估產線採用。",
+      "knownSources": [
+        "https://github.com/xibushu/UniForge3D",
+        "https://arxiv.org/abs/2610.15357",
+        "https://xishuxishu.github.io/uniforge3d-project/",
+        "https://huggingface.co/xibushu/UniForge3D",
+        "https://github.com/xibushu/UniForge3D/blob/main/setup.sh",
+        "https://github.com/xibushu/UniForge3D/blob/main/uniforge3d/models/view_router.py"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }

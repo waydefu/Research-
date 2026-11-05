@@ -29,6 +29,7 @@ export function motifFor(doc){
   if(/catalog|參考案例|案例清單|研究索引/i.test(file+' '+title))return 'references';
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
+  if(/UniForge3D/i.test(s))return 'geometry';
   if(/nanites|Virtualized Geometry|幾何|GPU 驅動/i.test(s))return 'geometry';
   if(/Polyfork|3D 素材|Asset-as-Code/i.test(s))return 'assets';
   if(/Colibri|MoE|記憶體|本機 LLM|模型推論/i.test(s))return 'chip';
