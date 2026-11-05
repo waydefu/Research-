@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, resolve, sep } from 'node:path';
 
-const root = resolve('../showcase/dist');
+const root = resolve('pages-dist');
 const base = '/Research-/';
 const port = 4326;
 const mime = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.json':'application/json; charset=utf-8', '.wasm':'application/wasm', '.svg':'image/svg+xml', '.woff2':'font/woff2', '.ttf':'font/ttf', '.png':'image/png', '.webp':'image/webp', '.pf_index':'application/octet-stream', '.pf_meta':'application/octet-stream', '.pf_filter':'application/octet-stream', '.pf_fragment':'application/octet-stream' };
