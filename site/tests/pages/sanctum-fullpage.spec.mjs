@@ -3,13 +3,14 @@ import { test, expect } from '@playwright/test';
 const BASE = '/Research-/v3/';
 const PREVIEW = BASE + 'atlas/sanctum/';
 
-test('Design Atlas prominently opens the current full-page Sanctum preview', async ({ page }) => {
+test('Design Atlas directs visitors to the single new cinematic observatory preview', async ({ page }) => {
   await page.goto(BASE + 'atlas/');
-  await expect(page.getByRole('link',{name:/開啟高保真全頁神殿原型/})).toHaveAttribute('href',PREVIEW);
-  await page.getByRole('link',{name:/開啟高保真全頁神殿原型/}).click();
-  await expect(page).toHaveURL(new RegExp('/Research-/v3/atlas/sanctum/'));
-  await expect(page.getByRole('heading',{name:/技術研究與實作知識庫/})).toBeVisible();
-  await expect(page.locator('.hero-discovery input[name="q"]')).toBeVisible();
+  const entry=page.getByRole('link',{name:/開啟 G1-01 新版觀測所/});
+  await expect(entry).toHaveAttribute('href',BASE+'observatory/');
+  await entry.click();
+  await expect(page).toHaveURL(new RegExp('/Research-/v3/observatory/'));
+  await expect(page.getByRole('heading',{name:/在未知的邊界/})).toBeVisible();
+  await expect(page.locator('#obs-scene')).toBeAttached();
 });
 
 for (const width of [320,360,393,430,768,1440]) {
