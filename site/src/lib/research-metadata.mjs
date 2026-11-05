@@ -3,6 +3,12 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/30-viper11-clouds-terrain-cinematic-rendering.md': {
+    title:"VIPER 11：可穿越體積雲、真實地形與電影級鏡頭",
+    lead:"從 VIPER 11 作者公開的技術筆記，理解瀏覽器體積雲、地表動態雲影、真實地形串流與電影鏡頭的協作方式。文章區分作者自述、可再利用的開源候選和尚未實測的效能數據。",
+    topic:"即時 3D 渲染與 Shader",
+    creator:{"label":"VIPER 11 官方作品與技術筆記","url":"https://viperoneone.com/notes/"}
+  },
   'research/2026-11-universal-web-engine/32-aurea-residences-immersive-luxury-web-ux-review.md': {
     title:"ÁUREA Residences：精品住宅網站的視覺與互動驗收",
     lead:"以 ÁUREA Residences 作為精品住宅網站研究入口，整理全頁構圖、字體層級、捲動敘事與手機體驗的驗收方法。尚未取得可重現的 JavaScript 畫面，不能指認實際框架或動畫技術。",

@@ -1,6 +1,7 @@
 // Editorial introductions only. Each entry is tied to one real source path, not an inferred fact.
 // Preserve original Markdown, source provenance, author and demos. Do not claim external testing.
 export const EDITORIAL_LEADS = Object.freeze({
+  "research/2026-11-universal-web-engine/30-viper11-clouds-terrain-cinematic-rendering.md": "從 VIPER 11 作者公開的技術筆記，理解瀏覽器體積雲、地表動態雲影、真實地形串流與電影鏡頭的協作方式。文章區分作者自述、可再利用的開源候選和尚未實測的效能數據。",
   "research/2026-11-universal-web-engine/32-aurea-residences-immersive-luxury-web-ux-review.md": "以 ÁUREA Residences 作為精品住宅網站研究入口，整理全頁構圖、字體層級、捲動敘事與手機體驗的驗收方法。尚未取得可重現的 JavaScript 畫面，不能指認實際框架或動畫技術。",
   "research/2026-11-universal-web-engine/27-threejs-r187-ultra-rendering-ceiling.md": "從官方 Three.js r187、WebGPU 渲染器和 TSL 出發，分析 PBR、SSGI、SSR、景深、陰影與 GPU 路徑追蹤的實際能力。比較可玩即時畫質與漸進式照片渲染，清楚標示 API 相容與尚未實測的性能。",
   "research/2026-11-universal-web-engine/28-advanced-shader-pipeline-and-hd2d-recipes.md": "拆解海浪 Fresnel、Beer-Lambert、海岸泡沫、SSGI、SSR、體積霧與像素角色抗鋸齒的工程設計。整理 Frame Graph、降級方案與三個可重現 PoC；配方是設計推導，不是已部署程式。",
