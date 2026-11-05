@@ -9,6 +9,12 @@ export const CURATED = {
     topic:"即時 3D 渲染與 Shader",
     creator:{"label":"VIPER 11 官方作品與技術筆記","url":"https://viperoneone.com/notes/"}
   },
+  'research/2026-11-universal-web-engine/31-brinewater-browser-open-world-and-agent-workflow.md': {
+    title:"Brinewater：瀏覽器開放世界與 AI Agent 開發案例",
+    lead:"Brinewater 展示以真實城市資料製作瀏覽器開放世界的可能性，並提供 AI Agent 分工、獨立工作樹與視覺驗收的研究線索。文章明確標示作者自述與未經遊戲實測的工程建議。",
+    topic:"互動作品與設計案例",
+    creator:{"label":"Brinewater 官方遊戲入口","url":"https://brinewater.vlad.yt/play/"}
+  },
   'research/2026-11-universal-web-engine/32-aurea-residences-immersive-luxury-web-ux-review.md': {
     title:"ÁUREA Residences：精品住宅網站的視覺與互動驗收",
     lead:"以 ÁUREA Residences 作為精品住宅網站研究入口，整理全頁構圖、字體層級、捲動敘事與手機體驗的驗收方法。尚未取得可重現的 JavaScript 畫面，不能指認實際框架或動畫技術。",
