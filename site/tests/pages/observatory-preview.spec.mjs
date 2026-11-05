@@ -169,6 +169,9 @@ test('G1-02 first screen does not eagerly fetch optional geometry',async({page})
 // handler and animation scheduling, not an unrelated resize, are tested.
 test('G1-02 3D animation resumes after document visibility is restored',async({page})=>{
   test.setTimeout(70_000);
+  // The pages CI defaults to reduced motion, which intentionally pauses the renderer.
+  // This test needs active animation frames to verify background/foreground rescheduling.
+  await page.emulateMedia({reducedMotion:'no-preference'});
   await page.addInitScript(()=>{
     window.__obsFrameTicks=0;
     const request=window.requestAnimationFrame.bind(window);
