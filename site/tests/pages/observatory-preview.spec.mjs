@@ -33,6 +33,15 @@ for(const width of [320,393,768,1440]){
     await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer',/^(poster|three)$/);
     await page.waitForTimeout(800);
     const state=await page.locator('#obs-scene').getAttribute('data-renderer');
+    // Do not silently count a real WebGL2-capable Chromium renderer failure
+    // as a passing 3D test. In browsers without WebGL2, poster is correct.
+    const capable=await page.evaluate(()=>{
+      try{
+        const canvas=document.createElement('canvas');
+        return Boolean(canvas.getContext('webgl2'));
+      }catch{return false;}
+    });
+    if(capable)expect(state,'WebGL2 available but Three.js failed to draw').toBe('three');
     if(state==='three'){
       await expect(page.locator('#obs-three-root canvas')).toBeVisible();
       await expect(page.locator('#obs-controls')).toBeVisible();
