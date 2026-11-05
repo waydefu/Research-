@@ -223,7 +223,7 @@ for(let k=0;k<9;k++){
   box(hall,3,.08,.37,1.14,x,3.75,-3.8);
 }
 // GLB2: emit interleaved node-independent VEC3 accessors and PBR materials.
-function exportGLB(){
+export function exportGLB(){
   const groups=new Map();
   for(const [key,data] of batches){
     const [node,material]=key.split('|');
