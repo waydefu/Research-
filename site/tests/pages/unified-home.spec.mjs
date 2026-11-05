@@ -17,14 +17,12 @@ test('secondary V3 homepage leads to the canonical root',async({page})=>{
   await expect(page).toHaveURL(/\/Research-\/$/);
   await expect(page.getByRole('heading',{name:/技術研究與實作知識庫/})).toBeVisible();
 });
-test('legacy V2 and original P0 research library remain readable',async({page})=>{
+test('retired V2 entry forwards to the single research archive without its own site',async({page})=>{
   await page.goto(V3+'library/');
   await expect(page.getByRole('heading',{name:/想了解一項技術/})).toBeVisible();
   await page.goto(ROOT+'v2/');
-  await expect(page.getByRole('heading',{name:/THE UNKNOWN,/})).toBeVisible();
-  const reader=page.locator('#results .result-title[href]').first();
-  await expect(reader).toBeVisible();
-  expect(await reader.getAttribute('href')).toMatch(/^\.\.\/v3\/(research|governance)\//);
+  await expect(page).toHaveURL(/\/Research-\/v3\/library\//);
+  await expect(page.getByRole('heading',{name:/想了解一項技術/})).toBeVisible();
 });
 test('no-JS public root keeps original research article links',async({browser})=>{
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:393,height:852}});

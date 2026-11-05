@@ -1,29 +1,24 @@
-import { test, expect } from '@playwright/test';
+import {test,expect} from '@playwright/test';
 
-test('clicking a V2 research title opens its V3 article in the same tab', async ({page}) => {
-  await page.goto('./v2/');
-  await expect(page.locator('#results .result-title[href]').first()).toBeVisible();
-  const firstRow = page.locator('#results .result').filter({has: page.locator('.result-title[href]')}).first();
-  const reader = firstRow.locator('.result-title');
-  const target = await reader.getAttribute('href');
-  expect(target).toMatch(/^\.\.\/v3\/(research|governance)\/.+\/$/);
-  const source = firstRow.locator('a.result-source');
-  await expect(source).toHaveAttribute('href', /github\.com\/waydefu\/Research-\/blob\//);
-  await expect(source).toHaveAttribute('target','_blank');
-  await expect(source).toHaveAttribute('rel', /noopener/);
-  await reader.click();
-  await expect(page).toHaveURL(/\/Research-\/v3\/(research|governance)\//);
-  await expect(page.locator('article[data-pagefind-body]')).toBeVisible();
-  await expect(page.locator('article .article-content')).not.toBeEmpty();
+const LEGACY='/Research-/v2/';
+const LIBRARY='/Research-/v3/library/';
+
+test('external old V2 bookmark reaches the maintained original-source research library',async({page})=>{
+  await page.goto(LEGACY);
+  await expect(page).toHaveURL(/\/Research-\/v3\/library\//);
+  await expect(page.getByRole('heading',{name:/想了解一項技術/})).toBeVisible();
+  await expect(page.locator('a[href^="/Research-/v3/"]')).not.toHaveCount(0);
 });
 
-test('sources V3 intentionally excludes have no broken V3 title link', async ({page}) => {
-  await page.goto('./v2/');
-  await expect(page.locator('#results .result-title[href]').first()).toBeVisible();
-  await page.locator('#research-search').fill('docs/governance/THREAT-MODEL.md');
-  const row = page.locator('#results .result');
-  await expect(row).toHaveCount(1);
-  await expect(row.locator('.result-unavailable')).toBeVisible();
-  await expect(row.locator('.result-title[href]')).toHaveCount(0);
-  await expect(row.locator('a.result-source')).toHaveAttribute('href', /github\.com\/waydefu\/Research-\/blob\//);
+test('retired V2 is only a tiny SEO-safe redirect, with no shadow website assets',async({page})=>{
+  const response=await page.request.get(LEGACY);
+  expect(response.ok()).toBe(true);
+  const html=await response.text();
+  expect(html).toContain('url=/Research-/v3/library/');
+  expect(html).toContain('noindex,follow');
+  expect(html).not.toContain('<script');
+  expect(html).not.toContain('THE UNKNOWN,');
+  for(const file of ['app.js','styles.css','reader-links.js','data/research-index.json','assets/og.svg']){
+    expect((await page.request.get(LEGACY+file)).status(),file).toBe(404);
+  }
 });

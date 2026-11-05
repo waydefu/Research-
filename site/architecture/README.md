@@ -9,7 +9,7 @@
 3. `public-articles.mjs` 是逐篇核對的通用技術正文編輯層；原文仍可展開閱讀。未完成正文的來源不能冒稱已編輯。
 4. `research-visuals.mjs` 與 `exhibit-info.mjs` 提供可追溯的原創示意圖、分類圖與標示，不能冒充原作者照片或測速結果。
 5. Astro `src/pages/` 與 `src/layouts/` 將來源與元資料輸出為語意化 HTML；Pagefind 在建置後索引。第三方示範要點擊才載入。
-6. `site/scripts/unify-home.mjs` 組裝 Sanctum 根首頁、V2 歷史版及 V3 全文閱讀；正式部署來源不應分叉。
+6. `site/scripts/unify-home.mjs` 從 Astro 輸出組裝 Sanctum 根首頁和 V3 全文閱讀，舊 V2 僅提供相容轉址，不再打包第二個應用；正式部署來源不應分叉。
 
 ## 機械邊界與不可推論事項
 

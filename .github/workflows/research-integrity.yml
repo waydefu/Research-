@@ -68,8 +68,6 @@ jobs:
       - name: Run P0-P1 browser, keyboard, accessibility, no-JS and viewport checks
         working-directory: site
         run: npm run e2e
-      - name: Validate original V2 showcase
-        run: npm --prefix showcase run check
       - name: Save mandatory browser evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

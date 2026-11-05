@@ -4,7 +4,7 @@
 
 ## 現況與權限
 
-- `/Research-/` 是 Sanctum 靜態首頁，`/Research-/v2/` 是歷史 V2，`/Research-/v3/` 是 Astro 全文研究館；**不是已完成的 Three.js 跨頁 3D 世界**。不可逆向將 V2 設回 root。
+- `/Research-/` 是 Sanctum 靜態首頁，`/Research-/v2/` 只保留前往正式研究館的相容轉址，`/Research-/v3/` 是 Astro 全文研究館；**不是已完成的 Three.js 跨頁 3D 世界**。不可逆向將 V2 設回 root。
 - Owner 最新明示授權 > 本檔／導航 > 具日期的現況修訂 > 歷史計畫。有衝突先核對，不自行擴大需求。
 - 可在 `site/` 編輯、測試、推分支與開 Draft PR；`research/`、`docs/`、`showcase/` 原始資料唯讀。
 - 跨出 `site/`、改 workflow／Ruleset／Pages、加入未列技術、安裝工具、刪檔、合併、部署、啟動 P2，均需 Owner 額外明示同意。
