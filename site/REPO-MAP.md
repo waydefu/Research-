@@ -21,6 +21,12 @@
 4. 需要主張或來源時，先用 `rg` 或 `python3 scripts/research_search.py verify`，不新鮮就明確 rebuild 再查；命中片段只是定位線索，必須重讀原始文件。
 5. 在 `site/` 改動後跑 `npm run check`、`npm run build`、`npm run provenance`、`npm run e2e`。CI 在最新 HEAD 真正 PASS 才能宣稱完成。
 
+## 新版 3D 美術資產入口
+
+- `site/scripts/generate-observatory-model.mjs` 由 `site/scripts/preflight.mjs` 建置時產生標準 glTF GLB 與來源清單；產物位於 `site/public/observatory/`（ignore），不要把二進位資產提交成備份。
+- `site/src/experience/observatory/scene.js` 是唯一瀏覽器 Three.js renderer／GLTFLoader；`site/src/pages/observatory/index.astro` 是唯一新版站預覽。舊 G1 多邊形實驗只有轉址。
+- 模型仍是程序化原創幾何，不是 Blender 精雕成品。真機和 Owner 美術 Gate 未通過前，不直接替換 `/Research-/` 正式首頁。
+
 ## 任務選哪個入口
 
 | 想處理什麼 | 第一個該讀的檔案 | 接著看 | 驗證／注意 |

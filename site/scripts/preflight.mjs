@@ -2,6 +2,7 @@ import { allDocs, resolveLocal, ROOT } from '../src/lib/catalog.mjs';
 import { mkdirSync, copyFileSync, existsSync, writeFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import {generateResearchArt} from './generate-research-art.mjs';
+import {generateObservatoryModel} from './generate-observatory-model.mjs';
 
 const docs = allDocs();
 if (!docs.length) throw new Error('來源研究庫是空的');
@@ -37,4 +38,5 @@ if (docs.some(d => d.file.endsWith('THREAT-MODEL.md'))) throw new Error('威脅�
  writeFileSync(join(ROOT,'site/public/original-search-index.json'),
    JSON.stringify(originalIndex)+'\n','utf8');
  const art=generateResearchArt(docs);
-console.log('P0 preflight: ' + docs.length + ' Markdown files, ' + count + ' linked asset copies; ' + art.written + ' original article diagrams; all checked.');
+const originalObservatory=generateObservatoryModel();
+console.log('P0 preflight: ' + docs.length + ' Markdown files, ' + count + ' linked asset copies; ' + art.written + ' original article diagrams; G1-02 GLB '+originalObservatory.bytes+' bytes; all checked.');

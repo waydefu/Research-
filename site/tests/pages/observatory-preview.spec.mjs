@@ -25,23 +25,29 @@ for(const width of [320,393,768,1440]){
     });
     expect(visual.overflow).toBeLessThanOrEqual(1);
     if(width<=600){
+      const stageBounds=await page.locator('#obs-scene').boundingBox();
+      expect(stageBounds,'cinematic 3D must be in a full-width scene, not a card').toBeTruthy();
+      expect(stageBounds.x).toBeGreaterThanOrEqual(-1);
+      expect(stageBounds.x).toBeLessThanOrEqual(1);
+      expect(stageBounds.width).toBeGreaterThanOrEqual(width-2);
+      expect(stageBounds.height).toBeGreaterThanOrEqual(520);
       expect(visual.copyTop,'central armillary image obscured on mobile').toBeGreaterThanOrEqual(height*.63);
       expect(visual.introHeight).toBeGreaterThanOrEqual(height);
     }
     await page.screenshot({path:testInfo.outputPath('g1-01-first-scene-'+width+'.png')});
     await page.locator('#obs-scene').scrollIntoViewIfNeeded();
     await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer',/^(poster|three)$/);
-    await page.waitForTimeout(800);
-    const state=await page.locator('#obs-scene').getAttribute('data-renderer');
+    const scene=page.locator('#obs-scene');
+    const capable=await page.evaluate(()=>{
+      try{return Boolean(document.createElement('canvas').getContext('webgl2'));}
+      catch{return false;}
+    });
+    if(capable)await expect(scene,'3D must render when the browser supports WebGL2')
+      .toHaveAttribute('data-renderer','three',{timeout:20000});
+    const state=await scene.getAttribute('data-renderer');
     // Do not silently count a real WebGL2-capable Chromium renderer failure
     // as a passing 3D test. In browsers without WebGL2, poster is correct.
-    const capable=await page.evaluate(()=>{
-      try{
-        const canvas=document.createElement('canvas');
-        return Boolean(canvas.getContext('webgl2'));
-      }catch{return false;}
-    });
-    if(capable)expect(state,'WebGL2 available but Three.js failed to draw').toBe('three');
+    if(capable)expect(state,'WebGL2 available but model failed').toBe('three');
     if(state==='three'){
       await expect(page.locator('#obs-three-root canvas')).toBeVisible();
       await expect(page.locator('#obs-controls')).toBeVisible();
@@ -100,4 +106,60 @@ test('G1-01 preview remains unindexed and self-hosted without runtime CDN',async
   }));
   expect(url.external).toEqual([]);
   expect(url.title).toContain('G1-01');
+});
+
+test('G1-02 asset and build manifest are local and self-contained',async({page})=>{
+  const asset='/Research-/v3/observatory/observatory-v1.glb';
+  const manifest='/Research-/v3/observatory/model-manifest.json';
+  const glb=await page.request.get(asset);
+  expect(glb.ok()).toBe(true);
+  const bytes=await glb.body();
+  expect(bytes.subarray(0,4).toString('ascii')).toBe('glTF');
+  expect(bytes.readUInt32LE(4)).toBe(2);
+  expect(bytes.readUInt32LE(8)).toBe(bytes.length);
+  expect(bytes.length).toBeLessThan(4_500_000);
+  const meta=await page.request.get(manifest);
+  expect(meta.ok()).toBe(true);
+  const m=await meta.json();
+  expect(m.sha256).toHaveLength(64);
+  expect(m.authoredBy).toBe('repository-procedural-script');
+  expect(m.blenderExported).toBe(false);
+  expect(m.bytes).toBe(bytes.length);
+});
+test('G1-02 forced static poster must not fetch the optional GLB',async({page})=>{
+  const fetched=[];
+  page.on('request',req=>{if(req.url().endsWith('.glb'))fetched.push(req.url());});
+  await page.goto('/Research-/v3/observatory/?poster=1');
+  await page.locator('#obs-scene').scrollIntoViewIfNeeded();
+  await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer','poster');
+  expect(fetched).toEqual([]);
+});
+
+test('G1-02 failed GLB fetch must fall back to static art without breaking research links',async({page})=>{
+  const glb='/Research-/v3/observatory/observatory-v1.glb';
+  await page.route('**/observatory-v1.glb',route=>route.fulfill({
+    status:503,contentType:'application/octet-stream',body:''
+  }));
+  await page.goto('/Research-/v3/observatory/');
+  const capable=await page.evaluate(()=>{
+    try{return Boolean(document.createElement('canvas').getContext('webgl2'));}
+    catch{return false;}
+  });
+  await page.locator('#obs-scene').scrollIntoViewIfNeeded();
+  if(capable){
+    await expect(page.locator('#obs-status')).toContainText('已回到靜態觀測所美術',{timeout:20000});
+    await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer','poster');
+  }
+  await expect(page.locator('.obs-archive-actions a[href="/Research-/v3/library/"]')).toBeVisible();
+  const response=await page.request.get(glb);
+  expect(response.ok()).toBe(true); // page.request bypasses the browser's route.
+});
+
+test('G1-02 first screen does not eagerly fetch optional geometry',async({page})=>{
+  const requests=[];
+  page.on('request',req=>{if(req.url().endsWith('.glb'))requests.push(req.url());});
+  await page.setViewportSize({width:393,height:852});
+  await page.goto('/Research-/v3/observatory/');
+  await expect(page.getByRole('heading',{level:1,name:/在未知的邊界/})).toBeVisible();
+  expect(requests).toEqual([]);
 });
