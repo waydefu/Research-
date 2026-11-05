@@ -11,7 +11,7 @@
 
 ## 技術與不可退讓的契約
 
-- Astro 6／TypeScript／Content Collections／remark／rehype／Shiki／Pagefind；正式 build 由 `site/scripts/unify-home.mjs` 組裝根首頁與 V2/V3。
+- Astro 7／TypeScript／Content Collections／remark／rehype／Shiki／Pagefind；正式 build 由 `site/scripts/unify-home.mjs` 組裝根首頁與 V2/V3。
 - 不擅自加入 React/R3F、Next.js、WebGPU-first、外部 CDN 字型／腳本或額外接管捲動。
 - 來源 Markdown 原封保留；內部引用轉站內，外部原作連結保留。本站 GitHub Repo PR／Ruleset 不作外連，Git SHA 顯示為文字。
 - `docs/governance/THREAT-MODEL.md` 不得出現在站內路由、Pagefind 或 graph；公開 Repo 中原檔仍可被讀取。
