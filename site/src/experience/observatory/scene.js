@@ -117,7 +117,7 @@ export function bootObservatory(){
     return;
   }
   let renderer=null,scene=null,camera=null,engine=null,environment=null,generation=0;
-  let frame=0,active=false,started=false,failed=false,lastTime=0,startTime=0;
+  let frame=0,active=false,started=false,failed=false,contextLost=false,lastTime=0,startTime=0;
   let paused=reduced.matches,eco=false,pointerOffset=0,targetOffset=0;
   const resize=()=>{
     if(!renderer||!camera)return;
@@ -128,7 +128,7 @@ export function bootObservatory(){
     renderer.setSize(width,height,false);
   };
   const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;lastTime=0;};
-  const visible=()=>active&&!document.hidden;
+  const visible=()=>active&&!document.hidden&&!contextLost;
   const paint=time=>{
     if(!renderer||!scene||!camera||!engine)return;
     const t=paused?0:Math.max(0,time-startTime);
@@ -196,12 +196,13 @@ export function bootObservatory(){
       scene.environment=environment;
       canvas.setAttribute('aria-hidden','true');
       canvas.addEventListener('webglcontextlost',e=>{
-        e.preventDefault();generation++;stop();stage.dataset.renderer='poster';
+        e.preventDefault();contextLost=true;generation++;stop();
+        stage.dataset.renderer='poster';controls.hidden=true;
         status.textContent='圖形上下文已中斷，正在使用靜態美術；研究功能不受影響。';
       });
       canvas.addEventListener('webglcontextrestored',()=>{
         try{
-          release();failed=false;init();
+          release();contextLost=false;failed=false;init();
         }catch(error){fail(error.message);}
       });
       mount.replaceChildren(canvas);
@@ -250,7 +251,9 @@ export function bootObservatory(){
   mount.addEventListener('pointerleave',()=>{targetOffset=0;});
   const ro=new ResizeObserver(()=>resize());
   ro.observe(stage);
-  addEventListener('visibilitychange',schedule);
+  // visibilitychange is dispatched on document, not the window.
+  // Reschedule after returning from a background tab or the animation can freeze.
+  document.addEventListener('visibilitychange',schedule);
   reduced.addEventListener?.('change',()=>{
     if(reduced.matches){paused=true;motion.textContent='播放機械運轉';motion.setAttribute('aria-pressed','true');schedule();}
   });
