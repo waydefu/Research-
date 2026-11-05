@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 
 const MIN_FRAME=1000/30;
-const golden=0xd5ae72,edgeGold=0xf3d49c,darkBrass=0x765331,blue=0x83bcd3;
+const golden=0xa98148,edgeGold=0xcdaa74,darkBrass=0x765331,blue=0x83bcd3;
 const mobile=()=>matchMedia('(max-width: 700px)').matches;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const median=(min,n,max)=>Math.max(min,Math.min(n,max));
@@ -17,13 +17,13 @@ function buildCelestialEngine(scene){
   const geometry=[],material=[],animate=[];
   const addGeo=g=>(geometry.push(g),g);
   const addMat=m=>(material.push(m),m);
-  const brass=addMat(makeMat(golden,.74,.28));
-  const polished=addMat(makeMat(edgeGold,.73,.21));
-  const warm=addMat(makeMat(0xb58750,.63,.38));
+  const brass=addMat(makeMat(golden,.79,.34));
+  const polished=addMat(makeMat(edgeGold,.76,.30));
+  const warm=addMat(makeMat(0x946d41,.74,.4));
   const shadow=addMat(makeMat(0x223747,.45,.5));
   const ink=addMat(makeMat(0x0d1e2a,.35,.62));
   const cyan=addMat(new THREE.MeshStandardMaterial({color:0x7baec4,metalness:.42,roughness:.32,emissive:0x123e53,emissiveIntensity:.26}));
-  const luminous=addMat(new THREE.MeshBasicMaterial({color:0xffd78e}));
+  const luminous=addMat(new THREE.MeshBasicMaterial({color:0xe8b467}));
   const glass=addMat(new THREE.MeshPhysicalMaterial({
     color:0xffd69e,metalness:.1,roughness:.16,transparent:true,opacity:.66,
     transmission:.25,thickness:.85,depthWrite:false
@@ -55,13 +55,13 @@ function buildCelestialEngine(scene){
   // Suspended 3-axis astronomical armillary, not a 2-ring placeholder.
   const armature=new THREE.Group();core.add(armature);
   const ringDefs=[
-    {radius:3.28,tube:.073,angle:[.29,.22,.12],speed:.072},
+    {radius:3.28,tube:.13,angle:[.29,.22,.12],speed:.072},
     {radius:3.13,tube:.018,angle:[.29,.22,.12],speed:.072},
-    {radius:2.86,tube:.065,angle:[1.2,.16,.35],speed:-.085},
+    {radius:2.86,tube:.116,angle:[1.2,.16,.35],speed:-.085},
     {radius:2.69,tube:.016,angle:[1.2,.16,.35],speed:-.085},
-    {radius:2.48,tube:.062,angle:[.8,1.2,.35],speed:.112},
+    {radius:2.48,tube:.103,angle:[.8,1.2,.35],speed:.112},
     {radius:2.29,tube:.022,angle:[.8,1.2,.35],speed:.112},
-    {radius:2.06,tube:.051,angle:[.11,.18,-.7],speed:-.14},
+    {radius:2.06,tube:.087,angle:[.11,.18,-.7],speed:-.14},
     {radius:1.88,tube:.017,angle:[.11,.18,-.7],speed:-.14}
   ];
   ringDefs.forEach((def,i)=>{
@@ -167,13 +167,13 @@ function buildCelestialEngine(scene){
   const architecture=new THREE.Group();scene.add(architecture);
   const architectureMetal=shadow;
   for(const [x,z] of [[-5,-2.5],[5,-2.5],[-5,1.7],[5,1.7]]){
-    const col=cylinder(.18,.23,7.8,architectureMetal,architecture,14);
+    const col=cylinder(.12,.15,7.3,architectureMetal,architecture,18);
     col.position.set(x,-.12,z);
     for(const y of [-3.8,-3.55,3.15,3.58]){
-      const cap=cylinder(.32,.32,.15,warm,architecture,18);
+      const cap=cylinder(.21,.21,.13,warm,architecture,18);
       cap.position.set(x,y,z);
     }
-    const trim=cylinder(.24,.24,7.0,shadow,architecture,16);
+    const trim=cylinder(.135,.135,6.95,shadow,architecture,18);
     trim.position.set(x,-.12,z);
   }
   // Rim of dome, distant structural ribs, no costly real-time shadows.
@@ -198,11 +198,11 @@ function buildCelestialEngine(scene){
   const pointGeometry=addGeo(new THREE.BufferGeometry());
   pointGeometry.setAttribute('position',new THREE.Float32BufferAttribute(points,3));
   architecture.add(new THREE.Points(pointGeometry,addMat(new THREE.PointsMaterial({color:0xa2c7d8,size:.031,transparent:true,opacity:.57,sizeAttenuation:true}))));
-  const ambient=new THREE.AmbientLight(0x8ca6bc,1.06);scene.add(ambient);
-  const sun=new THREE.DirectionalLight(0xffd6a1,3.7);sun.position.set(-3.5,6,7);scene.add(sun);
-  const edge=new THREE.DirectionalLight(0x7fbdd6,2.5);edge.position.set(5,1,-4);scene.add(edge);
-  const hearth=new THREE.PointLight(0xffc078,95,8,2);hearth.position.set(0,.65,2.0);scene.add(hearth);
-  const floorGlow=new THREE.PointLight(0x6f9fb8,36,10,2);floorGlow.position.set(-4,-3,0);scene.add(floorGlow);
+  const ambient=new THREE.AmbientLight(0x8ca6bc,.38);scene.add(ambient);
+  const sun=new THREE.DirectionalLight(0xffc78b,1.52);sun.position.set(-3.5,6,7);scene.add(sun);
+  const edge=new THREE.DirectionalLight(0x7fbdd6,.82);edge.position.set(5,1,-4);scene.add(edge);
+  const hearth=new THREE.PointLight(0xffa957,13,8,2);hearth.position.set(0,.65,2.0);scene.add(hearth);
+  const floorGlow=new THREE.PointLight(0x6f9fb8,8,10,2);floorGlow.position.set(-4,-3,0);scene.add(floorGlow);
 
   return {
     animate(t){
@@ -313,7 +313,7 @@ export function bootObservatory(){
       renderer=new THREE.WebGLRenderer({canvas,context,alpha:true,antialias:false,powerPreference:'low-power'});
       renderer.outputColorSpace=THREE.SRGBColorSpace;
       renderer.toneMapping=THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure=1.5;
+      renderer.toneMappingExposure=.9;
       scene=new THREE.Scene();
       scene.background=null;
       camera=new THREE.PerspectiveCamera(43,1,.1,65);
