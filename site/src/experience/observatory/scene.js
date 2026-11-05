@@ -48,7 +48,7 @@ async function loadCelestialEngine(scene){
   key.position.set(-4.5,7,6);scene.add(key);
   const ice=new THREE.DirectionalLight(0x88cce6,1.12);
   ice.position.set(5,3,-5);scene.add(ice);
-  const warm=new THREE.PointLight(0xffaa53,12,10,2);
+  const warm=new THREE.PointLight(0xffaa53,7.3,10,2);
   warm.position.set(0,.5,2);scene.add(warm);
   // The local starfield is inexpensive and never used as an external HDR.
   let seed=20261105;
