@@ -1,8 +1,21 @@
 // G1-01: One source-owned, progressively enhanced Three.js observatory.
 // No CDN, copied third-party models, fullscreen hijack, or fabricated benchmarks.
-import * as THREE from 'three';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+// Keep the initial mobile hero light: heavy GPU libraries are downloaded
+// only after entering the optional model section and confirming WebGL2 support.
+let THREE=null,RoomEnvironment=null,GLTFLoader=null;
+let gpuImports=null;
+async function ensureGraphicsModules(){
+  if(!gpuImports){
+    gpuImports=Promise.all([
+      import('three'),
+      import('three/addons/environments/RoomEnvironment.js'),
+      import('three/addons/loaders/GLTFLoader.js')
+    ]).then(([three,room,loader])=>{
+      THREE=three;RoomEnvironment=room.RoomEnvironment;GLTFLoader=loader.GLTFLoader;
+    });
+  }
+  return gpuImports;
+}
 
 const MIN_FRAME=1000/30;
 const golden=0xa98148,edgeGold=0xcdaa74,darkBrass=0x765331,blue=0x83bcd3;
@@ -165,6 +178,8 @@ export function bootObservatory(){
         alpha:true,antialias:false,depth:true,stencil:false,powerPreference:'low-power'
       });
       if(!context)throw new Error('WebGL2 is not available');
+      await ensureGraphicsModules();
+      if(currentGeneration!==generation)return; // User left while the GPU bundle loaded.
       renderer=new THREE.WebGLRenderer({canvas,context,alpha:true,antialias:false,powerPreference:'low-power'});
       renderer.outputColorSpace=THREE.SRGBColorSpace;
       renderer.toneMapping=THREE.ACESFilmicToneMapping;
