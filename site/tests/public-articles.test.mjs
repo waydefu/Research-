@@ -7,7 +7,7 @@ import {auditPublicDocs} from '../src/lib/public-content-audit.mjs';
 const docs=allDocs();
 test('inventory covers every published source and never calls automated flags factual verification',()=>{
   const audit=auditPublicDocs(docs);
-  assert.equal(audit.total,90);
+  assert.equal(audit.total,docs.length);
   assert.equal(audit.records.length,new Set(audit.records.map(x=>x.file)).size);
   assert.ok(audit.records.every(x=>['優先整理','人工核對','一般內容候選'].includes(x.priority)));
   assert.ok(audit.records.some(x=>x.priority==='優先整理'));
@@ -17,7 +17,7 @@ test('inventory covers every published source and never calls automated flags fa
   assert.deepEqual(audit.records.filter(x=>x.internalHits>0&&x.publicBody!=='已完成技術正文').map(x=>x.file),[]);
 });
 test('P0.5 closeout covers forty technical guides with unaltered original files with exact source mapping',()=>{
-  assert.deepEqual(publicBodyCoverage(docs.map(d=>d.file)),{total:90,ready:40,stale:[]});
+  assert.deepEqual(publicBodyCoverage(docs.map(d=>d.file)),{total:docs.length,ready:40,stale:[]});
   assert.equal(Object.keys(PUBLIC_ARTICLES).length,40);
   const batchTwo=[
     'research/2026-11-universal-web-engine/18-v3-cinematic-experience-technology-decision.md',
@@ -46,7 +46,7 @@ test('P0.5 closeout covers forty technical guides with unaltered original files 
   // This is not a claim that all 87 source bodies were rewritten.
   const allGuides=new Set(Object.keys(PUBLIC_ARTICLES));
   const uncurated=docs.filter(x=>!allGuides.has(x.file));
-  assert.equal(uncurated.length,50);
+  assert.equal(uncurated.length,docs.length-40);
   assert.ok(uncurated.every(x=>auditPublicDocs([x]).records[0].internalHits===0),
     'no uncurated source may expose internal repository narrative by default');
   for(const [file,body] of Object.entries(PUBLIC_ARTICLES)){

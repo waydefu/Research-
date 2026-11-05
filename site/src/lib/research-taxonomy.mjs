@@ -797,6 +797,7 @@ const raw = {
     ["27-threejs-r187-ultra-rendering-ceiling.md","即時 3D 渲染與 Shader","Three.js r187 畫質上限：WebGPU、TSL、全域光與路徑追蹤",["Three.js","WebGPU","TSL","Shader","全域光"]],
     ["28-advanced-shader-pipeline-and-hd2d-recipes.md","即時 3D 渲染與 Shader","高階 Shader 配方：海水、峽灣霧、反射、HD-2D",["Three.js","Shader","WebGPU","HD-2D","海水"]],
     ["29-rendering-ceiling-benchmark-and-adoption-gates.md","即時 3D 渲染與 Shader","3D 高畫質怎麼驗收？GPU 成本、真機與降級關卡",["Three.js","GPU","WebGPU","效能","效能驗收"]],
+    ["32-aurea-residences-immersive-luxury-web-ux-review.md","介面設計與視覺系統","ÁUREA Residences：精品住宅網站的視覺與互動驗收",["UI/UX","精品網站","視覺敘事","捲動互動","跨裝置驗收"]],
     [
       "README.md",
       "資料來源與研究索引",
