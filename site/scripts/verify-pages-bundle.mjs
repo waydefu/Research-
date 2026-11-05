@@ -1,88 +1,58 @@
-// Read-only verification of the exact GitHub Pages artifact layout.
-// Run from site/ after site/dist has been copied to showcase/dist/v3/.
-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
-import { createHash } from 'node:crypto';
-import { join, relative, resolve } from 'node:path';
-import { allDocs, BASE } from '../src/lib/catalog.mjs';
-import { readerHref } from '../../showcase/reader-links.js';
+// Verify the single-page-host artifact; no copied legacy V2 application.
+import {readdirSync,readFileSync,existsSync,statSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {join,relative,resolve} from 'node:path';
+import {allDocs,BASE} from '../src/lib/catalog.mjs';
 
-const repo = resolve(process.cwd(), '..');
-const source = join(repo, 'site/dist');
-const published = join(repo, 'showcase/dist');
-const nested = join(published, 'v3');
-const legacy = join(published, 'v2');
-const assert = (condition, description) => {
-  if (!condition) throw new Error('Pages layout invalid: ' + description);
-};
-const digest = path => createHash('sha256').update(readFileSync(path)).digest('hex');
-// Traverse with a stable reference root, including hidden files and Pagefind binary files.
-const walk = (dir, root = dir) => readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
-  const path = join(dir, entry.name);
-  if (entry.isDirectory()) return walk(path, root);
-  assert(entry.isFile(), 'unexpected symlink or special file: ' + path);
-  return [relative(root, path)];
+const source=resolve(process.cwd(),'dist');
+const publish=resolve(process.cwd(),'pages-dist');
+const v3=join(publish,'v3');
+const assert=(check,msg)=>{if(!check)throw Error('Single Pages artifact invalid: '+msg);};
+const hash=path=>createHash('sha256').update(readFileSync(path)).digest('hex');
+const walk=(dir,root=dir)=>readdirSync(dir,{withFileTypes:true}).flatMap(e=>{
+  const full=join(dir,e.name);
+  if(e.isDirectory())return walk(full,root);
+  assert(e.isFile(),'Unexpected non-file asset '+full);
+  return [relative(root,full)];
 }).sort();
-for (const name of ['index.html', 'styles.css', 'app.js', 'artifact.js', 'mesh-core.js', 'scene-director.js', 'interaction-core.js', 'qa-metrics.js', 'reader-links.js']) {
-  assert(existsSync(join(legacy, name)), 'V2 root missing ' + name);
-  if (name !== 'index.html' && name !== 'reader-links.js') assert(digest(join(legacy, name)) === digest(join(repo, 'showcase', name)), 'V2 archive modified: ' + name);
-}
-assert(digest(join(legacy, 'index.html')) === digest(join(repo, 'showcase/index.html')), 'V2 homepage changed');
-assert(readFileSync(join(legacy, 'index.html'), 'utf8').includes('THE UNKNOWN,'), 'V2 homepage replaced');
-assert(existsSync(join(legacy, 'data/research-index.json')), 'V2 research index missing');
-assert(existsSync(join(published, '.nojekyll')), 'GitHub Pages .nojekyll marker missing');
-assert(readFileSync(join(legacy,'reader-links.js'),'utf8').includes("return '../v3/'"),'Archived V2 reader routing broken');
-const home=readFileSync(join(published,'index.html'),'utf8');
-assert(home.includes('技術研究與實作知識庫')&&home.includes('class="world-backdrop"'),'Root not Sanctum');
-assert(!home.includes('THE UNKNOWN,'),'V2 must not remain the main home');
-assert(home.includes('href="https://waydefu.github.io/Research-/"'),'Primary canonical absent');
-assert(!home.includes('content="noindex"'),'Root must be indexable');
-assert(home.includes('/Research-/v3/atlas/sanctum/assets/world-desktop.webp'),'Root asset URLs not fixed');
-assert(existsSync(join(nested,'atlas/sanctum/assets/world-desktop.webp')),'Desktop artwork missing');
-assert(existsSync(join(nested,'atlas/sanctum/assets/world-mobile.webp')),'Mobile artwork missing');
-assert(!home.includes('href="/Research-/v3/"'),'Duplicate homepage link remains');
-assert(home.includes('href="/Research-/v3/library/"'),'Actual research library entry missing');
-assert(home.includes('href="/Research-/v2/"'),'Legacy V2 archive link missing');
 
-const original = walk(source);
-const copied = walk(nested);
-assert(original.length > 70, 'V3 artifact unexpectedly small');
-assert(JSON.stringify(original) === JSON.stringify(copied), 'V3 files not copied exactly / unexpected file');
-for (const path of original) {
-  assert(digest(join(source, path)) === digest(join(nested, path)), 'V3 bytes changed: ' + path);
-}
-const mustHave = ['index.html', 'search/index.html', 'graph.json', 'pagefind/pagefind.js', '404.html'];
-for (const file of mustHave) assert(existsSync(join(nested, file)), 'V3 route missing: ' + file);
-const docs = allDocs();
-assert(docs.length >= 60, 'V3 original sources missing');
-for (const doc of docs) {
-  assert(doc.href.startsWith(BASE), 'V3 link has wrong base: ' + doc.file);
-  const route = join(nested, decodeURIComponent(doc.href.slice(BASE.length)), 'index.html');
-  assert(existsSync(route) && statSync(route).size > 100, 'V3 article route missing: ' + doc.file);
-}
-assert(!existsSync(join(nested, 'governance/THREAT-MODEL/index.html')), 'excluded governance document published');
-const graph = JSON.parse(readFileSync(join(nested, 'graph.json'), 'utf8'));
-assert(graph.nodes.length === docs.length, 'graph nodes and documents mismatch');
-const v3ByPath = new Map(graph.nodes.map(node => [node.id, node.url]));
-const v2Documents = JSON.parse(readFileSync(join(legacy, 'data/research-index.json'), 'utf8')).documents;
-let readerPages = 0;
-const sourceOnly = [];
-for (const document of v2Documents) {
-  const local = readerHref(document.path);
-  const expected = v3ByPath.get(document.path);
-  if (expected) {
-    assert(local !== null, 'V2 document unexpectedly has no V3 route: ' + document.path);
-    assert('/Research-/' + local.slice(2) === expected, 'V2 reader route does not match V3 graph: ' + document.path);
-    assert(existsSync(join(nested, decodeURIComponent(expected.slice(BASE.length)), 'index.html')), 'V2 reader target not generated: ' + document.path);
-    readerPages++;
-  } else {
-    assert(local === null, 'V2 document would link to a non-existent V3 page: ' + document.path);
-    sourceOnly.push(document.path);
-  }
-}
-assert(readerPages > 50, 'Too few V2 documents have actual V3 reader pages');
-console.log('V2 reader link audit: ' + readerPages + ' valid internal article routes; ' + sourceOnly.length + ' source-only entries: ' + sourceOnly.join(', '));
+assert(existsSync(join(publish,'.nojekyll')),'nojekyll marker missing');
+const home=readFileSync(join(publish,'index.html'),'utf8');
+assert(home.includes('技術研究與實作知識庫'),'Canonical Sanctum missing');
+assert(home.includes('class="world-backdrop"'),'Primary art scene missing');
+assert(!home.includes('THE UNKNOWN,'),'Retired V2 incorrectly owns root');
+assert(home.includes('href="https://waydefu.github.io/Research-/"'),'Canonical URL missing');
+assert(!home.includes('content="noindex"'),'Production home blocked from indexing');
+assert(home.includes('/Research-/v3/atlas/sanctum/assets/world-desktop.webp'),'Real local world image missing');
+assert(home.includes('href="/Research-/v3/library/"'),'Research library route missing');
+assert(!home.includes('href="/Research-/v2/"'),'Retired V2 linked from primary home');
 
-const v3Home = readFileSync(join(nested, 'index.html'), 'utf8');
-assert(v3Home.includes('url=/Research-/'), 'V3 homepage must forward to canonical root');
-assert(existsSync(join(nested,'library/index.html')),'P0 library archive is missing');
-console.log('Unified Pages verified: Sanctum root, V2 archived under /v2/, V3 research intact; '+docs.length+' articles and '+original.length+' V3 assets.');
+const previous=walk(join(publish,'v2'));
+assert(JSON.stringify(previous)===JSON.stringify(['index.html']),'Unexpected retired V2 application still published: '+previous);
+const redirect=readFileSync(join(publish,'v2/index.html'),'utf8');
+assert(redirect.includes('url=/Research-/v3/library/'),'Old V2 URL must lead to research');
+assert(redirect.includes('noindex,follow'),'Retired route indexed as independent site');
+for(const name of ['app.js','styles.css','reader-links.js','data/research-index.json']){
+  assert(!existsSync(join(publish,'v2',name)),'Legacy site artifact still published: '+name);
+}
+const original=walk(source),copied=walk(v3);
+assert(original.length>70,'Research site artifacts unexpectedly few');
+assert(JSON.stringify(original)===JSON.stringify(copied),'Astro V3 copied incompletely');
+for(const path of original)assert(hash(join(source,path))===hash(join(v3,path)),'Altered research file: '+path);
+
+for(const path of ['index.html','library/index.html','search/index.html','graph.json','pagefind/pagefind.js','404.html','atlas/sanctum/assets/world-mobile.webp']){
+  assert(existsSync(join(v3,path)),'Missing V3 route or asset: '+path);
+}
+const docs=allDocs();
+assert(docs.length>=60,'Original research Markdown removed');
+for(const doc of docs){
+  assert(doc.href.startsWith(BASE),'Invalid original research URL: '+doc.file);
+  const route=join(v3,decodeURIComponent(doc.href.slice(BASE.length)),'index.html');
+  assert(existsSync(route)&&statSync(route).size>100,'Research page missing: '+doc.file);
+}
+assert(!existsSync(join(v3,'governance/THREAT-MODEL/index.html')),'Excluded security source published');
+const graph=JSON.parse(readFileSync(join(v3,'graph.json'),'utf8'));
+assert(graph.nodes.length===docs.length,'Graph and research document counts differ');
+const v3index=readFileSync(join(v3,'index.html'),'utf8');
+assert(v3index.includes('url=/Research-/'),'Secondary home must redirect to canonical root');
+console.log('Single-site Pages PASS: 1 home, 1 original V3 archive, 1 V2 compatibility redirect, '+docs.length+' source articles, '+original.length+' assets.');
