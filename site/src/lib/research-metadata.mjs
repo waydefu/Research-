@@ -3,6 +3,12 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/30-viper11-clouds-terrain-cinematic-rendering.md': {
+    title:"VIPER 11：可穿越體積雲、真實地形與電影級鏡頭",
+    lead:"從 VIPER 11 作者公開的技術筆記，理解瀏覽器體積雲、地表動態雲影、真實地形串流與電影鏡頭的協作方式。文章區分作者自述、可再利用的開源候選和尚未實測的效能數據。",
+    topic:"即時 3D 渲染與 Shader",
+    creator:{"label":"VIPER 11 官方作品與技術筆記","url":"https://viperoneone.com/notes/"}
+  },
   'research/2026-11-universal-web-engine/27-threejs-r187-ultra-rendering-ceiling.md': {
     schemaVersion:1,
     publicTitle:'Three.js r187 畫質上限：WebGPU、TSL、全域光與路徑追蹤',

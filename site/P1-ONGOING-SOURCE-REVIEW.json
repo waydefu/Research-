@@ -11,5 +11,23 @@
     "remainingWork",
     "knownSources"
   ],
-  "items": []
+  "items": [
+    {
+      "path": "research/2026-11-universal-web-engine/30-viper11-clouds-terrain-cinematic-rendering.md",
+      "sourceBlobSha": "5d7867d45257389e99984b835a935fb82a4bdaf6",
+      "sourceRevision": "99fc3f8f03fcc5afcc515bb36dbc5d187397e2b9",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "已讀取 VIPER 11 作者對體積雲、地形串流、鏡頭後製與飛控原理的公開技術筆記；作者報告的數字不是獨立效能測試。",
+      "publicNotice": "本文分析第三方作品作者公開的渲染方法，部分參數及效能描述屬作者自述；沒有取得作品完整原始碼、素材授權與真機效能證據。",
+      "remainingWork": "需確認 three-clouds／three-atmosphere 對應上游版本及授權，測試移動中的雲影與時間重建、地形串流和手機效能；不得當成現成可複製的遊戲程式碼。",
+      "knownSources": [
+        "https://viperoneone.com/notes/clouds/",
+        "https://viperoneone.com/notes/nellis/",
+        "https://viperoneone.com/notes/lens/",
+        "https://viperoneone.com/notes/flight/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    }
+  ]
 }

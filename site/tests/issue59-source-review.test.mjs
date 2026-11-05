@@ -5,6 +5,7 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {allDocs} from '../src/lib/catalog.mjs';
 import {getPublicArticle} from '../src/lib/public-articles.mjs';
+import ongoing from '../P1-ONGOING-SOURCE-REVIEW.json' with {type:'json'};
 
 const reviewed=JSON.parse(readFileSync(resolve(process.cwd(),'P1-ISSUE59-REVIEW.json'),'utf8'));
 const graphics=JSON.parse(readFileSync(resolve(process.cwd(),'P1-2026-11-05-GRAPHICS-REVIEW.json'),'utf8'));
@@ -12,14 +13,15 @@ const graphics=JSON.parse(readFileSync(resolve(process.cwd(),'P1-2026-11-05-GRAP
 test('Issue #59: exactly every unpublished public technical body has one dated review disposition',()=>{
   const docs=allDocs(),missing=docs.filter(d=>!getPublicArticle(d.file)).map(d=>d.file).sort();
   const registered=reviewed.items.map(x=>x.path).sort();
+  const incremental=new Set([...graphics.items,...ongoing.items].map(x=>x.path));
   assert.equal(reviewed.schemaVersion,2);
   assert.match(reviewed.dispositionCompletedAt,/^2026-11-04$/);
   assert.equal(reviewed.issue,59);
   assert.equal(reviewed.items.length,47);
   assert.equal(new Set(registered).size,registered.length,'duplicate source');
-  assert.deepEqual(registered,missing.filter(p=>!graphics.items.some(row=>row.path===p)),
+  assert.deepEqual(registered,missing.filter(p=>!incremental.has(p)),
     'historical Issue #59 source review remains unchanged');
-  assert.deepEqual([...registered,...graphics.items.map(x=>x.path)].sort(),missing,
+  assert.deepEqual([...registered,...incremental].sort(),missing,
     'new sources must have an independently dated review register');
   assert.ok(reviewed.items.every(x=>x.reviewedOn&&x.remainingWork),'all items need a review date and next action');
 });
