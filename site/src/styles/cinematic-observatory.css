@@ -48,25 +48,25 @@ html:has(.observatory-page){scroll-behavior:smooth;background:var(--obs-deep)}
 .obs-transition>p{margin:0;color:#cca971;font:11px/1.4 system-ui,sans-serif;letter-spacing:.26em}
 .obs-transition-line{height:90px;width:1px;margin:34px auto;background:linear-gradient(var(--obs-gold),transparent)}
 .obs-transition h2{margin:0;font-size:clamp(31px,4vw,61px);line-height:1.65;text-shadow:0 3px 28px #000}
-.obs-machine{position:relative;isolation:isolate;padding:90px clamp(19px,6.5vw,114px) 160px;background:linear-gradient(180deg,#080d15,#0c1420 27%,#060b13 93%,#070e18)}
+.obs-machine{position:relative;isolation:isolate;padding:90px clamp(19px,3vw,56px) 145px;background:radial-gradient(ellipse 55% 48% at 50% 41%,#18283a88,transparent 82%),linear-gradient(180deg,#080d15,#0b1420 30%,#060b13 94%,#070e18)}
 .obs-machine-heading{position:relative;z-index:2;max-width:710px;margin:0 auto 48px;text-align:center}
 .obs-machine h2,.obs-archive h2,.obs-featured h2{margin:8px 0 12px;font-size:clamp(34px,4.2vw,65px);line-height:1.4}
 .obs-machine-heading>p:last-child{max-width:64ch;margin:0 auto;color:#becbd1;font-size:clamp(14px,1vw,16px);line-height:1.95}
-.obs-scene{position:relative;margin:0 auto;max-width:1250px;height:min(72vw,760px);min-height:460px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 50% 58% at 50% 40%,rgba(51,75,97,.42),transparent 78%),linear-gradient(180deg,#111d2a,#060a11);border:1px solid rgba(218,176,111,.43);box-shadow:0 38px 110px #000b,inset 0 0 60px #0d1826}
-.obs-scene-backdrop{position:absolute;inset:0;z-index:-1;background:url('/Research-/v3/atlas/sanctum/assets/world-desktop.webp') center 47%/cover no-repeat;opacity:.25;filter:blur(2px) saturate(.66)}
+.obs-scene{position:relative;margin:0 auto;max-width:1440px;height:min(75vw,850px);min-height:520px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 45% 58% at 50% 40%,rgba(56,78,102,.35),transparent 78%),linear-gradient(180deg,#0b1521,#060b13);border:0;box-shadow:inset 0 0 86px #0b1625;mask-image:linear-gradient(180deg,transparent 0%,#000 8%,#000 86%,transparent 100%)}
+.obs-scene-backdrop{position:absolute;inset:0;z-index:-1;background:url('/Research-/v3/atlas/sanctum/assets/world-desktop.webp') center 47%/cover no-repeat;opacity:.34;filter:blur(1.5px) saturate(.78)}
 .obs-scene::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at 50% 52%,transparent 29%,rgba(4,8,13,.38) 65%,rgba(3,7,11,.76) 100%),linear-gradient(0deg,#050a11ae,transparent 27%,transparent 77%,#070b14a3)}
 .obs-three-root{position:absolute;inset:0;z-index:1;pointer-events:auto;touch-action:pan-y;opacity:0;transition:opacity .7s ease}
 .obs-three-root canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
 .obs-scene[data-renderer="three"] .obs-three-root{opacity:1}
-.obs-scene-shade{position:absolute;z-index:3;inset:0;pointer-events:none;border:17px solid transparent;border-image:linear-gradient(120deg,rgba(225,186,119,.2),transparent 35%,transparent 75%,rgba(225,186,119,.15)) 1}
-.obs-stage-corner{position:absolute;z-index:4;width:38px;height:38px;pointer-events:none;border-color:rgba(245,202,136,.75);border-style:solid}
+.obs-scene-shade{position:absolute;z-index:3;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 46%,rgba(242,166,75,.055),transparent 30%);mix-blend-mode:screen}
+.obs-stage-corner{position:absolute;z-index:4;width:34px;height:34px;pointer-events:none;border-color:rgba(245,202,136,.28);border-style:solid}
 .obs-stage-corner-tl{top:20px;left:20px;border-width:1px 0 0 1px}
 .obs-stage-corner-br{bottom:20px;right:20px;border-width:0 1px 1px 0}
 .obs-scene-meta{position:absolute;bottom:28px;left:35px;right:35px;z-index:4;display:flex;justify-content:space-between;gap:12px;color:#d5c19e;letter-spacing:.15em;font:10px/1.4 monospace;pointer-events:none}
 .obs-controls{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:25px}
-.obs-controls button{min-width:152px;min-height:48px;padding:10px 20px;background:#162437;color:#f0dbb8;border:1px solid rgba(217,181,121,.5);font-size:13px}
-.obs-controls button[aria-pressed="true"]{background:#e4bb82;color:#0a101b}
-.obs-status,.obs-honesty{text-align:center;max-width:94ch;margin:17px auto 0;color:#d9bd8f;font-size:13px;line-height:1.8}
+.obs-controls button{min-width:152px;min-height:46px;padding:10px 17px;background:transparent;color:#dbc39b;border:0;border-bottom:1px solid rgba(217,181,121,.47);font-size:13px;letter-spacing:.05em}
+.obs-controls button[aria-pressed="true"]{background:rgba(203,155,81,.11);color:#f3d8aa;border-bottom-color:#f1c582}
+.obs-status,.obs-honesty{text-align:center;max-width:94ch;margin:17px auto 0;padding-inline:20px;color:#d9bd8f;font-size:13px;line-height:1.8}
 .obs-honesty{color:#a3b3c1;font-size:12px}
 .obs-statement{position:relative;min-height:80svh;display:flex;flex-direction:column;justify-content:center;padding:160px clamp(28px,12vw,230px);background:linear-gradient(180deg,#070e18,rgba(6,13,22,.91) 30%,rgba(7,15,26,.95)),radial-gradient(ellipse at 60% 28%,#203852,transparent 69%)}
 .obs-stat-rail{position:absolute;right:4.7vw;top:25%;writing-mode:vertical-rl;color:#c9a572;letter-spacing:.22em;font:11px/1.4 Georgia,serif}
@@ -122,18 +122,18 @@ html:has(.observatory-page){scroll-behavior:smooth;background:var(--obs-deep)}
  .obs-transition{min-height:69svh;padding:80px 22px 100px}
  .obs-transition-line{height:65px}
  .obs-transition h2{font-size:clamp(28px,7vw,37px)}
- .obs-machine{padding:60px 14px 95px}
- .obs-machine-heading{padding:0 12px}
+ .obs-machine{padding:64px 0 100px}
+ .obs-machine-heading{padding:0 23px;margin-bottom:18px}
  .obs-machine-heading>p:last-child{font-size:13px}
  .obs-machine h2{font-size:35px}
- .obs-scene{height:min(123vw,600px);min-height:370px;max-height:600px}
- .obs-scene-backdrop{background-image:url('/Research-/v3/atlas/sanctum/assets/world-mobile.webp');background-position:center 45%;opacity:.24}
+ .obs-scene{height:clamp(520px,90svh,740px);min-height:520px;max-height:740px;mask-image:linear-gradient(180deg,transparent 0%,#000 9%,#000 87%,transparent 100%)}
+ .obs-scene-backdrop{background-image:url('/Research-/v3/atlas/sanctum/assets/world-mobile.webp');background-position:center 44%;opacity:.32}
  .obs-scene-meta{left:15px;right:15px;bottom:16px;font-size:9px}
- .obs-scene-shade{border-width:7px}
- .obs-stage-corner{width:24px;height:24px}
+ .obs-scene-shade{background:radial-gradient(circle at 50% 51%,rgba(252,187,91,.11),transparent 27%)}
+ .obs-stage-corner{display:none}
  .obs-stage-corner-tl{top:11px;left:11px}
  .obs-stage-corner-br{bottom:11px;right:11px}
- .obs-controls button{flex:1 1 145px;min-width:0}
+ .obs-controls{margin:0 23px}.obs-controls button{flex:1 1 145px;min-width:0}
  .obs-statement{min-height:77svh;padding:115px 30px}
  .obs-stat-rail{display:none}
  .obs-statement h2{font-size:clamp(31px,8vw,46px)}
