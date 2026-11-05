@@ -3,6 +3,12 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/31-brinewater-browser-open-world-and-agent-workflow.md': {
+    title:"Brinewater：瀏覽器開放世界與 AI Agent 開發案例",
+    lead:"Brinewater 展示以真實城市資料製作瀏覽器開放世界的可能性，並提供 AI Agent 分工、獨立工作樹與視覺驗收的研究線索。文章明確標示作者自述與未經遊戲實測的工程建議。",
+    topic:"互動作品與設計案例",
+    creator:{"label":"Brinewater 官方遊戲入口","url":"https://brinewater.vlad.yt/play/"}
+  },
   'research/2026-11-universal-web-engine/27-threejs-r187-ultra-rendering-ceiling.md': {
     schemaVersion:1,
     publicTitle:'Three.js r187 畫質上限：WebGPU、TSL、全域光與路徑追蹤',

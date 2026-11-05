@@ -1,6 +1,7 @@
 // Editorial introductions only. Each entry is tied to one real source path, not an inferred fact.
 // Preserve original Markdown, source provenance, author and demos. Do not claim external testing.
 export const EDITORIAL_LEADS = Object.freeze({
+  "research/2026-11-universal-web-engine/31-brinewater-browser-open-world-and-agent-workflow.md": "Brinewater 展示以真實城市資料製作瀏覽器開放世界的可能性，並提供 AI Agent 分工、獨立工作樹與視覺驗收的研究線索。文章明確標示作者自述與未經遊戲實測的工程建議。",
   "research/2026-11-universal-web-engine/27-threejs-r187-ultra-rendering-ceiling.md": "從官方 Three.js r187、WebGPU 渲染器和 TSL 出發，分析 PBR、SSGI、SSR、景深、陰影與 GPU 路徑追蹤的實際能力。比較可玩即時畫質與漸進式照片渲染，清楚標示 API 相容與尚未實測的性能。",
   "research/2026-11-universal-web-engine/28-advanced-shader-pipeline-and-hd2d-recipes.md": "拆解海浪 Fresnel、Beer-Lambert、海岸泡沫、SSGI、SSR、體積霧與像素角色抗鋸齒的工程設計。整理 Frame Graph、降級方案與三個可重現 PoC；配方是設計推導，不是已部署程式。",
   "research/2026-11-universal-web-engine/29-rendering-ceiling-benchmark-and-adoption-gates.md": "將 Three.js 高階視覺拆成行動裝置、桌面高畫質、研究級 Ultra 與漸進式照片模式；提供 Buffer 記憶體估算、效能診斷、資產壓縮、裝置測試欄位與 Go/No-go 標準，不虛構 FPS。",
