@@ -1,0 +1,151 @@
+---
+import {allDocs,BASE,displayDomain} from '../../lib/catalog.mjs';
+import '../../styles/cinematic-observatory.css';
+const documents=allDocs();
+const milestones=[
+  '27-threejs-r187-ultra-rendering-ceiling.md',
+  '28-advanced-shader-pipeline-and-hd2d-recipes.md',
+  '29-rendering-ceiling-benchmark-and-adoption-gates.md'
+];
+const selected=milestones.map(end=>documents.find(d=>d.file.endsWith(end))).filter(Boolean);
+const groups=[
+  {label:'即時 3D 與視覺系統',id:'2026-11-universal-web-engine',num:'01',detail:'場景、Shader、GPU 與互動體驗'},
+  {label:'AI 代理與工程治理',id:'2026-11-agent-repository-operations',num:'02',detail:'權限、可追溯來源與自動化'},
+  {label:'資訊安全與風險',id:'2026-11-information-security',num:'03',detail:'威脅、驗證、基礎設施與保護'},
+  {label:'本機 AI 與模型運作',id:'2026-11-local-ai-inference',num:'04',detail:'推論、MoE、記憶體與效能'}
+];
+---
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#080e18">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Research— 天文觀測所：電影式視覺與真實 Three.js 機械天球原型，通往可驗證的繁體中文技術研究與原始來源。">
+  <title>天文觀測所｜G1-01 電影式場景預覽</title>
+  <link rel="preload" as="image" href="/Research-/v3/atlas/sanctum/assets/world-mobile.webp" type="image/webp" media="(max-width: 700px)">
+  <link rel="preload" as="image" href="/Research-/v3/atlas/sanctum/assets/world-desktop.webp" type="image/webp" media="(min-width: 701px)">
+</head>
+<body class="observatory-page">
+  <a class="obs-skip" href="#obs-main">跳過導覽，直接進入研究觀測所</a>
+  <div class="obs-world" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 700px)" srcset="/Research-/v3/atlas/sanctum/assets/world-mobile.webp">
+      <img src="/Research-/v3/atlas/sanctum/assets/world-desktop.webp" alt="" fetchpriority="high" decoding="async" width="1440" height="900">
+    </picture>
+    <div class="obs-world-shade"></div>
+  </div>
+  <header class="obs-header">
+    <a class="obs-logo" href="#obs-top" aria-label="RESEARCH— 研究觀測所，返回頁首">
+      <span class="obs-sigil" aria-hidden="true">✧</span>
+      <span><strong>RESEARCH—</strong><small>THE OBSERVATORY</small></span>
+    </a>
+    <nav class="obs-nav" aria-label="網站主要導覽">
+      <a href="#obs-explore">探索世界</a>
+      <a href="#obs-archive">研究分類</a>
+      <a href={BASE+'search/'}>全文搜尋</a>
+      <a href={BASE+'library/'} class="obs-nav-accent">典藏館 <span aria-hidden="true">↗</span></a>
+    </nav>
+    <button id="obs-menu" class="obs-menu" aria-expanded="false" aria-controls="obs-mobile-nav" aria-label="展開網站選單"><span></span><span></span><span></span></button>
+    <nav id="obs-mobile-nav" class="obs-mobile-nav" aria-label="行動版網站導覽" hidden>
+      <a href="#obs-explore">探索世界</a>
+      <a href="#obs-archive">研究分類</a>
+      <a href={BASE+'search/'}>全文搜尋</a>
+      <a href={BASE+'library/'}>進入典藏館</a>
+    </nav>
+  </header>
+  <main id="obs-main">
+    <section id="obs-top" class="obs-intro" aria-labelledby="obs-title">
+      <div class="obs-intro-art" aria-hidden="true"></div>
+      <div class="obs-intro-gauge" aria-hidden="true"><span>研究觀測所 / VOL. I</span><span>37° / CINEMATIC STUDY</span></div>
+      <div class="obs-intro-copy">
+        <p class="obs-kicker">A WORLD MADE FOR DISCOVERY <span>— 01</span></p>
+        <h1 id="obs-title">在未知的邊界，<br><em>看見知識的軌道。</em></h1>
+        <p>以原始來源為座標，以工程與美術為觀測鏡。讓每一次探索，都能循著線索抵達知識的核心。</p>
+        <a href="#obs-explore" class="obs-discover">進入觀測核心 <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="obs-scroll-mark" aria-hidden="true">SCROLL TO EXPLORE <span></span> 01 / 04</div>
+    </section>
+
+    <section class="obs-transition" aria-label="從景觀進入機械觀測核心">
+      <p>FROM DISTANT LIGHT TO RESEARCH</p>
+      <div class="obs-transition-line" aria-hidden="true"></div>
+      <h2>光芒的深處，<br><em>有值得理解的結構。</em></h2>
+    </section>
+
+    <section class="obs-machine" id="obs-explore" aria-labelledby="obs-machine-title">
+      <div class="obs-machine-heading">
+        <p class="obs-kicker">02 / THE ENGINE OF DISCOVERY</p>
+        <h2 id="obs-machine-title">天球之心</h2>
+        <p>從歷史天文儀的結構取得靈感，將多層金屬環、分刻、傳動、發光核心與建築輪廓結合為原創即時 3D 場景。</p>
+      </div>
+      <div class="obs-scene" id="obs-scene" data-renderer="poster" aria-label="原創多層天文儀 3D 場景展示">
+        <div class="obs-scene-backdrop" aria-hidden="true"></div>
+        <div id="obs-three-root" class="obs-three-root" aria-hidden="true"></div>
+        <div class="obs-scene-shade" aria-hidden="true"></div>
+        <div class="obs-stage-corner obs-stage-corner-tl" aria-hidden="true"></div>
+        <div class="obs-stage-corner obs-stage-corner-br" aria-hidden="true"></div>
+        <div class="obs-scene-meta"><span>G1 / LIVE RENDER</span><span>THE CELESTIAL ENGINE</span></div>
+      </div>
+      <div class="obs-controls" id="obs-controls" hidden>
+        <button type="button" id="obs-motion" aria-pressed="false">暫停機械運轉</button>
+        <button type="button" id="obs-quality" aria-pressed="false">節能畫質：關</button>
+        <button type="button" id="obs-reset">重新觀看</button>
+      </div>
+      <p class="obs-status" id="obs-status" role="status" aria-live="polite">目前顯示靜態原創美術。若裝置支援 WebGL2，可選擇啟動即時場景。</p>
+      <p class="obs-honesty">3D 場景屬 G1 技術與美術原型。原圖維持為美術參考與退化畫面；尚未驗收真機 FPS、長時間發熱或 GPU 計時。</p>
+    </section>
+
+    <section class="obs-statement" aria-labelledby="obs-story-title">
+      <span class="obs-stat-rail" aria-hidden="true">03 / EVIDENCE MATTERS</span>
+      <p class="obs-mini">THE ARCHIVE OF IDEAS</p>
+      <h2 id="obs-story-title">最好的研究，<br>不只令人驚嘆。<br><em>更能被追溯、被驗證。</em></h2>
+      <p>每一份研究保留原始文章、作者與來源脈絡；我們把艱深的工程概念轉化為可探索的繁體中文知識，不把推測冒充實測。</p>
+      <a class="obs-inline-link" href={BASE+'library/'}>瀏覽完整研究館 <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="obs-archive" id="obs-archive" aria-labelledby="obs-archive-title">
+      <div class="obs-section-heading">
+        <p class="obs-kicker">04 / RESEARCH CONSTELLATIONS</p>
+        <h2 id="obs-archive-title">知識群星</h2>
+        <p>不是四張無關的卡片，而是從同一個世界延伸的研究航線。可以沿著主題深入，也可以直接搜尋所有原始來源。</p>
+      </div>
+      <ol class="obs-topic-list">
+        {groups.map(group=><li>
+          <a href={BASE+'domains/'+encodeURIComponent(group.id)+'/'} aria-label={'進入'+group.label}>
+            <span class="obs-topic-no">{group.num}</span>
+            <span class="obs-topic-body"><strong>{group.label}</strong><small>{group.detail}</small></span>
+            <span class="obs-topic-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>)}
+      </ol>
+      <div class="obs-archive-actions">
+        <a class="obs-primary-cta" href={BASE+'library/'}>開啟完整典藏館 <span aria-hidden="true">↗</span></a>
+        <a class="obs-inline-link" href={BASE+'search/'}>全文檢索所有研究</a>
+      </div>
+    </section>
+
+    <section class="obs-featured" aria-labelledby="obs-featured-title">
+      <div class="obs-section-heading"><p class="obs-kicker">FIELD NOTES / FROM THE ARCHIVE</p><h2 id="obs-featured-title">從工程走向世界</h2></div>
+      <ol>{selected.map((doc,i)=><li>
+        <a href={doc.href}>
+          <span class="obs-field-index">0{i+1}</span>
+          <span class="obs-field-main"><strong>{doc.publicTitle}</strong><small>{doc.summary}</small><span class="obs-source">研究來源：{displayDomain(doc.group)}</span></span>
+          <span class="obs-field-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>)}</ol>
+    </section>
+  </main>
+  <footer class="obs-footer">
+    <span class="obs-logo-type">RESEARCH— <small>THE OBSERVATORY</small></span>
+    <span>原始資料不因視覺實驗而消失。</span>
+    <a href={BASE+'library/'}>進入研究館 ↗</a>
+  </footer>
+  <script>
+    import {bootObservatory} from '../../experience/observatory/scene.js';
+    bootObservatory();
+  </script>
+</body>
+</html>
