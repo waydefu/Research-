@@ -2,6 +2,72 @@
 
 更新：2026-11-03｜這是網站管理說明，不會修改或取代原始研究結論。
 
+## 新增研究 PR｜必過收錄流程（2026-11-05）
+
+> **這是新增或改名 `research/**/*.md` 的 Agent 必讀流程。** 根目錄 `AGENTS.md` 必須指向本節。現行公開研究館具備「每篇一筆人工分類／繁中導讀／有限來源審閱／原創示意圖」的完整性契約。**只有 Markdown 不代表完成收錄，也不能直接開一個宣稱可合併的 PR。**
+
+### 0. 動手前先確認
+
+1. 查看 GitHub **即時** `main`、未合併 PR 和 `git diff`，找是否已有相同來源／研究，避免重複文章或編號衝突。閱讀根目錄 `AGENTS.md`、本指南、`site/AGENTS.md`，再看相關測試，不能只根據歷史交接推定現狀。
+2. 一個研究包必須明確記下研究問題、原作者／作品 URL、讀取日期、可追溯原始來源、來源是官方／作者自述／二手摘要還是未驗證、重現方法、未知點、權利及預計的採用門檻。
+3. 用新分支改檔；保留其他研究原文及歷史 SHA。多人／多 Agent 同時開單篇 PR 時，**共享索引檔一定會重疊**，後合併的分支需先對最新 `main` 重基底、重新核對並測試。
+
+### 1. 新文章的必查清單（完整來源路徑為主鍵）
+
+| 項目 | 必查路徑 | 新文章時的動作 |
+| --- | --- | --- |
+| 原始研究正文 | `research/<主題>/NN-*.md` | 新增研究；標明日期、原始鏈接及已證實／作者自述／推導／未驗證 |
+| 公開細分類／標題／標籤 | `site/src/lib/research-taxonomy.mjs` | 在對應來源資料夾的人工清單新增**精確檔名**、正確細分類、白話繁中標題、可搜尋標籤；不能只仰賴 fallback |
+| 公開繁中導讀 | `site/src/lib/research-leads.mjs` | 以**完整來源路徑**新增 60–160 字有依據的繁中導讀，不能宣稱未量測效能或未讀源碼 |
+| 有日期的有限來源審閱 | `site/P1-ONGOING-SOURCE-REVIEW.json` | 新增獨立 `items`，至少填 `path`、`sourceBlobSha`、`sourceRevision`、`reviewedOn`、`verifiedScope`、`publicNotice`、`remainingWork`、`knownSources`；未知不可冒充已完全證實 |
+| 作品作者／互動連結（需要時） | `site/src/lib/research-metadata.mjs` | 僅將已查核 `creator`、`demos` 或 canonical metadata 納入；來源與一般教學示例不可混淆；不確定則 `null`／空陣列 |
+| 專屬原創研究示意圖 | `site/src/lib/research-visuals.mjs`、`site/scripts/generate-research-art.mjs` | 依來源登錄確認可產生獨立、安全、非原作者截圖的 SVG；檢查主題圖樣是否合理，不複製第三方素材 |
+| 新主題資料夾（選用） | `site/src/lib/catalog.mjs` | 新 domain 才補繁中領域名稱；不能憑資料夾推論技術主題 |
+| 公開技術正文（依內容） | `site/src/lib/public-articles.mjs`、`site/scripts/audit-public-content.mjs` | 若 Markdown 含內部專案／交接敘事，應建立獨立、通用化、來源忠實的公開技術正文；**不修改歷史原文去規避檢查** |
+| 增量及 UI 測試 | `site/tests/*.test.mjs`、`site/tests/pages/*.spec.mjs` | 檢查 taxonomy、lead、source-review、visual、provenance、公開索引及中英文搜尋；來源數量增加時，真實資料應增加，測試不得停留在舊的硬編碼數量 |
+
+**來源 SHA 的強制流程：**先提交最終的原始研究 Markdown，再取得該檔的 Git **blob SHA**（`git hash-object research/<...>.md` 或 GitHub Contents `sha`）和確實包含此內容的 **commit SHA**。把它們分別填入 `sourceBlobSha` 與 `sourceRevision`，並執行 `site/tests/p1-source-review-coverage.test.mjs` 重新計算比對。不要拿 branch 名稱、摘要 hash、猜測的 SHA 或其他文章的 SHA 填值；後續若編輯 Markdown 必須重新檢查登記。舊的 `P1-ISSUE59-REVIEW.json`、`P1-2026-11-05-GRAPHICS-REVIEW.json` 是歷史審查快照，**不得為了新增文章而改寫**。
+
+### 2. 開 PR 前的測試（不能只跑一個 Python test）
+
+在專案根目錄：
+
+```bash
+python3 scripts/check_repository.py
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+在 `site/` 目錄（使用已核對之 Node/npm 版本、現有 lockfile）：
+
+```bash
+npm ci
+npm run check
+npm run build
+npm run provenance
+npm run e2e
+```
+
+- `npm run check` 會跑 Astro 與 Node 單元測試。建置與 `postbuild-verify` 需能讀到新增文章、索引、原始研究 SHA 及來源圖像；`npm run e2e` 涵蓋真實路由、Pagefind、導覽與圖片。無法在本機執行時，要在 PR 寫明 **NOT RUN**，再等 GitHub Actions 真正執行，而非自己打勾。
+- **防止固定篇數造成 CI 紅燈**：逐項檢查 `site/tests/public-articles.test.mjs`、`site/tests/research-leads.test.mjs`、`site/tests/research-visuals.test.mjs`、`site/tests/pages/research-discovery.spec.mjs`、`site/tests/pages/research-visuals.spec.mjs` 等是否有 `90`、`87` 或其他過時常數。應優先比對可追溯的實際完整資料集合，**仍須檢查精確集合與重複路徑**；不可直接移除必要斷言讓測試假綠。
+- 沒有真機、作者源碼、授權或效能基準，不得宣稱這些已驗證。第三方展示頁能開啟不等於可 `iframe`，不要為新網域直接放寬白名單。
+
+### 3. CI／PR 放行條件
+
+1. PR 描述列出來源日期和證據級別、**所有變更路徑**、新增文件 blob SHA／commit SHA、未驗事項、實際執行的測試及回退方法。
+2. PR 必須核對 **Research integrity**、**V3 P0 build and checks**、**Publish Research Showcase** 的適用檢查；以當下 GitHub Actions 結果為準。若有一項 fail，開啟失敗 job 及 log，查清楚是來源完整性、建置或瀏覽器端到端哪個失敗。
+3. CI 紅燈時先修資料登錄或失敗行為；不能關閉測試、擴大權限、偷偷改安全規範來求綠。修後重新驗證。
+4. 若幾個 PR 都修改 taxonomy／leads／ongoing register，**先合併其中一個並對剩餘 PR 同步最新 `main`**，保留所有來源紀錄，重新比對 Git SHA／CI，避免後合併的分支覆蓋已合併的登錄。
+5. **只要 CI 不全綠、權利未確認或人工驗收缺失，就不可說「完成可合併」。** 合併、部署和修改 Ruleset 仍需 Repo Owner 額外明確授權。
+
+### 4. 禁止的省事方式
+
+- 只新增 Markdown，完全漏掉人工分類、繁中導讀、審閱資料及 SVG 覆蓋。
+- 改掉舊來源 SHA／作者歸屬，讓舊審查資料「看起來」對得上。
+- 把作者自報 FPS、Git commits、框架或可商用授權寫成已獨立實測。
+- 硬把「預期總數」改成新魔法數字、不處理重複路徑／缺漏檔案。
+- 自動合併、跳過紅色 CI、將一個 PR 的綠燈外推到其他 PR。
+
+
 ## 原則
 
 1. 原始 Markdown 是唯一的研究正文：不得因排版而改寫、刪掉不確定性或變造作者言論。

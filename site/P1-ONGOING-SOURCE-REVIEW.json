@@ -11,5 +11,53 @@
     "remainingWork",
     "knownSources"
   ],
-  "items": []
+  "items": [
+    {
+      "path": "research/2026-11-universal-web-engine/30-viper11-clouds-terrain-cinematic-rendering.md",
+      "sourceBlobSha": "5d7867d45257389e99984b835a935fb82a4bdaf6",
+      "sourceRevision": "99fc3f8f03fcc5afcc515bb36dbc5d187397e2b9",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "已讀取 VIPER 11 作者對體積雲、地形串流、鏡頭後製與飛控原理的公開技術筆記；作者報告的數字不是獨立效能測試。",
+      "publicNotice": "本文分析第三方作品作者公開的渲染方法，部分參數及效能描述屬作者自述；沒有取得作品完整原始碼、素材授權與真機效能證據。",
+      "remainingWork": "需確認 three-clouds／three-atmosphere 對應上游版本及授權，測試移動中的雲影與時間重建、地形串流和手機效能；不得當成現成可複製的遊戲程式碼。",
+      "knownSources": [
+        "https://viperoneone.com/notes/clouds/",
+        "https://viperoneone.com/notes/nellis/",
+        "https://viperoneone.com/notes/lens/",
+        "https://viperoneone.com/notes/flight/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/31-brinewater-browser-open-world-and-agent-workflow.md",
+      "sourceBlobSha": "73cf3265d119c1f846ae0522dbb51c8ed9fdccf1",
+      "sourceRevision": "8dcd8b2a6d928405ed5ba423e04e978ed5262d36",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "已取得作品入口與創作者社群自述的可追索線索，並將開放世界資料串流、交通與 Agent 分工另列為通用工程候選；尚未直接檢查原始碼。",
+      "publicNotice": "本文主要依創作者公開描述與可檢索摘要整理，社群開發數字、模型分工和遊戲功能均未獨立實測或逐項驗證，不可作為商業級品質或效能認證。",
+      "remainingWork": "需在桌機與手機瀏覽器實際操作遊戲，確認資產串流、NPC 互動、道路資料授權、物理與渲染性能，並查核創作者原貼與是否存在可審計的官方原始碼。",
+      "knownSources": [
+        "https://brinewater.vlad.yt/play/",
+        "https://www.reddit.com/r/ClaudeAI/comments/1xntez0/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/32-aurea-residences-immersive-luxury-web-ux-review.md",
+      "sourceBlobSha": "121219273662b62c2be35e1d96b22a53cbe69a96",
+      "sourceRevision": "c78f129708ee3b014ca01e6c9274374b3976260c",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "已登記研究入口、此前取得的首頁文字摘要，以及 MDN 一般前端動效技術的查核路徑；未獨立觀察網站完整動態與程式碼，技術棧仍為未知。",
+      "publicNotice": "本篇是證據受限的精品網站研究候選，並非完成互動解構或視覺評分；來源站點的動畫、排版、框架及效能沒有經過實際瀏覽器或真機驗證。",
+      "remainingWork": "需擷取桌面與 Android 真機畫面、全頁操作錄影、DevTools network 與性能資料，確認技術框架、可及性及圖片字型權利後才能評級或建議實際採用。",
+      "knownSources": [
+        "https://aurea-residences-five.vercel.app/",
+        "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    }
+  ]
 }
