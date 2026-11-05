@@ -25,6 +25,12 @@ for(const width of [320,393,768,1440]){
     });
     expect(visual.overflow).toBeLessThanOrEqual(1);
     if(width<=600){
+      const stageBounds=await page.locator('#obs-scene').boundingBox();
+      expect(stageBounds,'cinematic 3D must be in a full-width scene, not a card').toBeTruthy();
+      expect(stageBounds.x).toBeGreaterThanOrEqual(-1);
+      expect(stageBounds.x).toBeLessThanOrEqual(1);
+      expect(stageBounds.width).toBeGreaterThanOrEqual(width-2);
+      expect(stageBounds.height).toBeGreaterThanOrEqual(520);
       expect(visual.copyTop,'central armillary image obscured on mobile').toBeGreaterThanOrEqual(height*.63);
       expect(visual.introHeight).toBeGreaterThanOrEqual(height);
     }
@@ -147,4 +153,13 @@ test('G1-02 failed GLB fetch must fall back to static art without breaking resea
   await expect(page.locator('.obs-archive-actions a[href="/Research-/v3/library/"]')).toBeVisible();
   const response=await page.request.get(glb);
   expect(response.ok()).toBe(true); // page.request bypasses the browser's route.
+});
+
+test('G1-02 first screen does not eagerly fetch optional geometry',async({page})=>{
+  const requests=[];
+  page.on('request',req=>{if(req.url().endsWith('.glb'))requests.push(req.url());});
+  await page.setViewportSize({width:393,height:852});
+  await page.goto('/Research-/v3/observatory/');
+  await expect(page.getByRole('heading',{level:1,name:/在未知的邊界/})).toBeVisible();
+  expect(requests).toEqual([]);
 });
