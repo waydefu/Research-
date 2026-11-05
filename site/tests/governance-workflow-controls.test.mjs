@@ -26,7 +26,7 @@ function checkRequiredWorkflow(text){
 
 function checkPagesWorkflow(text){
   const errors=[];
-  if(!/name:\s*V2 \+ V3 static Pages artifact integrity/.test(text))errors.push('Pages build evidence job missing');
+  if(!/name:\s*Single Astro site artifact integrity/.test(text))errors.push('Pages build evidence job missing');
   if(/pull_request_target\s*:/.test(text))errors.push('unsafe pull_request_target');
   // The artifact upload AND the deploy job have independent main-only guards.
   const guard="github.event_name != 'pull_request' && github.ref == 'refs/heads/main'";
