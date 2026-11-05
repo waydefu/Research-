@@ -128,3 +128,23 @@ test('G1-02 forced static poster must not fetch the optional GLB',async({page})=
   await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer','poster');
   expect(fetched).toEqual([]);
 });
+
+test('G1-02 failed GLB fetch must fall back to static art without breaking research links',async({page})=>{
+  const glb='/Research-/v3/observatory/observatory-v1.glb';
+  await page.route('**/observatory-v1.glb',route=>route.fulfill({
+    status:503,contentType:'application/octet-stream',body:''
+  }));
+  await page.goto('/Research-/v3/observatory/');
+  const capable=await page.evaluate(()=>{
+    try{return Boolean(document.createElement('canvas').getContext('webgl2'));}
+    catch{return false;}
+  });
+  await page.locator('#obs-scene').scrollIntoViewIfNeeded();
+  if(capable){
+    await expect(page.locator('#obs-status')).toContainText('已回到靜態觀測所美術',{timeout:20000});
+    await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer','poster');
+  }
+  await expect(page.locator('.obs-archive-actions a[href="/Research-/v3/library/"]')).toBeVisible();
+  const response=await page.request.get(glb);
+  expect(response.ok()).toBe(true); // page.request bypasses the browser's route.
+});
