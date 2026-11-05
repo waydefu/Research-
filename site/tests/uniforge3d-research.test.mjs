@@ -1,0 +1,30 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {allDocs} from '../src/lib/catalog.mjs';
+import {REVIEWED_DOCUMENTS,TOPIC_DESCRIPTORS} from '../src/lib/research-taxonomy.mjs';
+import {EDITORIAL_LEADS} from '../src/lib/research-leads.mjs';
+import {reviewForSource} from '../src/lib/source-review.mjs';
+import {visualForDoc} from '../src/lib/research-visuals.mjs';
+
+const file='research/2026-11-universal-web-engine/33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md';
+test('UniForge3D is a separately reviewed AI 3D generation study with a source-specific diagram',()=>{
+  const doc=allDocs().find(d=>d.file===file);
+  assert.ok(doc,'UniForge3D original research must be included');
+  assert.equal(doc.topic,'AI 3D 重建與生成');
+  assert.equal(REVIEWED_DOCUMENTS[file]?.topic,'AI 3D 重建與生成');
+  assert.ok(TOPIC_DESCRIPTORS[doc.topic]?.why.length>=15);
+  assert.equal(doc.summary,EDITORIAL_LEADS[file]);
+  assert.match(doc.summary,/授權|限制/);
+  assert.equal(doc.summaryFactChecked,false);
+  assert.match(doc.text,/CC BY-NC 4\.0/);
+  assert.match(doc.text,/未.*測|未實際執行/);
+  const row=reviewForSource(file);
+  assert.ok(row);
+  assert.equal(row.externallyVerifiedAllClaims,false);
+  assert.match(row.dispositionReason,/未獨立重現/);
+  assert.ok(row.evidenceUrls.some(url=>url.includes('arxiv.org/abs/2610.15357')));
+  const art=visualForDoc(doc);
+  assert.equal(art.motif,'geometry');
+  assert.ok(art.src?.startsWith('/Research-/v3/research-figures/'));
+  assert.equal(art.originalWork,false);
+});

@@ -3,6 +3,12 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md': {
+    title:"UniForge3D：少量多視角照片如何重建完整 3D 資產？",
+    lead:"UniForge3D 將相機姿態未知的多視角照片，透過共同錨定座標空間連結幾何重建與生成模型，並為不同立體區域選擇最有用的照片特徵，最後輸出 GLB。研究核對論文、推論程式及原始授權；模型權重與背景移除工具的商用限制、GPU 成本和輸出品質仍需另行驗證。",
+    topic:"AI 3D 重建與生成",
+    creator:{"label":"UniForge3D 論文作者與官方作品頁","url":"https://xishuxishu.github.io/uniforge3d-project/"}
+  },
   'research/2026-11-universal-web-engine/30-viper11-clouds-terrain-cinematic-rendering.md': {
     title:"VIPER 11：可穿越體積雲、真實地形與電影級鏡頭",
     lead:"從 VIPER 11 作者公開的技術筆記，理解瀏覽器體積雲、地表動態雲影、真實地形串流與電影鏡頭的協作方式。文章區分作者自述、可再利用的開源候選和尚未實測的效能數據。",

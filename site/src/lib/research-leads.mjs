@@ -1,6 +1,7 @@
 // Editorial introductions only. Each entry is tied to one real source path, not an inferred fact.
 // Preserve original Markdown, source provenance, author and demos. Do not claim external testing.
 export const EDITORIAL_LEADS = Object.freeze({
+  "research/2026-11-universal-web-engine/33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md": "UniForge3D 將相機姿態未知的多視角照片，透過共同錨定座標空間連結幾何重建與生成模型，並為不同立體區域選擇最有用的照片特徵，最後輸出 GLB。研究核對論文、推論程式及原始授權；模型權重與背景移除工具的商用限制、GPU 成本和輸出品質仍需另行驗證。",
   "research/2026-11-universal-web-engine/30-viper11-clouds-terrain-cinematic-rendering.md": "從 VIPER 11 作者公開的技術筆記，理解瀏覽器體積雲、地表動態雲影、真實地形串流與電影鏡頭的協作方式。文章區分作者自述、可再利用的開源候選和尚未實測的效能數據。",
   "research/2026-11-universal-web-engine/31-brinewater-browser-open-world-and-agent-workflow.md": "Brinewater 展示以真實城市資料製作瀏覽器開放世界的可能性，並提供 AI Agent 分工、獨立工作樹與視覺驗收的研究線索。文章明確標示作者自述與未經遊戲實測的工程建議。",
   "research/2026-11-universal-web-engine/32-aurea-residences-immersive-luxury-web-ux-review.md": "以 ÁUREA Residences 作為精品住宅網站研究入口，整理全頁構圖、字體層級、捲動敘事與手機體驗的驗收方法。尚未取得可重現的 JavaScript 畫面，不能指認實際框架或動畫技術。",
