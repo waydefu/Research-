@@ -9,7 +9,9 @@
 - [P0.5 → P1 的證據、阻塞及整合次序](./P0.5-EXIT-P1-ENTRY.md)，所有動態 SHA／PR／CI 仍須從 GitHub 重新核對。
 - [既有站點的架構邊界](./architecture/README.md) 與 [ADR-0001](./architecture/ADR-0001-content-and-design-boundaries.md)。
 - `site/src/styles/tokens.css` 是共用設計變數入口；`site/tests/p05-entry.test.mjs` 檢查基本 import 邊界、來源覆蓋與樣式 Token。
-- `site/src/lib/p1-readiness.mjs` 是各來源的 P1 證據狀態計算；使用 `cd site && node scripts/p1-readiness-report.mjs --json --strict` 驗證分類、導讀、圖片與限定審查登記。其 `structuralPass` 不代表真機、美術、授權或逐句事實核實。\n- `site/scripts/p1-readiness-report.mjs` 是該報表的 CLI 入口，新研究若漏登記則 required CI 會失敗。\n- `cd site && npm run gate:p05 -- --json` 取得**本地內容完整性**快照，不等於 GitHub 最新 CI、逐篇事實查證或實機驗收。
+- `site/src/lib/p1-readiness.mjs` 是各來源的 P1 證據狀態計算；使用 `cd site && node scripts/p1-readiness-report.mjs --json --strict` 驗證分類、導讀、圖片與限定審查登記。其 `structuralPass` 不代表真機、美術、授權或逐句事實核實。
+- `site/scripts/p1-readiness-report.mjs` 是該報表的 CLI 入口，新研究若漏登記則 required CI 會失敗。
+- `cd site && npm run gate:p05 -- --json` 取得**本地內容完整性**快照，不等於 GitHub 最新 CI、逐篇事實查證或實機驗收。
 
 ## 進 Repo 的最短路徑
 
@@ -30,7 +32,7 @@
 | 公開技術正文、歷史原文與全量初篩 | `site/src/lib/public-articles.mjs` | `site/src/lib/public-content-audit.mjs`、`site/scripts/audit-public-content.mjs` | `site/tests/public-articles.test.mjs`、`site/tests/pages/public-articles.spec.mjs` |
 | 歷史原始研究的證據分級、採用限制與讀者提示 | `site/src/lib/source-review.mjs` | `site/P1-ISSUE59-REVIEW.json`、`site/P1-ISSUE59-REVIEW.md` | `site/tests/issue59-source-review.test.mjs`、`site/tests/pages/research-discovery.spec.mjs`；核對來源 Blob SHA 且不可把局部查證當全文通過 |
 | 典藏、篩選、全文 | `site/src/pages/library/index.astro` | `site/src/pages/domains/[domain].astro`、`site/src/pages/[collection]/[...slug].astro`、`site/src/pages/search.astro` | `site/tests/pages/research-discovery.spec.mjs` |
-| Sanctum 首頁、V2／V3 組裝 | `site/scripts/unify-home.mjs` | `site/public/atlas/sanctum/index.html`、`site/scripts/verify-pages-bundle.mjs` | `site/tests/pages/unified-home.spec.mjs`；不能逆向把 V2 設回 root |
+| Sanctum 首頁、單一 Astro 組裝 | `site/scripts/unify-home.mjs` | `site/public/atlas/sanctum/index.html`、`site/scripts/verify-pages-bundle.mjs` | `site/tests/pages/unified-home.spec.mjs`；舊 V2 只保留導向研究館的轉址 |
 | Astro 建置、Pagefind、CI | `site/package.json` | `site/scripts/preflight.mjs`、`site/scripts/postbuild-verify.mjs` | `.github/workflows/v3-p0-build.yml` 和 `.github/workflows/publish-showcase.yml` 的 paths 過濾不能等同每 PR 必觸發 |
 | 離線研究索引／舊資料 | `scripts/research_search.py` | `docs/governance/REPO-TOOLING.md`、`site/src/pages/graph.json.ts` | `tests/test_research_search.py`，索引必須和 HEAD／內容 SHA 一致 |
 
@@ -53,10 +55,10 @@ Astro Content + pages/ [library / domains / research / search / graph.json]
 site/scripts/preflight.mjs -> Astro build -> Pagefind -> postbuild/provenance
        |
        v
-site/scripts/unify-home.mjs [Sanctum root + V2 archive + V3 reader]
+site/scripts/unify-home.mjs [Sanctum root + V3 reader + V2 redirect]
        |
        v
-publish-showcase.yml [PR validate; main push deployment subject to CI]
+publish-showcase.yml [PR 只驗證；main 部署僅採 site/pages-dist]
 ```
 
 **這是檔案與資料處理關係**，不是「所有函式呼叫的靜態分析圖」。`site/src/pages/graph.json.ts` 是研究**文件引用圖**，不是 JS 模組依賴圖。
