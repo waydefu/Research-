@@ -28,6 +28,21 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/31-brinewater-browser-open-world-and-agent-workflow.md",
+      "sourceBlobSha": "73cf3265d119c1f846ae0522dbb51c8ed9fdccf1",
+      "sourceRevision": "8dcd8b2a6d928405ed5ba423e04e978ed5262d36",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "已取得作品入口與創作者社群自述的可追索線索，並將開放世界資料串流、交通與 Agent 分工另列為通用工程候選；尚未直接檢查原始碼。",
+      "publicNotice": "本文主要依創作者公開描述與可檢索摘要整理，社群開發數字、模型分工和遊戲功能均未獨立實測或逐項驗證，不可作為商業級品質或效能認證。",
+      "remainingWork": "需在桌機與手機瀏覽器實際操作遊戲，確認資產串流、NPC 互動、道路資料授權、物理與渲染性能，並查核創作者原貼與是否存在可審計的官方原始碼。",
+      "knownSources": [
+        "https://brinewater.vlad.yt/play/",
+        "https://www.reddit.com/r/ClaudeAI/comments/1xntez0/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
