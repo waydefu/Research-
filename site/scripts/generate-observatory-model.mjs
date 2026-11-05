@@ -25,7 +25,7 @@ const metals=[
   {name:'oxidized-bronze',color:0x334951,metallic:.72,roughness:.54},
   {name:'weathered-stone',color:0x232f3e,metallic:.16,roughness:.87},
   {name:'inner-copper',color:0xb08354,metallic:.81,roughness:.37},
-  {name:'light-chamber',color:0xcda46f,metallic:.12,roughness:.32,emissive:[.95,.3,.07],emissiveStrength:1.04},
+  {name:'light-chamber',color:0xb5874e,metallic:.12,roughness:.37,emissive:[.76,.27,.07],emissiveStrength:.85},
   {name:'icy-inlay',color:0x7ea9bf,metallic:.56,roughness:.36},
 ];
 function bake(node,material,geo,position=[0,0,0],rotation=[0,0,0],scale=[1,1,1]){
@@ -194,33 +194,20 @@ for(let k=0;k<12;k++){
   column(pedestal,1,.063,.070,.70,[x,-2.34,z],10);
   sphere(pedestal,1,.06,x,-1.88,z,1);
 }
-// Observatory colonnade and architectural arcades, lowered contrast for depth.
+// The high-detail, sourced scene photograph already contains its own
+// grand architecture. Do not fake a second room with floating cylinders.
+// A low-profile ceremonial floor and anchored brass-inlay strips are enough
+// to situate the armillary without competing with the reference artwork.
 const hall='Hall';
-for(const x of [-5.45,-3.72,3.72,5.45]){
-  for(const z of [-4.7]){
-    column(hall,4,.28,.35,7.0,[x,-.12,z],16);
-    for(const [y,radius,h] of [[-3.45,.42,.23],[-3.14,.37,.13],[2.91,.39,.22],[3.28,.42,.18]]){
-      column(hall,y>2?1:3,radius,radius,h,[x,y,z],18);
-    }
-    for(let i=0;i<10;i++){
-      const angle=tau*i/10;
-      const rr=.30;
-      column(hall,3,.020,.020,6.1,[x+Math.cos(angle)*rr,-.16,z+Math.sin(angle)*rr],7);
-    }
-  }
+column(hall,4,2.55,2.62,.11,[0,-3.77,0],64);
+column(hall,3,2.40,2.48,.034,[0,-3.70,0],64);
+for(const r of [1.98,2.16,2.36]){
+  torus(hall,r===2.16?1:2,r,.019,[Math.PI/2,0,0],[0,-3.69,0]);
 }
-// Nested architectural rings and a ceremonial overhead occulus.
-for(const r of [4.48,4.72,5.10]){
-  torus(hall,r===4.72?5:3,r,.055,[.07,0,0],[0,2.38,-4.18]);
-}
-for(let k=0;k<18;k++){
-  const a=Math.PI*k/17;
-  link(hall,4,[Math.cos(a)*5.12,-2.9,-4.15],
-    [Math.cos(a)*5.12,3.6,-4.15],.018);
-}
-for(let k=0;k<9;k++){
-  const x=-5+k*1.25;
-  box(hall,3,.08,.37,1.14,x,3.75,-3.8);
+for(let k=0;k<16;k++){
+  const a=tau*k/16;
+  const x=Math.cos(a)*2.28,z=Math.sin(a)*2.28;
+  box(hall,k%4===0?1:2,.035,.021,.25,x,-3.66,z,-a);
 }
 // GLB2: emit interleaved node-independent VEC3 accessors and PBR materials.
 export function exportGLB(){
