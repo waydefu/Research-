@@ -18,6 +18,12 @@ test('G1-02 deterministically exports a valid, locally-authored binary glTF 2.0 
   assert.equal(gltf.nodes.length,7);
   assert.ok(gltf.materials.length>=8);
   assert.ok(gltf.meshes.every(mesh=>mesh.primitives.length>0));
+  // Public art screenshot review: standalone columns appeared suspended midair.
+  // The generated Hall node must now contain only an anchored floor plinth.
+  const hall=gltf.nodes.find(node=>node.name==='Hall');
+  const hallMaxY=Math.max(...gltf.meshes[hall.mesh].primitives
+    .map(primitive=>gltf.accessors[primitive.attributes.POSITION].max[1]));
+  assert.ok(hallMaxY < -3.3,'Hall should not contain floating colonnade pipes');
   for(const name of ['Orbit_Outer','Orbit_Meridian','Orbit_Inner','Orbit_Ecliptic',
     'Mechanism','Pedestal','Hall'])assert.ok(gltf.nodes.some(node=>node.name===name));
   assert.ok(gltf.accessors.every(item=>item.count>0&&!item.min.some(v=>!Number.isFinite(v))));
