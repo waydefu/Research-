@@ -19,13 +19,13 @@ const rotations={
   Hall:[0,0,0]
 };
 const metals=[
-  {name:'aged-gold-brass',color:0x967041,metallic:.91,roughness:.39},
-  {name:'polished-edge',color:0xc8a26f,metallic:.91,roughness:.27},
-  {name:'engraved-dark',color:0x34271f,metallic:.61,roughness:.59},
+  {name:'aged-gold-brass',color:0x765332,metallic:.90,roughness:.43},
+  {name:'polished-edge',color:0xc5a16d,metallic:.91,roughness:.28},
+  {name:'engraved-dark',color:0x211c19,metallic:.52,roughness:.62},
   {name:'oxidized-bronze',color:0x334951,metallic:.72,roughness:.54},
-  {name:'weathered-stone',color:0x394350,metallic:.24,roughness:.83},
+  {name:'weathered-stone',color:0x232f3e,metallic:.16,roughness:.87},
   {name:'inner-copper',color:0xb08354,metallic:.81,roughness:.37},
-  {name:'light-chamber',color:0xe8b86f,metallic:.13,roughness:.26,emissive:[1,.37,.09],emissiveStrength:1.65},
+  {name:'light-chamber',color:0xcda46f,metallic:.12,roughness:.32,emissive:[.95,.3,.07],emissiveStrength:1.04},
   {name:'icy-inlay',color:0x7ea9bf,metallic:.56,roughness:.36},
 ];
 function bake(node,material,geo,position=[0,0,0],rotation=[0,0,0],scale=[1,1,1]){
@@ -164,7 +164,7 @@ for(let k=0;k<56;k++){
     Math.cos(a)*.96,Math.sin(a)*.96,-.18,a);
 }
 column(mechanism,3,.27,.36,.78,[0,0,-.38],32);
-sphere(mechanism,6,.34,0,0,.52,3);
+sphere(mechanism,6,.265,0,0,.52,3);
 sphere(mechanism,1,.55,0,0,.11,2);
 torus(mechanism,1,.66,.041,[.12,.18,.22]);
 for(let k=0;k<12;k++){
@@ -197,7 +197,7 @@ for(let k=0;k<12;k++){
 // Observatory colonnade and architectural arcades, lowered contrast for depth.
 const hall='Hall';
 for(const x of [-5.45,-3.72,3.72,5.45]){
-  for(const z of [-3.7,1.7]){
+  for(const z of [-4.7]){
     column(hall,4,.28,.35,7.0,[x,-.12,z],16);
     for(const [y,radius,h] of [[-3.45,.42,.23],[-3.14,.37,.13],[2.91,.39,.22],[3.28,.42,.18]]){
       column(hall,y>2?1:3,radius,radius,h,[x,y,z],18);
