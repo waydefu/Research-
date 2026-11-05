@@ -230,36 +230,63 @@ export function exportGLB(){
     if(!groups.has(node))groups.set(node,[]);
     groups.get(node).push({material:Number(material),data});
   }
-  let byteOffset=0;
+  let byteOffset=0,uniqueVertexCount=0,triangleCount=0;
   const buffers=[],views=[],accessors=[],meshes=[],nodes=[];
-  function writeFloatArray(array){
-    const raw=Buffer.allocUnsafe(array.length*4);
-    for(let i=0;i<array.length;i++)raw.writeFloatLE(array[i],i*4);
+  const put=(raw,target)=>{
     const index=views.length;
-    views.push({buffer:0,byteOffset,byteLength:raw.length,target:34962});
+    views.push({buffer:0,byteOffset,byteLength:raw.length,target});
     buffers.push(raw);byteOffset+=raw.length;return index;
-  }
-  function accessor(data){
-    const view=writeFloatArray(data);
-    const ext=[Infinity,Infinity,Infinity],min=[Infinity,Infinity,Infinity];
-    for(let i=0;i<data.length;i+=3){
-      for(let j=0;j<3;j++){
-        const x=data[i+j];if(!Number.isFinite(x))throw Error('Non-finite glTF vertex');
-        min[j]=Math.min(min[j],x);ext[j]=Math.max(ext[j],x);
-      }
+  };
+  function vec3Accessor(data){
+    const raw=Buffer.allocUnsafe(data.length*4);
+    const upper=[-Infinity,-Infinity,-Infinity],lower=[Infinity,Infinity,Infinity];
+    for(let i=0;i<data.length;i++){
+      const value=data[i];
+      if(!Number.isFinite(value))throw Error('Non-finite GLB value');
+      raw.writeFloatLE(value,i*4);
+      lower[i%3]=Math.min(lower[i%3],value);
+      upper[i%3]=Math.max(upper[i%3],value);
     }
-    const index=accessors.length;
-    accessors.push({bufferView:view,byteOffset:0,componentType:5126,
-      count:data.length/3,type:'VEC3',min,max:ext});
+    const view=put(raw,34962),index=accessors.length;
+    accessors.push({bufferView:view,componentType:5126,count:data.length/3,
+      type:'VEC3',min:lower,max:upper});
     return index;
+  }
+  function triangles(data){
+    // Deduplicate exported vertices; exporting every original TriangleSoup
+    // costs >4.5 MB even if much of the geometry repeats adjacent normals.
+    // Indexed glTF removes ~4x the geometry bytes without lossy quantization.
+    const p=[],n=[],index=[],cache=new Map();
+    for(let i=0;i<data.p.length;i+=3){
+      const values=[data.p[i],data.p[i+1],data.p[i+2],
+        data.n[i],data.n[i+1],data.n[i+2]];
+      // Exact Float32 values are normalized before hashing, because glTF uses F32.
+      const key=values.map(v=>Math.fround(v)).join('|');
+      let v=cache.get(key);
+      if(v===undefined){
+        v=p.length/3;
+        p.push(...values.slice(0,3));n.push(...values.slice(3));
+        cache.set(key,v);
+      }
+      index.push(v);
+    }
+    if(index.length%3!==0)throw Error('Nontriangular export');
+    uniqueVertexCount+=p.length/3;triangleCount+=index.length/3;
+    const position=vec3Accessor(p),normal=vec3Accessor(n);
+    const viewIndex=Buffer.allocUnsafe(index.length*4);
+    for(let i=0;i<index.length;i++)viewIndex.writeUInt32LE(index[i],i*4);
+    const view=put(viewIndex,34963),idx=accessors.length;
+    accessors.push({bufferView:view,componentType:5125,count:index.length,
+      type:'SCALAR',min:[0],max:[p.length/3-1]});
+    return {attributes:{POSITION:position,NORMAL:normal},indices:idx};
   }
   for(const [node,parts] of groups){
     const primitives=[];
     for(const {material,data} of parts){
-      const p=accessor(data.p),n=accessor(data.n);
       if(data.p.length!==data.n.length||data.p.length%9!==0)
         throw Error('Invalid triangle accessor '+node);
-      primitives.push({attributes:{POSITION:p,NORMAL:n},material,mode:4});
+      const primitive=triangles(data);
+      primitives.push({...primitive,material,mode:4});
     }
     const mesh=meshes.length;meshes.push({name:node,primitives});
     const euler=new THREE.Euler(...rotations[node]);
@@ -305,7 +332,7 @@ export function exportGLB(){
   binary.copy(out,binHeader+8);binPad.copy(out,binHeader+8+binary.length);
   const summary={
     schemaVersion:1,format:'glTF-2.0-GLB',authoredBy:'repository-procedural-script',
-    blenderExported:false,vertexCount:accessors.filter((_,i)=>i%2===0).reduce((n,a)=>n+a.count,0),
+    blenderExported:false,vertexCount:uniqueVertexCount,triangleCount,
     meshCount:meshes.length,nodeCount:nodes.length,materialCount:mats.length,
     bytes:length,sha256:createHash('sha256').update(out).digest('hex'),
     source:'site/scripts/generate-observatory-model.mjs'
