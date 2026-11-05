@@ -43,6 +43,21 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/32-aurea-residences-immersive-luxury-web-ux-review.md",
+      "sourceBlobSha": "121219273662b62c2be35e1d96b22a53cbe69a96",
+      "sourceRevision": "c78f129708ee3b014ca01e6c9274374b3976260c",
+      "reviewedOn": "2026-11-05",
+      "verifiedScope": "已登記研究入口、此前取得的首頁文字摘要，以及 MDN 一般前端動效技術的查核路徑；未獨立觀察網站完整動態與程式碼，技術棧仍為未知。",
+      "publicNotice": "本篇是證據受限的精品網站研究候選，並非完成互動解構或視覺評分；來源站點的動畫、排版、框架及效能沒有經過實際瀏覽器或真機驗證。",
+      "remainingWork": "需擷取桌面與 Android 真機畫面、全頁操作錄影、DevTools network 與性能資料，確認技術框架、可及性及圖片字型權利後才能評級或建議實際採用。",
+      "knownSources": [
+        "https://aurea-residences-five.vercel.app/",
+        "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }

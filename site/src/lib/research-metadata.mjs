@@ -15,6 +15,12 @@ export const CURATED = {
     topic:"互動作品與設計案例",
     creator:{"label":"Brinewater 官方遊戲入口","url":"https://brinewater.vlad.yt/play/"}
   },
+  'research/2026-11-universal-web-engine/32-aurea-residences-immersive-luxury-web-ux-review.md': {
+    title:"ÁUREA Residences：精品住宅網站的視覺與互動驗收",
+    lead:"以 ÁUREA Residences 作為精品住宅網站研究入口，整理全頁構圖、字體層級、捲動敘事與手機體驗的驗收方法。尚未取得可重現的 JavaScript 畫面，不能指認實際框架或動畫技術。",
+    topic:"介面設計與視覺系統",
+    creator:null
+  },
   'research/2026-11-universal-web-engine/27-threejs-r187-ultra-rendering-ceiling.md': {
     schemaVersion:1,
     publicTitle:'Three.js r187 畫質上限：WebGPU、TSL、全域光與路徑追蹤',
