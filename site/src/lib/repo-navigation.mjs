@@ -44,7 +44,7 @@ export const REPO_NAVIGATION = Object.freeze([
   {
     id:'quality',title:'建置、回歸與來源 SHA',intent:'CI 失敗、Pagefind 缺頁、手機無 JS 閱讀',
     entry:'site/package.json',
-    paths:['site/package.json','site/scripts/postbuild-verify.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs','site/scripts/audit-public-content.mjs','site/scripts/p05-entry-report.mjs','site/scripts/p1-readiness-report.mjs','.github/workflows/research-integrity.yml','.github/workflows/v3-p0-build.yml','.github/workflows/publish-showcase.yml'],
+    paths:['site/package.json','site/scripts/postbuild-verify.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs','site/scripts/audit-public-content.mjs','site/scripts/p05-entry-report.mjs','site/scripts/p1-readiness-report.mjs','site/scripts/generate-observatory-model.mjs','.github/workflows/research-integrity.yml','.github/workflows/v3-p0-build.yml','.github/workflows/publish-showcase.yml'],
     checks:['site/tests/catalog.test.mjs','site/tests/pages/v2-reader.spec.mjs','scripts/check_repository.py']
   },
   {
