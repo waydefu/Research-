@@ -1,11 +1,16 @@
 import {test,expect} from '@playwright/test';
+import {allDocs} from '../../src/lib/catalog.mjs';
+import {visualFilename,ART_BASE} from '../../src/lib/research-visuals.mjs';
 const BASE='/Research-/v3/';
 test('all research cards have distinct generated illustrations and usable source labels',async({page})=>{
   await page.goto(BASE+'library/');
   const imgs=page.locator('#library-results .research-item-visual img');
   const urls=await imgs.evaluateAll(nodes=>nodes.map(img=>img.getAttribute('src')));
-  expect(urls.length).toBe(90);
-  expect(new Set(urls).size).toBe(90);
+  // Every published source must have one unique, exact-path illustration.
+  const expected=allDocs().map(d=>ART_BASE+visualFilename(d.file)).sort();
+  expect(urls).toHaveLength(expected.length);
+  expect(new Set(urls).size).toBe(expected.length);
+  expect([...urls].sort()).toEqual(expected);
   for(const url of urls) expect(url).toMatch(/^\/Research-\/v3\/research-figures\/research-[0-9a-f]{8}\.svg$/);
   await imgs.first().scrollIntoViewIfNeeded();
   await expect.poll(()=>imgs.first().evaluate(img=>img.complete&&img.naturalWidth>0)).toBeTruthy();

@@ -1,4 +1,5 @@
 import {test,expect} from '@playwright/test';
+import {allDocs} from '../../src/lib/catalog.mjs';
 const BASE='/Research-/v3/';
 const DOC=BASE+'research/2026-11-universal-web-engine/17-arctic-waters-threejs-creative-workflow/';
 
@@ -130,7 +131,12 @@ test('archived-original search is explicit, complete and retains provenance with
   expect(response.ok()).toBe(true);
   const index=await response.json();
   expect(index.scope).toBe('archived-original-markdown');
-  expect(index.documents).toHaveLength(90);
+  // Compare against the repository's real source inventory, not a fixed historical total.
+  const expectedFiles=allDocs().map(d=>d.file).sort();
+  const indexedFiles=index.documents.map(d=>d.file);
+  expect(indexedFiles).toHaveLength(expectedFiles.length);
+  expect(new Set(indexedFiles).size).toBe(expectedFiles.length);
+  expect([...indexedFiles].sort()).toEqual(expectedFiles);
   expect(index.documents.some(d=>d.file.includes('THREAT-MODEL.md'))).toBe(false);
   const curated=index.documents.find(d=>d.file==='docs/governance/OPERATIONS.md');
   expect(curated?.text.length).toBeGreaterThan(100);
