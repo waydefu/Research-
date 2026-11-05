@@ -7,7 +7,7 @@
 
 ## 這是什麼？研究邊界
 
-ÁUREA Residences 是使用者提供的住宅形象網站參考。先前曾取得首頁品牌名稱與西文標語「Una nueva perspectiva de vivir」的文字摘要；**本輪直接查核網址失敗，無法重現畫面、確認這段文字是否仍顯示，也無法判斷任何動畫是否真的存在**。
+ÁUREA Residences 是使用者提供的住宅形象網站參考。先前曾取得首頁品牌名稱與西文標語「Una nueva perspectiva de vivir」的文字摘要；**這次直接查核網址失敗，無法重現畫面、確認這段文字是否仍顯示，也無法判斷任何動畫是否真的存在**。
 
 因此本文不是「已解構網站原始碼」或「已看到全站動態」的報告，而是**附明確證據缺口的候選作品研究與完整視覺驗收方法**。任何 GSAP、Lenis、WebGL、Three.js、Framer Motion、Next.js 或 Vercel Runtime 等技術均不可只憑網址／視覺風格推定。網址位於 vercel.app，也只能說該入口使用 Vercel 網域，**不能推定應用框架**。
 
