@@ -36,9 +36,9 @@ export const REPO_NAVIGATION = Object.freeze([
     checks:['site/tests/pages/research-discovery.spec.mjs','site/tests/browser/p0.spec.mjs','site/tests/pages/p1-mobile-clarity.spec.mjs']
   },
   {
-    id:'homepage',title:'Sanctum 首頁、V2 歷史版與封裝',intent:'首頁視覺、跨頁連結、錯誤恢復 V2 首頁',
+    id:'homepage',title:'單一 Sanctum 首頁與 Astro 發布',intent:'首頁視覺、跨頁連結、舊版入口轉址及單一 Pages 封裝',
     entry:'site/scripts/unify-home.mjs',
-    paths:['site/public/atlas/sanctum/index.html','site/scripts/unify-home.mjs','site/scripts/verify-pages-bundle.mjs','showcase/scripts/build.mjs'],
+    paths:['site/public/atlas/sanctum/index.html','site/scripts/unify-home.mjs','site/scripts/verify-pages-bundle.mjs'],
     checks:['site/tests/pages/unified-home.spec.mjs','site/tests/pages/sanctum-fullpage.spec.mjs']
   },
   {
