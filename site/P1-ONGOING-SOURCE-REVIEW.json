@@ -167,6 +167,29 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/38-noniv-webgpu-fft-ocean-renderer.md",
+      "sourceBlobSha": "1f89c1c99f5ccad2713d809875fb0a5c1d06513e",
+      "sourceRevision": "c7221d8d922463b1484ee24566f5bab850e7f6b9",
+      "reviewedOn": "2026-11-06",
+      "verifiedScope": "已閱讀 Noniv/web-ocean 的 README、LICENSE、build.mjs、js/main.js、js/wgsl/common.js、sim.js、sky.js、ocean.js，核對六層 FFT 與作者描述的海面著色架構，記錄程式過期註解 4／5 層與有效常數 6 層的不一致；未實際執行 WebGPU 作品。",
+      "publicNotice": "本篇拆解非 Three.js 的原生 WebGPU 海面示例，六層 256×256 FFT 依 common.js 有效常數與 main.js 六個尺寸核對；17 階 LOD、160 km、RTX 5070 Ti 6–8 ms 為作者自報，沒有獨立效能或跨端驗證。",
+      "remainingWork": "固定上游 commit 在支援 WebGPU 的桌面與 Android 真機重現，量測相同解析度的 GPU time p95、FPS、溫度、記憶體與電耗，檢查 shader 編譯、裝置失效、背景恢復、反光閃爍與 HTML 單檔實際大小；確認第三方素材及展示授權後才評估導入。",
+      "knownSources": [
+        "https://github.com/Noniv/web-ocean",
+        "https://github.com/Noniv/web-ocean/blob/main/README.md",
+        "https://github.com/Noniv/web-ocean/blob/main/js/wgsl/common.js",
+        "https://github.com/Noniv/web-ocean/blob/main/js/wgsl/sim.js",
+        "https://github.com/Noniv/web-ocean/blob/main/js/wgsl/ocean.js",
+        "https://github.com/Noniv/web-ocean/blob/main/js/wgsl/sky.js",
+        "https://github.com/Noniv/web-ocean/blob/main/js/main.js",
+        "https://github.com/Noniv/web-ocean/blob/main/build.mjs",
+        "https://github.com/Noniv/web-ocean/blob/main/LICENSE",
+        "https://ocean-noniv.vercel.app/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
