@@ -4,6 +4,7 @@ import {allDocs} from '../src/lib/catalog.mjs';
 import {REVIEWED_DOCUMENTS} from '../src/lib/research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from '../src/lib/research-leads.mjs';
 import {reviewForSource} from '../src/lib/source-review.mjs';
+import ongoing from '../P1-ONGOING-SOURCE-REVIEW.json' with {type:'json'};
 import {visualForDoc} from '../src/lib/research-visuals.mjs';
 
 const cases = [
@@ -41,7 +42,9 @@ test('three November research entries are indexed, reviewed, and have distinct o
     assert.match(doc.text, row.evidence);
     const review = reviewForSource(row.file);
     assert.ok(review, row.file);
-    assert.equal(review.benchmarkStatus, 'NOT_RUN');
+    const scopedRow = ongoing.items.find(item => item.path === row.file);
+    assert.ok(scopedRow, row.file);
+    assert.equal(scopedRow.benchmarkStatus, 'NOT_RUN');
     assert.equal(review.externallyVerifiedAllClaims, false);
     assert.ok(review.evidenceUrls.some(u => u.startsWith(row.source)));
     assert.ok(review.dispositionReason.length > 25);
