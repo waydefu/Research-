@@ -4,6 +4,7 @@ import {allDocs,BASE,domains,domainDocs,displayDomain} from '../../lib/catalog.m
 import {topicsFor,tagsFor} from '../../lib/research-metadata.mjs';
 import {exhibitFor,topicFor} from '../../lib/exhibit-info.mjs';
 import {visualForDoc} from '../../lib/research-visuals.mjs';
+import '../../styles/library-world.css';
 const docs=allDocs();
 const topics=topicsFor(docs),tags=tagsFor(docs);
 const counts=new Map(topics.map(topic=>[topic,docs.filter(d=>d.topic===topic).length]));

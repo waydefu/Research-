@@ -28,6 +28,15 @@
   --cyan:var(--reading-cyan);
   --gold:var(--reading-gold);
   --line:var(--reading-line);
+
+  /* World layer shared by the library, reading pages and the observatory preview.
+     One gold, expressed as rgb channels so hairlines and washes stay the same hue. */
+  --gold-rgb:217 181 121;
+  --gold-dim:#bfa679;
+  --line-gold:rgb(var(--gold-rgb) / .30);
+  --line-gold-strong:rgb(var(--gold-rgb) / .50);
+  --ink-soft:#e8e2d9;
+  --world-night:#060a11;
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   font-synthesis:none;
 }

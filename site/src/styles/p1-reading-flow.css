@@ -23,7 +23,7 @@
 #main .archive-intro > * { position:relative; z-index:1; }
 
 /* Editorial rules provide rhythm without introducing another set of cards. */
-#main .section-heading {position:relative;padding-bottom:1.2rem;border-bottom:1px solid rgba(217,181,121,.19)}
+#main .section-heading {position:relative;padding-bottom:1.2rem;border-bottom:1px solid rgb(var(--gold-rgb) / .19)}
 #main .section-heading::after {
   content:"";
   position:absolute;
