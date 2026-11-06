@@ -237,6 +237,7 @@ const raw = {
         "Agent"
       ]
     ],
+    ["07-music-skill-editable-agent-composition.md","Agent 工具與 Skills","music-skill：AI Agent 如何寫出可修改的原創配樂？",["music-skill","Agent Skills","音樂製作","MIDI","FluidSynth"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -801,6 +802,8 @@ const raw = {
     ["31-brinewater-browser-open-world-and-agent-workflow.md","互動作品與設計案例","Brinewater：瀏覽器開放世界與 AI Agent 開發案例",["開放世界","交通模擬","Agent","Git Worktree","視覺驗收"]],
     ["32-aurea-residences-immersive-luxury-web-ux-review.md","介面設計與視覺系統","ÁUREA Residences：精品住宅網站的視覺與互動驗收",["UI/UX","精品網站","視覺敘事","捲動互動","跨裝置驗收"]],
     ["33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md","AI 3D 重建與生成","UniForge3D：少量多視角照片如何重建完整 3D 資產？",["UniForge3D","多視角重建","3D 生成","VGGT","GLB","授權"]],
+    ["34-forever-components-agent-retrieval-and-web-effects.md","創意前端工具與函式庫","Forever Components：可檢索網頁動效與 Agent 元件選型",["Forever Components","Agent","UI 動效","SVG","Canvas","索引"]],
+    ["35-ui-typography-readability-and-cjk.md","介面設計與視覺系統","UI 字體排版六原則：繁中、行長、字距與無障礙",["Typography","繁體中文","可及性","WCAG","字體排版"]],
     [
       "README.md",
       "資料來源與研究索引",

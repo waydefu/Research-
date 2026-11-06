@@ -29,6 +29,10 @@ export function motifFor(doc){
   if(/catalog|參考案例|案例清單|研究索引/i.test(file+' '+title))return 'references';
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
+  // Source-specific schematics: agent score/audio, component motion, and CJK text layout.
+  if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'score';
+  if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
+  if(/35-ui-typography-readability-and-cjk\.md$/.test(file))return 'layout';
   if(/UniForge3D/i.test(s))return 'geometry';
   if(/nanites|Virtualized Geometry|幾何|GPU 驅動/i.test(s))return 'geometry';
   if(/Polyfork|3D 素材|Asset-as-Code/i.test(s))return 'assets';
@@ -129,6 +133,13 @@ export function renderResearchArt(doc){
     drawing=polygon('345,38 468,111 345,180 223,110')+polygon('223,110 345,180 345,265 223,194')+polygon('345,180 468,111 468,194 345,265')+
       line(345,38,345,180)+line(224,195,345,265)+line(345,265,469,194)+
       (sym==='geometry'?Array.from({length:4},(_,i)=>circ(260+i*58,110+i*8,9)).join(''):sym==='assets'?rect(475,70,56,43,5):'');
+  }else if(sym==='score'){
+    // Original compact score schematic; bounded SVG geometry even when scene motifs repeat.
+    drawing=rect(211,65,298,172,6)+
+      Array.from({length:5},(_,i)=>line(235,100+i*19,482,100+i*19)).join('')+
+      circ(295,157,11)+line(306,157,306,101)+
+      circ(381,137,11)+line(392,137,392,91)+
+      polygon('306,101 322,106 322,117 306,112');
   }else if(sym==='audio'){
     drawing=rect(200,65,320,174)+Array.from({length:49},(_,i)=>{
       let n=(Math.sin(i*.55+seed)*.35+Math.sin(i*1.32)*.18+.47)*78;
