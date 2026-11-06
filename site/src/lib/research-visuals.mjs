@@ -29,6 +29,10 @@ export function motifFor(doc){
   if(/catalog|參考案例|案例清單|研究索引/i.test(file+' '+title))return 'references';
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
+  // Source-specific schematics: agent score/audio, component motion, and CJK text layout.
+  if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'audio';
+  if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
+  if(/35-ui-typography-readability-and-cjk\.md$/.test(file))return 'layout';
   if(/UniForge3D/i.test(s))return 'geometry';
   if(/nanites|Virtualized Geometry|幾何|GPU 驅動/i.test(s))return 'geometry';
   if(/Polyfork|3D 素材|Asset-as-Code/i.test(s))return 'assets';
