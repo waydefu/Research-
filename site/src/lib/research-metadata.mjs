@@ -3,6 +3,25 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/34-forever-components-agent-retrieval-and-web-effects.md': {
+    title:'Forever Components：可檢索網頁動效與 Agent 元件選型',
+    topic:'創意前端工具與函式庫',
+    creator:{label:'Forever AI Components 官方原始碼',url:'https://github.com/isas1/forever-ai-components'},
+    demos:[
+      {label:'官方網頁元件索引',url:'https://forevercomponents.com/components/',note:'僅連至原網站；未測試或允許 iframe 內嵌'},
+      {label:'Kinetic Typography',url:'https://forevercomponents.com/components/kinetic-type/',note:'外部作者示例，沒有複製程式碼或預覽素材'}
+    ]
+  },
+  'research/2026-11-agent-engineering/07-music-skill-editable-agent-composition.md': {
+    title:'music-skill：AI Agent 如何寫出可修改的原創配樂？',
+    topic:'Agent 工具與 Skills',
+    creator:{label:'owoevan-dev / music-skill 官方原始碼',url:'https://github.com/owoevan-dev/music-skill'}
+  },
+  'research/2026-11-universal-web-engine/35-ui-typography-readability-and-cjk.md': {
+    title:'UI 字體排版六原則：繁中、行長、字距與無障礙',
+    topic:'介面設計與視覺系統',
+    creator:null
+  },
   'research/2026-11-universal-web-engine/33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md': {
     title:"UniForge3D：少量多視角照片如何重建完整 3D 資產？",
     lead:"UniForge3D 將相機姿態未知的多視角照片，透過共同錨定座標空間連結幾何重建與生成模型，並為不同立體區域選擇最有用的照片特徵，最後輸出 GLB。研究核對論文、推論程式及原始授權；模型權重與背景移除工具的商用限制、GPU 成本和輸出品質仍需另行驗證。",
