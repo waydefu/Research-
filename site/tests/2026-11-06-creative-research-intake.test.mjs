@@ -22,7 +22,7 @@ const cases = [
   },
   {
     file: 'research/2026-11-agent-engineering/07-music-skill-editable-agent-composition.md',
-    topic: 'Agent 工具與 Skills', motif: 'audio',
+    topic: 'Agent 工具與 Skills', motif: 'score',
     source: 'https://github.com/owoevan-dev/music-skill',
     evidence: /FluidSynth/
   }
