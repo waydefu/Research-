@@ -77,6 +77,60 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/34-forever-components-agent-retrieval-and-web-effects.md",
+      "sourceBlobSha": "662940bb15e7c73cfbf55ac08fbc120c128280dd",
+      "sourceRevision": "c8e3a81d2181cadd0cca7fba005d52a7b5a0ec62",
+      "reviewedOn": "2026-11-06",
+      "verifiedScope": "閱讀 Forever AI Components 官方 README、agents.json、components.index.json、MIT LICENSE 與 Fractal Tree／Golden Tree 來源檢索摘要，並對照公開網站首頁標示的件數；未下載全套或執行原始元件。",
+      "publicNotice": "本篇介紹 Agent 檢索及兩種程序樹木效果；網站的 791 件與 GitHub 索引的 604 件不能混同。沒有實機效能、網頁嵌入、逐件授權或所有元件外部依賴查核。",
+      "remainingWork": "固定上游 commit、核對選中 HTML 和所有外部依賴，在隔離環境測試 Android、桌機、鍵盤／reduced-motion、CPU／GPU 成本與 iframe 限制，再評估可否整合。",
+      "knownSources": [
+        "https://forevercomponents.com/components/",
+        "https://github.com/isas1/forever-ai-components",
+        "https://github.com/isas1/forever-ai-components/blob/main/agents.json",
+        "https://github.com/isas1/forever-ai-components/blob/main/infinite/components.index.json",
+        "https://github.com/isas1/forever-ai-components/blob/main/infinite/organic-nature/10-fractal-tree.html",
+        "https://github.com/isas1/forever-ai-components/blob/main/infinite/klimt/01-golden-tree.html"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/35-ui-typography-readability-and-cjk.md",
+      "sourceBlobSha": "02d763a436be7c9ceec97221a18b3115d84adef4",
+      "sourceRevision": "8bc1b8df82b68fb80e0194f35757c11c14f2648b",
+      "reviewedOn": "2026-11-06",
+      "verifiedScope": "依使用者提供的 Typography Cheat Sheet 六原則對照 W3C WCAG 2.2 Text Spacing、Visual Presentation、USWDS Typography 與 MDN line-height；圖片原作者與散布權未驗證，未複製圖片。",
+      "publicNotice": "本篇是排版可讀性與繁體中文混排研究，不是原圖的授權重製；45–75 字元屬英文閱讀建議，WCAG 文字間距屬可調整時不喪失內容的測試要求，不能直接當固定 CSS 值。",
+      "remainingWork": "對真實多語頁面測試 320–1440px、螢幕閱讀器、文字縮放與 WCAG 1.4.12 覆寫，釐清原圖作者與圖像權利；目前沒有實際網站通過驗收的證據。",
+      "knownSources": [
+        "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing",
+        "https://www.w3.org/WAI/WCAG21/Understanding/visual-presentation",
+        "https://designsystem.digital.gov/components/typography/",
+        "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-height"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-engineering/07-music-skill-editable-agent-composition.md",
+      "sourceBlobSha": "fcc439f597eeff8f8383edb7bfe758cf796e5133",
+      "sourceRevision": "7fb3599590fd9e57074f67c54bf66e5ba1c5890a",
+      "reviewedOn": "2026-11-06",
+      "verifiedScope": "閱讀官方 README 與 music-production SKILL.md，核對工具依賴、可編輯樂譜／MIDI／分軌輸出、作者音色庫大小及主要第三方授權聲明；未安裝或執行播放器／渲染器。",
+      "publicNotice": "music-skill 是 Agent 逐音符作曲及離線合成工作流，不是文字生成音訊模型。音樂品質、安裝耗時、CPU／記憶體成本、輸出權利及商業適用性未做本地或法律驗證。",
+      "remainingWork": "隔離環境安裝音源與固定依賴後，以自創 45 秒影片／遊戲配樂執行 doctor、selfcheck、render、人工盲聽與授權審計；未完成前不部署到自動化產線。",
+      "knownSources": [
+        "https://github.com/owoevan-dev/music-skill",
+        "https://github.com/owoevan-dev/music-skill/blob/main/skills/music-production/SKILL.md",
+        "https://github.com/owoevan-dev/music-skill/blob/main/THIRD_PARTY.md",
+        "https://github.com/owoevan-dev/music-skill/blob/main/LICENSE",
+        "https://github.com/owoevan-dev/music-skill/blob/main/PRIVACY.md"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
