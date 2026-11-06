@@ -91,6 +91,8 @@ export const EDITORIAL_LEADS = Object.freeze({
   "research/2026-11-universal-web-engine/26-luminati-hd2d-browser-engine.md": "Luminati 探索以 Three.js 組合 2.5D 像素畫面、立體場景與即時光影的方式。適合研究復古風格的瀏覽器遊戲引擎；移植與手機效能仍須在目標裝置實測。",
   "research/2026-11-universal-web-engine/34-forever-components-agent-retrieval-and-web-effects.md": "Forever Components 以多維索引讓 Agent 先找用途、風格、效能適合的 HTML 動效元件，再讀取原始碼改造。整理動態文字、背景與程序樹木案例；網站與 GitHub 件數不同，手機效能及元件授權仍需逐件驗證。",
   "research/2026-11-universal-web-engine/35-ui-typography-readability-and-cjk.md": "整理 UI 字體排版的行高、行長、標題層級、英文大小寫、字體數量與字距六原則，解釋英文與繁體中文閱讀長度的差異，並對照 WCAG 文字間距要求。這是審查起點，不代表任何網站已通過無障礙測試。",
+  "research/2026-11-universal-web-engine/36-gradientdeck-design-md-library-for-agents.md": "介紹 GradientDeck UI 把 1,286 個真實網站整理成 DESIGN.md，讓 Claude Code、Codex 等 Agent 依色彩角色、字型與元件規則設計。已核對資料庫筆數與分布；內容是第三方詮釋，授權、擷取準確度與實際成效尚未驗證。",
+  "research/2026-11-universal-web-engine/37-threejs-grassworks-webgpu-grass-and-forest-demo.md": "整理 Three.js Grassworks 的 WebGPU 森林展示、產品功能與商用授權，並說明哪些體驗設計可借鏡。展示頁未在 WebGPU 裝置執行，效能為廠商自述；授權限制 AI 檢索，不能把購得的原始碼放進本庫。",
   "research/2026-11-universal-web-engine/README.md": "這是現代 Web 工程與互動技術研究的總入口，串聯前後端框架、3D、效能、UI/UX 與網頁案例。適合先找子主題再閱讀原始研究，不能把選型提案當成已上線功能。",
   "research/2026-11-universal-web-engine/SOURCES.md": "彙整現代 Web 工程研究使用的官方文件、原始專案、版本和證據限制，方便核對框架與安全資訊。這是查證索引，不是已完成產品兼容或性能測試的證明。",
   "research/RESEARCH-TEMPLATE.md": "這是一份研究文件的寫作範本，示範如何記錄問題、結論、可重現方法、選項比較與採用條件。它提供撰寫結構，不代表任何特定工具已通過驗證或獲得使用授權。",

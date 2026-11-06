@@ -33,6 +33,8 @@ export function motifFor(doc){
   if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'score';
   if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
   if(/35-ui-typography-readability-and-cjk\.md$/.test(file))return 'layout';
+  if(/36-gradientdeck-design-md-library-for-agents\.md$/.test(file))return 'layout';
+  if(/37-threejs-grassworks-webgpu-grass-and-forest-demo\.md$/.test(file))return 'cube';
   if(/UniForge3D/i.test(s))return 'geometry';
   if(/nanites|Virtualized Geometry|幾何|GPU 驅動/i.test(s))return 'geometry';
   if(/Polyfork|3D 素材|Asset-as-Code/i.test(s))return 'assets';

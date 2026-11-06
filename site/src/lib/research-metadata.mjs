@@ -3,6 +3,22 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/36-gradientdeck-design-md-library-for-agents.md': {
+    title:'GradientDeck UI：把真實網站整理成 DESIGN.md，讓 Agent 照風格設計',
+    topic:'介面設計與視覺系統',
+    creator:null,
+    demos:[
+      {label:'GradientDeck UI 官方資料庫',url:'https://ui.gradientdeck.com/',note:'僅連至原網站；未測試或允許 iframe 內嵌；運營者身分與內容授權未查證'}
+    ]
+  },
+  'research/2026-11-universal-web-engine/37-threejs-grassworks-webgpu-grass-and-forest-demo.md': {
+    title:'Three.js Grassworks：WebGPU 草地系統、森林展示與商用授權',
+    topic:'即時 3D 渲染與 Shader',
+    creator:{label:'Tech Redux／Three.js Grassworks 官方頁面',url:'https://grassworks.techredux.co/'},
+    demos:[
+      {label:'廢棄屋森林展示（官方）',url:'https://grassworks.techredux.co/forest-demo',note:'僅連至原網站；需 WebGPU 的桌機 Chrome／Edge；未測試或允許 iframe 內嵌；本站未執行此展示'}
+    ]
+  },
   'research/2026-11-universal-web-engine/34-forever-components-agent-retrieval-and-web-effects.md': {
     title:'Forever Components：可檢索網頁動效與 Agent 元件選型',
     topic:'創意前端工具與函式庫',

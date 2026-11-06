@@ -131,6 +131,42 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/36-gradientdeck-design-md-library-for-agents.md",
+      "sourceBlobSha": "7049839ed68d203fc7e414e04af41d8ed7d651e5",
+      "sourceRevision": "04fe170904318d3c1bd04d820eae26ecc743a1db",
+      "reviewedOn": "2026-11-06",
+      "verifiedScope": "讀取 GradientDeck UI 首頁、llms.txt、library.json（統計 1,286 筆、theme 與 industry 分布、欄位）及 Aesop、Moooi、Studio Freight、Active Theory 四份 DESIGN.md；未逐站對照原網站，未讓 Agent 實際套用。",
+      "publicNotice": "本篇盤點 GradientDeck 的 DESIGN.md 資料庫。內容是第三方對真實網站的詮釋（站方自述量測值已正規化、HTML 為重建），不是官方設計系統；內容授權、擷取準確度與對 Agent 產出的實際影響未驗證，也未計算 token。",
+      "remainingWork": "抽樣對照原站色票與字型，查明 DESIGN.md 使用條款，做有／無 DESIGN.md 的 A/B 與 token 成本比較，再撰寫本站原創 DESIGN.md；完成前不複製任何第三方 DESIGN.md 進本庫。",
+      "knownSources": [
+        "https://ui.gradientdeck.com/",
+        "https://ui.gradientdeck.com/llms.txt",
+        "https://ui.gradientdeck.com/library.json",
+        "https://ui.gradientdeck.com/styles/aesop/design.md",
+        "https://ui.gradientdeck.com/styles/active-theory/design.md",
+        "https://ui.gradientdeck.com/styles/moooi/design.md",
+        "https://ui.gradientdeck.com/styles/studio-freight/design.md"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/37-threejs-grassworks-webgpu-grass-and-forest-demo.md",
+      "sourceBlobSha": "ef0826f39ad8bad8ee60ac196f402c134ff725a1",
+      "sourceRevision": "04fe170904318d3c1bd04d820eae26ecc743a1db",
+      "reviewedOn": "2026-11-06",
+      "verifiedScope": "讀取 Grassworks 森林展示頁、產品頁與 2026 年 10 月版商用授權（含 §2、§4、§5）；下載展示頁公開 JS 並比對 Three.js REVISION 字串；檢查本研究環境無 navigator.gpu。未購買、未下載產品、未在 WebGPU 裝置執行展示。",
+      "publicNotice": "本篇整理 Three.js Grassworks 的官方展示、功能自述與授權重點。效能、FPS 與相容性均為廠商自述且 NOT_RUN；授權摘要不是法律意見，條款明文限制將原始碼用於 AI 檢索與重製。",
+      "remainingWork": "在有 WebGPU 的桌機實測展示頁的 FPS、GPU 時間、記憶體與發熱，記錄裝置與瀏覽器版本；確認手機與 Safari；若要使用，另行閱讀 LICENSE.pdf 全文並保存在使用專案而非本庫。",
+      "knownSources": [
+        "https://grassworks.techredux.co/forest-demo",
+        "https://grassworks.techredux.co/",
+        "https://grassworks.techredux.co/license"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }

@@ -804,6 +804,8 @@ const raw = {
     ["33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md","AI 3D 重建與生成","UniForge3D：少量多視角照片如何重建完整 3D 資產？",["UniForge3D","多視角重建","3D 生成","VGGT","GLB","授權"]],
     ["34-forever-components-agent-retrieval-and-web-effects.md","創意前端工具與函式庫","Forever Components：可檢索網頁動效與 Agent 元件選型",["Forever Components","Agent","UI 動效","SVG","Canvas","索引"]],
     ["35-ui-typography-readability-and-cjk.md","介面設計與視覺系統","UI 字體排版六原則：繁中、行長、字距與無障礙",["Typography","繁體中文","可及性","WCAG","字體排版"]],
+    ["36-gradientdeck-design-md-library-for-agents.md","介面設計與視覺系統","GradientDeck UI：把真實網站整理成 DESIGN.md，讓 Agent 照風格設計",["GradientDeck","DESIGN.md","設計系統","Agent","UI"]],
+    ["37-threejs-grassworks-webgpu-grass-and-forest-demo.md","即時 3D 渲染與 Shader","Three.js Grassworks：WebGPU 草地系統、森林展示與商用授權",["Three.js","WebGPU","TSL","草地","授權"]],
     [
       "README.md",
       "資料來源與研究索引",
