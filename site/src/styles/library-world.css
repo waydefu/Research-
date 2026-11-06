@@ -1,0 +1,89 @@
+/* Library (典藏館) visual direction — loaded by src/pages/library/index.astro only.
+   Goal: the library is the same world as the observatory preview, not a separate
+   document site. One hero subject, a warm core glow, gold hairlines, serif numerals.
+   All content stays real DOM text; images are decorative. No scroll hijacking.
+   Layout tokens come from tokens.css; selectors are prefixed with #main so they win
+   over the generic rules in global.css without !important. */
+
+/* ── Hero: the poster hall replaces the generic magnifier illustration ── */
+#main .archive-intro{
+  min-height:clamp(32rem,76vh,47rem);
+  background:
+    radial-gradient(ellipse 34% 46% at 73% 47%,rgba(255,184,92,.22),transparent 72%),
+    linear-gradient(90deg,var(--world-night) 0%,rgb(6 10 17 / .93) 33%,rgb(6 10 17 / .42) 70%,rgb(6 10 17 / .62) 100%),
+    url('/Research-/v3/atlas/sanctum/assets/world-desktop.webp') 64% 46%/cover no-repeat;
+}
+#main .archive-intro .eyebrow{color:var(--gold);letter-spacing:.24em}
+#main .archive-intro h1{text-shadow:0 4px 34px rgb(0 0 0 / .85)}
+#main .archive-intro .intro-sub{color:var(--ink-soft);text-shadow:0 2px 14px rgb(0 0 0 / .8)}
+#main .archive-intro .primary-link{
+  background:linear-gradient(110deg,#f2d7a4,#c5995d);color:#0b1320;border-color:#efd1a0;font-weight:700;letter-spacing:.06em;
+}
+#main .archive-intro .primary-link:hover{background:#ffe2ad;color:#0b1320}
+#main .archive-intro .index-stat strong{font-family:"Noto Serif TC","Songti TC",serif;color:var(--gold)}
+
+/* ── Areas: numbered editorial rows instead of a plain list ── */
+#main .exhibit-list{counter-reset:area}
+#main .exhibit-list li{counter-increment:area}
+#main .exhibit-list li a{
+  grid-template-columns:3.2rem minmax(150px,210px) minmax(0,1fr) 5rem 1.6rem;
+  padding:1.45rem .5rem;
+  transition:background-color .25s ease,padding-left .25s ease;
+}
+#main .exhibit-list li a::before{
+  content:counter(area,decimal-leading-zero);
+  font:400 1.45rem/1 Georgia,"Noto Serif TC",serif;color:var(--gold-dim);letter-spacing:.04em;
+  align-self:center;transition:color .25s ease;
+}
+#main .exhibit-list .domain-scene{
+  border-color:var(--line-gold-strong);
+  box-shadow:0 0 0 4px rgb(10 16 26 / .9),0 0 0 5px var(--line-gold),0 12px 30px rgb(0 0 0 / .45);
+}
+#main .exhibit-list li a:is(:hover,:focus-visible){padding-left:1rem;background:linear-gradient(90deg,rgb(var(--gold-rgb) / .09),transparent 85%)}
+#main .exhibit-list li a:is(:hover,:focus-visible)::before{color:var(--gold)}
+#main .exhibit-list li a:is(:hover,:focus-visible) .domain-summary strong{color:#ffe7b8}
+#main .exhibit-list .domain-count{font:400 .8rem/1 Georgia,"Noto Serif TC",serif;letter-spacing:.08em;color:var(--gold-dim)}
+#main .exhibit-list .domain-arrow{transition:transform .25s ease}
+#main .exhibit-list li a:is(:hover,:focus-visible) .domain-arrow{transform:translate(3px,-3px)}
+
+/* ── Topics: quieter accordions with a gold index line ── */
+#main .topic-exhibit{border-top:1px solid var(--line-gold)}
+#main .topic-exhibit:last-child{border-bottom:1px solid var(--line-gold)}
+#main .topic-exhibit[open]{background:linear-gradient(90deg,rgb(var(--gold-rgb) / .07),transparent 88%)}
+#main .topic-exhibit summary strong{font-family:"Noto Serif TC","Songti TC",serif;color:#f2dfbc}
+#main .topic-articles li a strong{font-family:"Noto Serif TC","Songti TC",serif}
+
+/* ── Index: filter bar reads as one instrument panel ── */
+#main .library-filters{
+  padding:1.2rem 1.2rem 1.4rem;border:1px solid var(--line-gold);
+  background:linear-gradient(180deg,rgb(14 21 33 / .72),rgb(8 12 20 / .6));
+}
+#main .research-results li>a:is(:hover,:focus-visible) .research-item-visual{border-color:var(--gold)}
+#main .research-item-visual{border-color:var(--line-gold-strong)}
+
+/* ── Tablet and phone: reflow, not shrink ── */
+@media(max-width:850px){
+  #main .archive-intro{
+    /* Tall enough that the instrument shows above the copy instead of behind it. */
+    min-height:clamp(36rem,90svh,46rem);
+    padding-top:clamp(14rem,46svh,22rem);
+    background:
+      radial-gradient(ellipse 60% 30% at 50% 24%,rgba(255,184,92,.2),transparent 72%),
+      linear-gradient(180deg,rgb(6 10 17 / .12) 0%,rgb(6 10 17 / .30) 26%,rgb(6 10 17 / .86) 52%,rgb(6 10 17 / .97) 78%,var(--world-night) 100%),
+      url('/Research-/v3/atlas/sanctum/assets/world-mobile.webp') 50% 12%/cover no-repeat;
+    justify-content:flex-end;
+  }
+  #main .exhibit-list li a{grid-template-columns:2.4rem 112px minmax(0,1fr) 3.6rem 1rem;gap:.8rem}
+  #main .exhibit-list li a::before{font-size:1.1rem}
+}
+@media(max-width:520px){
+  /* Small phones: the numeral would steal text width, so the plate and copy keep the original two columns. */
+  #main .exhibit-list li a{grid-template-columns:90px minmax(0,1fr);gap:.65rem;padding:1.1rem .1rem}
+  #main .exhibit-list li a::before{display:none}
+  #main .library-filters{padding:1rem .85rem 1.1rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #main .exhibit-list li a,#main .exhibit-list li a::before,#main .exhibit-list .domain-arrow{transition:none}
+  #main .exhibit-list li a:is(:hover,:focus-visible) .domain-arrow{transform:none}
+}
