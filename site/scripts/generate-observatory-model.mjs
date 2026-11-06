@@ -19,14 +19,16 @@ const rotations={
   Hall:[0,0,0]
 };
 const metals=[
-  {name:'aged-gold-brass',color:0x765332,metallic:.90,roughness:.43},
-  {name:'polished-edge',color:0xc5a16d,metallic:.91,roughness:.28},
-  {name:'engraved-dark',color:0x211c19,metallic:.52,roughness:.62},
-  {name:'oxidized-bronze',color:0x334951,metallic:.72,roughness:.54},
-  {name:'weathered-stone',color:0x232f3e,metallic:.16,roughness:.87},
-  {name:'inner-copper',color:0xb08354,metallic:.81,roughness:.37},
-  {name:'light-chamber',color:0xb5874e,metallic:.12,roughness:.37,emissive:[.76,.27,.07],emissiveStrength:.85},
-  {name:'icy-inlay',color:0x7ea9bf,metallic:.56,roughness:.36},
+  // Palette follows the reference poster: deep aged gold, bright worn edges,
+  // near-black engraving, verdigris accents, warm basalt, and a hot core.
+  {name:'aged-gold-brass',color:0x9a6f33,metallic:.96,roughness:.36},
+  {name:'polished-edge',color:0xe0b872,metallic:.97,roughness:.22},
+  {name:'engraved-dark',color:0x15110e,metallic:.55,roughness:.58},
+  {name:'oxidized-bronze',color:0x2b4a4d,metallic:.78,roughness:.46},
+  {name:'weathered-stone',color:0x1b1a1c,metallic:.32,roughness:.74},
+  {name:'inner-copper',color:0xb7803f,metallic:.9,roughness:.3},
+  {name:'light-chamber',color:0xd9a55a,metallic:.1,roughness:.3,emissive:[1,.52,.16],emissiveStrength:2.6},
+  {name:'icy-inlay',color:0x8fc0dc,metallic:.7,roughness:.28},
 ];
 function bake(node,material,geo,position=[0,0,0],rotation=[0,0,0],scale=[1,1,1]){
   const matrix=new THREE.Matrix4().compose(
