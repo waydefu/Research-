@@ -163,3 +163,70 @@ test('G1-02 first screen does not eagerly fetch optional geometry',async({page})
   await expect(page.getByRole('heading',{level:1,name:/在未知的邊界/})).toBeVisible();
   expect(requests).toEqual([]);
 });
+
+// G1-02 P0 reliability: headless Chromium does not necessarily mark a second
+// browser tab as hidden; simulate document.hidden so the real document event
+// handler and animation scheduling, not an unrelated resize, are tested.
+test('G1-02 3D animation resumes after document visibility is restored',async({page})=>{
+  test.setTimeout(70_000);
+  // The pages CI defaults to reduced motion, which intentionally pauses the renderer.
+  // This test needs active animation frames to verify background/foreground rescheduling.
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.addInitScript(()=>{
+    window.__obsFrameTicks=0;
+    const request=window.requestAnimationFrame.bind(window);
+    window.requestAnimationFrame=cb=>request(time=>{
+      window.__obsFrameTicks++;
+      cb(time);
+    });
+  });
+  await page.goto(PREVIEW);
+  const scene=page.locator('#obs-scene');
+  await scene.scrollIntoViewIfNeeded();
+  const capable=await page.evaluate(()=>Boolean(document.createElement('canvas').getContext('webgl2')));
+  test.skip(!capable,'WebGL2 unavailable: poster fallback already covered separately');
+  await expect(scene).toHaveAttribute('data-renderer','three',{timeout:25_000});
+  await expect.poll(()=>page.evaluate(()=>window.__obsFrameTicks),{timeout:12_000}).toBeGreaterThan(4);
+  await page.evaluate(()=>{
+    Object.defineProperty(document,'hidden',{configurable:true,value:true});
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await page.waitForTimeout(220); // Allow any frame queued before hiding to finish.
+  const hiddenTicks=await page.evaluate(()=>window.__obsFrameTicks);
+  await page.waitForTimeout(120);
+  expect(await page.evaluate(()=>window.__obsFrameTicks)).toBe(hiddenTicks);
+  await page.evaluate(()=>{
+    Object.defineProperty(document,'hidden',{configurable:true,value:false});
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await expect.poll(()=>page.evaluate(()=>window.__obsFrameTicks),{timeout:12_000})
+    .toBeGreaterThan(hiddenTicks+4);
+  await expect(scene).toHaveAttribute('data-renderer','three');
+});
+
+test('G1-02 simulated WebGL context loss hides inactive controls and restores GLB',async({page})=>{
+  test.setTimeout(80_000);
+  await page.goto(PREVIEW);
+  const stage=page.locator('#obs-scene');
+  await stage.scrollIntoViewIfNeeded();
+  const capable=await page.evaluate(()=>Boolean(document.createElement('canvas').getContext('webgl2')));
+  test.skip(!capable,'WebGL2 unavailable: poster fallback already covered separately');
+  await expect(stage).toHaveAttribute('data-renderer','three',{timeout:25_000});
+  const canLose=await page.evaluate(()=>{
+    const canvas=document.querySelector('#obs-three-root canvas');
+    const context=canvas?.getContext('webgl2');
+    const extension=context?.getExtension('WEBGL_lose_context');
+    if(!extension)return false;
+    window.__observatoryContextExtension=extension;
+    extension.loseContext();
+    return true;
+  });
+  test.skip(!canLose,'WEBGL_lose_context not supported by this browser');
+  await expect(stage).toHaveAttribute('data-renderer','poster');
+  await expect(page.locator('#obs-controls')).toBeHidden();
+  await expect(page.locator('#obs-status')).toContainText('圖形上下文已中斷');
+  await expect(page.locator('.obs-archive-actions a[href="/Research-/v3/library/"]')).toBeVisible();
+  await page.evaluate(()=>window.__observatoryContextExtension.restoreContext());
+  await expect(stage).toHaveAttribute('data-renderer','three',{timeout:30_000});
+  await expect(page.locator('#obs-controls')).toBeVisible();
+});

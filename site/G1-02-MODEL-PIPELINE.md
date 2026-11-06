@@ -37,3 +37,11 @@
 這套生成器不是 Blender，也不能假稱有 `.blend`；但模型節點、GLB URL、顯示與退化路徑都已分離，未來使用 Blender 可匯入同規格 GLB，確認 UV/ORM/Normal、授權及尺度，再用同組場景名稱實作旋轉。真正精雕仍需資產生產與人工構圖審核。
 
 **上線策略**：此包僅更新 `/Research-/v3/observatory/` 新版預覽，不改根首頁、研究原文、舊版轉址、CI Workflow 或權限。PR 合併仍需 Owner 批准；CI 的綠燈不能替代美術與實機測試。
+
+## 6. 2026-11-05｜P0 自動化可靠性補驗收（獨立修補候選）
+
+**範圍限定：** 修正頁面由背景轉回前景時的 `visibilitychange` 事件對象（document，而非 window），避免重啟動畫失效；修正 WebGL context lost 時畫面降為海報卻仍顯示不可操作的 3D 控制按鈕，暫停該狀態的 frame 排程，恢復 context 後重新初始化。
+
+**預計的可驗證證據：** `site/tests/pages/observatory-preview.spec.mjs` 增加兩項 Chromium Playwright 測試；透過覆寫 `document.hidden` 與派發標準 `visibilitychange` 事件驗證動畫重新排程，並以 `WEBGL_lose_context` 模擬中斷及復原。若執行環境不支援 WebGL2 或此 extension，僅跳過 該 GPU 特有測項，不能標成真機 PASS。
+
+**仍未完成（不得宣稱達標）：** Android POCO F8 Ultra／iPhone Safari 真機運作、15–30 分鐘熱／功耗、真實從 Chrome 背景返回、弱網載入／GPU 長時 context loss、FPS／GPU frame time／Core Web Vitals、Blender 重新匯入與美術 Golden 視覺簽核。本次不更換模型、不安裝套件、不改發佈工作流程、不讓其他研究失去原始來源。CI 成功只代表自動化契約通過。
