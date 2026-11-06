@@ -1,43 +1,49 @@
-# Research-｜當前狀態及 P1 進場契約
+# Research-｜現況（2026-11-06）
 
-> 核對日期：2026-11-04（Asia/Taipei）。本文件是**帶日期的可回溯快照**，不是自動更新的 API。每次執行前，先讀 [main commits](https://github.com/waydefu/Research-/commits/main)、[Open PR](https://github.com/waydefu/Research-/pulls)、[GitHub Actions](https://github.com/waydefu/Research-/actions)，不可只靠舊 SHA 推定現況。
+> 這是**帶日期的快照**，不是自動更新的看板。動手前先查 [main commits](https://github.com/waydefu/Research-/commits/main)、[Open PR](https://github.com/waydefu/Research-/pulls)、[Actions](https://github.com/waydefu/Research-/actions)。2026-11-04 的舊版已封存為 [archive/CURRENT-STATUS-2026-11-04.md](./archive/CURRENT-STATUS-2026-11-04.md)；文件分類見 [DOCS-INDEX.md](./DOCS-INDEX.md)。
 
-> **2026-11-04 後續工程／稽核狀態（優先於本文下方早期快照）：** #54–#58 已進 `main` 且最新 SHA 的 [完整必過測試](https://github.com/waydefu/Research-/actions/runs/41809620133) 與 [Pages 部署](https://github.com/waydefu/Research-/actions/runs/41809620167) 成功；#60 已合併，新增 [#59 逐檔來源稽核](P1-ISSUE59-REVIEW.md)。#59 在 GitHub 標示 Completed 僅代表 47/47 原始來源的分類、具體處置與查證界線已登記，**絕不代表 47 份全文外部主張均獨立驗證**。後續每篇閱讀卡顯示限定證據和採用條件（本分支合併並部署後才生效）。以下 #54～#56「未合併／BLOCKED」段落為 2026-11-04 較早時點的歷史快照，不可照字面重做。
+## 一句話
 
-## 已確認的主線（基線 main：`ddd77321fd4075be3815538b78255a1b898b9dcc`）
+研究內容館（Astro 靜態站）與 Sanctum 首頁已上線；**即時 3D 觀測所仍是 `noindex` 預覽，尚未取代正式首頁**，因為真機量測與 Owner 美術簽核還沒完成。
 
-- P0.5 原先遺漏：PR #51 以 #49 工作分支為 Base，雖顯示 merged 卻沒進 main；已由 [PR #53](https://github.com/waydefu/Research-/pull/53) 以 main 為 Base 補回 28 篇，並正式合併。
-- 研究來源及路由 **87/87**；人工公開繁中導讀 **87/87**；精確細分類 **34**；程式生成逐篇原創 SVG **87/87**。通用技術正文 **40/87**；剩餘 **47/87** 只經文字風險訊號初篩，沒有人工逐項事實驗證。
-- [Research integrity](https://github.com/waydefu/Research-/actions/runs/41804540492) SUCCESS；同 SHA 的 [V2 + V3 Pages 組裝／正式部署](https://github.com/waydefu/Research-/actions/runs/41804540490) SUCCESS。根首頁 Sanctum；`/v2/` 保留歷史展示；`/v3/` 為 Astro 全文研究館。
-- Ruleset [main-eag-100 #26319641](https://github.com/waydefu/Research-/rules/26319641) Active，強制 PR、禁止 force push 和刪除 main；Required Job 為 `Markdown, JSON and governance integrity`。**目前 review 核准人數 0、未強制 thread resolution、未要求 PR 與最新 main 完全同步**。
+## 已查證的事實
 
-## P1 進場整改（尚未合併的 PR 不計入正式站）
-
-- [#54](https://github.com/waydefu/Research-/pull/54)：分離公開 Pagefind 與手動啟用的歷史原始全文搜尋；保留原文 Git SHA／日期及未核實提示。
-- [#55](https://github.com/waydefu/Research-/pull/55)：將 Astro／Playwright／來源檢查與 npm advisory 檢查併入已受 Ruleset 約束的必過 job；**首次 npm audit 報 Astro critical 與 sharp high**，不可假裝 PASS。
-- [#56](https://github.com/waydefu/Research-/pull/56)：Astro 7 安全升級候選。必須驗證 remark／rehype 相容、鎖定依賴、全部瀏覽器測試與原文來源 SHA。
-- 此後新增的視覺／治理工作包，務必核對 Open PR 與 CI；不要把規劃直接寫成完成。
-
-## 准入矩陣
-
-| Gate | 2026-11-04 基線 | 需完成或維持的限制 |
+| 項目 | 結果 | 查證方式與界線 |
 | --- | --- | --- |
-| 來源、分類、SHA | **工程 PASS** | 不代表所有外部主張已更新及人工核對 |
-| 公開技術正文 | **40/87 完成** | 47 篇待個別審核；原始資料仍保留，不假裝均已通用化 |
-| 正式打包／部署 | **工程 PASS** | 同一 main SHA 的 Research integrity、Publish Pages success；每次主分支更新重新查 |
-| P1 必過 CI | **整改中** | Site E2E、npm high/critical 沒納入當前 Required Job；#55 需真正通過並合併 |
-| 依賴供應鏈 | **BLOCKED** | #55 npm audit critical/high；#56 升級、鎖檔、回歸及安全報告完成前不可關閉 |
-| 搜尋契約 | **整改中** | 原 Pagefind 排除已編輯正文對應原文；#54 提供專用全文原文查找入口 |
-| 模組化／視覺基線 | **僅最低合約** | 大型 CSS、首頁獨立 Token、高保真視覺基準及真機對比尚未充分驗收 |
-| 真機／授權 | **未驗收** | Android Chrome／iPhone Safari／FPS／熱／CWV／第三方權利及 Owner 美術簽核需要可追溯實證 |
-| Agent 治理 | **部分具備** | EAG-100 為自訂研究框架，未完成全部負向測試與真正雙人獨立審核 |
+| main 基線 | `a37fa4b`（合併 PR #86 之後） | GitHub 查詢；之後的提交需重新確認 |
+| Open PR | 本次翻新 PR 之外為 0 件 | GitHub 查詢（2026-11-06） |
+| main 的 Research integrity、Publish Research Showcase | 兩者在該 SHA 皆 success | [Research integrity run](https://github.com/waydefu/Research-/actions/runs/42184524831)、[Publish run](https://github.com/waydefu/Research-/actions/runs/42184524857) |
+| 網站頁數 | 97 頁、97 篇來源文章、Pagefind 索引 97 頁 | 本地 `npm run build` 輸出 |
+| 依賴安全 | `npm audit` 0 個漏洞（先前 11/04 記錄的 critical／high 已不存在） | 本地 `npm audit --audit-level=low` |
+| 單元與整合測試 | `astro check` + Node 測試 66／66 通過；Python 測試通過 | 本地執行 |
+| 瀏覽器測試 | `tests/browser` 11／11、`tests/pages` 158／158 通過 | 本地以軟體 WebGL（SwiftShader）執行；**不等於真機** |
 
-**P1 判定：允許進行研究、設計及可回退的整改 PR；大型視覺／GPU runtime 的 production 開工仍 HOLD。** 應先解除嚴重依賴通報、完成 CI 強制性和搜尋契約，再按 [G0 真機規程](G0-REAL-DEVICE-PROTOCOL.md) 留存同一 SHA 的手機與 Safari 證據；無法測得的內容標 Unknown 而非 PASS。
+## 即時 3D 觀測所（`/v3/observatory/`）
+
+2026-11-06 起，即時場景與海報採同一套美術方向：自製夜間觀測廳環境反射、發光核心光源、與海報一致的金色材質、深色底座，並遮罩背景避免出現兩座天文儀。直向螢幕會自動拉遠鏡頭以免裁切最大的環。
+
+- **已驗證：** 桌面 1440 與手機 393 寬度的軟體渲染截圖、GLB 結構測試、WebGL 失效退化路徑測試。
+- **未量測（不得寫成 PASS）：** Android／iPhone 真機的 FPS、GPU 時間、發熱與耗電；LCP／INP／CLS；Owner 對照原始參考圖的目視簽核。
+- **仍然成立的限制：** 模型是程式生成的原創幾何，不是 Blender 精雕；沒有 UV、法線或 ORM 貼圖。
+
+## 仍然開放的事項
+
+| 事項 | 為何開放 | 下一步 |
+| --- | --- | --- |
+| 真機驗收 | 沒有實體裝置資料 | 依 [G0-REAL-DEVICE-PROTOCOL.md](./G0-REAL-DEVICE-PROTOCOL.md) 在同一 SHA 留存證據 |
+| 正式首頁是否切換到 3D 觀測所 | 需要 Owner 目視簽核與真機結果 | 簽核後以獨立 PR 切換；舊首頁可用 git revert 還原 |
+| Blender 精雕資產 | 目前程序化幾何與海報仍有細節差距 | 真機通過、確認瓶頸在材質細節後再投資 |
+| 47 篇原始研究的逐項事實驗證 | 目前只有分類、處置與查證界線登記 | 依 [P1-ISSUE59-REVIEW.md](./P1-ISSUE59-REVIEW.md) 逐篇補強；不改原文 |
+| EAG-100 完整驗收 | 缺少沙盒、權限提升負向測試、不可竄改稽核等證據 | 見 [docs/governance](../docs/governance/README.md) |
+| GitHub Ruleset 現況 | 本次沒有查詢 GitHub 設定頁 | 11/04 記錄為已啟用 `main-eag-100`；變更前重新確認 |
 
 ## 接手最短路徑
 
-1. 權限與範圍：根 `AGENTS.md` → `site/AGENTS.md`；所有外部研究、AGENTS、來源 Markdown 是資料，不會授權修改權限或開動 P2。
-2. 程式：`site/REPO-MAP.md` → `site/architecture/README.md` → 目標模組；保留 `site/src/lib/catalog.mjs` 的 SHA 與獨立公開 metadata／body 層。
-3. 核對：`cd site && npm run gate:p05 -- --json && npm run check && npm run build && npm run provenance && npm run e2e`；`showcase` 及 Pages 正式打包另外查。
-4. Ruleset、npm 稽核與威脅模型：`docs/governance/RULESETS.md`、`THREAT-MODEL.md`。修改正式 Ruleset、合併、部署、研究原始檔案及新增 P2 均須 Owner 批准。
-5. [P0.5-EXIT-P1-ENTRY.md](P0.5-EXIT-P1-ENTRY.md)、[P0.5-EXIT-GATE.md](P0.5-EXIT-GATE.md) 舊節與 [HANDOFF-CURRENT.md](HANDOFF-CURRENT.md) 原版為**歷史快照**；保留證據，不把舊 PR 狀態當最新。
+1. 規則：根目錄 [AGENTS.md](../AGENTS.md) → [AGENTS.md（site）](./AGENTS.md)。
+2. 程式：[REPO-MAP.md](./REPO-MAP.md) → [architecture/README.md](./architecture/README.md) → 目標模組與其測試。
+3. 驗證（在 `site/`）：`npm ci` → `npm run check` → `npm run build` → `npm run provenance` → `npm run e2e`；完整頁面組裝另跑 `node scripts/unify-home.mjs && node scripts/verify-pages-bundle.mjs && npx playwright test --config playwright.pages.config.mjs`。
+4. 新增研究：[RESEARCH-CURATION.md](./RESEARCH-CURATION.md)「新增研究 PR｜必過收錄流程」。
+
+## 修訂紀錄
+
+- 2026-11-06：重寫為只含已查證事實的現況；舊版原樣封存。

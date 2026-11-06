@@ -1,5 +1,7 @@
 # P1 / G0-02｜Sanctum 首頁正式美術候選
 
+> **文件狀態：歷史快照。** 記錄某一日期的決策或審查，內容原樣保留，不代表現況；現況見 [CURRENT-STATUS.md](./CURRENT-STATUS.md)，分類見 [DOCS-INDEX.md](./DOCS-INDEX.md)。
+
 > 本文件描述一個可回退的實作候選。沒有 Owner 的畫面簽核、物理 Android／iOS、效能量測，**不得標為正式美術 Gate PASS**。
 
 ## 方向與實作
