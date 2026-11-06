@@ -1,4 +1,7 @@
 import test from 'node:test';
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {allDocs} from '../src/lib/catalog.mjs';
 import {REVIEWED_DOCUMENTS} from '../src/lib/research-taxonomy.mjs';
@@ -35,7 +38,14 @@ test('six active cascades, known stale comments and missing benchmarks remain ex
   const review=reviewForSource(FILE);
   const raw=ongoing.items.find(row=>row.path===FILE);
   assert.ok(review && raw);
-  assert.equal(raw.sourceBlobSha,doc.sha);
+  // Catalog exposes last source *commit* as doc.sha; source review pins both
+  // this revision and the Git *blob* hash of the raw Markdown independently.
+  const source=readFileSync(resolve(process.cwd(),'..',FILE));
+  const gitBlob=createHash('sha1')
+    .update(Buffer.from('blob '+source.byteLength+'\0'))
+    .update(source).digest('hex');
+  assert.equal(raw.sourceBlobSha,gitBlob);
+  assert.equal(raw.sourceRevision,doc.sha);
   assert.equal(raw.benchmarkStatus,'NOT_RUN');
   assert.equal(raw.externallyVerifiedAllClaims,false);
   assert.equal(review.externallyVerifiedAllClaims,false);
