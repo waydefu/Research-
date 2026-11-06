@@ -10,12 +10,12 @@
 
 | 項目 | 結果 | 查證方式與界線 |
 | --- | --- | --- |
-| main 基線 | `a37fa4b`（合併 PR #86 之後） | GitHub 查詢；之後的提交需重新確認 |
-| Open PR | 本次翻新 PR 之外為 0 件 | GitHub 查詢（2026-11-06） |
-| main 的 Research integrity、Publish Research Showcase | 兩者在該 SHA 皆 success | [Research integrity run](https://github.com/waydefu/Research-/actions/runs/42184524831)、[Publish run](https://github.com/waydefu/Research-/actions/runs/42184524857) |
-| 網站頁數 | 97 頁、97 篇來源文章、Pagefind 索引 97 頁 | 本地 `npm run build` 輸出 |
+| main 基線 | `03642d8`（合併 PR #87 之後） | GitHub 查詢；之後的提交需重新確認 |
+| Open PR | 收錄研究 36、37 的 PR 之外為 0 件 | GitHub 查詢（2026-11-06） |
+| PR #87 的必過檢查 | 三條（Markdown/治理完整性、Astro 建置、單一站點組裝）皆 success 後合併 | [Research integrity run](https://github.com/waydefu/Research-/actions/runs/42226641146) |
+| 網站頁數 | 99 頁、99 篇來源文章（含新收錄的研究 36、37） | 本地 `npm run build` 與 `unify-home` 輸出 |
 | 依賴安全 | `npm audit` 0 個漏洞（先前 11/04 記錄的 critical／high 已不存在） | 本地 `npm audit --audit-level=low` |
-| 單元與整合測試 | `astro check` + Node 測試 66／66 通過；Python 測試通過 | 本地執行 |
+| 單元與整合測試 | `astro check` + Node 測試 69／69 通過；Python 測試通過 | 本地執行 |
 | 瀏覽器測試 | `tests/browser` 11／11、`tests/pages` 158／158 通過 | 本地以軟體 WebGL（SwiftShader）執行；**不等於真機** |
 
 ## 即時 3D 觀測所（`/v3/observatory/`）
