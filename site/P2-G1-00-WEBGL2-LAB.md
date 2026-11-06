@@ -1,5 +1,7 @@
 # P2／G1-00｜低風險 WebGL2 研究核心驗證實驗室
 
+> **文件狀態：歷史快照。** 記錄某一日期的決策或審查，內容原樣保留，不代表現況；現況見 [CURRENT-STATUS.md](./CURRENT-STATUS.md)，分類見 [DOCS-INDEX.md](./DOCS-INDEX.md)。
+
 > **階段狀態：已提交隔離 PoC 候選；P2 完整 G1 尚未通過。** 此原型使用原生 WebGL2，**未使用 Three.js**；不能冒稱已實現選定的 Three.js／Blender 方案，也不是 Active Theory 級完工頁面。
 
 ## 可驗證成果

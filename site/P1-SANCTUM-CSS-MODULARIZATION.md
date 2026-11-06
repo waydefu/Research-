@@ -1,5 +1,7 @@
 # P1｜Sanctum CSS 快取與模組邊界第一次抽離
 
+> **文件狀態：歷史快照。** 記錄某一日期的決策或審查，內容原樣保留，不代表現況；現況見 [CURRENT-STATUS.md](./CURRENT-STATUS.md)，分類見 [DOCS-INDEX.md](./DOCS-INDEX.md)。
+
 ## 範圍
 - 原本 `site/public/atlas/sanctum/index.html` 的約 48 KB inline CSS **未改選擇器或宣告順序**，獨立為 `sanctum-core.css`。
 - HTML 原先後載入的 `g0-02.css` 保留原順序；主頁 `/Research-/` 和 Astro Atlas 預覽使用同一份絕對網址的 stylesheet。

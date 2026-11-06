@@ -1,8 +1,8 @@
 # RESEARCH— THE OBSERVATORY｜現行站點與 V3 研究館
 
-> **新接手 Agent 先看 [REPO-MAP.md](./REPO-MAP.md)**（依任務找到負責模組和測試）與 [AGENTS.md](./AGENTS.md)（授權範圍）。[HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md) 是具日期的歷史交接快照；main／PR／CI 必須重新查 GitHub。不要按歷史 P0 筆記把正式 root 改回 V2。
+> **新接手 Agent 先看 [REPO-MAP.md](./REPO-MAP.md)**（依任務找到負責模組和測試）與 [AGENTS.md](./AGENTS.md)（授權範圍）。[CURRENT-STATUS.md](./CURRENT-STATUS.md) 是帶日期的現況、[DOCS-INDEX.md](./DOCS-INDEX.md) 說明每份文件是現行還是歷史；[HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md) 是具日期的歷史交接快照；main／PR／CI 必須重新查 GitHub。不要按歷史 P0 筆記把正式 root 改回 V2。
 
-正式首頁為 `/Research-/` 的 Sanctum；原 V2 網站程式已退役，`/Research-/v2/` 只留下前往正式研究館的轉址，V3 的典藏、搜尋、研究全文保留 `/Research-/v3/`。目前是**靜態**神殿視覺＋Astro/Markdown/Pagefind 內容館，不代表已實作跨頁即時 3D。研究正文從 `../research/`、`../docs/governance/`、`../showcase/design/` 於建置讀取，不複製或修改原 Markdown。
+正式首頁為 `/Research-/` 的 Sanctum；原 V2 網站程式已退役，`/Research-/v2/` 只留下前往正式研究館的轉址，V3 的典藏、搜尋、研究全文保留 `/Research-/v3/`。目前是**靜態**神殿視覺＋Astro/Markdown/Pagefind 內容館；另有 `noindex` 的即時 Three.js 預覽 `/Research-/v3/observatory/`（單一天文儀場景，尚未取代首頁，也不代表已實作跨頁 3D 世界）。研究正文從 `../research/`、`../docs/governance/`、`../showcase/design/` 於建置讀取，不複製或修改原 Markdown。
 
 ## 在完整 Git clone 中操作
 

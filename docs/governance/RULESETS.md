@@ -3,7 +3,7 @@
 > **現況更新：2026-11-02** — 後續使用者已建立 `main-eag-100`（Ruleset #26319641），Active，`include: refs/heads/main`，且 GitHub branch API 回報 `protected: true`。原文件的 `protected:false` 是**建立前的歷史基線**，不得當成目前狀態。此 Repo 仍未通過所有 EAG-100 P0 安全驗收。
 
 
-**狀態：操作手冊，尚未執行。** Repo 是 private；GitHub 方案不同，Rulesets/Required Review 在私人 Repo 的可用性可能受限。先確認 GitHub 帳戶方案與實際 UI 顯示。
+**狀態：操作手冊。** *（2026-11-06 修訂：本段原寫「尚未執行」與「Repo 是 private」，均為建立前的歷史描述。Repo 現已公開，`main-eag-100` 於 2026-11-04 的狀態文件記錄為已啟用；以下仍是設定與負向驗證的操作建議，實際狀態請查 GitHub。）* 原文：GitHub 方案不同，Rulesets/Required Review 在私人 Repo 的可用性可能受限，先確認帳戶方案與實際 UI 顯示。
 
 ## 基線問題
 
@@ -56,3 +56,7 @@ GitHub Ruleset `main-eag-100`（#26319641）已是 Active，且要求既有 `Mar
 **持續限制：** 現行 Ruleset 必須有人審核數仍為 0，未強制解決 review threads，strict up-to-date 為 false；單一 Owner 無第二名合格審核者時不應強行設 1 人核准而死鎖。若日後有第二位可審者，再由 Owner 在 GitHub Settings 調整 review count、conversation resolution 與 strict merge，並做負向測試。不能聲稱目前已調整。
 
 **驗收：** 此 PR 應在最新 HEAD 達成 Research integrity PASS；但 PR 時 CI 成功尚不是 merge 後的規則驗證，需在另一個 docs-only PR 中確認必要 Context 仍執行，且模擬測試失敗時無法合併（不得真的破壞 main）。
+
+## 修訂紀錄
+
+- 2026-11-06：更正已過期的「private／尚未執行」描述；操作建議與負向驗證清單原樣保留。

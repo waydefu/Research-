@@ -9,6 +9,8 @@
 
 - [ ] Factual changes cite primary sources, dates and evidence status
 - [ ] Existing research preserved or corrections explained
+- [ ] `git diff --stat origin/main -- research/` shows no modified or deleted files, unless this PR is an owner-authorized research change with a revision note
+- [ ] New or moved `site/*.md` / `docs/governance/*.md` files are classified in `site/DOCS-INDEX.md`
 - [ ] Local Markdown links, JSON and EAG controls checked
 - [ ] Security/privacy impact reviewed, no credentials committed
 - [ ] Sensitive paths reviewed by an eligible person where possible

@@ -60,6 +60,32 @@ def check_link(root: Path, source: Path, raw_link: str) -> str | None:
     return None
 
 
+DOCS_INDEX = "site/DOCS-INDEX.md"
+
+
+def unindexed_documents(root: Path = ROOT) -> list[str]:
+    """Top-level site/*.md and docs/governance/*.md must be classified.
+
+    The index is what tells a new maintainer which documents describe the
+    current state and which are dated historical snapshots. The check applies
+    only when the index exists, so it cannot break unrelated fixtures.
+    """
+    index = root / DOCS_INDEX
+    if not index.is_file():
+        return []
+    listed = index.read_text(encoding="utf-8")
+    findings = []
+    for path in tracked_paths(root):
+        rel = path.relative_to(root).as_posix()
+        top_level = (
+            (rel.startswith("site/") and rel.count("/") == 1)
+            or (rel.startswith("docs/governance/") and rel.count("/") == 2)
+        )
+        if top_level and path.suffix.lower() == ".md" and path.name not in listed:
+            findings.append(f"{rel}: not classified in {DOCS_INDEX}")
+    return findings
+
+
 def verify_repository(root: Path = ROOT) -> list[str]:
     errors = []
     for path in tracked_paths(root):
@@ -82,6 +108,8 @@ def verify_repository(root: Path = ROOT) -> list[str]:
             except (ValueError, UnicodeDecodeError) as exc:
                 errors.append(f"{path.relative_to(root)}: invalid JSON: {exc}")
 
+    errors.extend(unindexed_documents(root))
+
     standard = root / "research/2026-11-agent-repository-operations/EAG-100.md"
     if not standard.is_file():
         errors.append("EAG-100 governance standard is missing")
@@ -103,7 +131,7 @@ def main() -> int:
         for err in errors:
             print(f"::error::{err}")
         return 1
-    print("Research integrity PASS: Markdown local links, JSON, EAG control IDs.")
+    print("Research integrity PASS: Markdown local links, JSON, EAG control IDs, document index.")
     print("Note: external URLs, live security, model behavior and permissions NOT validated.")
     return 0
 

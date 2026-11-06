@@ -1,13 +1,13 @@
 # site/ — THE OBSERVATORY Agent 規範
 
-> **先導航**：[REPO-MAP.md](./REPO-MAP.md) → 只讀任務相關原始碼與測試。歷史資料：[HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md)。main／PR／CI 務必當場核對 GitHub，不引用過時 SHA 宣稱現況。
+> **先導航**：[REPO-MAP.md](./REPO-MAP.md) → 只讀任務相關原始碼與測試。現況：[CURRENT-STATUS.md](./CURRENT-STATUS.md)；文件分類：[DOCS-INDEX.md](./DOCS-INDEX.md)；歷史交接：[HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md)。main／PR／CI 務必當場核對 GitHub，不引用過時 SHA 宣稱現況。
 
 ## 現況與權限
 
-- `/Research-/` 是 Sanctum 靜態首頁，`/Research-/v2/` 只保留前往正式研究館的相容轉址，`/Research-/v3/` 是 Astro 全文研究館；**不是已完成的 Three.js 跨頁 3D 世界**。不可逆向將 V2 設回 root。
+- `/Research-/` 是 Sanctum 靜態首頁，`/Research-/v2/` 只保留前往正式研究館的相容轉址，`/Research-/v3/` 是 Astro 全文研究館。`/Research-/v3/observatory/` 是 `noindex` 的即時 Three.js 預覽（單一天文儀場景），**不是已完成的跨頁 3D 世界，也尚未取代正式首頁**。不可逆向將 V2 設回 root。
 - Owner 最新明示授權 > 本檔／導航 > 具日期的現況修訂 > 歷史計畫。有衝突先核對，不自行擴大需求。
-- 可在 `site/` 編輯、測試、推分支與開 Draft PR；`research/`、`docs/`、`showcase/` 原始資料唯讀。
-- 跨出 `site/`、改 workflow／Ruleset／Pages、加入未列技術、安裝工具、刪檔、合併、部署、啟動 P2，均需 Owner 額外明示同意。
+- 可在 `site/` 編輯、測試、推分支與開 Draft PR。`research/` 下的原始研究檔**不得改動**（網站的來源 SHA 與審查登記綁定其內容）；`docs/`、`showcase/` 的改動限於治理與說明文件本身。
+- 跨出 `site/`、改 workflow／Ruleset／Pages、加入未列技術、安裝工具、刪檔、合併、部署、啟動 P2，均需 Owner 當次明示同意。**2026-11-06 的一次性翻新授權及其範圍見根目錄 [AGENTS.md](../AGENTS.md)「授權紀錄」，不是常設授權。**
 
 ## 技術與不可退讓的契約
 
@@ -24,8 +24,9 @@
 
 Draft PR 需記錄：變更與授權範圍、最新 HEAD／CI、原文／素材溯源、未測部分、Owner 待決事項。不得自行合併或部署。
 
-## P1 必過檢查（2026-11-04 新增提案）
+## 必過檢查
 
-- 本工作包將未過濾的 `Research integrity / Markdown, JSON and governance integrity` job 擴大為完整 P1 website gate。因該 job 已列入 main-eag-100 Required Checks，所有 PR 的網站測試、來源核對和高風險 npm advisory 都必須成功（待本 PR 合併後生效）。
-- `V3 P0 build and checks` 與 `Publish Research Showcase` 仍提供額外建置證據，但因 paths filter 不把它們當成全路徑必過的唯一來源。
-- 實際硬性拒絕效果必須在合併後用不同路徑測試 PR 證明；CI PASS 不代表真機、人工美術或第三方權利查核通過。
+- 未過濾的 `Research integrity / Markdown, JSON and governance integrity` job 已是完整的網站 gate，並列入 main-eag-100 的 Required Checks：所有 PR 的網站單元測試、建置、來源溯源、瀏覽器測試與高風險 npm advisory 都必須成功。（2026-11-04 提案、其後已併入 main；Ruleset 設定本身以 GitHub 當下為準。）
+- `Publish Research Showcase`（單一 Pages 站點的組裝、`verify-pages-bundle` 與 `tests/pages` 瀏覽器測試）提供額外的組裝證據；它有 paths filter，不是全路徑必過的唯一來源。
+- `docs/governance/` 與 `site/` 頂層的 Markdown 必須在 [DOCS-INDEX.md](./DOCS-INDEX.md) 分類，否則 `scripts/check_repository.py` 失敗。
+- CI PASS 不代表真機、人工美術或第三方權利查核通過。
