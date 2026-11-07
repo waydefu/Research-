@@ -3,6 +3,12 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/38-noniv-webgpu-fft-ocean-renderer.md': {
+    title:'Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染',
+    topic:'即時 3D 渲染與 Shader',
+    creator:{label:'Noniv / web-ocean 原作者程式庫',url:'https://github.com/Noniv/web-ocean'},
+    demos:[{label:'Web Ocean 作者互動展示',url:'https://ocean-noniv.vercel.app/',note:'僅保留原站連結；未實機執行 WebGPU，也未核准或驗證 iframe 內嵌'}]
+  },
   'research/2026-11-universal-web-engine/36-gradientdeck-design-md-library-for-agents.md': {
     title:'GradientDeck UI：把真實網站整理成 DESIGN.md，讓 Agent 照風格設計',
     topic:'介面設計與視覺系統',

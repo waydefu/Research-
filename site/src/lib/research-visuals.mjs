@@ -30,6 +30,7 @@ export function motifFor(doc){
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
   // Source-specific schematics: agent score/audio, component motion, and CJK text layout.
+  if(/38-noniv-webgpu-fft-ocean-renderer\.md$/.test(file))return 'ocean';
   if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'score';
   if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
   if(/35-ui-typography-readability-and-cjk\.md$/.test(file))return 'layout';
@@ -135,6 +136,15 @@ export function renderResearchArt(doc){
     drawing=polygon('345,38 468,111 345,180 223,110')+polygon('223,110 345,180 345,265 223,194')+polygon('345,180 468,111 468,194 345,265')+
       line(345,38,345,180)+line(224,195,345,265)+line(345,265,469,194)+
       (sym==='geometry'?Array.from({length:4},(_,i)=>circ(260+i*58,110+i*8,9)).join(''):sym==='assets'?rect(475,70,56,43,5):'');
+  }else if(sym==='ocean'){
+    // Original sea-spectrum diagram: six frequency bands, a sun and layered wave fronts.
+    drawing=circ(362,92,26)+
+      Array.from({length:6},(_,i)=>{
+        const y=145+i*17;
+        return '<path d="M215 '+y+' Q250 '+(y-12-i%2*3)+' 288 '+y+
+          ' T360 '+y+' T432 '+y+' T505 '+y+'" '+stroke+'/>';
+      }).join('')+
+      line(318,246,412,246);
   }else if(sym==='score'){
     // Original compact score schematic; bounded SVG geometry even when scene motifs repeat.
     drawing=rect(211,65,298,172,6)+
