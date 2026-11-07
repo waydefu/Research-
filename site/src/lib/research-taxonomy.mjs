@@ -238,6 +238,8 @@ const raw = {
       ]
     ],
     ["07-music-skill-editable-agent-composition.md","Agent 工具與 Skills","music-skill：AI Agent 如何寫出可修改的原創配樂？",["music-skill","Agent Skills","音樂製作","MIDI","FluidSynth"]],
+    ["08-nvidia-skillspector-agent-skill-security.md","Agent 權限與安全","NVIDIA SkillSpector：安裝 Agent Skills 前如何掃描安全風險？",["NVIDIA","SkillSpector","Agent Skills","提示注入","供應鏈","MCP","SARIF"]],
+    ["09-nvidia-ai-workbench-reproducible-agent-containers.md","AI 開發環境與容器","NVIDIA AI Workbench：本地與遠端 AI 開發容器管理",["NVIDIA","AI Workbench","容器","Git","遠端 GPU","Agent"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -477,6 +479,8 @@ const raw = {
         "本機推論"
       ]
     ],
+    ["02-nvidia-parakeet-v3-multilingual-asr.md","語音辨識與字幕","NVIDIA Parakeet V3：25 種歐語辨識與中文支援限制",["NVIDIA","Parakeet","ASR","字幕","時間戳","中文限制","CC BY 4.0"]],
+    ["03-nvidia-broadcast-rtx-audio-video-effects.md","影片製作與自動化","NVIDIA Broadcast：RTX 人聲降噪、鏡頭特效與檔案處理",["NVIDIA","Broadcast","RTX","降噪","Eye Contact","File Processor","MCP"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -893,6 +897,8 @@ export const TOPIC_DESCRIPTORS = Object.freeze({
     "why": "設計代理分工、上下文交接與可恢復工作流程",
     "image": "workflow.svg"
   },
+  "AI 開發環境與容器": {"why":"管理可重現容器、Git 環境、遠端 GPU 與 Agent 隔離","image":"workflow.svg"},
+  "語音辨識與字幕": {"why":"研究 ASR 模型、語言支援、字幕時間戳及轉錄誤差","image":"studio.svg"},
   "Agent 工具與 Skills": {
     "why": "比較程式代理工具、MCP 與可重用技能",
     "image": "robot.svg"
