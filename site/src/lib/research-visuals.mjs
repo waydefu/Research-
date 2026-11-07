@@ -36,6 +36,7 @@ export function motifFor(doc){
   if(/09-nvidia-ai-workbench-reproducible-agent-containers\.md$/.test(file))return 'container';
   if(/02-nvidia-parakeet-v3-multilingual-asr\.md$/.test(file))return 'speech';
   if(/03-nvidia-broadcast-rtx-audio-video-effects\.md$/.test(file))return 'camera';
+  if(/39-infinitra-mathematical-world-volumetric-generation\.md$/.test(file))return 'world';
   if(/38-noniv-webgpu-fft-ocean-renderer\.md$/.test(file))return 'ocean';
   if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'score';
   if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
@@ -168,6 +169,12 @@ export function renderResearchArt(doc){
   }else if(sym==='camera'){
     drawing=rect(234,91,245,138,15)+circ(354,155,45)+
       rect(262,67,99,22,5)+rect(470,118,34,79,5)+circ(354,155,16);
+  }else if(sym==='world'){
+    // Original multi-scale procedural geometry schematic, not an INFINITRA screenshot.
+    drawing=circ(356,143,94)+circ(356,143,67)+circ(356,143,37)+
+      line(262,143,450,143)+line(356,49,356,237)+
+      polygon('289,170 324,125 344,156 382,113 421,169')+
+      Array.from({length:3},(_,i)=>rect(270+i*17,84-i*11,18,33+i*11,3)).join('');
   }else if(sym==='ocean'){
     // Original sea-spectrum diagram: six frequency bands, a sun and layered wave fronts.
     drawing=circ(362,92,26)+
