@@ -815,6 +815,7 @@ const raw = {
     ["36-gradientdeck-design-md-library-for-agents.md","介面設計與視覺系統","GradientDeck UI：把真實網站整理成 DESIGN.md，讓 Agent 照風格設計",["GradientDeck","DESIGN.md","設計系統","Agent","UI"]],
     ["37-threejs-grassworks-webgpu-grass-and-forest-demo.md","即時 3D 渲染與 Shader","Three.js Grassworks：WebGPU 草地系統、森林展示與商用授權",["Three.js","WebGPU","TSL","草地","授權"]],
     ["38-noniv-webgpu-fft-ocean-renderer.md","即時 3D 渲染與 Shader","Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染",["WebGPU","WGSL","FFT","JONSWAP","CDLOD","LEAN","海洋渲染"]],
+    ["39-infinitra-mathematical-world-volumetric-generation.md","程序生成與世界架構","INFINITRA：數學定義世界、體積生成與無縫細節切換",["INFINITRA","程序生成","體積世界","LOD","決定性生成","Delta 儲存","授權"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -973,6 +974,7 @@ export const TOPIC_DESCRIPTORS = Object.freeze({
     "why": "研究照片到三維資產的幾何重建、生成補完、模型推論與素材品質驗收",
     "image": "chip.svg"
   },
+  "程序生成與世界架構": {"why":"研究決定性三維世界、體積生成、無縫 LOD 與玩家修改持久化","image":"browser.svg"},
   "3D 資產與幾何最佳化": {
     "why": "研究 3D 模型、LOD、可見性裁剪與素材管線",
     "image": "chip.svg"
