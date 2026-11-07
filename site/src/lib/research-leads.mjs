@@ -35,7 +35,7 @@ export const EDITORIAL_LEADS = Object.freeze({
   "research/2026-11-agent-engineering/07-music-skill-editable-agent-composition.md": "介紹 music-skill 如何讓 AI Agent 逐音符寫譜，透過採樣樂器、合成器與混音流程產出可編輯 MIDI、分軌和母帶。這不是直接生成音訊的模型；音源品質、商用權利及 CPU 成本仍須依實際作品驗證。",
   "research/2026-11-agent-engineering/08-nvidia-skillspector-agent-skill-security.md": "NVIDIA SkillSpector 讓 Agent Skills 在安裝前接受提示注入、資料外洩、越權指令及依賴漏洞等安全掃描，並輸出 SARIF 或 JSON 供審查。官方 README 與文件記載的規則數量不同，風險評分不能代替人工審核與最低權限驗證，本研究尚未執行掃描。",
   "research/2026-11-agent-engineering/09-nvidia-ai-workbench-reproducible-agent-containers.md": "NVIDIA AI Workbench 以 Git 和版本化容器規格管理本地及遠端 AI 開發環境，可連接 IDE 與 Agent，也能使用遠端 GPU。平台雖可免費使用且能在 CPU 主機啟動，但受專有授權條款限制；容器隔離並非完整安全沙箱，本研究尚未安裝驗證。",
-  "research/2026-11-agent-engineering/10-agents-anywhere-cross-device-agent-workbench.md": "Agents Anywhere 讓手機、桌機及 Web 遠端管理工作設備上的 Codex、Claude Code 等 Agent，包含會話、核准、檔案與終端機。它透過 Server 和 Connector 轉發操作，並非手機本身執行桌面 Agent；官方發行版與 README 版本不同，需核對相容性、會話資料流向和自架安全。",
+  "research/2026-11-agent-engineering/10-agents-anywhere-cross-device-agent-workbench.md": "Agents Anywhere 讓手機、桌機及 Web 遠端管理 Codex、Claude Code 等 Agent，包含會話、核准、檔案與終端機。它透過 Server 和 Connector 轉發操作，並非手機本身執行桌面 Agent；官方發行版與 README 版本不同，需核對相容性、會話資料流向和自架安全。",
   "research/2026-11-agent-engineering/README.md": "這是 AI Coding 代理工程研究的閱讀入口，介紹 EGM、Claude Code、Advisor、Imagine 與 Jev 的研究關係。可以先看各工具解決的不同問題，再閱讀整合與證據核查。",
   "research/2026-11-agent-engineering/SOURCES.md": "列出 AI 代理研究使用的官方文件、原始專案及社群來源，並說明可信度等級和查證日期。這是追溯證據的索引，不是對外部功能已在本機可用的保證。",
   "research/2026-11-agent-repository-operations/01-governance-and-authority.md": "說明讓 AI 代理操作 GitHub 時，如何界定權限、核准人、變更範圍和信任邊界。適合設計安全的工作規範；文件中的權限矩陣仍需與真正的 GitHub 設定比對。",
