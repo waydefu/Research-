@@ -254,6 +254,43 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-engineering/10-agents-anywhere-cross-device-agent-workbench.md",
+      "sourceBlobSha": "d3e2f3413e0175129fe592d2217276a609ceaa82",
+      "sourceRevision": "f6af91f14e5da34fa5478f9de120953bcce728d8",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 anywhere-labs/Agents-Anywhere 官方 README、Connector、Android、Docker、首次使用與正式 v2.1.0 Release，核對遠端工作台、工作設備實際執行、Server/Connector 邊界、Cloud 區域與 v2.0.x／v2.1.0 相容性；未實際安裝、登入、配對或測試安全。",
+      "publicNotice": "Agents Anywhere 讓不同裝置查看與管理工作設備 Agent，手機端不直接變成桌機算力。README 的 2.0.3 下載表落後 2.1.0 正式 Release；2.1.0 Desktop／Connector／DSH 本機通道與 2.0.x 不相容，Server 遷移與資料安全需按版本確認。",
+      "remainingWork": "隔離帳號與資料先在測試環境驗證安裝、Android/Windows/CLI 配對、核准的負向權限、token 撤銷、跨帳號工作目錄隔離、TLS、附件儲存／刪除、斷線復原、v2_42–v2_44 升級及第三方授權，再決定是否正式接入。",
+      "knownSources": [
+        "https://github.com/anywhere-labs/Agents-Anywhere",
+        "https://github.com/anywhere-labs/Agents-Anywhere/blob/main/README.md",
+        "https://github.com/anywhere-labs/Agents-Anywhere/blob/main/connector/README.md",
+        "https://github.com/anywhere-labs/Agents-Anywhere/blob/main/docker/README.md",
+        "https://github.com/anywhere-labs/Agents-Anywhere/blob/main/docs/getting-started.md",
+        "https://github.com/anywhere-labs/Agents-Anywhere/releases/tag/v2.1.0"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-edge-infrastructure/01-android-phone-termux-proot-home-server.md",
+      "sourceBlobSha": "710213ff00e0441a7212e961fe1927e70a01c26b",
+      "sourceRevision": "af1cdb53921cedb4d9dab833cd66ca55225d5f2c",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "以 Reddit/Facebook 社群轉述的 Redmi 10C 截圖為研究線索，交叉閱讀 Xiaomi 台灣官方規格、Termux/proot-distro 官方文件、Termux Wake Lock 手冊、Android Doze 官方說明及 Pi-hole 系統需求；硬體與系統限制已核對，但貼文 ROM、伺服器持續上線、功耗、效能與快取率均未獨立驗證。",
+      "publicNotice": "一台 Redmi 10C 運行 Debian 與 Nextcloud、Pi-hole 等服務的社群案例不代表 2～3W 牆上功耗或永久可靠。PRoot 不具真實 root、systemd 與完整網路操作；Pi-hole 的官方支援發行版前提與 Android PRoot 不一致，不能把貼文當官方部署教學。",
+      "remainingWork": "使用外部電表與相同規格手機測量待機／負載功耗、GPU／CPU 溫度、電池安全、低耗電策略、Wi-Fi/Doze 行為、服務重啟恢復、DNS 53 埠、DB fsync、備份／還原與局域網容錯；只有通過故障注入與安全審查後再考慮部署非關鍵服務。",
+      "knownSources": [
+        "https://www.mi.com/tw/product/redmi-10c/specs/",
+        "https://github.com/termux/proot-distro",
+        "https://github.com/termux/termux-tools/blob/master/doc/termux.1.md.in",
+        "https://source.android.com/docs/core/power/platform_mgmt",
+        "https://docs.pi-hole.net/main/prerequisites/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
