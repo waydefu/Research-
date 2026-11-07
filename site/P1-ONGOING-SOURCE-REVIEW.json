@@ -190,6 +190,70 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-engineering/08-nvidia-skillspector-agent-skill-security.md",
+      "sourceBlobSha": "376311dbd41db82fd7d076225a39f1ff5993e026",
+      "sourceRevision": "534f6ad73c418580b42971342dd9f693c2dcca5d",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 NVIDIA/SkillSpector 上游 README 與 LICENSE、NVIDIA SkillSpector 官方使用文件，核對掃描輸入種類、靜態／可選語意分析、報告格式及 OSV；官方文件 68 模式與 GitHub README 71 模式存在版本差異。未安裝或執行掃描。",
+      "publicNotice": "SkillSpector 是開源技能安全分析工具，並非安全合格認證；偵測數量因官方文件與 README 版本不同而不同。作者研究樣本與 0–100 分數不能替代漏洞重現、完整覆蓋或人為風險判斷。",
+      "remainingWork": "固定版本後隔離安裝，建立良性／惡意／混淆／MCP 投毒測試集，跑靜態與可選 LLM 模式，記錄誤報漏報、覆蓋率、隱私資料流向、SARIF 有效性與負向防護。",
+      "knownSources": [
+        "https://github.com/NVIDIA/SkillSpector",
+        "https://github.com/NVIDIA/SkillSpector/blob/main/README.md",
+        "https://github.com/NVIDIA/SkillSpector/blob/main/LICENSE",
+        "https://docs.nvidia.com/skills/scanning-agent-skills"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-engineering/09-nvidia-ai-workbench-reproducible-agent-containers.md",
+      "sourceBlobSha": "ababdddb15df9ce91b9dcd3ae31057f6a3fa4776",
+      "sourceRevision": "947964aa37f7fb7175b705262eb3ba9b42e33edb",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 NVIDIA AI Workbench 官方 Overview、安裝指南、CPU-only FAQ、遠端位置文件，核對 Git Repo、project container、.project/spec.yaml、nvwb CLI 與 remote location 的官方設計；未安裝、實際建立容器或連遠端 GPU。",
+      "publicNotice": "NVIDIA AI Workbench 是免費但受產品 EULA 約束的 AI 專案環境管理平台；不是一鍵模型訓練器或 MIT 開源工具。容器化不保證完整安全隔離，對 GPU、SSH、Volumes 與外部主機仍需實測。",
+      "remainingWork": "在隔離主機建立測試 Repo、固定 Workbench 與容器 Digest、Lockfile，測本機與遠端重建一致性、Git diff、權限掛載、CPU-only 與 GPU 設定、使用成本和 EULA 再決定是否採用。",
+      "knownSources": [
+        "https://docs.nvidia.com/ai-workbench/overview/introduction",
+        "https://docs.nvidia.com/ai-workbench/user-guide/latest/installation/overview.html",
+        "https://docs.nvidia.com/ai-workbench/user-guide/latest/reference/faqs/integration-faq.html",
+        "https://docs.nvidia.com/ai-workbench/how-to/locations/overview/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-local-ai-inference/02-nvidia-parakeet-v3-multilingual-asr.md",
+      "sourceBlobSha": "3ab7a03eea221454f11c2f2c79a70cc515158206",
+      "sourceRevision": "a5ade128357e8585ca941676fb87f51d79e38f6b",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 NVIDIA Hugging Face Parakeet TDT 0.6B V3 官方模型卡及作者 Demo 連結，核對 600M 參數、FastConformer-TDT、詞級時間戳、25 種歐語、未支援中文、CC BY 4.0 與作者長音訊硬體條件；未下載權重或推論。",
+      "publicNotice": "Parakeet V3 模型卡列出的 25 種語言不含繁體／簡體中文；不能用它當可靠的中文轉錄預設。作者 WER、長音訊、A100 條件、語音模型商用權利均非本次獨立驗證。",
+      "remainingWork": "固定 model revision 與 inference runtime，用英語／支援歐語音檔和人工逐字稿量 WER、CER、RTF、時間戳誤差、VRAM 及功耗，對中文明標不在支援範圍；核對 CC BY 4.0 義務及音檔隱私。",
+      "knownSources": [
+        "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3",
+        "https://huggingface.co/spaces/nvidia/parakeet-tdt-0.6b-v3"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-local-ai-inference/03-nvidia-broadcast-rtx-audio-video-effects.md",
+      "sourceBlobSha": "1ae8d34c2adcf92070403594709b853f0a2177d7",
+      "sourceRevision": "24a6500ce0b269b31beb046c6b51665400300603",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 NVIDIA Broadcast 官方產品頁與 FAQ，核對降噪回音、背景、Eye Contact、Auto Frame、Studio Voice、File Processor、MCP Server 官方宣稱及基本 RTX 2060／8GB RAM 門檻；未下載、開啟程式或測試特效。",
+      "publicNotice": "NVIDIA Broadcast 為 RTX 硬體驅動的專用應用程式，不是開源。部分特效最低 GPU 門檻較高，File Processor 與 MCP Server 的存在不證明可無人監督自動批次輸出。未驗音畫品質、延遲或正式授權。",
+      "remainingWork": "在相容 RTX 桌機固定版本及驅動，測不開啟／開啟各效果的延遲、GPU 占用、人聲失真、畫面偽影、批次與虛擬裝置權限；核對 File Processor、MCP 文件和可撤銷設定。",
+      "knownSources": [
+        "https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/",
+        "https://www.nvidia.com/en-my/geforce/broadcasting/broadcast-app/faq/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
