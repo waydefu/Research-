@@ -30,6 +30,8 @@ export function motifFor(doc){
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
   // Source-specific schematics: agent score/audio, component motion, and CJK text layout.
+  if(/40-volumetric-clouds-unified-wind-vegetation-weather\.md$/.test(file))return 'weather';
+  if(/41-web-audio-spatial-coastal-soundscape-and-asset-rights\.md$/.test(file))return 'soundscape';
   if(/38-noniv-webgpu-fft-ocean-renderer\.md$/.test(file))return 'ocean';
   if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'score';
   if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
@@ -136,6 +138,17 @@ export function renderResearchArt(doc){
     drawing=polygon('345,38 468,111 345,180 223,110')+polygon('223,110 345,180 345,265 223,194')+polygon('345,180 468,111 468,194 345,265')+
       line(345,38,345,180)+line(224,195,345,265)+line(345,265,469,194)+
       (sym==='geometry'?Array.from({length:4},(_,i)=>circ(260+i*58,110+i*8,9)).join(''):sym==='assets'?rect(475,70,56,43,5):'');
+  }else if(sym==='weather'){
+    // Original diagram: drifting cloud bank and a line of wind-swept grass.
+    drawing=Array.from({length:5},(_,i)=>circ(283+i*41,102+(i%2)*12,29)).join('')+
+      line(250,163,450,163)+
+      Array.from({length:8},(_,i)=>line(259+i*26,252,268+i*26,215-(i%3)*10)).join('')+
+      line(237,195,488,195);
+  }else if(sym==='soundscape'){
+    // Original spatial-audio diagram: listener, emitters and concentric sound zones.
+    drawing=circ(350,155,72)+circ(350,155,43)+circ(350,155,14)+
+      circ(270,100,9)+circ(458,155,10)+circ(283,236,8)+
+      line(283,236,350,155)+line(270,100,350,155)+line(458,155,350,155);
   }else if(sym==='ocean'){
     // Original sea-spectrum diagram: six frequency bands, a sun and layered wave fronts.
     drawing=circ(362,92,26)+
