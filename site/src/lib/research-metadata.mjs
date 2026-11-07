@@ -16,7 +16,7 @@ export const CURATED = {
     demos:[{label:'官方功能與設定說明',url:'https://docs.nvidia.com/ai-workbench/overview/introduction',note:'文件非互動 Demo；未下載或連接遠端 GPU'}]
   },
   'research/2026-11-local-ai-inference/02-nvidia-parakeet-v3-multilingual-asr.md': {
-    title:'NVIDIA Parakeet V3：25 種歐語辨識與中文支援限制',
+    title:'NVIDIA Parakeet 第三版：25 種歐語辨識與中文支援限制',
     topic:'語音辨識與字幕',
     creator:{label:'NVIDIA Parakeet TDT 0.6B V3 模型卡',url:'https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3'},
     demos:[{label:'NVIDIA Parakeet 官方試用 Space',url:'https://huggingface.co/spaces/nvidia/parakeet-tdt-0.6b-v3',note:'僅連至原作者 Demo；本站未上傳音檔、未測試外站嵌入'}]
