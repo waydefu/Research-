@@ -59,7 +59,7 @@ export const EDITORIAL_LEADS = Object.freeze({
   "research/2026-11-information-security/infrastructure-and-physical-security.md": "整理資訊中心的實體保護、設備、網路、備份與異地復原做法，說明系統安全不只靠密碼或防火牆。適合盤點營運風險；實際復原時間仍需演練驗證。",
   "research/2026-11-information-security/security-guidance-evidence-review.md": "比較歷史教材與現代 NIST／OWASP 身分驗證建議的差異，避免把過時規則當成現行最佳實務。它是來源核查報告，不保證所有系統已依建議完成修改。",
   "research/2026-11-local-ai-inference/01-colibri-moe-streaming.md": "Colibri 研究如何在大型 MoE 模型推論時，將不同部分分別放在顯示卡記憶體、系統記憶體和固態硬碟，按需要讀取。這有助降低常駐記憶體壓力，但上游速度數據不代表本機實測。",
-  "research/2026-11-local-ai-inference/02-nvidia-parakeet-v3-multilingual-asr.md": "NVIDIA Parakeet TDT 0.6B V3 是支援 25 種歐洲語言的六億參數語音辨識模型，可產生標點與詞級時間戳，適合研究英文及歐語字幕。但官方語言清單不含中文，不能直接用作可靠繁體中文語音轉錄；模型卡效能與硬體成本仍需獨立測試。",
+  "research/2026-11-local-ai-inference/02-nvidia-parakeet-v3-multilingual-asr.md": "NVIDIA Parakeet TDT 0.6B 第三版支援 25 種歐洲語言的六億參數語音辨識模型，可產生標點與詞級時間戳，適合研究英文及歐語字幕。但官方語言清單不含中文，不能直接用作可靠繁體中文語音轉錄；模型卡效能與硬體成本仍需獨立測試。",
   "research/2026-11-local-ai-inference/03-nvidia-broadcast-rtx-audio-video-effects.md": "NVIDIA Broadcast 可透過 RTX 即時處理降噪、回音、虛擬背景、眼神與鏡頭構圖，官方也列有離線 File Processor 與 MCP 控制功能。它是需符合相容 RTX 門檻的專用軟體，不是開源模型；音畫品質、批次自動化能力與特效限制尚待實際測試。",
   "research/2026-11-local-ai-inference/README.md": "這是本機大型 AI 模型研究的入口，解釋 MoE 模型、VRAM／RAM／固態硬碟的分工與資料串流。適合評估硬體是否可能執行大型模型；降低常駐占用不等於保證對話流暢。",
   "research/2026-11-systems-analysis-design/README.md": "這份導覽將資訊系統開發拆成系統組成、商業需求、可行性與專案管理，方便依課程章節閱讀。適合入門系統分析；實際產品決策仍須確認使用者需求與資料來源。",
