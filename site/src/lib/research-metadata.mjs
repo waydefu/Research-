@@ -3,6 +3,15 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/39-infinitra-mathematical-world-volumetric-generation.md': {
+    title:'INFINITRA：數學定義世界、體積生成與無縫細節切換',
+    topic:'程序生成與世界架構',
+    creator:{label:'Richard Bogad / INFINITRA 官方專案',url:'https://github.com/richardbogad/INFINITRA'},
+    demos:[
+      {label:'作者公開的遊戲下載版本',url:'https://github.com/richardbogad/INFINITRA/releases',note:'Windows 遊戲下載，不是網頁內嵌展示；未安裝或進行性能測試'},
+      {label:'INFINITRA 官方網站',url:'https://www.infinitra.xyz/',note:'原作者網站，沒有檢查其互動或 iframe 允許情況'}
+    ]
+  },
   'research/2026-11-agent-engineering/10-agents-anywhere-cross-device-agent-workbench.md': {
     title:'Agents Anywhere：跨手機與電腦管理 Codex、Claude Code 工作階段',
     topic:'Agent 遠端工作台',
