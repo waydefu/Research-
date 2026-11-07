@@ -479,7 +479,7 @@ const raw = {
         "本機推論"
       ]
     ],
-    ["02-nvidia-parakeet-v3-multilingual-asr.md","語音辨識與字幕","NVIDIA Parakeet V3：25 種歐語辨識與中文支援限制",["NVIDIA","Parakeet","ASR","字幕","時間戳","中文限制","CC BY 4.0"]],
+    ["02-nvidia-parakeet-v3-multilingual-asr.md","語音辨識與字幕","NVIDIA Parakeet 第三版：25 種歐語辨識與中文支援限制",["NVIDIA","Parakeet","ASR","字幕","時間戳","中文限制","CC BY 4.0"]],
     ["03-nvidia-broadcast-rtx-audio-video-effects.md","影片製作與自動化","NVIDIA Broadcast：RTX 人聲降噪、鏡頭特效與檔案處理",["NVIDIA","Broadcast","RTX","降噪","Eye Contact","File Processor","MCP"]],
     [
       "README.md",
