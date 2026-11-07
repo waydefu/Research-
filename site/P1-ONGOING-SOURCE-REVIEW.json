@@ -193,8 +193,8 @@
     },
     {
       "path": "research/2026-11-universal-web-engine/40-volumetric-clouds-unified-wind-vegetation-weather.md",
-      "sourceBlobSha": "e1249dfffa647eb4adf794b8985c5bdfba5ceaae",
-      "sourceRevision": "f895d3ad334a3435064314ab711e3011048a3129",
+      "sourceBlobSha": "db6112bc1c16e54d3e348502a39e673089071397",
+      "sourceRevision": "db4222934bdcaa382dcc29d10437b21f683e4e93",
       "reviewedOn": "2026-11-08",
       "verifiedScope": "已閱讀 Eanpa Sky、Takram three-geospatial clouds、Three.js 官方體積雲示例、Field Grass、SeedThree 與 VIPER 11 作者說明，核對 WebGL2/WebGPU、TSL、postprocessing composer、MIT 程式碼與示範音訊的不同授權範圍；未執行作品、測雲影或真機效能。",
       "publicNotice": "這是跨專案體積雲、雲影與植被風場的技術選型與原創工程設計，不是已整合的天氣引擎。Eanpa 自訂 Renderer 及高首載成本、Takram composer 相容性、Field Grass Three.js 版本和 SeedThree alpha 均須個別核對；任何作者 FPS/資產大小不視為獨立測試。",
