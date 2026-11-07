@@ -807,6 +807,8 @@ const raw = {
     ["36-gradientdeck-design-md-library-for-agents.md","介面設計與視覺系統","GradientDeck UI：把真實網站整理成 DESIGN.md，讓 Agent 照風格設計",["GradientDeck","DESIGN.md","設計系統","Agent","UI"]],
     ["37-threejs-grassworks-webgpu-grass-and-forest-demo.md","即時 3D 渲染與 Shader","Three.js Grassworks：WebGPU 草地系統、森林展示與商用授權",["Three.js","WebGPU","TSL","草地","授權"]],
     ["38-noniv-webgpu-fft-ocean-renderer.md","即時 3D 渲染與 Shader","Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染",["WebGPU","WGSL","FFT","JONSWAP","CDLOD","LEAN","海洋渲染"]],
+    ["40-volumetric-clouds-unified-wind-vegetation-weather.md","即時 3D 渲染與 Shader","體積雲與統一風場：讓雲影、草浪與樹葉同一天氣系統連動",["Three.js","WebGL2","WebGPU","體積雲","風場","草地","雲影","WeatherState"]],
+    ["41-web-audio-spatial-coastal-soundscape-and-asset-rights.md","音訊技術與空間聲景","Web Audio 海岸聲景：海浪、海鷗、風聲的空間音效與授權",["Web Audio","Three.js","HRTF","海浪","海鷗","風聲","音效授權","CC0"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -952,6 +954,10 @@ export const TOPIC_DESCRIPTORS = Object.freeze({
   "網站安全、測試與部署": {
     "why": "維護 Web 系統安全、測試、CI 和發布流程",
     "image": "vault.svg"
+  },
+  "音訊技術與空間聲景": {
+    "why": "研究 Web Audio、3D 音源、動態聲景、混音、素材授權與音效效能",
+    "image": "studio.svg"
   },
   "即時 3D 渲染與 Shader": {
     "why": "比較 WebGL/WebGPU、著色器與即時場景引擎",
