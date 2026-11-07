@@ -30,6 +30,10 @@ export function motifFor(doc){
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
   // Source-specific schematics: agent score/audio, component motion, and CJK text layout.
+  if(/08-nvidia-skillspector-agent-skill-security\.md$/.test(file))return 'scan';
+  if(/09-nvidia-ai-workbench-reproducible-agent-containers\.md$/.test(file))return 'container';
+  if(/02-nvidia-parakeet-v3-multilingual-asr\.md$/.test(file))return 'speech';
+  if(/03-nvidia-broadcast-rtx-audio-video-effects\.md$/.test(file))return 'camera';
   if(/38-noniv-webgpu-fft-ocean-renderer\.md$/.test(file))return 'ocean';
   if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'score';
   if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
@@ -136,6 +140,20 @@ export function renderResearchArt(doc){
     drawing=polygon('345,38 468,111 345,180 223,110')+polygon('223,110 345,180 345,265 223,194')+polygon('345,180 468,111 468,194 345,265')+
       line(345,38,345,180)+line(224,195,345,265)+line(345,265,469,194)+
       (sym==='geometry'?Array.from({length:4},(_,i)=>circ(260+i*58,110+i*8,9)).join(''):sym==='assets'?rect(475,70,56,43,5):'');
+  }else if(sym==='scan'){
+    drawing=polygon('354,47 438,83 427,189 354,244 281,189 270,83')+
+      line(316,140,346,166)+line(346,166,395,110)+
+      line(267,220,319,220);
+  }else if(sym==='container'){
+    drawing=rect(214,60,294,174,9)+rect(239,81,244,17,2)+
+      Array.from({length:3},(_,i)=>rect(240+i*80,118,63,78,4)).join('')+
+      line(354,196,354,222);
+  }else if(sym==='speech'){
+    drawing=rect(234,60,241,154,20)+polygon('301,210 330,210 307,234')+
+      Array.from({length:9},(_,i)=>line(254+i*24,147-(i%4)*13,254+i*24,171+(i%4)*13)).join('');
+  }else if(sym==='camera'){
+    drawing=rect(234,91,245,138,15)+circ(354,155,45)+
+      rect(262,67,99,22,5)+rect(470,118,34,79,5)+circ(354,155,16);
   }else if(sym==='ocean'){
     // Original sea-spectrum diagram: six frequency bands, a sun and layered wave fronts.
     drawing=circ(362,92,26)+
