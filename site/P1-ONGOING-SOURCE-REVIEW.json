@@ -291,6 +291,26 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/39-infinitra-mathematical-world-volumetric-generation.md",
+      "sourceBlobSha": "a83a241327a05a3b9ec1c8376f5abe88e799a1c7",
+      "sourceRevision": "573208536ad1973a6b08fa5c6b2f575dd14b551a",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 richardbogad/INFINITRA 官方 README、LICENSE.md 與 EULA.md，核對作者對十兆公里連續數學三維世界、洞穴／室內、動態 LOD、決定性生成、持久化玩家修改、玩法與硬體的描述；確認 LICENSE.md 僅指定部分開源碼 MIT，核心 DLL 屬專有軟體。未取得能逐行重建核心生成演算法的原始碼，未執行遊戲或測試效能。",
+      "publicNotice": "INFINITRA 的世界規模、無縫 LOD 與三維體積生成均為作者敘述，缺少獨立算法與性能實驗；不可把其宣稱當已重現的通用技術。LICENSE.md 的 MIT 只適用明確指定的部分原始碼，不涵蓋 Infinitra.Client.dll、Infinitra.Shared.dll 與整體遊戲。",
+      "remainingWork": "在原作者授權範圍內固定可執行版本做 Windows／PC VR 觀測，獨立建立同種子位置重建、LOD 接縫、三維洞穴、delta 持久化與 CPU／GPU 預算測試；核對核心程式是否公開、第三方素材權利及 EULA，不拆解或重散布專有二進位。",
+      "knownSources": [
+        "https://github.com/richardbogad/INFINITRA",
+        "https://github.com/richardbogad/INFINITRA/blob/main/README.md",
+        "https://github.com/richardbogad/INFINITRA/blob/main/LICENSE.md",
+        "https://github.com/richardbogad/INFINITRA/blob/main/EULA.md",
+        "https://github.com/richardbogad/INFINITRA/blob/main/TERMS.md",
+        "https://github.com/richardbogad/INFINITRA/releases",
+        "https://www.infinitra.xyz/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
