@@ -190,6 +190,51 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/40-volumetric-clouds-unified-wind-vegetation-weather.md",
+      "sourceBlobSha": "e1249dfffa647eb4adf794b8985c5bdfba5ceaae",
+      "sourceRevision": "f895d3ad334a3435064314ab711e3011048a3129",
+      "reviewedOn": "2026-11-08",
+      "verifiedScope": "已閱讀 Eanpa Sky、Takram three-geospatial clouds、Three.js 官方體積雲示例、Field Grass、SeedThree 與 VIPER 11 作者說明，核對 WebGL2/WebGPU、TSL、postprocessing composer、MIT 程式碼與示範音訊的不同授權範圍；未執行作品、測雲影或真機效能。",
+      "publicNotice": "這是跨專案體積雲、雲影與植被風場的技術選型與原創工程設計，不是已整合的天氣引擎。Eanpa 自訂 Renderer 及高首載成本、Takram composer 相容性、Field Grass Three.js 版本和 SeedThree alpha 均須個別核對；任何作者 FPS/資產大小不視為獨立測試。",
+      "remainingWork": "選一個現有 WebGL2 3D 場景建立非侵入性 PoC，統一 weather/wind 時鐘，驗證相同雲密度投影、草浪傳播、樹枝與葉片延遲；分別在桌機/Android 測 GPU p95、shader warm-up、熱負載、記憶體、WebGPU fallback 和各資產授權。",
+      "knownSources": [
+        "https://github.com/SkyeShark/Eanpa-Sky",
+        "https://github.com/SkyeShark/Eanpa-Sky/blob/main/KNOWN_ISSUES.md",
+        "https://github.com/SkyeShark/Eanpa-Sky/blob/main/docs/SKY_SYSTEM_INTEGRATION.md",
+        "https://github.com/takram-design-engineering/three-geospatial",
+        "https://github.com/takram-design-engineering/three-geospatial/blob/main/packages/clouds/README.md",
+        "https://threejs.org/examples/webgl_volume_cloud.html",
+        "https://threejs.org/examples/webgpu_volume_cloud.html",
+        "https://github.com/matthew-kissinger/threejs-field-grass",
+        "https://github.com/SkyeShark/SeedThree",
+        "https://viperoneone.com/notes/clouds/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/41-web-audio-spatial-coastal-soundscape-and-asset-rights.md",
+      "sourceBlobSha": "3ea151168a17ee0ae3a39c63b7d88d4a9399fdc8",
+      "sourceRevision": "e35b1f7d898834344117ddc8c816359d9864b3a1",
+      "reviewedOn": "2026-11-08",
+      "verifiedScope": "已核對 Three.js AudioListener/PositionalAudio、MDN Web Audio API/AudioBufferSourceNode/PannerNode/Autoplay、OpenGameArt Beach Ocean Waves 與 Solo Seagull 發布頁的 CC0 標記，以及 Sonniss GDC 2026 官網與 2026-08-27 EULA v2.0；未下載音檔、聆聽、量測或判定第三方錄音授權鏈完整。",
+      "publicNotice": "本篇整理可互動海岸聲景的 Web Audio 混音與音區設計，不是完成音效產品。OpenGameArt 海浪頁列四段 CC0 FLAC；海鷗頁聲稱影片原作者許可，未獨立核對權利鏈；Sonniss 是可用於成品的專用授權，禁止裸音檔素材包重散布與 AI/ML 訓練。",
+      "remainingWork": "先對每個聲源查閱作者、正式授權、再散布範圍與 SHA，再用 Chrome/Firefox/Android 測 AudioContext gesture、HRTF emitter pool、loop crossfade、聽感、主輸出削波、混音分區、音訊 CPU／RAM、背景恢復，確認沒有將限制素材上傳公開 Repo。",
+      "knownSources": [
+        "https://threejs.org/docs/pages/AudioListener.html",
+        "https://threejs.org/docs/pages/PositionalAudio.html",
+        "https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode",
+        "https://developer.mozilla.org/en-US/docs/Web/API/PannerNode",
+        "https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay",
+        "https://opengameart.org/content/beach-ocean-waves",
+        "https://opengameart.org/content/solo-seagull-sound-effects",
+        "https://gdc.sonniss.com/",
+        "https://sonniss.com/gdc-bundle-license/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
