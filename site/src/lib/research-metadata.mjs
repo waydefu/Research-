@@ -9,7 +9,7 @@ export const CURATED = {
     creator:{label:'Richard Bogad / INFINITRA 官方專案',url:'https://github.com/richardbogad/INFINITRA'},
     demos:[
       {label:'作者公開的遊戲下載版本',url:'https://github.com/richardbogad/INFINITRA/releases',note:'Windows 遊戲下載，不是網頁內嵌展示；未安裝或進行性能測試'},
-      {label:'INFINITRA 官方網站',url:'https://www.infinitra.xyz/',note:'原作者網站，沒有檢查其互動或 iframe 允許情況'}
+      {label:'INFINITRA 官方網站',url:'https://www.infinitra.xyz/',note:'原作者網站，未驗證其互動表現或 iframe 允許情況'}
     ]
   },
   'research/2026-11-agent-engineering/10-agents-anywhere-cross-device-agent-workbench.md': {
