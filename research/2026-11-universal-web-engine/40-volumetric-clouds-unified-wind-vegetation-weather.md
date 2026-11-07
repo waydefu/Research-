@@ -2,7 +2,7 @@
 
 **來源最後核對：2026-11-08（Asia/Taipei）**  
 **範圍：** Three.js、WebGL2、WebGPU／TSL、體積雲、地面雲影、草浪、樹冠／葉片、共用氣象狀態、行動裝置降級。  
-**查證狀態：** 已讀原作者 README、官方 API／技術文件與上游相容限制；**本篇沒有安裝任何工具、執行示範、進行 GPU benchmark 或驗收手機 FPS**。以下公式、架構與預算是可重現的**工程設計建議**，不是任何既有產品已測得的表現。
+**查證狀態：** 已讀原作者 README、官方 API／技術文件與上游相容限制；**本篇未實測，也沒有安裝任何工具、執行示範、進行 GPU benchmark 或驗收手機 FPS**。以下公式、架構與預算是可重現的**工程設計建議**，不是任何既有產品已測得的表現。
 
 ## 1｜問題：雲、草與樹若各自擺動，畫面仍像假的
 
@@ -64,7 +64,7 @@
 
 - [Eanpa Sky README](https://github.com/SkyeShark/Eanpa-Sky)、[Cloud Shadow integration](https://github.com/SkyeShark/Eanpa-Sky/blob/main/docs/SKY_SYSTEM_INTEGRATION.md)、[Known Issues](https://github.com/SkyeShark/Eanpa-Sky/blob/main/KNOWN_ISSUES.md) — A：上游作者自述架構與限制，非本次 GPU 實測。
 - [Takram three-geospatial](https://github.com/takram-design-engineering/three-geospatial)、[clouds README](https://github.com/takram-design-engineering/three-geospatial/blob/main/packages/clouds/README.md)、[套件資訊](https://github.com/takram-design-engineering/three-geospatial/blob/main/packages/clouds/package.json) — A：官方功能、Composer 相容及 MIT 宣告。
-- [Three.js WebGL 體積雲](https://threejs.org/examples/webgl_volume_cloud.html)、[WebGPU 體積雲](https://threejs.org/examples/webgpu_volume_cloud.html) — A：官方可供實作參考的示範路徑；本站未執行。
+- [Three.js WebGL 體積雲](https://threejs.org/examples/webgl_volume_cloud.html)、[WebGPU 體積雲](https://threejs.org/examples/webgpu_volume_cloud.html) — A：官方可供實作參考的示範路徑；本次研究未執行。
 - [Field Grass](https://github.com/matthew-kissinger/threejs-field-grass)、[SeedThree](https://github.com/SkyeShark/SeedThree) — A：上游原始碼 README，版本與資產邊界以作者明示為準。
 - [VIPER 11 Clouds](https://viperoneone.com/notes/clouds/) — A：作者技術文章；不可代替第三方量測。
 - 本文統一 `WeatherState` 模型、品質路線、GPU 驗收規格 — C：工程推導；**NOT RUN**。
