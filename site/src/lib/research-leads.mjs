@@ -100,6 +100,7 @@ export const EDITORIAL_LEADS = Object.freeze({
   "research/2026-11-universal-web-engine/36-gradientdeck-design-md-library-for-agents.md": "介紹 GradientDeck UI 把 1,286 個真實網站整理成 DESIGN.md，讓 Claude Code、Codex 等 Agent 依色彩角色、字型與元件規則設計。已核對資料庫筆數與分布；內容是第三方詮釋，授權、擷取準確度與實際成效尚未驗證。",
   "research/2026-11-universal-web-engine/37-threejs-grassworks-webgpu-grass-and-forest-demo.md": "整理 Three.js Grassworks 的 WebGPU 森林展示、產品功能與商用授權，並說明哪些體驗設計可借鏡。展示頁未在 WebGPU 裝置執行，效能為廠商自述；授權限制 AI 檢索，不能把購得的原始碼放進本庫。",
   "research/2026-11-universal-web-engine/38-noniv-webgpu-fft-ocean-renderer.md": "深入 Noniv Web Ocean 的原生 WebGPU 海面管線：以六層 FFT 波譜計算海浪，搭配 CDLOD 幾何、LEAN 斜率反光、持續泡沫、物理式天空與 HDR 後製。原始碼能核對計算結構，但作者自報 GPU 時間、手機效能與展示品質都尚未獨立實測。",
+  "research/2026-11-universal-web-engine/39-infinitra-mathematical-world-volumetric-generation.md": "INFINITRA 提出以連續數學定義生成巨型三維世界，按視距計算體積地形、洞穴與室內，並只保存玩家造成的修改。本文整理決定性生成、無縫 LOD 與資料持久化的研究方法；核心演算法位於專有元件，十兆公里規模與性能仍屬作者聲明，沒有獨立重現或測量。",
   "research/2026-11-universal-web-engine/README.md": "這是現代 Web 工程與互動技術研究的總入口，串聯前後端框架、3D、效能、UI/UX 與網頁案例。適合先找子主題再閱讀原始研究，不能把選型提案當成已上線功能。",
   "research/2026-11-universal-web-engine/SOURCES.md": "彙整現代 Web 工程研究使用的官方文件、原始專案、版本和證據限制，方便核對框架與安全資訊。這是查證索引，不是已完成產品兼容或性能測試的證明。",
   "research/RESEARCH-TEMPLATE.md": "這是一份研究文件的寫作範本，示範如何記錄問題、結論、可重現方法、選項比較與採用條件。它提供撰寫結構，不代表任何特定工具已通過驗證或獲得使用授權。",
