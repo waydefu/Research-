@@ -30,6 +30,8 @@ export function motifFor(doc){
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
   // Source-specific schematics: agent score/audio, component motion, and CJK text layout.
+  if(/10-agents-anywhere-cross-device-agent-workbench\.md$/.test(file))return 'remote';
+  if(/01-android-phone-termux-proot-home-server\.md$/.test(file))return 'edge';
   if(/08-nvidia-skillspector-agent-skill-security\.md$/.test(file))return 'scan';
   if(/09-nvidia-ai-workbench-reproducible-agent-containers\.md$/.test(file))return 'container';
   if(/02-nvidia-parakeet-v3-multilingual-asr\.md$/.test(file))return 'speech';
@@ -140,6 +142,18 @@ export function renderResearchArt(doc){
     drawing=polygon('345,38 468,111 345,180 223,110')+polygon('223,110 345,180 345,265 223,194')+polygon('345,180 468,111 468,194 345,265')+
       line(345,38,345,180)+line(224,195,345,265)+line(345,265,469,194)+
       (sym==='geometry'?Array.from({length:4},(_,i)=>circ(260+i*58,110+i*8,9)).join(''):sym==='assets'?rect(475,70,56,43,5):'');
+  }else if(sym==='remote'){
+    // Original devices-and-connector diagram, bounded geometry and no external source art.
+    drawing=rect(225,78,92,152,12)+rect(240,94,62,108,4)+
+      rect(398,87,105,122,8)+rect(411,101,79,91,3)+
+      rect(333,118,47,57,4)+
+      line(317,151,333,151)+line(380,151,398,151)+
+      circ(356,145,9);
+  }else if(sym==='edge'){
+    // Original mobile-edge stack: phone chassis and three service tiers.
+    drawing=rect(274,40,172,225,18)+rect(291,68,137,165,7)+
+      Array.from({length:3},(_,i)=>rect(310,91+i*43,101,28,4)).join('')+
+      circ(360,249,6)+line(345,57,376,57);
   }else if(sym==='scan'){
     drawing=polygon('354,47 438,83 427,189 354,244 281,189 270,83')+
       line(316,140,346,166)+line(346,166,395,110)+
