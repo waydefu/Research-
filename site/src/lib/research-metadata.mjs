@@ -3,6 +3,25 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/40-volumetric-clouds-unified-wind-vegetation-weather.md': {
+    title:'體積雲與統一風場：讓雲影、草浪與樹葉同一天氣系統連動',
+    topic:'即時 3D 渲染與 Shader',
+    creator:null,
+    demos:[
+      {label:'Eanpa Sky 原作者展示',url:'https://skyeshark.github.io/Eanpa-Sky/',note:'需 WebGPU 的外站展示；未在本站測試、未授權 iframe 內嵌'},
+      {label:'Field Grass 原作者展示',url:'https://matthew-kissinger.github.io/threejs-field-grass/',note:'外站草地展示；作者指定 Three.js 0.185.x，未實測版本相容性'},
+      {label:'Three.js 官方 WebGL 體積雲',url:'https://threejs.org/examples/webgl_volume_cloud.html',note:'官方獨立技術 Demo，非完整風場套件；本站未實測'}
+    ]
+  },
+  'research/2026-11-universal-web-engine/41-web-audio-spatial-coastal-soundscape-and-asset-rights.md': {
+    title:'Web Audio 海岸聲景：海浪、海鷗、風聲的空間音效與授權',
+    topic:'音訊技術與空間聲景',
+    creator:null,
+    demos:[
+      {label:'海浪 CC0 素材原始頁',url:'https://opengameart.org/content/beach-ocean-waves',note:'原站候選錄音，非互動 Demo；本站未下載或試聽'},
+      {label:'Sonniss 官方商用音效授權',url:'https://sonniss.com/gdc-bundle-license/',note:'專用授權條款，非 CC0；原始或改造音檔不得作素材包再散布'}
+    ]
+  },
   'research/2026-11-universal-web-engine/38-noniv-webgpu-fft-ocean-renderer.md': {
     title:'Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染',
     topic:'即時 3D 渲染與 Shader',
