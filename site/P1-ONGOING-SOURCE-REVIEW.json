@@ -190,6 +190,127 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-engineering/08-nvidia-skillspector-agent-skill-security.md",
+      "sourceBlobSha": "376311dbd41db82fd7d076225a39f1ff5993e026",
+      "sourceRevision": "534f6ad73c418580b42971342dd9f693c2dcca5d",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 NVIDIA/SkillSpector 上游 README 與 LICENSE、NVIDIA SkillSpector 官方使用文件，核對掃描輸入種類、靜態／可選語意分析、報告格式及 OSV；官方文件 68 模式與 GitHub README 71 模式存在版本差異。未安裝或執行掃描。",
+      "publicNotice": "SkillSpector 是開源技能安全分析工具，並非安全合格認證；偵測數量因官方文件與 README 版本不同而不同。作者研究樣本與 0–100 分數不能替代漏洞重現、完整覆蓋或人為風險判斷。",
+      "remainingWork": "固定版本後隔離安裝，建立良性／惡意／混淆／MCP 投毒測試集，跑靜態與可選 LLM 模式，記錄誤報漏報、覆蓋率、隱私資料流向、SARIF 有效性與負向防護。",
+      "knownSources": [
+        "https://github.com/NVIDIA/SkillSpector",
+        "https://github.com/NVIDIA/SkillSpector/blob/main/README.md",
+        "https://github.com/NVIDIA/SkillSpector/blob/main/LICENSE",
+        "https://docs.nvidia.com/skills/scanning-agent-skills"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-engineering/09-nvidia-ai-workbench-reproducible-agent-containers.md",
+      "sourceBlobSha": "ababdddb15df9ce91b9dcd3ae31057f6a3fa4776",
+      "sourceRevision": "947964aa37f7fb7175b705262eb3ba9b42e33edb",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 NVIDIA AI Workbench 官方 Overview、安裝指南、CPU-only FAQ、遠端位置文件，核對 Git Repo、project container、.project/spec.yaml、nvwb CLI 與 remote location 的官方設計；未安裝、實際建立容器或連遠端 GPU。",
+      "publicNotice": "NVIDIA AI Workbench 是免費但受產品 EULA 約束的 AI 專案環境管理平台；不是一鍵模型訓練器或 MIT 開源工具。容器化不保證完整安全隔離，對 GPU、SSH、Volumes 與外部主機仍需實測。",
+      "remainingWork": "在隔離主機建立測試 Repo、固定 Workbench 與容器 Digest、Lockfile，測本機與遠端重建一致性、Git diff、權限掛載、CPU-only 與 GPU 設定、使用成本和 EULA 再決定是否採用。",
+      "knownSources": [
+        "https://docs.nvidia.com/ai-workbench/overview/introduction",
+        "https://docs.nvidia.com/ai-workbench/user-guide/latest/installation/overview.html",
+        "https://docs.nvidia.com/ai-workbench/user-guide/latest/reference/faqs/integration-faq.html",
+        "https://docs.nvidia.com/ai-workbench/how-to/locations/overview/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-local-ai-inference/02-nvidia-parakeet-v3-multilingual-asr.md",
+      "sourceBlobSha": "3ab7a03eea221454f11c2f2c79a70cc515158206",
+      "sourceRevision": "a5ade128357e8585ca941676fb87f51d79e38f6b",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 NVIDIA Hugging Face Parakeet TDT 0.6B V3 官方模型卡及作者 Demo 連結，核對 600M 參數、FastConformer-TDT、詞級時間戳、25 種歐語、未支援中文、CC BY 4.0 與作者長音訊硬體條件；未下載權重或推論。",
+      "publicNotice": "Parakeet V3 模型卡列出的 25 種語言不含繁體／簡體中文；不能用它當可靠的中文轉錄預設。作者 WER、長音訊、A100 條件、語音模型商用權利均非本次獨立驗證。",
+      "remainingWork": "固定 model revision 與 inference runtime，用英語／支援歐語音檔和人工逐字稿量 WER、CER、RTF、時間戳誤差、VRAM 及功耗，對中文明標不在支援範圍；核對 CC BY 4.0 義務及音檔隱私。",
+      "knownSources": [
+        "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3",
+        "https://huggingface.co/spaces/nvidia/parakeet-tdt-0.6b-v3"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-local-ai-inference/03-nvidia-broadcast-rtx-audio-video-effects.md",
+      "sourceBlobSha": "1ae8d34c2adcf92070403594709b853f0a2177d7",
+      "sourceRevision": "24a6500ce0b269b31beb046c6b51665400300603",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 NVIDIA Broadcast 官方產品頁與 FAQ，核對降噪回音、背景、Eye Contact、Auto Frame、Studio Voice、File Processor、MCP Server 官方宣稱及基本 RTX 2060／8GB RAM 門檻；未下載、開啟程式或測試特效。",
+      "publicNotice": "NVIDIA Broadcast 為 RTX 硬體驅動的專用應用程式，不是開源。部分特效最低 GPU 門檻較高，File Processor 與 MCP Server 的存在不證明可無人監督自動批次輸出。未驗音畫品質、延遲或正式授權。",
+      "remainingWork": "在相容 RTX 桌機固定版本及驅動，測不開啟／開啟各效果的延遲、GPU 占用、人聲失真、畫面偽影、批次與虛擬裝置權限；核對 File Processor、MCP 文件和可撤銷設定。",
+      "knownSources": [
+        "https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/",
+        "https://www.nvidia.com/en-my/geforce/broadcasting/broadcast-app/faq/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-engineering/10-agents-anywhere-cross-device-agent-workbench.md",
+      "sourceBlobSha": "d3e2f3413e0175129fe592d2217276a609ceaa82",
+      "sourceRevision": "f6af91f14e5da34fa5478f9de120953bcce728d8",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 anywhere-labs/Agents-Anywhere 官方 README、Connector、Android、Docker、首次使用與正式 v2.1.0 Release，核對遠端工作台、工作設備實際執行、Server/Connector 邊界、Cloud 區域與 v2.0.x／v2.1.0 相容性；未實際安裝、登入、配對或測試安全。",
+      "publicNotice": "Agents Anywhere 讓不同裝置查看與管理工作設備 Agent，手機端不直接變成桌機算力。README 的 2.0.3 下載表落後 2.1.0 正式 Release；2.1.0 Desktop／Connector／DSH 本機通道與 2.0.x 不相容，Server 遷移與資料安全需按版本確認。",
+      "remainingWork": "隔離帳號與資料先在測試環境驗證安裝、Android/Windows/CLI 配對、核准的負向權限、token 撤銷、跨帳號工作目錄隔離、TLS、附件儲存／刪除、斷線復原、v2_42–v2_44 升級及第三方授權，再決定是否正式接入。",
+      "knownSources": [
+        "https://github.com/anywhere-labs/Agents-Anywhere",
+        "https://github.com/anywhere-labs/Agents-Anywhere/blob/main/README.md",
+        "https://github.com/anywhere-labs/Agents-Anywhere/blob/main/connector/README.md",
+        "https://github.com/anywhere-labs/Agents-Anywhere/blob/main/docker/README.md",
+        "https://github.com/anywhere-labs/Agents-Anywhere/blob/main/docs/getting-started.md",
+        "https://github.com/anywhere-labs/Agents-Anywhere/releases/tag/v2.1.0"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-edge-infrastructure/01-android-phone-termux-proot-home-server.md",
+      "sourceBlobSha": "710213ff00e0441a7212e961fe1927e70a01c26b",
+      "sourceRevision": "af1cdb53921cedb4d9dab833cd66ca55225d5f2c",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "以 Reddit/Facebook 社群轉述的 Redmi 10C 截圖為研究線索，交叉閱讀 Xiaomi 台灣官方規格、Termux/proot-distro 官方文件、Termux Wake Lock 手冊、Android Doze 官方說明及 Pi-hole 系統需求；硬體與系統限制已核對，但貼文 ROM、伺服器持續上線、功耗、效能與快取率均未獨立驗證。",
+      "publicNotice": "一台 Redmi 10C 運行 Debian 與 Nextcloud、Pi-hole 等服務的社群案例不代表 2～3W 牆上功耗或永久可靠。PRoot 不具真實 root、systemd 與完整網路操作；Pi-hole 的官方支援發行版前提與 Android PRoot 不一致，不能把貼文當官方部署教學。",
+      "remainingWork": "使用外部電表與相同規格手機測量待機／負載功耗、GPU／CPU 溫度、電池安全、低耗電策略、Wi-Fi/Doze 行為、服務重啟恢復、DNS 53 埠、DB fsync、備份／還原與局域網容錯；只有通過故障注入與安全審查後再考慮部署非關鍵服務。",
+      "knownSources": [
+        "https://www.mi.com/tw/product/redmi-10c/specs/",
+        "https://github.com/termux/proot-distro",
+        "https://github.com/termux/termux-tools/blob/master/doc/termux.1.md.in",
+        "https://source.android.com/docs/core/power/platform_mgmt",
+        "https://docs.pi-hole.net/main/prerequisites/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/39-infinitra-mathematical-world-volumetric-generation.md",
+      "sourceBlobSha": "a83a241327a05a3b9ec1c8376f5abe88e799a1c7",
+      "sourceRevision": "573208536ad1973a6b08fa5c6b2f575dd14b551a",
+      "reviewedOn": "2026-11-07",
+      "verifiedScope": "已閱讀 richardbogad/INFINITRA 官方 README、LICENSE.md 與 EULA.md，核對作者對十兆公里連續數學三維世界、洞穴／室內、動態 LOD、決定性生成、持久化玩家修改、玩法與硬體的描述；確認 LICENSE.md 僅指定部分開源碼 MIT，核心 DLL 屬專有軟體。未取得能逐行重建核心生成演算法的原始碼，未執行遊戲或測試效能。",
+      "publicNotice": "INFINITRA 的世界規模、無縫 LOD 與三維體積生成均為作者敘述，缺少獨立算法與性能實驗；不可把其宣稱當已重現的通用技術。LICENSE.md 的 MIT 只適用明確指定的部分原始碼，不涵蓋 Infinitra.Client.dll、Infinitra.Shared.dll 與整體遊戲。",
+      "remainingWork": "在原作者授權範圍內固定可執行版本做 Windows／PC VR 觀測，獨立建立同種子位置重建、LOD 接縫、三維洞穴、delta 持久化與 CPU／GPU 預算測試；核對核心程式是否公開、第三方素材權利及 EULA，不拆解或重散布專有二進位。",
+      "knownSources": [
+        "https://github.com/richardbogad/INFINITRA",
+        "https://github.com/richardbogad/INFINITRA/blob/main/README.md",
+        "https://github.com/richardbogad/INFINITRA/blob/main/LICENSE.md",
+        "https://github.com/richardbogad/INFINITRA/blob/main/EULA.md",
+        "https://github.com/richardbogad/INFINITRA/blob/main/TERMS.md",
+        "https://github.com/richardbogad/INFINITRA/releases",
+        "https://www.infinitra.xyz/"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
