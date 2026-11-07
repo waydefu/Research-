@@ -3,6 +3,30 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-agent-engineering/08-nvidia-skillspector-agent-skill-security.md': {
+    title:'NVIDIA SkillSpector：安裝 Agent Skills 前如何掃描安全風險？',
+    topic:'Agent 權限與安全',
+    creator:{label:'NVIDIA / SkillSpector 官方原始碼',url:'https://github.com/NVIDIA/SkillSpector'},
+    demos:[{label:'NVIDIA 官方技能掃描指南',url:'https://docs.nvidia.com/skills/scanning-agent-skills',note:'僅原站文件連結；未安裝、執行或放行任何掃描器'}]
+  },
+  'research/2026-11-agent-engineering/09-nvidia-ai-workbench-reproducible-agent-containers.md': {
+    title:'NVIDIA AI Workbench：本地與遠端 AI 開發容器管理',
+    topic:'AI 開發環境與容器',
+    creator:{label:'NVIDIA AI Workbench 官方文件',url:'https://docs.nvidia.com/ai-workbench/overview/introduction'},
+    demos:[{label:'官方功能與設定說明',url:'https://docs.nvidia.com/ai-workbench/overview/introduction',note:'文件非互動 Demo；未下載或連接遠端 GPU'}]
+  },
+  'research/2026-11-local-ai-inference/02-nvidia-parakeet-v3-multilingual-asr.md': {
+    title:'NVIDIA Parakeet V3：25 種歐語辨識與中文支援限制',
+    topic:'語音辨識與字幕',
+    creator:{label:'NVIDIA Parakeet TDT 0.6B V3 模型卡',url:'https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3'},
+    demos:[{label:'NVIDIA Parakeet 官方試用 Space',url:'https://huggingface.co/spaces/nvidia/parakeet-tdt-0.6b-v3',note:'僅連至原作者 Demo；本站未上傳音檔、未測試外站嵌入'}]
+  },
+  'research/2026-11-local-ai-inference/03-nvidia-broadcast-rtx-audio-video-effects.md': {
+    title:'NVIDIA Broadcast：RTX 人聲降噪、鏡頭特效與檔案處理',
+    topic:'影片製作與自動化',
+    creator:{label:'NVIDIA Broadcast 官方產品頁',url:'https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/'},
+    demos:[{label:'官方功能展示與下載頁',url:'https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/',note:'產品說明頁非通用 SDK；未測試 RTX 特效或允許 iframe'}]
+  },
   'research/2026-11-universal-web-engine/38-noniv-webgpu-fft-ocean-renderer.md': {
     title:'Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染',
     topic:'即時 3D 渲染與 Shader',
