@@ -240,6 +240,7 @@ const raw = {
     ["07-music-skill-editable-agent-composition.md","Agent 工具與 Skills","music-skill：AI Agent 如何寫出可修改的原創配樂？",["music-skill","Agent Skills","音樂製作","MIDI","FluidSynth"]],
     ["08-nvidia-skillspector-agent-skill-security.md","Agent 權限與安全","NVIDIA SkillSpector：安裝 Agent Skills 前如何掃描安全風險？",["NVIDIA","SkillSpector","Agent Skills","提示注入","供應鏈","MCP","SARIF"]],
     ["09-nvidia-ai-workbench-reproducible-agent-containers.md","AI 開發環境與容器","NVIDIA AI Workbench：本地與遠端 AI 開發容器管理",["NVIDIA","AI Workbench","容器","Git","遠端 GPU","Agent"]],
+    ["10-agents-anywhere-cross-device-agent-workbench.md","Agent 遠端工作台","Agents Anywhere：跨手機與電腦管理 Codex、Claude Code 工作階段",["Agents Anywhere","Agent","Connector","Codex","Claude Code","遠端管理","自架"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -467,6 +468,9 @@ const raw = {
         "身分驗證"
       ]
     ]
+  ],
+  "research/2026-11-edge-infrastructure": [
+    ["01-android-phone-termux-proot-home-server.md","邊緣設備與自架服務","舊 Android 手機當低功耗伺服器：Termux、PRoot 與長期可靠性",["Android","Termux","PRoot","Debian","Pi-hole","低功耗","家庭伺服器"]]
   ],
   "research/2026-11-local-ai-inference": [
     [
@@ -897,6 +901,8 @@ export const TOPIC_DESCRIPTORS = Object.freeze({
     "why": "設計代理分工、上下文交接與可恢復工作流程",
     "image": "workflow.svg"
   },
+  "Agent 遠端工作台": {"why":"管理跨裝置 Agent 會話、Connector 權限、遠端核准及自架服務","image":"robot.svg"},
+  "邊緣設備與自架服務": {"why":"研究舊手機等低功耗裝置部署 Linux 服務的可靠性、安全與成本","image":"servers.svg"},
   "AI 開發環境與容器": {"why":"管理可重現容器、Git 環境、遠端 GPU 與 Agent 隔離","image":"workflow.svg"},
   "語音辨識與字幕": {"why":"研究 ASR 模型、語言支援、字幕時間戳及轉錄誤差","image":"studio.svg"},
   "Agent 工具與 Skills": {
