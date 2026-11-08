@@ -238,8 +238,8 @@
     },
     {
       "path": "research/2026-11-universal-web-engine/42-ten-cloud-genera-procedural-algorithms-and-rendering.md",
-      "sourceBlobSha": "5b4dd21e39cfd8a72381da49d1fbd3f9fa464018",
-      "sourceRevision": "2a58aaadb52a61b35a4e48f7b5bd9d98388c65f2",
+      "sourceBlobSha": "541b43fe171685f1924786b439d48ccf2b9e7c2d",
+      "sourceRevision": "086e7e2f556421d28342b2c3372186f9c86989e1",
       "reviewedOn": "2026-11-08",
       "verifiedScope": "已核對 WMO 十雲屬與溫帶雲高、NOAA 與香港天文台形態定義；逐段閱讀 takustaqu/atmosphere v0.12.0 固定提交 01223085 的 src/clouds.ts、src/shaders/sky.ts 中 cloudField、cuLump、cuField、積雲 slab、stratiform、granular、flocks、filament、cloudLight/cloudColor、iceHalo、sea cloud shadows 與 anti-aliasing、precision 處理，另查 src/quality.ts、features.ts、renderer.ts；比對 Unity HDRP 與 Guerrilla Nubis。屬靜態原始碼閱讀，沒有 clone 本機、執行 Shader、GPU/手機 benchmark 或視覺實測。",
       "publicNotice": "上游註解確認單閾值連續場在地平線會拉成放射狀條紋、固定格點在細雲會產生方格壁紙；積雲以單雲塊 cuLump 45% 權重和有限高度 slab 塑形，並非完整 3D；flocks 才有多旋轉格線處理，granular 是不同的 roll 方法。密度差分明暗會額外做多個 noise taps，不可稱單一 GPU texture fetch。作者雲影目前只在海水着色，不是通用地形雲影圖；沒有任何本次視覺或效能測量。",
