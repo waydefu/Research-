@@ -193,8 +193,8 @@
     },
     {
       "path": "research/2026-11-universal-web-engine/43-webgl2-rendering-performance-visibility-and-benchmark-protocol.md",
-      "sourceBlobSha": "b45c932450097082cef93f5eb9af6e2276d5975c",
-      "sourceRevision": "8acf41147071cd93eb09ae2b51ed1a971e4795d8",
+      "sourceBlobSha": "a2de4e5534ebd09cc24908ba765301391bc3b3e8",
+      "sourceRevision": "646f613d3e754bfdd5f4b079730129a11986ab55",
       "reviewedOn": "2026-11-09",
       "verifiedScope": "核對 Three.js InstancedMesh、BatchedMesh、LOD 與 WebGPURenderer 官方 API，MDN／Khronos GPU timer 規格；分區合批與多 Pass 策略是工程設計推論，並未執行跨裝置基準。",
       "publicNotice": "此篇是 WebGL2 場景效能研究與測試規格。官方 API 能力已核對，但沒有同場景可重現的 CPU／GPU 提升百分比，也未完成 Android 長時間實測；所有外部結論並未逐項獨立驗證。",
@@ -211,8 +211,8 @@
     },
     {
       "path": "research/2026-11-universal-web-engine/44-seamless-world-streaming-lod-hlod-resource-lifecycle.md",
-      "sourceBlobSha": "676f9dfe6f3bd6c9cad8ef630b2533d490aec59f",
-      "sourceRevision": "8acf41147071cd93eb09ae2b51ed1a971e4795d8",
+      "sourceBlobSha": "1463559aa629903b9f4567e064d14298c5f64c98",
+      "sourceRevision": "646f613d3e754bfdd5f4b079730129a11986ab55",
       "reviewedOn": "2026-11-09",
       "verifiedScope": "核對 Three.js LOD、GLTFLoader、KTX2Loader、InstancedMesh、BatchedMesh 官方機制與 meshoptimizer gltfpack 原始專案文檔；Stream Scheduler／World State 狀態機是設計提案，無跨區原型實測。",
       "publicNotice": "本文研究無縫世界串流、LOD、存檔狀態與資產生命週期的可行架構。僅部分底層官方能力已核對，兩 Chunk 原型、設備記憶體、FPS 和畫面連續性並未實測，所有外部主張並未逐項獨立驗證。",
