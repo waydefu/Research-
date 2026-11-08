@@ -40,6 +40,8 @@ export function motifFor(doc){
   if(/42-ten-cloud-genera-procedural-algorithms-and-rendering\.md$/.test(file))return 'genera';
   if(/40-volumetric-clouds-unified-wind-vegetation-weather\.md$/.test(file))return 'weather';
   if(/41-web-audio-spatial-coastal-soundscape-and-asset-rights\.md$/.test(file))return 'soundscape';
+  if(/43-webgl2-rendering-performance-visibility-and-benchmark-protocol\.md$/.test(file))return 'visibility';
+  if(/44-seamless-world-streaming-lod-hlod-resource-lifecycle\.md$/.test(file))return 'streaming';
   if(/38-noniv-webgpu-fft-ocean-renderer\.md$/.test(file))return 'ocean';
   if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'score';
   if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
@@ -137,7 +139,17 @@ export function renderResearchArt(doc){
   const polygon=points=>'<polygon points="'+points+'" '+stroke+'/>';
   const sym=visualForDoc(doc).motif;
   let drawing='';
-  if(sym==='pixels'){
+  if(sym==='visibility'){
+    // Original rendering diagram: a camera frustum intersects several independent render cells.
+    drawing=polygon('217,223 292,94 465,94 528,223')+
+      Array.from({length:4},(_,i)=>rect(256+(i%2)*94,121+Math.floor(i/2)*64,74,49,4)).join('')+
+      line(211,225,520,225)+circ(373,245,9);
+  }else if(sym==='streaming'){
+    // Original stream lifecycle: adjacent regions, arrows, and a persistent world-state store.
+    drawing=Array.from({length:3},(_,i)=>rect(208+i*109,75,90,79,6)).join('')+
+      line(298,115,317,115)+line(407,115,426,115)+
+      rect(293,195,134,50,7)+line(251,156,323,195)+line(469,156,397,195);
+  }else if(sym==='pixels'){
     drawing=rect(220,60,285,158,9)+Array.from({length:52},(_,i)=>{
       const x=247+(i%13)*18, y=82+Math.floor(i/13)*24;
       const on=((i*13+seed)%9)<4;return on?'<rect x="'+x+'" y="'+y+'" width="13" height="13" fill="'+accent+'" opacity="'+(.32+((i+seed)%5)*.12)+'"/>':'';

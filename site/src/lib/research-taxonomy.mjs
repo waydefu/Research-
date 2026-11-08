@@ -819,6 +819,8 @@ const raw = {
     ["40-volumetric-clouds-unified-wind-vegetation-weather.md","即時 3D 渲染與 Shader","體積雲與統一風場：讓雲影、草浪與樹葉同一天氣系統連動",["Three.js","WebGL2","WebGPU","體積雲","風場","草地","雲影","WeatherState"]],
     ["41-web-audio-spatial-coastal-soundscape-and-asset-rights.md","音訊技術與空間聲景","Web Audio 海岸聲景：海浪、海鷗、風聲的空間音效與授權",["Web Audio","Three.js","HRTF","海浪","海鷗","風聲","音效授權","CC0"]],
     ["42-ten-cloud-genera-procedural-algorithms-and-rendering.md","即時 3D 渲染與 Shader","十種雲怎麼用程式生成？WMO 雲屬與體積雲 Shader 演算法",["WMO","十種雲","Atmosphere","GLSL","Cloud Density","Raymarch","雲層","WebGPU","MIT"]],
+    ["43-webgl2-rendering-performance-visibility-and-benchmark-protocol.md","即時 3D 渲染與 Shader","WebGL2 大型場景效能：量測、空間合批與剔除",["Three.js","WebGL2","Frustum Culling","BatchedMesh","GPU Timer","Benchmark"]],
+    ["44-seamless-world-streaming-lod-hlod-resource-lifecycle.md","即時 3D 渲染與 Shader","無縫大世界如何設計？Chunk、LOD、HLOD 與資源生命週期",["Three.js","Chunk Streaming","LOD","HLOD","World State","Meshopt"]],
     [
       "README.md",
       "資料來源與研究索引",
