@@ -20,6 +20,8 @@ const raw = {
         "回退"
       ]
     ],
+    ["43-webgl2-rendering-performance-visibility-and-benchmark-protocol.md","即時 3D 渲染與 Shader","WebGL2 大型場景效能：量測、空間合批與剔除",["Three.js","WebGL2","Frustum Culling","BatchedMesh","GPU Timer","Benchmark"]],
+    ["44-seamless-world-streaming-lod-hlod-resource-lifecycle.md","即時 3D 渲染與 Shader","無縫大世界如何設計？Chunk、LOD、HLOD 與資源生命週期",["Three.js","Chunk Streaming","LOD","HLOD","World State","Meshopt"]],
     [
       "README.md",
       "資料來源與研究索引",
