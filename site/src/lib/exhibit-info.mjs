@@ -5,6 +5,7 @@ const IMG='/Research-/v3/research-exhibits/';
 export const EXHIBITS={
   '2026-10-retrospective':{name:'十月跨領域技術回顧',what:'整理 AI 代理、Web 3D、音訊、影片自動化與工程治理的研究摘要。',use:'適合從不同技術領域回顧研究結果，並辨識尚待查證的候選工具。',image:IMG+'books.svg'},
   '2026-11-information-security':{name:'資訊安全與保護資料',what:'認識網路攻擊、帳號權限、加密與漏洞，理解資料怎樣避免被偷走或誤用。',use:'適合想保護帳號、網站、公司資料或學習基本資安知識的讀者。',image:IMG+'privacy.svg'},
+  '2026-11-edge-infrastructure':{name:'低功耗設備與自架服務',what:'研究手機、微型電腦和 Linux 使用者空間如何提供長時間運作的網路服務。',use:'適合評估 Termux、PRoot、家庭 DNS、私有雲與備份可靠性。',image:IMG+'servers.svg'},
   '2026-11-local-ai-inference':{name:'讓 AI 在自己的電腦與手機運作',what:'研究本機模型、記憶體與執行速度，理解不用全靠雲端也能運行 AI。',use:'適合想在自己的硬體部署模型，或比較效能與成本的讀者。',image:IMG+'chip.svg'},
   '2026-11-systems-analysis-design':{name:'系統分析與需求設計',what:'從釐清需求、畫出流程到設計資料與畫面，學習如何規劃一個能真正運作的系統。',use:'適合資訊管理課程、產品規劃或想從零設計資訊系統的人。',image:IMG+'analysis.svg'},
   '2026-11-universal-web-engine':{name:'網站、三維場景與互動設計',what:'研究網頁外觀、動畫、3D 場景與載入效能，包含真實網站案例。',use:'適合想製作網站、互動作品或改善使用體驗的人。',image:IMG+'browser.svg'},

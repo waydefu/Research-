@@ -30,6 +30,16 @@ export function motifFor(doc){
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
   // Source-specific schematics: agent score/audio, component motion, and CJK text layout.
+  if(/10-agents-anywhere-cross-device-agent-workbench\.md$/.test(file))return 'remote';
+  if(/01-android-phone-termux-proot-home-server\.md$/.test(file))return 'edge';
+  if(/08-nvidia-skillspector-agent-skill-security\.md$/.test(file))return 'scan';
+  if(/09-nvidia-ai-workbench-reproducible-agent-containers\.md$/.test(file))return 'container';
+  if(/02-nvidia-parakeet-v3-multilingual-asr\.md$/.test(file))return 'speech';
+  if(/03-nvidia-broadcast-rtx-audio-video-effects\.md$/.test(file))return 'camera';
+  if(/39-infinitra-mathematical-world-volumetric-generation\.md$/.test(file))return 'world';
+  if(/42-ten-cloud-genera-procedural-algorithms-and-rendering\.md$/.test(file))return 'genera';
+  if(/40-volumetric-clouds-unified-wind-vegetation-weather\.md$/.test(file))return 'weather';
+  if(/41-web-audio-spatial-coastal-soundscape-and-asset-rights\.md$/.test(file))return 'soundscape';
   if(/43-webgl2-rendering-performance-visibility-and-benchmark-protocol\.md$/.test(file))return 'visibility';
   if(/44-seamless-world-streaming-lod-hlod-resource-lifecycle\.md$/.test(file))return 'streaming';
   if(/38-noniv-webgpu-fft-ocean-renderer\.md$/.test(file))return 'ocean';
@@ -148,6 +158,55 @@ export function renderResearchArt(doc){
     drawing=polygon('345,38 468,111 345,180 223,110')+polygon('223,110 345,180 345,265 223,194')+polygon('345,180 468,111 468,194 345,265')+
       line(345,38,345,180)+line(224,195,345,265)+line(345,265,469,194)+
       (sym==='geometry'?Array.from({length:4},(_,i)=>circ(260+i*58,110+i*8,9)).join(''):sym==='assets'?rect(475,70,56,43,5):'');
+  }else if(sym==='remote'){
+    // Original devices-and-connector diagram, bounded geometry and no external source art.
+    drawing=rect(225,78,92,152,12)+rect(240,94,62,108,4)+
+      rect(398,87,105,122,8)+rect(411,101,79,91,3)+
+      rect(333,118,47,57,4)+
+      line(317,151,333,151)+line(380,151,398,151)+
+      circ(356,145,9);
+  }else if(sym==='edge'){
+    // Original mobile-edge stack: phone chassis and three service tiers.
+    drawing=rect(274,40,172,225,18)+rect(291,68,137,165,7)+
+      Array.from({length:3},(_,i)=>rect(310,91+i*43,101,28,4)).join('')+
+      circ(360,249,6)+line(345,57,376,57);
+  }else if(sym==='scan'){
+    drawing=polygon('354,47 438,83 427,189 354,244 281,189 270,83')+
+      line(316,140,346,166)+line(346,166,395,110)+
+      line(267,220,319,220);
+  }else if(sym==='container'){
+    drawing=rect(214,60,294,174,9)+rect(239,81,244,17,2)+
+      Array.from({length:3},(_,i)=>rect(240+i*80,118,63,78,4)).join('')+
+      line(354,196,354,222);
+  }else if(sym==='speech'){
+    drawing=rect(234,60,241,154,20)+polygon('301,210 330,210 307,234')+
+      Array.from({length:9},(_,i)=>line(254+i*24,147-(i%4)*13,254+i*24,171+(i%4)*13)).join('');
+  }else if(sym==='camera'){
+    drawing=rect(234,91,245,138,15)+circ(354,155,45)+
+      rect(262,67,99,22,5)+rect(470,118,34,79,5)+circ(354,155,16);
+  }else if(sym==='world'){
+    // Original multi-scale procedural geometry schematic, not an INFINITRA screenshot.
+    drawing=circ(356,143,94)+circ(356,143,67)+circ(356,143,37)+
+      line(262,143,450,143)+line(356,49,356,237)+
+      polygon('289,170 324,125 344,156 382,113 421,169')+
+      Array.from({length:3},(_,i)=>rect(270+i*17,84-i*11,18,33+i*11,3)).join('');
+  }else if(sym==='genera'){
+    // Original cloud-morphology taxonomy schematic, not meteorological photography.
+    drawing=Array.from({length:7},(_,i)=>line(222+i*7,79+i*2,294+i*10,62+i*5)).join('')+
+      Array.from({length:6},(_,i)=>circ(365+(i%3)*28,91+Math.floor(i/3)*27,12)).join('')+
+      line(227,164,489,164)+line(227,181,489,181)+
+      Array.from({length:5},(_,i)=>circ(286+i*32,225-(i%3)*16,19)).join('');
+  }else if(sym==='weather'){
+    // Original diagram: drifting cloud bank and a line of wind-swept grass.
+    drawing=Array.from({length:5},(_,i)=>circ(283+i*41,102+(i%2)*12,29)).join('')+
+      line(250,163,450,163)+
+      Array.from({length:8},(_,i)=>line(259+i*26,252,268+i*26,215-(i%3)*10)).join('')+
+      line(237,195,488,195);
+  }else if(sym==='soundscape'){
+    // Original spatial-audio diagram: listener, emitters and concentric sound zones.
+    drawing=circ(350,155,72)+circ(350,155,43)+circ(350,155,14)+
+      circ(270,100,9)+circ(458,155,10)+circ(283,236,8)+
+      line(283,236,350,155)+line(270,100,350,155)+line(458,155,350,155);
   }else if(sym==='ocean'){
     // Original sea-spectrum diagram: six frequency bands, a sun and layered wave fronts.
     drawing=circ(362,92,26)+
