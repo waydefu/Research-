@@ -809,6 +809,7 @@ const raw = {
     ["38-noniv-webgpu-fft-ocean-renderer.md","即時 3D 渲染與 Shader","Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染",["WebGPU","WGSL","FFT","JONSWAP","CDLOD","LEAN","海洋渲染"]],
     ["40-volumetric-clouds-unified-wind-vegetation-weather.md","即時 3D 渲染與 Shader","體積雲與統一風場：讓雲影、草浪與樹葉同一天氣系統連動",["Three.js","WebGL2","WebGPU","體積雲","風場","草地","雲影","WeatherState"]],
     ["41-web-audio-spatial-coastal-soundscape-and-asset-rights.md","音訊技術與空間聲景","Web Audio 海岸聲景：海浪、海鷗、風聲的空間音效與授權",["Web Audio","Three.js","HRTF","海浪","海鷗","風聲","音效授權","CC0"]],
+    ["42-ten-cloud-genera-procedural-algorithms-and-rendering.md","即時 3D 渲染與 Shader","十種雲怎麼用程式生成？WMO 雲屬與體積雲 Shader 演算法",["WMO","十種雲","Atmosphere","GLSL","Cloud Density","Raymarch","雲層","WebGPU","MIT"]],
     [
       "README.md",
       "資料來源與研究索引",
