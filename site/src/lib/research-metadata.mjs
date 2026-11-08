@@ -3,6 +3,16 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/42-ten-cloud-genera-procedural-algorithms-and-rendering.md': {
+    title:'十種雲怎麼用程式生成？WMO 雲屬與體積雲 Shader 演算法',
+    topic:'即時 3D 渲染與 Shader',
+    creator:null,
+    demos:[
+      {label:'Atmosphere 官方原始碼與十雲屬展示說明',url:'https://github.com/takustaqu/atmosphere',note:'作者程式與示例入口；未執行 WebGL 程式，也未核准內嵌'},
+      {label:'Three.js 官方 WebGPU 體積雲展示',url:'https://threejs.org/examples/webgpu_volume_cloud.html',note:'官方 Raymarch 技術示例，不代表能渲染所有 WMO 雲屬；未實測'},
+      {label:'WMO 雲屬辨識參考',url:'https://cloudatlas.wmo.int/en/cloud-identification-guide.html',note:'氣象標準照片與辨識，不是渲染器互動展示'}
+    ]
+  },
   'research/2026-11-universal-web-engine/40-volumetric-clouds-unified-wind-vegetation-weather.md': {
     title:'體積雲與統一風場：讓雲影、草浪與樹葉同一天氣系統連動',
     topic:'即時 3D 渲染與 Shader',
