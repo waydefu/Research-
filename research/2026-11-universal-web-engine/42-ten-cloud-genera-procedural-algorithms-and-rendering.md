@@ -161,14 +161,14 @@ type CloudWeather = {
 
 ## 9｜原始碼深讀：形狀錯誤、抗鋸齒與雲影邊界（0.12.0）
 
-本節依上游 **\`01223085dc0bb6a0ab3def2c303b54ff8d5b4c38\`** 的實際 \`src/clouds.ts\`、\`src/shaders/sky.ts\`、\`src/quality.ts\`、\`src/features.ts\`、\`src/renderer.ts\` 查核。屬於**程式碼靜態閱讀**，不代表已在任何裝置執行或認可視覺效果。函式名、變數與行號指向**固定 commit**；分支 \`main\` 可能改變。
+本節依上游 **`01223085dc0bb6a0ab3def2c303b54ff8d5b4c38`** 的實際 `src/clouds.ts`、`src/shaders/sky.ts`、`src/quality.ts`、`src/features.ts`、`src/renderer.ts` 查核。屬於**程式碼靜態閱讀**，不代表已在任何裝置執行或認可視覺效果。函式名、變數與行號指向**固定 commit**；分支 `main` 可能改變。
 
 ### 9.1｜兩種可重現的失敗模式與根因
 
 | 失敗現象 | 上游註解及程式碼能確認的原因 | 通用修正原則 |
 | --- | --- | --- |
-| **放射狀「窗簾」或手指狀雲條** | \`cuField\` 上方註解指出：單純把一張連續 noise field 依單閾值裁切，會出現蜿蜒片層、狹長條紋與藍天通道；接近地平線後，平面透視將它們拉向消失點。僅將上、下兩個截面各畫一次，也會成為兩張位移後的雲影輪廓。 | 以**分立的單雲塊 envelope** 混入連續形態場，並在單一輪廓／有限厚度 slab 內合成，避免把兩片相似 alpha 直接疊起。 |
-| **魚鱗雲變方格、編織或壁紙** | \`granular\` 註解指出規律格點產生壁紙感、混合太多 fBM 倍頻會改變顆粒尺度；\`flocks\` 註解指出窄閾值的單格線可顯露方形鋸齒織紋。 | 以**接近單尺度的顆粒**控制統計形狀，再由低頻 patch 控制分布；對需要細顆粒的 Cc／Ac，混合**不同角度**的雜訊採樣與次級細節，不以固定格點本身作為可見顆粒邊界。 |
+| **放射狀「窗簾」或手指狀雲條** | `cuField` 上方註解指出：單純把一張連續 noise field 依單閾值裁切，會出現蜿蜒片層、狹長條紋與藍天通道；接近地平線後，平面透視將它們拉向消失點。僅將上、下兩個截面各畫一次，也會成為兩張位移後的雲影輪廓。 | 以**分立的單雲塊 envelope** 混入連續形態場，並在單一輪廓／有限厚度 slab 內合成，避免把兩片相似 alpha 直接疊起。 |
+| **魚鱗雲變方格、編織或壁紙** | `granular` 註解指出規律格點產生壁紙感、混合太多 fBM 倍頻會改變顆粒尺度；`flocks` 註解指出窄閾值的單格線可顯露方形鋸齒織紋。 | 以**接近單尺度的顆粒**控制統計形狀，再由低頻 patch 控制分布；對需要細顆粒的 Cc／Ac，混合**不同角度**的雜訊採樣與次級細節，不以固定格點本身作為可見顆粒邊界。 |
 
 這些是**作者在註解中明確描述的設計問題**，不是本研究用截圖獨立重現的缺陷。即使採用同一方法，實際效果仍需檢查地平線、相機 FOV、顆粒頻率和像素 footprint。
 
@@ -176,38 +176,38 @@ type CloudWeather = {
 
 | 原始函式與固定來源 | 經確認的工作原理 | 容易誤述的地方 |
 | --- | --- | --- |
-| [\`cloudField\`：sky.ts L845–881](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L845-L881) | 先用受 \`u_evo\` 驅動的 2D domain warp 移動座標，再合成大尺度與細節 \`fBM\`；以 threshold／ramp 得 alpha；對不可能超過閾值的區域提早退出，避免無用雜訊讀取。 | 這是天空方向投影的**雲形與明暗近似**，不是整片天空的 3D 光學模擬。 |
-| [\`cuLump\`／\`cuField\`：L928–988](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L928-L988) | \`cuLump\` 用粗尺度、單個雜訊 octave 和柔化閾值產生**分立雲塊**；\`cuField\` 將它與 warped \`fBM\` 場混合，常數 \`CU_ENV=0.45\`（約 45% 權重給 lump，**不是恰好一半**）。雲心的細節強度降低，避免挖出不自然藍洞。 | 分立雲塊與場在**同一扭曲座標**求值；若各自使用不同 warp，輪廓易分離。 |
+| [`cloudField`：sky.ts L845–881](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L845-L881) | 先用受 `u_evo` 驅動的 2D domain warp 移動座標，再合成大尺度與細節 `fBM`；以 threshold／ramp 得 alpha；對不可能超過閾值的區域提早退出，避免無用雜訊讀取。 | 這是天空方向投影的**雲形與明暗近似**，不是整片天空的 3D 光學模擬。 |
+| [`cuLump`／`cuField`：L928–988](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L928-L988) | `cuLump` 用粗尺度、單個雜訊 octave 和柔化閾值產生**分立雲塊**；`cuField` 將它與 warped `fBM` 場混合，常數 `CU_ENV=0.45`（約 45% 權重給 lump，**不是恰好一半**）。雲心的細節強度降低，避免挖出不自然藍洞。 | 分立雲塊與場在**同一扭曲座標**求值；若各自使用不同 warp，輪廓易分離。 |
 | [積雲主組裝：L6335–6391](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L6335-L6391) | 對雲底與雲頂兩個高度平面計算雲形，並沿相機射線在 **4 個相對高度（含兩端）** 評估形狀；以隨高度收窄的 dome 關係統一輪廓和陰影。這種 **2.5D slab／view-dependent 近似**使底部較平、頂部有圓拱。 | 積雲**不只是普通平面貼圖，也不是完整的 3D volume Raymarch**；不能把四次高度估計寫成完整 3D 物理密度積分。 |
-| [\`stratiform\`：L2401–2423](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2401-L2423) | 低頻連續 \`fBM\`，按 \`breakup\` 打洞、按 \`turb\` 加 warp 和煙霧表面；回傳 coverage 與 thickness，服務 Cs／As／Ns／St 各種厚薄片雲。 | 不應替所有層雲套用同一厚度和透明度。 |
-| [\`granular\`：L2425–2471](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2425-L2471) | 使用較集中的顆粒尺度、窄 \`smoothstep\` 閾值、弱高頻侵蝕和大尺度 \`patch\`；朝太陽方向偏移再採樣以估計顆粒亮暗，特別服務較大的 **Sc／roll** 雲塊。 | 這個函式**並沒有直接使用兩組旋轉約 60° 的格線**；那是 \`flocks\` 的另一組技法。 |
-| [\`flocks\`：L2473–2566](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2473-L2566) | 用低頻 \`T\` 決定「羊群」聚集區；向邊界逐漸提高顆粒門檻，使顆粒**變小、分開、透明**而非裁成固定邊界。使用兩組不同旋轉方向的雜訊樣本（作者註解稱相隔約 60°）加較細一層來打破格線。主要用於 **Cc／Ac**。 | \`flocks\` 的門檻與 alpha 漸變**故意比 \`granular\` 寬**，兩者不能簡單合併成同一個窄閾值公式。 |
-| [\`filament\`：L2568–2586](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2568-L2586) | 各向異性 fBM 拉成細絲，低頻扭曲造成彎曲；再以較粗 noise 形成密集的「羽柄／結點」，在下風側延伸稀疏尾絲，以 \`head\`／\`tail\` 分開控制。 | 不是只把一張 Perlin 圖拉長；卷雲的稀疏空隙與尾端密度是主要辨識特徵。 |
+| [`stratiform`：L2401–2423](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2401-L2423) | 低頻連續 `fBM`，按 `breakup` 打洞、按 `turb` 加 warp 和煙霧表面；回傳 coverage 與 thickness，服務 Cs／As／Ns／St 各種厚薄片雲。 | 不應替所有層雲套用同一厚度和透明度。 |
+| [`granular`：L2425–2471](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2425-L2471) | 使用較集中的顆粒尺度、窄 `smoothstep` 閾值、弱高頻侵蝕和大尺度 `patch`；朝太陽方向偏移再採樣以估計顆粒亮暗，特別服務較大的 **Sc／roll** 雲塊。 | 這個函式**並沒有直接使用兩組旋轉約 60° 的格線**；那是 `flocks` 的另一組技法。 |
+| [`flocks`：L2473–2566](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2473-L2566) | 用低頻 `T` 決定「羊群」聚集區；向邊界逐漸提高顆粒門檻，使顆粒**變小、分開、透明**而非裁成固定邊界。使用兩組不同旋轉方向的雜訊樣本（作者註解稱相隔約 60°）加較細一層來打破格線。主要用於 **Cc／Ac**。 | `flocks` 的門檻與 alpha 漸變**故意比 `granular` 寬**，兩者不能簡單合併成同一個窄閾值公式。 |
+| [`filament`：L2568–2586](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2568-L2586) | 各向異性 fBM 拉成細絲，低頻扭曲造成彎曲；再以較粗 noise 形成密集的「羽柄／結點」，在下風側延伸稀疏尾絲，以 `head`／`tail` 分開控制。 | 不是只把一張 Perlin 圖拉長；卷雲的稀疏空隙與尾端密度是主要辨識特徵。 |
 
 ### 9.3｜便宜的立體明暗，不必等於完整光線追蹤
 
-\`cloudField\` 在 **L875–880** 先求雲密度，再以 \`q + lightDirection * 0.16\` 重新求鄰近的密度，計算 \`clamp((dcomb-dl)*2.5,-1,1)\` 作為明暗方向。\\
-\`granular\` 在 **L2462–2470** 用沿光向的鄰近噪聲差求 \`lit\`；\`flocks\` 的採樣在 **L2561–2565**，\`cuField\` 還會連同 lump 斜率一起使用。
+`cloudField` 在 **L875–880** 先求雲密度，再以 `q + lightDirection * 0.16` 重新求鄰近的密度，計算 `clamp((dcomb-dl)*2.5,-1,1)` 作為明暗方向。
+`granular` 在 **L2462–2470** 用沿光向的鄰近噪聲差求 `lit`；`flocks` 的採樣在 **L2561–2565**，`cuField` 還會連同 lump 斜率一起使用。
 
-**正確描述是「額外做一次沿光照方向的局部場估計」；不保證 GPU 只增加一個 texture fetch。** \`fBM\` 往往由多個 octave／採樣組成，實際耗時要以 Shader 編譯器和 GPU 計時確認。此法提供立體感的**高度場式視覺線索**，無法取代真正的透射積分、多重散射或雲內陰影。
+**正確描述是「額外做一次沿光照方向的局部場估計」；不保證 GPU 只增加一個 texture fetch。** `fBM` 往往由多個 octave／採樣組成，實際耗時要以 Shader 編譯器和 GPU 計時確認。此法提供立體感的**高度場式視覺線索**，無法取代真正的透射積分、多重散射或雲內陰影。
 
 ### 9.4｜抗閃爍與精度：地平線是特殊情況
 
-- [\`planeUV\`／\`planeFoot\`：L2389–2399](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2389-L2399) 依視線和平面高度計算投影及每個像素在雲平面上的 footprint；越接近地平線，同一像素涵蓋的地面／雲面範圍越大。
-- [\`flocks\`：L2513–2552](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2513-L2552) 用 footprint 改變 \`hc\`、\`h0\`、\`h1\`，把超過像素可分辨尺度的高頻樣本**收斂至平均值 0.5**，同時放寬遮罩過渡，避免遠處雲粒閃爍。
-- [\`vnoiseHQ\`：L884–916](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L884-L916) 為**另一個**與 footprint 不同的精度問題：作者發現 GPU 內建雙線性插值的有限精度，讓積雨雲輪廓與動畫逐格跳動；改為同次讀出四角格點，再用 shader 的高精度插值。不是每種雲都一定需要這條高成本路徑。
+- [`planeUV`／`planeFoot`：L2389–2399](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2389-L2399) 依視線和平面高度計算投影及每個像素在雲平面上的 footprint；越接近地平線，同一像素涵蓋的地面／雲面範圍越大。
+- [`flocks`：L2513–2552](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2513-L2552) 用 footprint 改變 `hc`、`h0`、`h1`，把超過像素可分辨尺度的高頻樣本**收斂至平均值 0.5**，同時放寬遮罩過渡，避免遠處雲粒閃爍。
+- [`vnoiseHQ`：L884–916](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L884-L916) 為**另一個**與 footprint 不同的精度問題：作者發現 GPU 內建雙線性插值的有限精度，讓積雨雲輪廓與動畫逐格跳動；改為同次讀出四角格點，再用 shader 的高精度插值。不是每種雲都一定需要這條高成本路徑。
 - 高度 0 附近的近水平射線需限制分母及最大投影距離，並量測視角變化、畫面縮放、手機 GPU 的 precision 與 temporal stability；不要以「關掉細節」掩蓋過度平滑或輪廓消失。
 
 ### 9.5｜共用光照、日暈與海面雲影：驗證到哪個邊界？
 
-- [\`cloudLight\`／\`cloudColor\`：L2708–2742、L2790–2830](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2708-L2742)：\`cloudLight\` 同時輸出 ambient、sun、shade、pink afterglow、moon 與 overcast diffuse；高雲可在太陽落到地平線下方後仍照到日光，低雲較早變灰。厚度決定暗面顏色而不是固定一層陰影貼圖。
-- [\`iceHalo\`：L701–728](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L701-L728)：卷層雲冰晶日暈以 \`sunAng - 0.379\` **弧度**為主要角度差（約 **21.7°**），\`smoothstep\` 控制內側略紅的銳利邊緣，\`exp\` 處理外側衰退；亮度還乘以卷層雲薄幕的空間分布，**不代表每片 Cs 都一定有日暈**。
-- [海面 \`cloud shadows\`：L6974–7018](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L6974-L7018)：作者從**海面位置向太陽方向回投至低雲平面**，對積雲 \`cloudField\` 與層積雲 \`granular\` 求遮光，再減弱水面陽光／反射的直射貢獻。**這是內建海水著色部分，不是可直接掛到任意 3D 地形、山地、屋頂的雲影圖。**
-- 另外要注意：海面雲影在部分條件用 \`cloudField\`，而近景積雲可見形狀透過 \`cuField/cuLump\` 生成。若用於需要高精度同形雲影的場景，必須進一步建立**同一 canonical density／mask** 的天空和陰影讀取流程，不能無條件宣稱原海面雲影與所有可見雲輪廓完全一一重合。
+- [`cloudLight`／`cloudColor`：L2708–2742、L2790–2830](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2708-L2742)：`cloudLight` 同時輸出 ambient、sun、shade、pink afterglow、moon 與 overcast diffuse；高雲可在太陽落到地平線下方後仍照到日光，低雲較早變灰。厚度決定暗面顏色而不是固定一層陰影貼圖。
+- [`iceHalo`：L701–728](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L701-L728)：卷層雲冰晶日暈以 `sunAng - 0.379` **弧度**為主要角度差（約 **21.7°**），`smoothstep` 控制內側略紅的銳利邊緣，`exp` 處理外側衰退；亮度還乘以卷層雲薄幕的空間分布，**不代表每片 Cs 都一定有日暈**。
+- [海面 `cloud shadows`：L6974–7018](https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L6974-L7018)：作者從**海面位置向太陽方向回投至低雲平面**，對積雲 `cloudField` 與層積雲 `granular` 求遮光，再減弱水面陽光／反射的直射貢獻。**這是內建海水著色部分，不是可直接掛到任意 3D 地形、山地、屋頂的雲影圖。**
+- 另外要注意：海面雲影在部分條件用 `cloudField`，而近景積雲可見形狀透過 `cuField/cuLump` 生成。若用於需要高精度同形雲影的場景，必須進一步建立**同一 canonical density／mask** 的天空和陰影讀取流程，不能無條件宣稱原海面雲影與所有可見雲輪廓完全一一重合。
 
 ### 9.6｜抽象成通用、可測試的移植契約
 
-\`\`\`ts
+```ts
 interface CloudSample {
   opacity: number;       // [0,1], silhouette/visibility
   thickness: number;     // [0,1], stylized optical depth proxy
@@ -219,7 +219,7 @@ interface CloudShapeModel {
 }
 // The second method must share canonical cloud coordinates and weather clock
 // with the first. It is a *design requirement*, not an Atmosphere API.
-\`\`\`
+```
 
 **移植策略：** 把「分離雲塊 vs 連續紋理」「不同角度細顆粒 vs 方格」「方向差分明暗」「像素 footprint 濾波」「光照統一調色」「共用雲密度投影雲影」拆成**彼此獨立、可 A/B 量測的原理**；先以低成本天空層建立十雲屬辨識和檢查品質，再以真正體積 Renderer 補足近景厚積雲、雲內穿越與三維陰影。禁止把一份原始碼的近似效果當作 WMO 物理正確或跨 GPU 效能保證。
 
