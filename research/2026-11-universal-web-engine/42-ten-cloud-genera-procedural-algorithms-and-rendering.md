@@ -2,7 +2,7 @@
 
 **研究與上游核對：2026-11-08（Asia/Taipei）**  
 **研究問題：** 在可動態切換天氣的 Three.js／原生 WebGL2／WebGPU 3D 世界中，如何生成卷雲、卷積雲、卷層雲、高積雲、高層雲、雨層雲、層積雲、層雲、積雲與積雨雲，而不是「只有同一張雜訊貼圖改透明度」？  
-**查證方法：** 以 WMO／NOAA 原始雲屬定義校對形態，閱讀 `takustaqu/atmosphere` 的真實 TypeScript／GLSL 實作、Unity HDRP 的雲圖／體積技術說明、Guerrilla Games Nubis 與 Three.js 官方示例。**本次未下載／安裝／執行專案、未渲染任何影格、未進行手機或桌機基準測試；方案與參數均為工程推導，不是已通過的性能主張。**
+**查證方法與限制：本篇未實測。** 以 WMO／NOAA 原始雲屬定義校對形態，閱讀 `takustaqu/atmosphere` 的真實 TypeScript／GLSL 實作、Unity HDRP 的雲圖／體積技術說明、Guerrilla Games Nubis 與 Three.js 官方示例。**本次未下載／安裝／執行專案、未渲染任何影格、未進行手機或桌機基準測試；方案與參數均為工程推導，不是已通過的性能主張。**
 
 ## 1｜氣象學先說清楚：十種「屬」，不等於十個固定高度槽
 
