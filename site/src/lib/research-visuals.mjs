@@ -37,6 +37,9 @@ export function motifFor(doc){
   if(/02-nvidia-parakeet-v3-multilingual-asr\.md$/.test(file))return 'speech';
   if(/03-nvidia-broadcast-rtx-audio-video-effects\.md$/.test(file))return 'camera';
   if(/39-infinitra-mathematical-world-volumetric-generation\.md$/.test(file))return 'world';
+  if(/42-ten-cloud-genera-procedural-algorithms-and-rendering\.md$/.test(file))return 'genera';
+  if(/40-volumetric-clouds-unified-wind-vegetation-weather\.md$/.test(file))return 'weather';
+  if(/41-web-audio-spatial-coastal-soundscape-and-asset-rights\.md$/.test(file))return 'soundscape';
   if(/38-noniv-webgpu-fft-ocean-renderer\.md$/.test(file))return 'ocean';
   if(/07-music-skill-editable-agent-composition\.md$/.test(file))return 'score';
   if(/34-forever-components-agent-retrieval-and-web-effects\.md$/.test(file))return 'motion';
@@ -175,6 +178,23 @@ export function renderResearchArt(doc){
       line(262,143,450,143)+line(356,49,356,237)+
       polygon('289,170 324,125 344,156 382,113 421,169')+
       Array.from({length:3},(_,i)=>rect(270+i*17,84-i*11,18,33+i*11,3)).join('');
+  }else if(sym==='genera'){
+    // Original cloud-morphology taxonomy schematic, not meteorological photography.
+    drawing=Array.from({length:7},(_,i)=>line(222+i*7,79+i*2,294+i*10,62+i*5)).join('')+
+      Array.from({length:6},(_,i)=>circ(365+(i%3)*28,91+Math.floor(i/3)*27,12)).join('')+
+      line(227,164,489,164)+line(227,181,489,181)+
+      Array.from({length:5},(_,i)=>circ(286+i*32,225-(i%3)*16,19)).join('');
+  }else if(sym==='weather'){
+    // Original diagram: drifting cloud bank and a line of wind-swept grass.
+    drawing=Array.from({length:5},(_,i)=>circ(283+i*41,102+(i%2)*12,29)).join('')+
+      line(250,163,450,163)+
+      Array.from({length:8},(_,i)=>line(259+i*26,252,268+i*26,215-(i%3)*10)).join('')+
+      line(237,195,488,195);
+  }else if(sym==='soundscape'){
+    // Original spatial-audio diagram: listener, emitters and concentric sound zones.
+    drawing=circ(350,155,72)+circ(350,155,43)+circ(350,155,14)+
+      circ(270,100,9)+circ(458,155,10)+circ(283,236,8)+
+      line(283,236,350,155)+line(270,100,350,155)+line(458,155,350,155);
   }else if(sym==='ocean'){
     // Original sea-spectrum diagram: six frequency bands, a sun and layered wave fronts.
     drawing=circ(362,92,26)+

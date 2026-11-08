@@ -51,6 +51,35 @@ export const CURATED = {
     creator:{label:'NVIDIA Broadcast 官方產品頁',url:'https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/'},
     demos:[{label:'官方功能展示與下載頁',url:'https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/',note:'產品說明頁非通用 SDK；未測試 RTX 特效或允許 iframe'}]
   },
+  'research/2026-11-universal-web-engine/42-ten-cloud-genera-procedural-algorithms-and-rendering.md': {
+    title:'十種雲怎麼用程式生成？WMO 雲屬與體積雲 Shader 演算法',
+    topic:'即時 3D 渲染與 Shader',
+    creator:null,
+    demos:[
+      {label:'Atmosphere 官方原始碼與十雲屬展示說明',url:'https://github.com/takustaqu/atmosphere',note:'作者程式與示例入口；未執行 WebGL 程式，也未核准內嵌'},
+      {label:'Three.js 官方 WebGPU 體積雲展示',url:'https://threejs.org/examples/webgpu_volume_cloud.html',note:'官方 Raymarch 技術示例，不代表能渲染所有 WMO 雲屬；未實測'},
+      {label:'WMO 雲屬辨識參考',url:'https://cloudatlas.wmo.int/en/cloud-identification-guide.html',note:'氣象標準照片與辨識，不是渲染器互動展示'}
+    ]
+  },
+  'research/2026-11-universal-web-engine/40-volumetric-clouds-unified-wind-vegetation-weather.md': {
+    title:'體積雲與統一風場：讓雲影、草浪與樹葉同一天氣系統連動',
+    topic:'即時 3D 渲染與 Shader',
+    creator:null,
+    demos:[
+      {label:'Eanpa Sky 原作者展示',url:'https://skyeshark.github.io/Eanpa-Sky/',note:'需 WebGPU 的外站展示；未在本站測試、未授權 iframe 內嵌'},
+      {label:'Field Grass 原作者展示',url:'https://matthew-kissinger.github.io/threejs-field-grass/',note:'外站草地展示；作者指定 Three.js 0.185.x，未實測版本相容性'},
+      {label:'Three.js 官方 WebGL 體積雲',url:'https://threejs.org/examples/webgl_volume_cloud.html',note:'官方獨立技術 Demo，非完整風場套件；本站未實測'}
+    ]
+  },
+  'research/2026-11-universal-web-engine/41-web-audio-spatial-coastal-soundscape-and-asset-rights.md': {
+    title:'Web Audio 海岸聲景：海浪、海鷗、風聲的空間音效與授權',
+    topic:'音訊技術與空間聲景',
+    creator:null,
+    demos:[
+      {label:'海浪 CC0 素材原始頁',url:'https://opengameart.org/content/beach-ocean-waves',note:'原站候選錄音，非互動 Demo；本站未下載或試聽'},
+      {label:'Sonniss 官方商用音效授權',url:'https://sonniss.com/gdc-bundle-license/',note:'專用授權條款，非 CC0；原始或改造音檔不得作素材包再散布'}
+    ]
+  },
   'research/2026-11-universal-web-engine/38-noniv-webgpu-fft-ocean-renderer.md': {
     title:'Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染',
     topic:'即時 3D 渲染與 Shader',
