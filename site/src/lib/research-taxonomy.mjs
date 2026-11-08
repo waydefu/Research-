@@ -238,6 +238,9 @@ const raw = {
       ]
     ],
     ["07-music-skill-editable-agent-composition.md","Agent 工具與 Skills","music-skill：AI Agent 如何寫出可修改的原創配樂？",["music-skill","Agent Skills","音樂製作","MIDI","FluidSynth"]],
+    ["08-nvidia-skillspector-agent-skill-security.md","Agent 權限與安全","NVIDIA SkillSpector：安裝 Agent Skills 前如何掃描安全風險？",["NVIDIA","SkillSpector","Agent Skills","提示注入","供應鏈","MCP","SARIF"]],
+    ["09-nvidia-ai-workbench-reproducible-agent-containers.md","AI 開發環境與容器","NVIDIA AI Workbench：本地與遠端 AI 開發容器管理",["NVIDIA","AI Workbench","容器","Git","遠端 GPU","Agent"]],
+    ["10-agents-anywhere-cross-device-agent-workbench.md","Agent 遠端工作台","Agents Anywhere：跨手機與電腦管理 Codex、Claude Code 工作階段",["Agents Anywhere","Agent","Connector","Codex","Claude Code","遠端管理","自架"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -466,6 +469,9 @@ const raw = {
       ]
     ]
   ],
+  "research/2026-11-edge-infrastructure": [
+    ["01-android-phone-termux-proot-home-server.md","邊緣設備與自架服務","舊 Android 手機當低功耗伺服器：Termux、PRoot 與長期可靠性",["Android","Termux","PRoot","Debian","Pi-hole","低功耗","家庭伺服器"]]
+  ],
   "research/2026-11-local-ai-inference": [
     [
       "01-colibri-moe-streaming.md",
@@ -477,6 +483,8 @@ const raw = {
         "本機推論"
       ]
     ],
+    ["02-nvidia-parakeet-v3-multilingual-asr.md","語音辨識與字幕","NVIDIA Parakeet 第三版：25 種歐語辨識與中文支援限制",["NVIDIA","Parakeet","ASR","字幕","時間戳","中文限制","CC BY 4.0"]],
+    ["03-nvidia-broadcast-rtx-audio-video-effects.md","影片製作與自動化","NVIDIA Broadcast：RTX 人聲降噪、鏡頭特效與檔案處理",["NVIDIA","Broadcast","RTX","降噪","Eye Contact","File Processor","MCP"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -807,6 +815,7 @@ const raw = {
     ["36-gradientdeck-design-md-library-for-agents.md","介面設計與視覺系統","GradientDeck UI：把真實網站整理成 DESIGN.md，讓 Agent 照風格設計",["GradientDeck","DESIGN.md","設計系統","Agent","UI"]],
     ["37-threejs-grassworks-webgpu-grass-and-forest-demo.md","即時 3D 渲染與 Shader","Three.js Grassworks：WebGPU 草地系統、森林展示與商用授權",["Three.js","WebGPU","TSL","草地","授權"]],
     ["38-noniv-webgpu-fft-ocean-renderer.md","即時 3D 渲染與 Shader","Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染",["WebGPU","WGSL","FFT","JONSWAP","CDLOD","LEAN","海洋渲染"]],
+    ["39-infinitra-mathematical-world-volumetric-generation.md","程序生成與世界架構","INFINITRA：數學定義世界、體積生成與無縫細節切換",["INFINITRA","程序生成","體積世界","LOD","決定性生成","Delta 儲存","授權"]],
     ["40-volumetric-clouds-unified-wind-vegetation-weather.md","即時 3D 渲染與 Shader","體積雲與統一風場：讓雲影、草浪與樹葉同一天氣系統連動",["Three.js","WebGL2","WebGPU","體積雲","風場","草地","雲影","WeatherState"]],
     ["41-web-audio-spatial-coastal-soundscape-and-asset-rights.md","音訊技術與空間聲景","Web Audio 海岸聲景：海浪、海鷗、風聲的空間音效與授權",["Web Audio","Three.js","HRTF","海浪","海鷗","風聲","音效授權","CC0"]],
     ["42-ten-cloud-genera-procedural-algorithms-and-rendering.md","即時 3D 渲染與 Shader","十種雲怎麼用程式生成？WMO 雲屬與體積雲 Shader 演算法",["WMO","十種雲","Atmosphere","GLSL","Cloud Density","Raymarch","雲層","WebGPU","MIT"]],
@@ -896,6 +905,10 @@ export const TOPIC_DESCRIPTORS = Object.freeze({
     "why": "設計代理分工、上下文交接與可恢復工作流程",
     "image": "workflow.svg"
   },
+  "Agent 遠端工作台": {"why":"管理跨裝置 Agent 會話、Connector 權限、遠端核准及自架服務","image":"robot.svg"},
+  "邊緣設備與自架服務": {"why":"研究舊手機等低功耗裝置部署 Linux 服務的可靠性、安全與成本","image":"servers.svg"},
+  "AI 開發環境與容器": {"why":"管理可重現容器、Git 環境、遠端 GPU 與 Agent 隔離","image":"workflow.svg"},
+  "語音辨識與字幕": {"why":"研究 ASR 模型、語言支援、字幕時間戳及轉錄誤差","image":"studio.svg"},
   "Agent 工具與 Skills": {
     "why": "比較程式代理工具、MCP 與可重用技能",
     "image": "robot.svg"
@@ -968,6 +981,7 @@ export const TOPIC_DESCRIPTORS = Object.freeze({
     "why": "研究照片到三維資產的幾何重建、生成補完、模型推論與素材品質驗收",
     "image": "chip.svg"
   },
+  "程序生成與世界架構": {"why":"研究決定性三維世界、體積生成、無縫 LOD 與玩家修改持久化","image":"browser.svg"},
   "3D 資產與幾何最佳化": {
     "why": "研究 3D 模型、LOD、可見性裁剪與素材管線",
     "image": "chip.svg"

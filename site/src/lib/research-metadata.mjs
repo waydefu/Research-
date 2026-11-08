@@ -3,6 +3,54 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  'research/2026-11-universal-web-engine/39-infinitra-mathematical-world-volumetric-generation.md': {
+    title:'INFINITRA：數學定義世界、體積生成與無縫細節切換',
+    topic:'程序生成與世界架構',
+    creator:{label:'Richard Bogad / INFINITRA 官方專案',url:'https://github.com/richardbogad/INFINITRA'},
+    demos:[
+      {label:'作者公開的遊戲下載版本',url:'https://github.com/richardbogad/INFINITRA/releases',note:'Windows 遊戲下載，不是網頁內嵌展示；未安裝或進行性能測試'},
+      {label:'INFINITRA 官方網站',url:'https://www.infinitra.xyz/',note:'原作者網站，未驗證其互動表現或 iframe 允許情況'}
+    ]
+  },
+  'research/2026-11-agent-engineering/10-agents-anywhere-cross-device-agent-workbench.md': {
+    title:'Agents Anywhere：跨手機與電腦管理 Codex、Claude Code 工作階段',
+    topic:'Agent 遠端工作台',
+    creator:{label:'Agents Anywhere 官方原始碼',url:'https://github.com/anywhere-labs/Agents-Anywhere'},
+    demos:[
+      {label:'官方 Web 工作台',url:'https://web.agents-anywhere.com',note:'需登入的原站服務；未註冊或實測，未核准嵌入'},
+      {label:'官方正式發行版',url:'https://github.com/anywhere-labs/Agents-Anywhere/releases',note:'需依 Desktop／Connector／Android 實際版本核對相容性'}
+    ]
+  },
+  'research/2026-11-edge-infrastructure/01-android-phone-termux-proot-home-server.md': {
+    title:'舊 Android 手機當低功耗伺服器：Termux、PRoot 與長期可靠性',
+    topic:'邊緣設備與自架服務',
+    creator:null,
+    demos:[{label:'Termux 官方 PRoot-Distro 文件',url:'https://github.com/termux/proot-distro',note:'技術文件而非 Redmi 10C 作者原始展示，未在 Android 設備實測'}]
+  },
+  'research/2026-11-agent-engineering/08-nvidia-skillspector-agent-skill-security.md': {
+    title:'NVIDIA SkillSpector：安裝 Agent Skills 前如何掃描安全風險？',
+    topic:'Agent 權限與安全',
+    creator:{label:'NVIDIA / SkillSpector 官方原始碼',url:'https://github.com/NVIDIA/SkillSpector'},
+    demos:[{label:'NVIDIA 官方技能掃描指南',url:'https://docs.nvidia.com/skills/scanning-agent-skills',note:'僅原站文件連結；未安裝、執行或放行任何掃描器'}]
+  },
+  'research/2026-11-agent-engineering/09-nvidia-ai-workbench-reproducible-agent-containers.md': {
+    title:'NVIDIA AI Workbench：本地與遠端 AI 開發容器管理',
+    topic:'AI 開發環境與容器',
+    creator:{label:'NVIDIA AI Workbench 官方文件',url:'https://docs.nvidia.com/ai-workbench/overview/introduction'},
+    demos:[{label:'官方功能與設定說明',url:'https://docs.nvidia.com/ai-workbench/overview/introduction',note:'文件非互動 Demo；未下載或連接遠端 GPU'}]
+  },
+  'research/2026-11-local-ai-inference/02-nvidia-parakeet-v3-multilingual-asr.md': {
+    title:'NVIDIA Parakeet 第三版：25 種歐語辨識與中文支援限制',
+    topic:'語音辨識與字幕',
+    creator:{label:'NVIDIA Parakeet TDT 0.6B V3 模型卡',url:'https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3'},
+    demos:[{label:'NVIDIA Parakeet 官方試用 Space',url:'https://huggingface.co/spaces/nvidia/parakeet-tdt-0.6b-v3',note:'僅連至原作者 Demo；本站未上傳音檔、未測試外站嵌入'}]
+  },
+  'research/2026-11-local-ai-inference/03-nvidia-broadcast-rtx-audio-video-effects.md': {
+    title:'NVIDIA Broadcast：RTX 人聲降噪、鏡頭特效與檔案處理',
+    topic:'影片製作與自動化',
+    creator:{label:'NVIDIA Broadcast 官方產品頁',url:'https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/'},
+    demos:[{label:'官方功能展示與下載頁',url:'https://www.nvidia.com/en-us/geforce/broadcasting/broadcast-app/',note:'產品說明頁非通用 SDK；未測試 RTX 特效或允許 iframe'}]
+  },
   'research/2026-11-universal-web-engine/42-ten-cloud-genera-procedural-algorithms-and-rendering.md': {
     title:'十種雲怎麼用程式生成？WMO 雲屬與體積雲 Shader 演算法',
     topic:'即時 3D 渲染與 Shader',

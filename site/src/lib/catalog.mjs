@@ -100,6 +100,7 @@ const DOMAIN_NAMES = {
   '2026-10-retrospective': '十月跨領域技術研究',
   '2026-11-information-security': '資訊安全研究',
   '2026-11-local-ai-inference': '本機 AI 與模型推論',
+  '2026-11-edge-infrastructure': '邊緣設備與自架服務',
   '2026-11-systems-analysis-design': '系統分析與專案管理',
   '2026-11-agent-engineering': 'AI 代理工程',
   '2026-11-agent-repository-operations': 'Agent 治理與資料索引',
