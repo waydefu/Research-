@@ -235,6 +235,32 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/42-ten-cloud-genera-procedural-algorithms-and-rendering.md",
+      "sourceBlobSha": "019736bfbac6b1e1dda73a2292031524c7422e5d",
+      "sourceRevision": "3192f9f5aed433b6c979a7176469c973c47963cc",
+      "reviewedOn": "2026-11-08",
+      "verifiedScope": "已核對 WMO 十雲屬與溫帶雲高、NOAA 與香港天文台的形態定義，實際閱讀 takustaqu/atmosphere 0.12.0 README、LICENSE、package.json、src/clouds.ts、src/shaders/sky.ts、src/quality.ts、src/renderer.ts 與 features.ts 的片段，交叉比對 Unity HDRP 雲圖/LUT/雲體積及 Guerrilla Horizon Zero Dawn Nubis 公開技術說明。未執行、未渲染、未做 GPU、手機或授權再散布測試。",
+      "publicNotice": "本文完整列出 WMO 十個雲屬的辨識特徵與建議程序生成形態，並公開區分 Atmosphere 原始碼已實作的四形態／三高度天空平面近似和選擇性積雨雲三維 Raymarch；四形態 Density、WeatherState、光照偽碼與各品質級別屬工程推導，不應宣稱十種雲都具有可穿越體積或氣象物理精度。",
+      "remainingWork": "在隔離最小 Three.js/WebGL2 場景分別建立 Ci/Cc/Cs/Ac/As/Ns/Sc/St/Cu/Cb 十種定點視覺回歸，核對 MIT 授權和第三方資產，再測雲層透射率、形態切換、冰晶暈圈、積雨雲砧台、Wind Field、Cloud Shadow、空區跳步、TAA、GPU p95、WebGPU fallback 和 Android 裝置熱與耗電；用 WMO 照片做人工評估。",
+      "knownSources": [
+        "https://cloudatlas.wmo.int/en/principles-of-cloud-classification-genera.html",
+        "https://cloudatlas.wmo.int/en/clouds-definitions.html",
+        "https://cloudatlas.wmo.int/en/cloud-identification-guide.html",
+        "https://www.noaa.gov/jetstream/clouds/ten-basic-clouds",
+        "https://www.weather.gov.hk/tc/education/weather/clouds/00099-the-classification-and-nomenclature-of-clouds-1.html",
+        "https://github.com/takustaqu/atmosphere",
+        "https://github.com/takustaqu/atmosphere/blob/main/src/clouds.ts",
+        "https://github.com/takustaqu/atmosphere/blob/main/src/shaders/sky.ts",
+        "https://github.com/takustaqu/atmosphere/blob/main/src/quality.ts",
+        "https://github.com/takustaqu/atmosphere/blob/main/LICENSE",
+        "https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@17.0/manual/volumetric-clouds-volume-override-reference.html",
+        "https://www.guerrilla-games.com/read/the-real-time-volumetric-cloudscapes-of-horizon-zero-dawn",
+        "https://threejs.org/examples/webgpu_volume_cloud.html"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
