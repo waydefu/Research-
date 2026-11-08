@@ -78,3 +78,25 @@ test('unique original cloud taxonomy art exists and has no embedded external ass
   assert.ok(art.length<16000);
   assert.doesNotMatch(art,/<(?:script|image|foreignObject)|(?:onload|onclick)\s*=/i);
 });
+
+
+test('cloud morphology audit distinguishes planar slab, rotated flocks and shared sea shadows',()=>{
+  const doc=allDocs().find(d=>d.file===FILE);
+  const content=doc.text;
+  for(const fn of ['cloudField','cuLump','cuField','stratiform','granular','flocks','filament','cloudLight','cloudColor','iceHalo','planeFoot','vnoiseHQ']){
+    assert.ok(content.includes(fn),fn);
+  }
+  assert.ok(content.includes('CU_ENV=0.45'),'lump weight must not be called an exact half');
+  assert.match(content,/2\.5D slab/);
+  assert.match(content,/4 個相對高度/);
+  assert.match(content,/flocks.*旋轉|旋轉.*flocks/);
+  assert.match(content,/不是完整的 3D volume Raymarch/);
+  assert.match(content,/不保證 GPU 只增加一個 texture fetch/);
+  assert.match(content,/平均值 0\.5/);
+  assert.match(content,/21\.7°/);
+  assert.match(content,/海面.*雲影|雲影.*海面/);
+  assert.match(content,/不是可直接掛到任意 3D 地形/);
+  assert.ok(content.includes('01223085dc0bb6a0ab3def2c303b54ff8d5b4c38'));
+  assert.ok(content.includes('L2473-L2566'),'source line range must remain traceable');
+  assert.match(content,/NOT RUN/);
+});
