@@ -238,12 +238,12 @@
     },
     {
       "path": "research/2026-11-universal-web-engine/42-ten-cloud-genera-procedural-algorithms-and-rendering.md",
-      "sourceBlobSha": "019736bfbac6b1e1dda73a2292031524c7422e5d",
-      "sourceRevision": "3192f9f5aed433b6c979a7176469c973c47963cc",
+      "sourceBlobSha": "5b4dd21e39cfd8a72381da49d1fbd3f9fa464018",
+      "sourceRevision": "2a58aaadb52a61b35a4e48f7b5bd9d98388c65f2",
       "reviewedOn": "2026-11-08",
-      "verifiedScope": "已核對 WMO 十雲屬與溫帶雲高、NOAA 與香港天文台的形態定義，實際閱讀 takustaqu/atmosphere 0.12.0 README、LICENSE、package.json、src/clouds.ts、src/shaders/sky.ts、src/quality.ts、src/renderer.ts 與 features.ts 的片段，交叉比對 Unity HDRP 雲圖/LUT/雲體積及 Guerrilla Horizon Zero Dawn Nubis 公開技術說明。未執行、未渲染、未做 GPU、手機或授權再散布測試。",
-      "publicNotice": "本文完整列出 WMO 十個雲屬的辨識特徵與建議程序生成形態，並公開區分 Atmosphere 原始碼已實作的四形態／三高度天空平面近似和選擇性積雨雲三維 Raymarch；四形態 Density、WeatherState、光照偽碼與各品質級別屬工程推導，不應宣稱十種雲都具有可穿越體積或氣象物理精度。",
-      "remainingWork": "在隔離最小 Three.js/WebGL2 場景分別建立 Ci/Cc/Cs/Ac/As/Ns/Sc/St/Cu/Cb 十種定點視覺回歸，核對 MIT 授權和第三方資產，再測雲層透射率、形態切換、冰晶暈圈、積雨雲砧台、Wind Field、Cloud Shadow、空區跳步、TAA、GPU p95、WebGPU fallback 和 Android 裝置熱與耗電；用 WMO 照片做人工評估。",
+      "verifiedScope": "已核對 WMO 十雲屬與溫帶雲高、NOAA 與香港天文台形態定義；逐段閱讀 takustaqu/atmosphere v0.12.0 固定提交 01223085 的 src/clouds.ts、src/shaders/sky.ts 中 cloudField、cuLump、cuField、積雲 slab、stratiform、granular、flocks、filament、cloudLight/cloudColor、iceHalo、sea cloud shadows 與 anti-aliasing、precision 處理，另查 src/quality.ts、features.ts、renderer.ts；比對 Unity HDRP 與 Guerrilla Nubis。屬靜態原始碼閱讀，沒有 clone 本機、執行 Shader、GPU/手機 benchmark 或視覺實測。",
+      "publicNotice": "上游註解確認單閾值連續場在地平線會拉成放射狀條紋、固定格點在細雲會產生方格壁紙；積雲以單雲塊 cuLump 45% 權重和有限高度 slab 塑形，並非完整 3D；flocks 才有多旋轉格線處理，granular 是不同的 roll 方法。密度差分明暗會額外做多個 noise taps，不可稱單一 GPU texture fetch。作者雲影目前只在海水着色，不是通用地形雲影圖；沒有任何本次視覺或效能測量。",
+      "remainingWork": "以固定 seed 對天頂／地平線、寬／窄 FOV、各種雲族和品質級別完成視覺對照、日落與 22° 日暈、卷積雲與高積雲多角度採樣、積雲單塊、細節遠距收斂及雲影海／地形一致性，記錄 GPU 採樣成本與 p95；若實際引用 MIT 原始碼，保留完整著作權和 LICENSE，並核對所有第三方素材來源。",
       "knownSources": [
         "https://cloudatlas.wmo.int/en/principles-of-cloud-classification-genera.html",
         "https://cloudatlas.wmo.int/en/clouds-definitions.html",
@@ -257,7 +257,11 @@
         "https://github.com/takustaqu/atmosphere/blob/main/LICENSE",
         "https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@17.0/manual/volumetric-clouds-volume-override-reference.html",
         "https://www.guerrilla-games.com/read/the-real-time-volumetric-cloudscapes-of-horizon-zero-dawn",
-        "https://threejs.org/examples/webgpu_volume_cloud.html"
+        "https://threejs.org/examples/webgpu_volume_cloud.html",
+        "https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L928-L988",
+        "https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L2473-L2566",
+        "https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L6974-L7018",
+        "https://github.com/takustaqu/atmosphere/blob/01223085dc0bb6a0ab3def2c303b54ff8d5b4c38/src/shaders/sky.ts#L701-L728"
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
