@@ -30,6 +30,7 @@ export function motifFor(doc){
   const s=(doc.publicTitle||'')+' '+(doc.topic||'');
   if(/Luminati|像素遊戲|2\.5D/i.test(s))return 'pixels';
   // Source-specific schematics: agent score/audio, component motion, and CJK text layout.
+  if(/42-ten-cloud-genera-procedural-algorithms-and-rendering\.md$/.test(file))return 'genera';
   if(/40-volumetric-clouds-unified-wind-vegetation-weather\.md$/.test(file))return 'weather';
   if(/41-web-audio-spatial-coastal-soundscape-and-asset-rights\.md$/.test(file))return 'soundscape';
   if(/38-noniv-webgpu-fft-ocean-renderer\.md$/.test(file))return 'ocean';
@@ -138,6 +139,12 @@ export function renderResearchArt(doc){
     drawing=polygon('345,38 468,111 345,180 223,110')+polygon('223,110 345,180 345,265 223,194')+polygon('345,180 468,111 468,194 345,265')+
       line(345,38,345,180)+line(224,195,345,265)+line(345,265,469,194)+
       (sym==='geometry'?Array.from({length:4},(_,i)=>circ(260+i*58,110+i*8,9)).join(''):sym==='assets'?rect(475,70,56,43,5):'');
+  }else if(sym==='genera'){
+    // Original cloud-morphology taxonomy schematic, not meteorological photography.
+    drawing=Array.from({length:7},(_,i)=>line(222+i*7,79+i*2,294+i*10,62+i*5)).join('')+
+      Array.from({length:6},(_,i)=>circ(365+(i%3)*28,91+Math.floor(i/3)*27,12)).join('')+
+      line(227,164,489,164)+line(227,181,489,181)+
+      Array.from({length:5},(_,i)=>circ(286+i*32,225-(i%3)*16,19)).join('');
   }else if(sym==='weather'){
     // Original diagram: drifting cloud bank and a line of wind-swept grass.
     drawing=Array.from({length:5},(_,i)=>circ(283+i*41,102+(i%2)*12,29)).join('')+
