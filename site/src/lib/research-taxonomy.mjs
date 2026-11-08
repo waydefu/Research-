@@ -20,8 +20,6 @@ const raw = {
         "回退"
       ]
     ],
-    ["43-webgl2-rendering-performance-visibility-and-benchmark-protocol.md","即時 3D 渲染與 Shader","WebGL2 大型場景效能：量測、空間合批與剔除",["Three.js","WebGL2","Frustum Culling","BatchedMesh","GPU Timer","Benchmark"]],
-    ["44-seamless-world-streaming-lod-hlod-resource-lifecycle.md","即時 3D 渲染與 Shader","無縫大世界如何設計？Chunk、LOD、HLOD 與資源生命週期",["Three.js","Chunk Streaming","LOD","HLOD","World State","Meshopt"]],
     [
       "README.md",
       "資料來源與研究索引",
@@ -809,6 +807,8 @@ const raw = {
     ["36-gradientdeck-design-md-library-for-agents.md","介面設計與視覺系統","GradientDeck UI：把真實網站整理成 DESIGN.md，讓 Agent 照風格設計",["GradientDeck","DESIGN.md","設計系統","Agent","UI"]],
     ["37-threejs-grassworks-webgpu-grass-and-forest-demo.md","即時 3D 渲染與 Shader","Three.js Grassworks：WebGPU 草地系統、森林展示與商用授權",["Three.js","WebGPU","TSL","草地","授權"]],
     ["38-noniv-webgpu-fft-ocean-renderer.md","即時 3D 渲染與 Shader","Noniv Web Ocean：原生 WebGPU 六層 FFT 海面、泡沫與天空渲染",["WebGPU","WGSL","FFT","JONSWAP","CDLOD","LEAN","海洋渲染"]],
+    ["43-webgl2-rendering-performance-visibility-and-benchmark-protocol.md","即時 3D 渲染與 Shader","WebGL2 大型場景效能：量測、空間合批與剔除",["Three.js","WebGL2","Frustum Culling","BatchedMesh","GPU Timer","Benchmark"]],
+    ["44-seamless-world-streaming-lod-hlod-resource-lifecycle.md","即時 3D 渲染與 Shader","無縫大世界如何設計？Chunk、LOD、HLOD 與資源生命週期",["Three.js","Chunk Streaming","LOD","HLOD","World State","Meshopt"]],
     [
       "README.md",
       "資料來源與研究索引",

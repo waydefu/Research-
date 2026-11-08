@@ -161,7 +161,7 @@ simulationTimestamp + deterministicSeed + dirtyRevision
 | C HLOD | 三視角動態、移動中切換無顯著破綻 | 素材／LOD 管線與渲染分開 |
 | D State Contract | 兩個相鄰 Chunk + 跨區互動狀態維持 | World State 與 Renderer 使用顯式接口 |
 | E Streaming | 受預算控制的背景載入卸載 | 單一整合人負責共同入口 |
-| F Device Gate | 實機熱功耗／效能、故障注入、可退版 | 品質 Owner 最終批准 |
+| F Device Gate | 實機熱功耗／效能、故障注入、可退版 | 品質 專案決策者 最終批准 |
 
 **不要**在同一個大型 PR 同時重寫 Input、Renderer、World State、Persistence 和 CI；多端無即時溝通時，先決定模組契約、分支基準和具體整合驗收。
 
@@ -183,3 +183,5 @@ simulationTimestamp + deterministicSeed + dirtyRevision
 - **待核實：** SSE 門檻、固定 Chunk 大小、實際 FPS、GPU memory、多人同步、長時間手機熱、透明材質的 HLOD 視覺品質。
 - **尚未批准實作**：新 Loader、Server、GPU compute、第三方模型與套件均未授權安裝／部署。此文件只提出研究與驗收設計。
 - **2026-11-09**：首版公開技術研究，無第三方素材複製，無基準實測。
+
+> **修訂註記（2026-11-09）：** 將內部決策者與研究批次的稱呼改為通用工程語彙；研究結論與待驗證界線不變。

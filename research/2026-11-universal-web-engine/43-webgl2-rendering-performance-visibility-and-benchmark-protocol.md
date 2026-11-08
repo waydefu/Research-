@@ -112,11 +112,13 @@ GPU-Driven Culling、Meshlet／Virtualized Geometry、Compute-driven indirect dr
 | S4 | https://developer.mozilla.org/en-US/docs/Web/API/EXT_disjoint_timer_query | 2026-11-09 | GPU 計時特性與裝置相容限制 |
 | S5 | https://registry.khronos.org/webgl/extensions/EXT_disjoint_timer_query_webgl2/ | 2026-11-09 | WebGL2 extension 規格；不是特定 GPU 可用性證明 |
 | S6 | https://threejs.org/manual/pages/webgpurenderer | 2026-11-09 | TSL 與 Renderer 移植限制；不支持「WebGPU 必然快」 |
-| S7 | https://github.com/mrdoob/three.js/blob/r187/examples/jsm/utils/BufferGeometryUtils.js | 2026-11-09 | 合併幾何工具的公開原始碼入口；未於本輪執行 |
+| S7 | https://github.com/mrdoob/three.js/blob/r187/examples/jsm/utils/BufferGeometryUtils.js | 2026-11-09 | 合併幾何工具的公開原始碼入口；未於這次研究執行 |
 | S8 | [既有 29｜渲染驗收研究](29-rendering-ceiling-benchmark-and-adoption-gates.md)、[既有 23｜GPU 驅動幾何](23-threejs-nanites-gpu-driven-geometry.md) | 2026-11-09 | 提供早期研究與假說；本篇未冒充其未跑的 benchmark |
 
 ## 採用狀態、反證條件和修訂
 
-- **採用建議（待 Owner 批准）：** 先做完整基準與「空間分區 batching + Instance Bounds」的受控實驗，再依 Pass 耗時調整海面反射／後製；Occlusion／WebGPU 是進階候選。
+- **採用建議（待 專案決策者 批准）：** 先做完整基準與「空間分區 batching + Instance Bounds」的受控實驗，再依 Pass 耗時調整海面反射／後製；Occlusion／WebGPU 是進階候選。
 - **不採用條件：** 實際 p95 改善低於統計波動；CPU／記憶體成本增加；海面反射或陰影遺失；真機熱穩定性惡化；不得用低畫質的對照誤導。
 - **2026-11-09**：首版通用技術研究。沒有下載第三方商用程式、沒有引用第三方截圖、沒有部署、沒有實際效能測試。
+
+> **修訂註記（2026-11-09）：** 將內部決策者與研究批次的稱呼改為通用工程語彙；研究結論與待驗證界線不變。
