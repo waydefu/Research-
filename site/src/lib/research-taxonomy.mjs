@@ -371,6 +371,18 @@ const raw = {
       ]
     ],
     [
+      "12-starwire-external-project-discovery.md",
+      "程式碼搜尋與索引",
+      "Starwire：GitHub 開源專案的多來源發現與可信度評估",
+      [
+        "Starwire",
+        "GitHub",
+        "RSS",
+        "開源情報",
+        "索引"
+      ]
+    ],
+    [
       "EAG-100-AUDIT-TEMPLATE.md",
       "治理稽核與操作",
       "AI Agent 治理稽核表：權限、證據與風險",
