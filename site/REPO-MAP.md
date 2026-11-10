@@ -21,11 +21,12 @@
 4. 需要主張或來源時，先用 `rg` 或 `python3 scripts/research_search.py verify`，不新鮮就明確 rebuild 再查；命中片段只是定位線索，必須重讀原始文件。
 5. 在 `site/` 改動後跑 `npm run check`、`npm run build`、`npm run provenance`、`npm run e2e`。CI 在最新 HEAD 真正 PASS 才能宣稱完成。
 
-## 新版 3D 美術資產入口
+## 觀測所即時場景入口
 
-- `site/scripts/generate-observatory-model.mjs` 由 `site/scripts/preflight.mjs` 建置時產生標準 glTF GLB 與來源清單；產物位於 `site/public/observatory/`（ignore），不要把二進位資產提交成備份。
-- `site/src/experience/observatory/scene.js` 是唯一瀏覽器 Three.js renderer／GLTFLoader；`site/src/pages/observatory/index.astro` 是唯一新版站預覽。舊 G1 多邊形實驗只有轉址。
-- 模型仍是程序化原創幾何，不是 Blender 精雕成品。真機和 Owner 美術 Gate 未通過前，不直接替換 `/Research-/` 正式首頁。
+- `site/src/experience/observatory/singularity-shader.js` 是**純資料**的 GLSL 著色器與主題／畫質分級；單元測試 `site/tests/observatory-shader.test.mjs` 不需要 GPU 就能檢查它。
+- `site/src/experience/observatory/singularity.js` 是 WebGL2 渲染器（編譯、uniform、依畫質縮放繪製尺寸）；`site/src/experience/observatory/scene.js` 管理捲動相位、主題、暫停、可見性、context 遺失與自動降級；`site/src/pages/observatory/index.astro` 是唯一預覽頁。
+- 沒有 3D 模型、貼圖或第三方執行期。`site/scripts/postbuild-verify.mjs` 要求建置產物含著色器模組且不得有 `.glb`／`.gltf`。舊的 GLB 管線已移除（歷史文件見 `site/archive/`）。
+- 真機和 Owner 美術 Gate 未通過前，不直接替換 `/Research-/` 正式首頁。
 
 ## 任務選哪個入口
 
