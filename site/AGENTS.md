@@ -4,7 +4,7 @@
 
 ## 現況與權限
 
-- `/Research-/` 是 Sanctum 靜態首頁，`/Research-/v2/` 只保留前往正式研究館的相容轉址，`/Research-/v3/` 是 Astro 全文研究館。`/Research-/v3/observatory/` 是 `noindex` 的即時 Three.js 預覽（單一天文儀場景），**不是已完成的跨頁 3D 世界，也尚未取代正式首頁**。不可逆向將 V2 設回 root。
+- `/Research-/` 是 Sanctum 靜態首頁，`/Research-/v2/` 只保留前往正式研究館的相容轉址，`/Research-/v3/` 是 Astro 全文研究館。`/Research-/v3/observatory/` 是 `noindex` 的即時預覽（單一 WebGL2 著色器繪製的奇點與裂隙，沒有 3D 模型），**不是已完成的跨頁 3D 世界，也尚未取代正式首頁**。不可逆向將 V2 設回 root。
 - Owner 最新明示授權 > 本檔／導航 > 具日期的現況修訂 > 歷史計畫。有衝突先核對，不自行擴大需求。
 - 可在 `site/` 編輯、測試、推分支與開 Draft PR。`research/` 下的原始研究檔**不得改動**（網站的來源 SHA 與審查登記綁定其內容）；`docs/`、`showcase/` 的改動限於治理與說明文件本身。
 - 跨出 `site/`、改 workflow／Ruleset／Pages、加入未列技術、安裝工具、刪檔、合併、部署、啟動 P2，均需 Owner 當次明示同意。**2026-11-06 的一次性翻新授權及其範圍見根目錄 [AGENTS.md](../AGENTS.md)「授權紀錄」，不是常設授權。**

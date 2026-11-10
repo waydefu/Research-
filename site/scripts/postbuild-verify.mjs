@@ -1,5 +1,4 @@
-import { readFileSync, existsSync } from 'node:fs';
-import { createHash } from 'node:crypto';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { allDocs, graph, BASE } from '../src/lib/catalog.mjs';
 
@@ -31,26 +30,22 @@ for(const d of docs){
 }
 const world = JSON.parse(readFileSync('dist/graph.json', 'utf8'));
 if (world.nodes.length !== docs.length) throw new Error('文件圖與真實文件數不一致');
-// G1-02 asset provenance is checked independently of WebGL availability.
-const model='dist/observatory/observatory-v1.glb';
-const manifest='dist/observatory/model-manifest.json';
-if(!existsSync(model)||!existsSync(manifest))
-  throw new Error('缺少原創觀測所 GLB 或模型來源清單');
-const binary=readFileSync(model),meta=JSON.parse(readFileSync(manifest,'utf8'));
-if(binary.subarray(0,4).toString('ascii')!=='glTF'||binary.readUInt32LE(4)!==2||
-  binary.readUInt32LE(8)!==binary.length||binary.length>4_500_000)
-  throw new Error('GLB 格式或手機體積上限不合格');
-if(meta.bytes!==binary.length||meta.sha256!==createHash('sha256').update(binary).digest('hex'))
-  throw new Error('GLB 與已驗證的 SHA256 manifest 不符');
-if(meta.blenderExported!==false||meta.authoredBy!=='repository-procedural-script')
-  throw new Error('模型產地不得被錯誤宣稱為 Blender 精雕');
-const glbJsonLength=binary.readUInt32LE(12);
-const glb=JSON.parse(binary.subarray(20,20+glbJsonLength).toString('utf8').trim());
-if(glb.asset.version!=='2.0'||glb.meshes.length!==7||
-  !glb.nodes.some(n=>n.name==='Orbit_Outer')||
-  !glb.nodes.some(n=>n.name==='Hall')||
-  glb.buffers.some(b=>b.uri))
-  throw new Error('觀測所模型節點、glTF 或自含資源不符合契約');
-console.log('G1-02 verified original GLB:',meta.bytes,'bytes;',meta.meshCount,'meshes; sha256',meta.sha256);
+// The observatory ships one procedural shader module and no 3D model asset.
+// Check the built output, independent of WebGL availability.
+const astroDir='dist/_astro';
+const chunks=existsSync(astroDir)?readdirSync(astroDir).filter(f=>f.endsWith('.js')):[];
+const shaderChunk=chunks.find(f=>{
+  const code=readFileSync(astroDir+'/'+f,'utf8');
+  return code.includes('#version 300 es')&&code.includes('uPhase')&&code.includes('uTheme');
+});
+if(!shaderChunk)throw new Error('缺少奇點著色器模組：建置產物中找不到 WebGL2 著色器');
+const stray=[];
+const walk=dir=>{for(const e of readdirSync(dir,{withFileTypes:true})){
+  const full=dir+'/'+e.name;
+  if(e.isDirectory())walk(full);else if(/\.(glb|gltf)$/i.test(e.name))stray.push(full);
+}};
+walk('dist');
+if(stray.length)throw new Error('觀測所不應再含 3D 模型資產：'+stray.join(', '));
+console.log('Observatory verified: shader module '+shaderChunk+', no model assets.');
 
 console.log('P0 output verification: ' + verified + ' pages, Pagefind bundle present, graph consistent.');

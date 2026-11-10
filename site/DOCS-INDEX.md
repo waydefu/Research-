@@ -28,8 +28,7 @@
 | [P1-ASSET-RIGHTS-REGISTER.md](./P1-ASSET-RIGHTS-REGISTER.md) | 規格／協定 | 原創素材與第三方權利登記 |
 | [P1-EAG100-VALIDATION.md](./P1-EAG100-VALIDATION.md) | 規格／協定 | 可執行控制與仍需人工證明的安全 Gate |
 | [P0.5-C-METADATA-SCHEMA.md](./P0.5-C-METADATA-SCHEMA.md) | 規格／協定 | 研究 Metadata Schema 最小可驗證方案 |
-| [G1-01-CINEMATIC-OBSERVATORY.md](./G1-01-CINEMATIC-OBSERVATORY.md) | 規格／協定 | 即時 3D 預覽的範圍、檔案與未達成門檻 |
-| [G1-02-MODEL-PIPELINE.md](./G1-02-MODEL-PIPELINE.md) | 規格／協定 | 程序化 GLB 管線與 Blender 接入介面 |
+| [G1-01-CINEMATIC-OBSERVATORY.md](./G1-01-CINEMATIC-OBSERVATORY.md) | 規格／協定 | 觀測所即時場景（單一著色器）的語法、相位、效能降級與未達成門檻 |
 | [HANDOFF-CURRENT.md](./HANDOFF-CURRENT.md) | 歷史快照 | 2026-11-03 的接手交接書；其中的產品要求仍有參考價值 |
 | [ATLAS-G0-REVIEW.md](./ATLAS-G0-REVIEW.md) | 歷史快照 | Sanctum 美術方向圖集審查 |
 | [P0.5-C-TAXONOMY-AUDIT.md](./P0.5-C-TAXONOMY-AUDIT.md) | 歷史快照 | 逐篇細分類與公開標題校訂 |
@@ -47,6 +46,7 @@
 | [P1-SANCTUM-CSS-MODULARIZATION.md](./P1-SANCTUM-CSS-MODULARIZATION.md) | 歷史快照 | Sanctum CSS 模組邊界第一次抽離 |
 | [P2-G1-00-WEBGL2-LAB.md](./P2-G1-00-WEBGL2-LAB.md) | 歷史快照 | 已退役的原生 WebGL2 實驗室（頁面只留轉址） |
 | [archive/CURRENT-STATUS-2026-11-04.md](./archive/CURRENT-STATUS-2026-11-04.md) | 封存 | 2026-11-04 的現況快照 |
+| [archive/G1-02-MODEL-PIPELINE.md](./archive/G1-02-MODEL-PIPELINE.md) | 封存 | 2026-11-05 的程序化 GLB 管線；2026-11-10 起被著色器取代 |
 
 資料型登記檔（JSON，非 Markdown）：`P1-ISSUE59-REVIEW.json`、`P1-2026-11-05-GRAPHICS-REVIEW.json` 是歷史審查快照，不得為了新增文章而改寫；`P1-ONGOING-SOURCE-REVIEW.json` 是持續追加的有限來源審閱登記，規則見 [RESEARCH-CURATION.md](./RESEARCH-CURATION.md)。
 

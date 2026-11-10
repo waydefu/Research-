@@ -44,8 +44,8 @@ export const REPO_NAVIGATION = Object.freeze([
   {
     id:'quality',title:'建置、回歸與來源 SHA',intent:'CI 失敗、Pagefind 缺頁、手機無 JS 閱讀',
     entry:'site/package.json',
-    paths:['site/package.json','site/scripts/postbuild-verify.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs','site/scripts/audit-public-content.mjs','site/scripts/p05-entry-report.mjs','site/scripts/p1-readiness-report.mjs','site/scripts/generate-observatory-model.mjs','.github/workflows/research-integrity.yml','.github/workflows/v3-p0-build.yml','.github/workflows/publish-showcase.yml'],
-    checks:['site/tests/catalog.test.mjs','site/tests/pages/v2-reader.spec.mjs','scripts/check_repository.py']
+    paths:['site/package.json','site/scripts/postbuild-verify.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs','site/scripts/audit-public-content.mjs','site/scripts/p05-entry-report.mjs','site/scripts/p1-readiness-report.mjs','site/src/experience/observatory/singularity-shader.js','site/src/experience/observatory/singularity.js','site/src/experience/observatory/scene.js','.github/workflows/research-integrity.yml','.github/workflows/v3-p0-build.yml','.github/workflows/publish-showcase.yml'],
+    checks:['site/tests/observatory-shader.test.mjs','site/tests/catalog.test.mjs','site/tests/pages/v2-reader.spec.mjs','scripts/check_repository.py']
   },
   {
     id:'search',title:'Repo 內全文搜尋、索引與新鮮度',intent:'查找證據，拒絕過期 Markdown 搜尋結果',

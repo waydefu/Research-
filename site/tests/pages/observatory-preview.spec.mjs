@@ -26,33 +26,35 @@ for(const width of [320,393,768,1440]){
     expect(visual.overflow).toBeLessThanOrEqual(1);
     if(width<=600){
       const stageBounds=await page.locator('#obs-scene').boundingBox();
-      expect(stageBounds,'cinematic 3D must be in a full-width scene, not a card').toBeTruthy();
+      expect(stageBounds,'the live scene must be full width, not a card').toBeTruthy();
       expect(stageBounds.x).toBeGreaterThanOrEqual(-1);
       expect(stageBounds.x).toBeLessThanOrEqual(1);
       expect(stageBounds.width).toBeGreaterThanOrEqual(width-2);
-      expect(stageBounds.height).toBeGreaterThanOrEqual(520);
-      expect(visual.copyTop,'central armillary image obscured on mobile').toBeGreaterThanOrEqual(height*.63);
+      expect(stageBounds.height).toBeGreaterThanOrEqual(560);
+      expect(visual.copyTop,'hero artwork obscured by copy on mobile').toBeGreaterThanOrEqual(height*.63);
       expect(visual.introHeight).toBeGreaterThanOrEqual(height);
     }
     await page.screenshot({path:testInfo.outputPath('g1-01-first-scene-'+width+'.png')});
     await page.locator('#obs-scene').scrollIntoViewIfNeeded();
-    await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer',/^(poster|three)$/);
+    await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer',/^(poster|shader)$/);
     const scene=page.locator('#obs-scene');
     const capable=await page.evaluate(()=>{
       try{return Boolean(document.createElement('canvas').getContext('webgl2'));}
       catch{return false;}
     });
-    if(capable)await expect(scene,'3D must render when the browser supports WebGL2')
-      .toHaveAttribute('data-renderer','three',{timeout:20000});
+    if(capable)await expect(scene,'the effect must render when the browser supports WebGL2')
+      .toHaveAttribute('data-renderer','shader',{timeout:20000});
     const state=await scene.getAttribute('data-renderer');
     // Do not silently count a real WebGL2-capable Chromium renderer failure
     // as a passing 3D test. In browsers without WebGL2, poster is correct.
-    if(capable)expect(state,'WebGL2 available but model failed').toBe('three');
-    if(state==='three'){
-      await expect(page.locator('#obs-three-root canvas')).toBeVisible();
+    if(capable)expect(state,'WebGL2 available but the shader failed').toBe('shader');
+    if(state==='shader'){
+      await expect(page.locator('#obs-fx-root canvas')).toBeVisible();
       await expect(page.locator('#obs-controls')).toBeVisible();
+      await expect(page.locator('#obs-themes button')).toHaveCount(3);
       await page.getByRole('button',{name:/節能畫質/}).click();
       await expect(page.getByRole('button',{name:'節能畫質：開'})).toHaveAttribute('aria-pressed','true');
+      await expect(scene).toHaveAttribute('data-quality','low');
     }else{
       await expect(page.locator('.obs-scene-backdrop')).toBeVisible();
       await expect(page.locator('#obs-controls')).toBeHidden();
@@ -105,69 +107,149 @@ test('G1-01 preview remains unindexed and self-hosted without runtime CDN',async
     title:document.title
   }));
   expect(url.external).toEqual([]);
-  expect(url.title).toContain('G1-01');
+  expect(url.title).toContain('電影式場景預覽');
 });
 
-test('G1-02 asset and build manifest are local and self-contained',async({page})=>{
-  const asset='/Research-/v3/observatory/observatory-v1.glb';
-  const manifest='/Research-/v3/observatory/model-manifest.json';
-  const glb=await page.request.get(asset);
-  expect(glb.ok()).toBe(true);
-  const bytes=await glb.body();
-  expect(bytes.subarray(0,4).toString('ascii')).toBe('glTF');
-  expect(bytes.readUInt32LE(4)).toBe(2);
-  expect(bytes.readUInt32LE(8)).toBe(bytes.length);
-  expect(bytes.length).toBeLessThan(4_500_000);
-  const meta=await page.request.get(manifest);
-  expect(meta.ok()).toBe(true);
-  const m=await meta.json();
-  expect(m.sha256).toHaveLength(64);
-  expect(m.authoredBy).toBe('repository-procedural-script');
-  expect(m.blenderExported).toBe(false);
-  expect(m.bytes).toBe(bytes.length);
+const SHADER_CHUNK=/singularity[^/]*\.js(\?|$)/;
+const webgl2=page=>page.evaluate(()=>{
+  try{return Boolean(document.createElement('canvas').getContext('webgl2'));}catch{return false;}
 });
-test('G1-02 forced static poster must not fetch the optional GLB',async({page})=>{
+// Decodes a screenshot inside the page and returns brightness and colour statistics.
+const stats=async(page,locator)=>{
+  const png=(await locator.screenshot()).toString('base64');
+  return page.evaluate(async data=>{
+    const blob=await (await fetch('data:image/png;base64,'+data)).blob();
+    const bitmap=await createImageBitmap(blob);
+    const canvas=document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;
+    const ctx=canvas.getContext('2d');ctx.drawImage(bitmap,0,0);
+    const px=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+    let sum=0,max=0,dark=0,r=0,b=0;const n=px.length/4;
+    for(let i=0;i<px.length;i+=4){
+      const l=(.2126*px[i]+.7152*px[i+1]+.0722*px[i+2])/255;
+      sum+=l;if(l>max)max=l;if(l<.08)dark++;r+=px[i];b+=px[i+2];
+    }
+    return {mean:sum/n,max,darkShare:dark/n,redMinusBlue:(r-b)/n};
+  },png);
+};
+
+test('shader module and shader scene ship as local files, with no model asset or CDN',async({page})=>{
+  const loaded=[];
+  page.on('request',req=>loaded.push(req.url()));
+  await page.goto(PREVIEW);
+  await page.locator('#obs-scene').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(600);
+  expect(loaded.filter(u=>/\.(glb|gltf)(\?|$)/i.test(u)),'no 3D model may be requested').toEqual([]);
+  expect(loaded.filter(u=>!u.startsWith('http://127.0.0.1')&&!u.startsWith('data:')),'no third-party request').toEqual([]);
+});
+test('forced static poster must not fetch the shader module',async({page})=>{
   const fetched=[];
-  page.on('request',req=>{if(req.url().endsWith('.glb'))fetched.push(req.url());});
-  await page.goto('/Research-/v3/observatory/?poster=1');
+  page.on('request',req=>{if(SHADER_CHUNK.test(req.url()))fetched.push(req.url());});
+  await page.goto(PREVIEW+'?poster=1');
   await page.locator('#obs-scene').scrollIntoViewIfNeeded();
   await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer','poster');
   expect(fetched).toEqual([]);
 });
-
-test('G1-02 failed GLB fetch must fall back to static art without breaking research links',async({page})=>{
-  const glb='/Research-/v3/observatory/observatory-v1.glb';
-  await page.route('**/observatory-v1.glb',route=>route.fulfill({
-    status:503,contentType:'application/octet-stream',body:''
-  }));
-  await page.goto('/Research-/v3/observatory/');
-  const capable=await page.evaluate(()=>{
-    try{return Boolean(document.createElement('canvas').getContext('webgl2'));}
-    catch{return false;}
-  });
+test('a failed shader module fetch falls back to static art without breaking research links',async({page})=>{
+  await page.route(SHADER_CHUNK,route=>route.fulfill({status:503,contentType:'text/javascript',body:''}));
+  await page.goto(PREVIEW);
+  const capable=await webgl2(page);
   await page.locator('#obs-scene').scrollIntoViewIfNeeded();
   if(capable){
     await expect(page.locator('#obs-status')).toContainText('已回到靜態觀測所美術',{timeout:20000});
     await expect(page.locator('#obs-scene')).toHaveAttribute('data-renderer','poster');
   }
   await expect(page.locator('.obs-archive-actions a[href="/Research-/v3/library/"]')).toBeVisible();
-  const response=await page.request.get(glb);
-  expect(response.ok()).toBe(true); // page.request bypasses the browser's route.
 });
-
-test('G1-02 first screen does not eagerly fetch optional geometry',async({page})=>{
+test('first screen does not eagerly fetch the shader module',async({page})=>{
   const requests=[];
-  page.on('request',req=>{if(req.url().endsWith('.glb'))requests.push(req.url());});
+  page.on('request',req=>{if(SHADER_CHUNK.test(req.url()))requests.push(req.url());});
   await page.setViewportSize({width:393,height:852});
-  await page.goto('/Research-/v3/observatory/');
+  await page.goto(PREVIEW);
   await expect(page.getByRole('heading',{level:1,name:/在未知的邊界/})).toBeVisible();
   expect(requests).toEqual([]);
 });
+test('the shader really paints: a hot core, a dark void and moving frames',async({page})=>{
+  test.setTimeout(90_000);
+  await page.setViewportSize({width:1280,height:800});
+  await page.goto(PREVIEW+'?phase=1&q=low');
+  const scene=page.locator('#obs-scene');
+  await scene.scrollIntoViewIfNeeded();
+  test.skip(!await webgl2(page),'WebGL2 unavailable: poster fallback covered separately');
+  await expect(scene).toHaveAttribute('data-renderer','shader',{timeout:30_000});
+  await expect.poll(()=>scene.getAttribute('data-frames').then(Number),{timeout:30_000}).toBeGreaterThan(1);
+  const s=await stats(page,scene);
+  expect(s.max,'a white-hot core must exist').toBeGreaterThan(.85);
+  // Measured 0.19 on the default theme at phase 1 (violet haze fills part of the void).
+  expect(s.darkShare,'there must be a dark void around the light').toBeGreaterThan(.12);
+  expect(s.mean,'not a blank or a washed-out frame').toBeGreaterThan(.03);
+  expect(s.mean).toBeLessThan(.6);
+});
+test('the picture moves when motion is allowed and holds still when it is not',async({page})=>{
+  test.setTimeout(120_000);
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.setViewportSize({width:1280,height:800});
+  await page.goto(PREVIEW+'?phase=1&q=low');
+  const scene=page.locator('#obs-scene');
+  await scene.scrollIntoViewIfNeeded();
+  test.skip(!await webgl2(page),'WebGL2 unavailable: poster fallback covered separately');
+  await expect(scene).toHaveAttribute('data-renderer','shader',{timeout:30_000});
+  await expect.poll(()=>scene.getAttribute('data-frames').then(Number),{timeout:30_000}).toBeGreaterThan(3);
+  const first=(await scene.screenshot()).toString('base64');
+  await page.waitForTimeout(2500);
+  const second=(await scene.screenshot()).toString('base64');
+  expect(second,'frames must differ while animating').not.toBe(first);
+  await page.getByRole('button',{name:'暫停動態'}).click();
+  await expect(page.getByRole('button',{name:'播放動態'})).toHaveAttribute('aria-pressed','true');
+  await page.waitForTimeout(700);
+  const frozenA=(await scene.screenshot()).toString('base64');
+  await page.waitForTimeout(1500);
+  const frozenB=(await scene.screenshot()).toString('base64');
+  expect(frozenB,'a paused scene must not change').toBe(frozenA);
+});
+test('colour themes switch and the picture changes with them',async({page})=>{
+  test.setTimeout(120_000);
+  await page.setViewportSize({width:1280,height:800});
+  await page.goto(PREVIEW+'?phase=1&q=low');
+  const scene=page.locator('#obs-scene');
+  await scene.scrollIntoViewIfNeeded();
+  test.skip(!await webgl2(page),'WebGL2 unavailable: poster fallback covered separately');
+  await expect(scene).toHaveAttribute('data-renderer','shader',{timeout:30_000});
+  await page.getByRole('button',{name:'赤焰裂隙'}).click();
+  await expect(scene).toHaveAttribute('data-theme','ember');
+  await expect(page.getByRole('button',{name:'赤焰裂隙'})).toHaveAttribute('aria-pressed','true');
+  await expect(page.getByRole('button',{name:'金色奇點'})).toHaveAttribute('aria-pressed','false');
+  await page.waitForTimeout(1500);
+  const ember=await stats(page,scene);
+  await page.getByRole('button',{name:'冷光透鏡'}).click();
+  await expect(scene).toHaveAttribute('data-theme','nebula');
+  await page.waitForTimeout(1500);
+  const nebula=await stats(page,scene);
+  expect(ember.redMinusBlue,'ember is warm').toBeGreaterThan(nebula.redMinusBlue+10);
+  expect(nebula.redMinusBlue,'nebula leans cold').toBeLessThan(ember.redMinusBlue);
+});
+test('scrolling drives the narrative phase of the effect',async({page})=>{
+  test.setTimeout(120_000);
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.setViewportSize({width:1280,height:800});
+  await page.goto(PREVIEW+'?q=low');
+  const scene=page.locator('#obs-scene');
+  test.skip(!await webgl2(page),'WebGL2 unavailable: poster fallback covered separately');
+  const place=fraction=>page.evaluate(f=>{
+    const rect=document.getElementById('obs-scene').getBoundingClientRect();
+    scrollBy(0,rect.top-innerHeight*f);
+  },fraction);
+  await place(.7);
+  await expect(scene).toHaveAttribute('data-renderer','shader',{timeout:40_000});
+  await place(.97);
+  await expect.poll(()=>scene.getAttribute('data-phase').then(Number),{timeout:40_000}).toBeLessThan(.2);
+  await place(.08);
+  await expect.poll(()=>scene.getAttribute('data-phase').then(Number),{timeout:60_000}).toBeGreaterThan(.8);
+});
 
-// G1-02 P0 reliability: headless Chromium does not necessarily mark a second
+// Reliability: headless Chromium does not necessarily mark a second
 // browser tab as hidden; simulate document.hidden so the real document event
 // handler and animation scheduling, not an unrelated resize, are tested.
-test('G1-02 3D animation resumes after document visibility is restored',async({page})=>{
+test('animation resumes after document visibility is restored',async({page})=>{
   test.setTimeout(70_000);
   // The pages CI defaults to reduced motion, which intentionally pauses the renderer.
   // This test needs active animation frames to verify background/foreground rescheduling.
@@ -185,7 +267,7 @@ test('G1-02 3D animation resumes after document visibility is restored',async({p
   await scene.scrollIntoViewIfNeeded();
   const capable=await page.evaluate(()=>Boolean(document.createElement('canvas').getContext('webgl2')));
   test.skip(!capable,'WebGL2 unavailable: poster fallback already covered separately');
-  await expect(scene).toHaveAttribute('data-renderer','three',{timeout:25_000});
+  await expect(scene).toHaveAttribute('data-renderer','shader',{timeout:25_000});
   await expect.poll(()=>page.evaluate(()=>window.__obsFrameTicks),{timeout:12_000}).toBeGreaterThan(4);
   await page.evaluate(()=>{
     Object.defineProperty(document,'hidden',{configurable:true,value:true});
@@ -201,19 +283,19 @@ test('G1-02 3D animation resumes after document visibility is restored',async({p
   });
   await expect.poll(()=>page.evaluate(()=>window.__obsFrameTicks),{timeout:12_000})
     .toBeGreaterThan(hiddenTicks+4);
-  await expect(scene).toHaveAttribute('data-renderer','three');
+  await expect(scene).toHaveAttribute('data-renderer','shader');
 });
 
-test('G1-02 simulated WebGL context loss hides inactive controls and restores GLB',async({page})=>{
+test('simulated WebGL context loss hides inactive controls and restores the shader',async({page})=>{
   test.setTimeout(80_000);
   await page.goto(PREVIEW);
   const stage=page.locator('#obs-scene');
   await stage.scrollIntoViewIfNeeded();
   const capable=await page.evaluate(()=>Boolean(document.createElement('canvas').getContext('webgl2')));
   test.skip(!capable,'WebGL2 unavailable: poster fallback already covered separately');
-  await expect(stage).toHaveAttribute('data-renderer','three',{timeout:25_000});
+  await expect(stage).toHaveAttribute('data-renderer','shader',{timeout:25_000});
   const canLose=await page.evaluate(()=>{
-    const canvas=document.querySelector('#obs-three-root canvas');
+    const canvas=document.querySelector('#obs-fx-root canvas');
     const context=canvas?.getContext('webgl2');
     const extension=context?.getExtension('WEBGL_lose_context');
     if(!extension)return false;
@@ -227,6 +309,6 @@ test('G1-02 simulated WebGL context loss hides inactive controls and restores GL
   await expect(page.locator('#obs-status')).toContainText('圖形上下文已中斷');
   await expect(page.locator('.obs-archive-actions a[href="/Research-/v3/library/"]')).toBeVisible();
   await page.evaluate(()=>window.__observatoryContextExtension.restoreContext());
-  await expect(stage).toHaveAttribute('data-renderer','three',{timeout:30_000});
+  await expect(stage).toHaveAttribute('data-renderer','shader',{timeout:30_000});
   await expect(page.locator('#obs-controls')).toBeVisible();
 });

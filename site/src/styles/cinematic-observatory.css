@@ -52,18 +52,23 @@ html:has(.observatory-page){scroll-behavior:smooth;background:var(--obs-deep)}
 .obs-machine-heading{position:relative;z-index:2;max-width:710px;margin:0 auto 48px;text-align:center}
 .obs-machine h2,.obs-archive h2,.obs-featured h2{margin:8px 0 12px;font-size:clamp(34px,4.2vw,65px);line-height:1.4}
 .obs-machine-heading>p:last-child{max-width:64ch;margin:0 auto;color:#becbd1;font-size:clamp(14px,1vw,16px);line-height:1.95}
-.obs-scene{position:relative;margin:0 auto;max-width:1440px;height:min(75vw,850px);min-height:520px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 45% 58% at 50% 40%,rgba(56,78,102,.35),transparent 78%),linear-gradient(180deg,#0b1521,#060b13);border:0;box-shadow:inset 0 0 86px #0b1625;mask-image:linear-gradient(180deg,transparent 0%,#000 8%,#000 86%,transparent 100%)}
-.obs-scene-backdrop{position:absolute;inset:0;z-index:-1;background:url('/Research-/v3/atlas/sanctum/assets/world-desktop.webp') 88% 46%/142% auto no-repeat;opacity:.62;filter:saturate(.9) brightness(.82);-webkit-mask-image:radial-gradient(ellipse 44% 62% at 50% 47%,transparent 62%,#000 100%);mask-image:radial-gradient(ellipse 44% 62% at 50% 47%,transparent 62%,#000 100%)}
+.obs-scene{position:relative;margin:0 auto;max-width:1440px;height:clamp(560px,64vw,900px);min-height:560px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 45% 58% at 50% 40%,rgba(56,78,102,.35),transparent 78%),linear-gradient(180deg,#0b1521,#060b13);border:0;box-shadow:inset 0 0 86px #0b1625;mask-image:linear-gradient(180deg,transparent 0%,#000 8%,#000 86%,transparent 100%)}
+.obs-scene-backdrop{position:absolute;inset:0;z-index:-1;background:url('/Research-/v3/atlas/sanctum/assets/world-desktop.webp') center 47%/cover no-repeat;opacity:.7;filter:saturate(.95) brightness(.9)}
 .obs-scene::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at 50% 52%,transparent 29%,rgba(4,8,13,.38) 65%,rgba(3,7,11,.76) 100%),linear-gradient(0deg,#050a11ae,transparent 27%,transparent 77%,#070b14a3)}
-.obs-three-root{position:absolute;inset:0;z-index:1;pointer-events:auto;touch-action:pan-y;opacity:0;transition:opacity .7s ease}
-.obs-three-root canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
-.obs-scene[data-renderer="three"] .obs-three-root{opacity:1}
+.obs-fx-root{position:absolute;inset:0;z-index:1;pointer-events:auto;touch-action:pan-y;opacity:0;transition:opacity .9s ease}
+.obs-fx-root canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+.obs-scene[data-renderer="shader"] .obs-fx-root{opacity:1}
+/* The live effect is the picture: the poster steps aside and the vignettes lighten. */
+.obs-scene[data-renderer="shader"] .obs-scene-backdrop{opacity:0}
+.obs-scene[data-renderer="shader"]::before{opacity:.28}
+.obs-scene[data-renderer="shader"] .obs-scene-shade{opacity:0}
 .obs-scene-shade{position:absolute;z-index:3;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 46%,rgba(242,166,75,.055),transparent 30%);mix-blend-mode:screen}
 .obs-stage-corner{position:absolute;z-index:4;width:34px;height:34px;pointer-events:none;border-color:rgba(245,202,136,.28);border-style:solid}
 .obs-stage-corner-tl{top:20px;left:20px;border-width:1px 0 0 1px}
 .obs-stage-corner-br{bottom:20px;right:20px;border-width:0 1px 1px 0}
 .obs-scene-meta{position:absolute;bottom:28px;left:35px;right:35px;z-index:4;display:flex;justify-content:space-between;gap:12px;color:#d5c19e;letter-spacing:.15em;font:10px/1.4 monospace;pointer-events:none}
 .obs-controls{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:25px}
+.obs-themes{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;width:100%}
 .obs-controls button{min-width:152px;min-height:46px;padding:10px 17px;background:transparent;color:#dbc39b;border:0;border-bottom:1px solid rgba(217,181,121,.47);font-size:13px;letter-spacing:.05em}
 .obs-controls button[aria-pressed="true"]{background:rgba(203,155,81,.11);color:#f3d8aa;border-bottom-color:#f1c582}
 .obs-status,.obs-honesty{text-align:center;max-width:94ch;margin:17px auto 0;padding-inline:20px;color:#d9bd8f;font-size:13px;line-height:1.8}
@@ -103,7 +108,7 @@ html:has(.observatory-page){scroll-behavior:smooth;background:var(--obs-deep)}
  .obs-intro{min-height:105svh}
  .obs-intro-copy{max-width:650px}
  .obs-machine{padding-top:60px}
- .obs-scene{height:610px;min-height:420px}
+ .obs-scene{height:640px;min-height:480px}
  .obs-world img{object-position:50% 48%}
 }
 @media(max-width:600px){
@@ -126,8 +131,8 @@ html:has(.observatory-page){scroll-behavior:smooth;background:var(--obs-deep)}
  .obs-machine-heading{padding:0 23px;margin-bottom:18px}
  .obs-machine-heading>p:last-child{font-size:13px}
  .obs-machine h2{font-size:35px}
- .obs-scene{height:clamp(520px,90svh,740px);min-height:520px;max-height:740px;mask-image:linear-gradient(180deg,transparent 0%,#000 9%,#000 87%,transparent 100%)}
- .obs-scene-backdrop{background-image:url('/Research-/v3/atlas/sanctum/assets/world-mobile.webp');background-position:center 44%;opacity:.6;-webkit-mask-image:radial-gradient(ellipse 60% 46% at 50% 47%,transparent 58%,#000 100%);mask-image:radial-gradient(ellipse 60% 46% at 50% 47%,transparent 58%,#000 100%)}
+ .obs-scene{height:clamp(560px,100svh,860px);min-height:560px;max-height:860px;mask-image:linear-gradient(180deg,transparent 0%,#000 9%,#000 87%,transparent 100%)}
+ .obs-scene-backdrop{background-image:url('/Research-/v3/atlas/sanctum/assets/world-mobile.webp');background-position:center 44%;opacity:.7}
  .obs-scene-meta{left:15px;right:15px;bottom:16px;font-size:9px}
  .obs-scene-shade{background:radial-gradient(circle at 50% 51%,rgba(252,187,91,.11),transparent 27%)}
  .obs-stage-corner{display:none}
@@ -153,7 +158,7 @@ html:has(.observatory-page){scroll-behavior:smooth;background:var(--obs-deep)}
 @media(prefers-reduced-motion:reduce){
  html:has(.observatory-page){scroll-behavior:auto}
  .obs-world img{transform:none}
- .obs-three-root{transition:none}
+ .obs-fx-root{transition:none}
  .obs-topic-list a,.obs-nav a{transition:none}
 }
 @media(prefers-reduced-transparency:reduce){.obs-world-shade,.obs-scene::before{opacity:.84}.obs-mobile-nav{background:#09121f;backdrop-filter:none}}
