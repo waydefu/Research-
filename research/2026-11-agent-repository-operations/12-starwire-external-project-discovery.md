@@ -41,7 +41,7 @@ heat = weekly_gain / sqrt(stars_today + 100)
 採用兩階段流程，先將 Starwire 作為可選的**候選發現來源**，再由另一套研究流程確認可引用的證據：
 
 1. **按需選取**：先以網站、公開 JSON 或 RSS 搜尋一個研究主題；只保存人工選中的 Repo URL 與最小候選摘要，不預設同步整份清單。
-2. **來源身分與去重**：候選主鍵優先使用取得時的 GitHub repository ID；URL、owner/name 為可變別名。若只拿到 URL，先做 Repo 解析與更名驗證，不根據同名推定同一項目。
+2. **來源身分與去重**：候選主鍵優先使用取得時的 GitHub repository ID；URL 與「帳號／儲存庫名稱」屬於可變別名。若只拿到 URL，先做 Repo 解析與更名驗證，不根據同名推定同一項目。
 3. **分離事實與轉述**：資料上保留 `discoverySource=starwire`、`discoveredAt`、`observedAt`、`sourceUrl`、`sourceRevisionOrEtag`、`sourceLicense`、`reviewStatus=pending`；排名、摘要、標籤須標為第三方觀察，不取代原始 GitHub README、LICENSE、Release 與程式碼證據。
 4. **人工研究 Gate**：獨立確認用途、上游來源、授權、維護活動、安全風險、是否重複既有研究及可重現步驟。通過 Gate 後再建立正常研究文獻；未通過的候選不可當成採用建議。
 5. **最小變更與回退**：如未來試點匯入，限定白名單主題／最多 N 筆、手動觸發、唯讀、產生可審核 diff；出問題時停用來源並刪除未核准候選，不碰既有正文與來源 SHA。
