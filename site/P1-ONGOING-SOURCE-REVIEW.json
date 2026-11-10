@@ -425,8 +425,8 @@
     },
     {
       "path": "research/2026-11-agent-repository-operations/12-starwire-external-project-discovery.md",
-      "sourceBlobSha": "8680226661e921799fe2dea1a3004ff76024dee5",
-      "sourceRevision": "1167dc7a4a6cdee4db09baf37e617dc2dfa4b3bd",
+      "sourceBlobSha": "995cfc3c8f6cdf4d2f9bb5ea1dd7d2a7dbb22f7d",
+      "sourceRevision": "d58d17806a3a32467b776d886dc9aa8d267904ec",
       "reviewedOn": "2026-11-10",
       "verifiedScope": "核對 Starwire 作者公開 README 的 2026-11-09 清單數量快照、docs/how.html 的來源類型、更新週期、熱度公式與健康訊號、公開 data/repos.json 介面、清單 CC0 與網站 MIT 的原始 LICENSE、GitHub Pages workflow 與 stamp.mjs；未重現資料擷取管線、AI 分類、全部候選 Repo 或更新成功率。",
       "publicNotice": "Starwire 是第三方 GitHub 開源專案發現來源，而非資安掃描或品質認證。資料數量與星數屬 2026-11-10 核對時的上游快照；候選收錄與排名不等於可直接採用。所述匯入欄位及採用 Gate 只是建議，沒有實際匯入、排程、Token 或新鮮度量測。",
