@@ -1,6 +1,7 @@
 // Editorial introductions only. Each entry is tied to one real source path, not an inferred fact.
 // Preserve original Markdown, source provenance, author and demos. Do not claim external testing.
 export const EDITORIAL_LEADS = Object.freeze({
+  "research/2026-11-agent-repository-operations/12-starwire-external-project-discovery.md": "研究 Starwire 如何整合 GitHub Trending、開發者推薦、Reddit、Hacker News 與讀者提交，建立開源專案發現清單。解析七日 Star 熱度、分類與 RSS／JSON 資料介面，並說明授權、去重、資料新鮮度與安全審核的界線。這是外部情報來源研究，沒有匯入全量資料或執行自動化。",
   "research/2026-11-universal-web-engine/43-webgl2-rendering-performance-visibility-and-benchmark-protocol.md": "整理如何用有效的 CPU、GPU 與幀時間資料識別 3D 場景瓶頸，再比較實例化、空間分區合批、視錐剔除、BatchedMesh 及反射和後製通道的成本。研究援引 Three.js 與 WebGL 官方機制，提出可回退的 A/B 驗收方法，尚無跨裝置實測效能結果。",
   "research/2026-11-universal-web-engine/44-seamless-world-streaming-lod-hlod-resource-lifecycle.md": "從資料層、載入排程和渲染層拆解無縫大世界，說明 Chunk Streaming 為何不同於剔除與 LOD，並研究 HLOD、資產壓縮、跨區導航、資源釋放及持久世界狀態。提供兩區域原型與手機驗收條件；這是可採用的架構規劃，尚未完成真實世界串流測試。",
   "research/2026-11-universal-web-engine/33-uniforge3d-anchor-guided-multiview-3d-reconstruction.md": "UniForge3D 將相機姿態未知的多視角照片，透過共同錨定座標空間連結幾何重建與生成模型，並為不同立體區域選擇最有用的照片特徵，最後輸出 GLB。研究核對論文、推論程式及原始授權；模型權重與背景移除工具的商用限制、GPU 成本和輸出品質仍需另行驗證。",
