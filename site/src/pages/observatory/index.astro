@@ -23,8 +23,8 @@ const groups=[
   <meta name="theme-color" content="#080e18">
   <meta name="color-scheme" content="dark">
   <meta name="robots" content="noindex,follow">
-  <meta name="description" content="Research— 天文觀測所：電影式視覺與真實 Three.js 機械天球原型，通往可驗證的繁體中文技術研究與原始來源。">
-  <title>天文觀測所｜G1-01 電影式場景預覽</title>
+  <meta name="description" content="Research— 天文觀測所：以單一著色器即時繪製的奇點與裂隙，通往可驗證的繁體中文技術研究與原始來源。">
+  <title>天文觀測所｜電影式場景預覽</title>
   <link rel="preload" as="image" href="/Research-/v3/atlas/sanctum/assets/world-mobile.webp" type="image/webp" media="(max-width: 700px)">
   <link rel="preload" as="image" href="/Research-/v3/atlas/sanctum/assets/world-desktop.webp" type="image/webp" media="(min-width: 701px)">
 </head>
@@ -77,25 +77,30 @@ const groups=[
 
     <section class="obs-machine" id="obs-explore" aria-labelledby="obs-machine-title">
       <div class="obs-machine-heading">
-        <p class="obs-kicker">02 / THE ENGINE OF DISCOVERY</p>
-        <h2 id="obs-machine-title">天球之心</h2>
-        <p>從歷史天文儀的結構取得靈感，將多層金屬環、分刻、傳動、發光核心與建築輪廓結合為原創即時 3D 場景。</p>
+        <p class="obs-kicker">02 / THE SINGULARITY</p>
+        <h2 id="obs-machine-title">奇點之心</h2>
+        <p>一道光從一個點撕開空間：兩側的等離子牆向中心收束，十字星芒、環形刻度與飛散的碎片，會隨著你往下捲動而逐步展開。全部由一支著色器即時畫出，沒有 3D 模型，也沒有外部素材。</p>
       </div>
-      <div class="obs-scene" id="obs-scene" data-renderer="poster" aria-label="原創多層天文儀 3D 場景展示">
+      <div class="obs-scene" id="obs-scene" data-renderer="poster" aria-label="著色器即時繪製的奇點與裂隙場景">
         <div class="obs-scene-backdrop" aria-hidden="true"></div>
-        <div id="obs-three-root" class="obs-three-root" aria-hidden="true"></div>
+        <div id="obs-fx-root" class="obs-fx-root" aria-hidden="true"></div>
         <div class="obs-scene-shade" aria-hidden="true"></div>
         <div class="obs-stage-corner obs-stage-corner-tl" aria-hidden="true"></div>
         <div class="obs-stage-corner obs-stage-corner-br" aria-hidden="true"></div>
-        <div class="obs-scene-meta"><span>G1 / LIVE RENDER</span><span>THE CELESTIAL ENGINE</span></div>
+        <div class="obs-scene-meta"><span>LIVE SHADER</span><span>THE SINGULARITY</span></div>
       </div>
       <div class="obs-controls" id="obs-controls" hidden>
-        <button type="button" id="obs-motion" aria-pressed="false">暫停機械運轉</button>
+        <div class="obs-themes" id="obs-themes" role="group" aria-label="色彩主題">
+          <button type="button" data-theme="aurum" aria-pressed="true">金色奇點</button>
+          <button type="button" data-theme="ember" aria-pressed="false">赤焰裂隙</button>
+          <button type="button" data-theme="nebula" aria-pressed="false">冷光透鏡</button>
+        </div>
+        <button type="button" id="obs-motion" aria-pressed="false">暫停動態</button>
         <button type="button" id="obs-quality" aria-pressed="false">節能畫質：關</button>
         <button type="button" id="obs-reset">重新觀看</button>
       </div>
       <p class="obs-status" id="obs-status" role="status" aria-live="polite">目前顯示靜態原創美術。若裝置支援 WebGL2，可選擇啟動即時場景。</p>
-      <p class="obs-honesty">3D 場景屬 G1 技術與美術原型。原圖維持為美術參考與退化畫面；尚未驗收真機 FPS、長時間發熱或 GPU 計時。</p>
+      <p class="obs-honesty">即時繪製屬技術與美術原型：視覺語法取自宇宙裂隙類的插畫，沒有複製任何圖像。海報維持為退化畫面；尚未驗收真機 FPS、長時間發熱或 GPU 計時。</p>
     </section>
 
     <section class="obs-statement" aria-labelledby="obs-story-title">
