@@ -38,8 +38,8 @@ export const REPO_NAVIGATION = Object.freeze([
   {
     id:'homepage',title:'單一 Sanctum 首頁與 Astro 發布',intent:'首頁視覺、跨頁連結、舊版入口轉址及單一 Pages 封裝',
     entry:'site/scripts/unify-home.mjs',
-    paths:['site/public/atlas/sanctum/index.html','site/scripts/unify-home.mjs','site/scripts/verify-pages-bundle.mjs'],
-    checks:['site/tests/pages/unified-home.spec.mjs','site/tests/pages/sanctum-fullpage.spec.mjs']
+    paths:['site/public/atlas/sanctum/index.html','site/scripts/unify-home.mjs','site/scripts/build-haloflux-integration.mjs','site/scripts/verify-pages-bundle.mjs'],
+    checks:['site/tests/pages/unified-home.spec.mjs','site/tests/pages/sanctum-fullpage.spec.mjs','site/tests/pages/haloflux-research-integration.spec.mjs']
   },
   {
     id:'quality',title:'建置、回歸與來源 SHA',intent:'CI 失敗、Pagefind 缺頁、手機無 JS 閱讀',

@@ -28,6 +28,8 @@
 - 沒有 3D 模型、貼圖或第三方執行期。`site/scripts/postbuild-verify.mjs` 要求建置產物含著色器模組且不得有 `.glb`／`.gltf`。舊的 GLB 管線已移除（歷史文件見 `site/archive/`）。
 - 真機和 Owner 美術 Gate 未通過前，不直接替換 `/Research-/` 正式首頁。
 
+- **HALOFLUX 原作與實際研究資料整合**：原作位於 `site/public/haloflux/`，不可直接修改；`site/scripts/build-haloflux-integration.mjs` 在 Astro 建置後從原作生成 `dist/haloflux-research/` 的研究版，資料來自 `site/src/lib/catalog.mjs`，介面增量位於 `site/public/haloflux-integration/bridge.js` 與 `bridge.css`，採 `site/tests/pages/haloflux-research-integration.spec.mjs` 驗證桌面／手機、來源連結、reduced-motion 與無 JS。這是獨立預覽，不是根首頁或全站八項美術完成。
+
 ## 任務選哪個入口
 
 | 想處理什麼 | 第一個該讀的檔案 | 接著看 | 驗證／注意 |
