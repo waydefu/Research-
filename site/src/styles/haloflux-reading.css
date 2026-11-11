@@ -2,7 +2,7 @@
    The document layer remains ordinary semantic HTML and works without JavaScript. */
 body{position:relative;isolation:isolate;background:#0a101d;color:#eef3f4}
 .reader-halo{position:absolute;z-index:-1;top:0;left:0;width:100%;height:min(78vh,760px);pointer-events:none}
-#main{background:linear-gradient(180deg,rgba(10,16,29,.15),rgba(10,16,29,.93) 48rem,#0a101d 90rem)}
+#main{background:radial-gradient(ellipse 76% 52rem at 96% 6%,rgba(64,212,222,.045),transparent 74%),radial-gradient(ellipse 70% 60rem at 5% 56%,rgba(228,180,81,.045),transparent 78%),linear-gradient(180deg,rgba(10,16,29,.15),rgba(10,16,29,.93) 48rem,#0a101d 90rem)}
 .global-header{background:rgba(8,14,24,.88);border-color:rgba(228,180,81,.25)}
 .global-header nav a{position:relative;min-height:44px;display:inline-flex;align-items:center;color:#d5dbe0}
 .global-header nav a[aria-current=page]::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:#40d4de}
