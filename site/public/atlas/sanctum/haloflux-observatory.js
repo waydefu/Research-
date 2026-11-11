@@ -229,8 +229,11 @@ function resizeStage() {
   ROT = r.height > r.width * 1.05; SW = r.width; SH = r.height;
   W = ROT ? r.height : r.width; H = ROT ? r.width : r.height;
   stage.width = SW * DPR; stage.height = SH * DPR;
-  cx = W * (ROT ? -0.1 : 0.07); cy = H * 0.5;
-  R = Math.max(H * 0.78, W * 0.30);
+  // Reframe the original scene for narrow portrait layouts: leave room for
+  // the ring AND its outgoing light, rather than cropping all beams away.
+  const compact = SW <= 700 && !ROT;
+  cx = W * (ROT ? -0.1 : compact ? -0.03 : 0.07); cy = H * 0.5;
+  R = compact ? Math.max(H * 0.42, W * 0.30) : Math.max(H * 0.78, W * 0.30);
   RO = R + Math.max(90, Math.min(240, H * 0.3, W * 0.13)) * C.ringWidth;
   RMAX = Math.hypot(W - cx, H / 2) + 60;
   thV = Math.asin(Math.min(1, (H / 2 + 60) / R));
