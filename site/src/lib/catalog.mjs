@@ -104,6 +104,7 @@ const DOMAIN_NAMES = {
   '2026-11-systems-analysis-design': '系統分析與專案管理',
   '2026-11-agent-engineering': 'AI 代理工程',
   '2026-11-agent-repository-operations': 'Agent 治理與資料索引',
+  '2026-11-startup-animation': '開機動畫與視覺效果',
   '2026-11-universal-web-engine': '現代 Web 工程與互動技術',
   'RESEARCH-TEMPLATE': '研究文件模板'
 };

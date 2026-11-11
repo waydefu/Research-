@@ -1,6 +1,14 @@
 // Editorial introductions only. Each entry is tied to one real source path, not an inferred fact.
 // Preserve original Markdown, source provenance, author and demos. Do not claim external testing.
 export const EDITORIAL_LEADS = Object.freeze({
+  "research/2026-11-startup-animation/README.md": "整理四個 GitHub 動畫案例：DSH 影片開場、550C 敘事片頭、HALOFLUX 即時光環與 Codex Dragon 三段角色動畫。逐篇區分原始碼核對、作者自述、影片影格統計及未實測的 Android 系統可行性，並保留來源、授權和驗收入口。",
+  "research/2026-11-startup-animation/01-cross-project-architecture-and-adoption.md": "比較預製影片、SVG／DOM 時間線、Canvas 即時生成與 Windows 原生啟動器如何控制啟動畫面。主張將動畫完成、程式就緒、首幀呈現和使用者略過分成不同狀態，並以可重現的錯誤案例與效能門檻選型；這是架構推導而非已完成的跨平台整合。",
+  "research/2026-11-startup-animation/02-dsh-boot-animation-handoff-and-fallback.md": "研究 DSH 影片式片頭如何用片段結束與核心就緒雙條件控制進入畫面，並用逐幀時間檢查、備用事件和有界超時避免黑屏。另拆解素材快取、播放失敗、音訊淡出及屏保碎片特效，並指出程式 MIT 不包含可自由散布的動畫媒體。",
+  "research/2026-11-startup-animation/03-dsh-550c-splash-timeline-and-first-frame.md": "分析 550C 如何在頁面解析階段先覆蓋背景，再以 SVG 路徑依序書寫、可取消的非同步時間線與節點故障事件建立開場敘事。重點比較前景先消失、底色再撤離的雙段淡出；67ms、338ms 等時間來自作者的測試紀錄，不是本次量測。",
+  "research/2026-11-startup-animation/04-haloflux-beat-canvas-light-rings.md": "從 HALOFLUX 原始 HTML 拆解不均勻節拍、指數亮度包絡、分層光束與七段自動運鏡。手機版以減少粒子數及限制像素比例降低理論負載，但未獨立測試 FPS；現行 PolyForm Noncommercial 授權限制商業使用與公開改作的署名方式。",
+  "research/2026-11-startup-animation/05-codex-dragon-r16-living-boot-and-pulse.md": "研究 Codex Dragon 社群 R16 將角色演出拆成 Intro、可循環 Idle 與 Finale，利用媒體預熱、眨眼保護及淚滴撞擊時的橢圓波紋露出真實 Codex 介面。R16 修復提前關閉動畫誤停壁紙的狀態錯誤；完整 ZIP 未能取得，影片並未逐幀驗證。",
+  "research/2026-11-startup-animation/06-android-bootanimation-and-video-analysis.md": "整理四部教學與示範影片的解碼影格、亮度突變和分鏡抽樣，並區分每幀程式分析與人工視覺判讀。解釋 Android AOSP 開機動畫不能直接執行 Canvas 或 WPF，且手機錄下的展示不代表真的重新開機；HyperOS 真機適配仍需獨立驗證。",
+  "research/2026-11-startup-animation/SOURCES.md": "將四個動畫專案的對應 Git commit 或 Release tag、主要程式碼路徑及 LICENSE 集中記錄，方便逐項追蹤事實來源。特別區分 MIT 程式碼、保留權利的影片、HALOFLUX 非商用條款與 Codex Dragon 尚未釐清的資產權利；不收錄任何受保護原始影片。",
   "research/2026-11-agent-repository-operations/12-starwire-external-project-discovery.md": "研究 Starwire 如何整合 GitHub Trending、開發者推薦、Reddit、Hacker News 與讀者提交，建立開源專案發現清單。解析七日 Star 熱度、分類與 RSS／JSON 資料介面，並說明授權、去重、資料新鮮度與安全審核的界線。這是外部情報來源研究，沒有匯入全量資料或執行自動化。",
   "research/2026-11-universal-web-engine/43-webgl2-rendering-performance-visibility-and-benchmark-protocol.md": "整理如何用有效的 CPU、GPU 與幀時間資料識別 3D 場景瓶頸，再比較實例化、空間分區合批、視錐剔除、BatchedMesh 及反射和後製通道的成本。研究援引 Three.js 與 WebGL 官方機制，提出可回退的 A/B 驗收方法，尚無跨裝置實測效能結果。",
   "research/2026-11-universal-web-engine/44-seamless-world-streaming-lod-hlod-resource-lifecycle.md": "從資料層、載入排程和渲染層拆解無縫大世界，說明 Chunk Streaming 為何不同於剔除與 LOD，並研究 HLOD、資產壓縮、跨區導航、資源釋放及持久世界狀態。提供兩區域原型與手機驗收條件；這是可採用的架構規劃，尚未完成真實世界串流測試。",
