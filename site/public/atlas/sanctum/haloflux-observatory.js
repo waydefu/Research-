@@ -1077,7 +1077,9 @@ function resizeNow() {
   if (initialized && bounds.width === lastWidth && bounds.height === lastHeight) return;
   lastWidth = bounds.width; lastHeight = bounds.height;
   DPR = Math.min(window.devicePixelRatio || 1, 1.75);
-  resizeStage(); initialized = true; sync();
+  resizeStage(); initialized = true;
+  document.documentElement.classList.add('haloflux-ready');
+  sync();
 }
 function resize() { clearTimeout(resizeTimer); resizeTimer = setTimeout(resizeNow, 100); }
 new ResizeObserver(resize).observe(stage);
