@@ -162,7 +162,3 @@ html:has(.observatory-page){scroll-behavior:smooth;background:var(--obs-deep)}
  .obs-topic-list a,.obs-nav a{transition:none}
 }
 @media(prefers-reduced-transparency:reduce){.obs-world-shade,.obs-scene::before{opacity:.84}.obs-mobile-nav{background:#09121f;backdrop-filter:none}}
-
-/* Shared Observatory interaction accents; preserve the existing live shader. */
-.obs-logo:focus-visible,.obs-nav a:focus-visible,.obs-mobile-nav a:focus-visible,.obs-controls button:focus-visible{outline:3px solid #40d4de;outline-offset:4px}
-@media(hover:hover){.obs-topic-list a:hover .obs-topic-arrow,.obs-featured a:hover .obs-field-arrow{color:#40d4de}}

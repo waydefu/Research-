@@ -40,14 +40,6 @@ const sourceReview=reviewForSource(doc.file);
           <ol class="toc">{headings.filter(h=>h.depth>1 && h.depth<5).map(h=><li class={'depth-' + h.depth}><a href={'#' + h.slug}>{h.text}</a></li>)}</ol>
         ) : <p class="muted">本篇沒有子章節。</p>}
       </nav>
-      <details class="mobile-toc">
-        <summary>本篇章節</summary>
-        {publicArticle ? (
-          <ol class="toc">{publicArticle.sections.map((part,i)=><li><a href={'#public-section-'+(i+1)}>{part.heading}</a></li>)}</ol>
-        ) : headings.filter(h=>h.depth>1 && h.depth<5).length ? (
-          <ol class="toc">{headings.filter(h=>h.depth>1 && h.depth<5).map(h=><li class={'depth-' + h.depth}><a href={'#' + h.slug}>{h.text}</a></li>)}</ol>
-        ) : <p class="muted">本篇沒有子章節。</p>}
-      </details>
       <a href={BASE + 'search/'} class="sidebar-search-link">搜尋其他研究 ↗</a>
     </aside>
     <article class="document" data-pagefind-body data-pagefind-filter={'domain:' + doc.group}>
