@@ -3,6 +3,10 @@ import {REVIEWED_DOCUMENTS} from './research-taxonomy.mjs';
 import {EDITORIAL_LEADS} from './research-leads.mjs';
 // Editorial metadata overlay. The original Markdown is never rewritten.
 export const CURATED = {
+  "research/2026-11-startup-animation/02-dsh-boot-animation-handoff-and-fallback.md": {creator:{label:"lxj5820／dsh-boot-animation 上游儲存庫",url:"https://github.com/lxj5820/dsh-boot-animation"},demos:[]},
+  "research/2026-11-startup-animation/03-dsh-550c-splash-timeline-and-first-frame.md": {creator:{label:"Ziyang Song／dsh-550c-boot 插件作者",url:"https://github.com/yannicksong0106/dsh-550c-boot"},demos:[]},
+  "research/2026-11-startup-animation/04-haloflux-beat-canvas-light-rings.md": {creator:{label:"Ryder191／HALOFLUX 原作者",url:"https://github.com/Ryder191/haloflux"},demos:[]},
+  "research/2026-11-startup-animation/05-codex-dragon-r16-living-boot-and-pulse.md": {creator:{label:"HanwenZhang-George／Codex Dragon 社群發布",url:"https://github.com/HanwenZhang-George/codex-startup-animation"},demos:[]},
   'research/2026-11-universal-web-engine/39-infinitra-mathematical-world-volumetric-generation.md': {
     title:'INFINITRA：數學定義世界、體積生成與無縫細節切換',
     topic:'程序生成與世界架構',

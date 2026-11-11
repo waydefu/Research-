@@ -443,6 +443,135 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-startup-animation/README.md",
+      "sourceBlobSha": "7c71a200b73c7fe5cc90938fa9c0bc285a65aef5",
+      "sourceRevision": "e824fdea06dd92df3c39654c6cba2c692ea43fd9",
+      "reviewedOn": "2026-11-11",
+      "verifiedScope": "核對四個上游倉庫、對應版本及研究索引，未執行其程式、未取得可商用素材授權。",
+      "publicNotice": "跨平台動畫研究導覽不是套件安裝指南；研究館未完成 Windows／Android 實機運行及第三方媒體授權驗收。",
+      "remainingWork": "需進行每種宿主的首次顯示、跳過、失敗及實機效能測試；確保引用版本與來源授權未變。",
+      "knownSources": [
+        "https://github.com/lxj5820/dsh-boot-animation",
+        "https://github.com/yannicksong0106/dsh-550c-boot",
+        "https://github.com/Ryder191/haloflux",
+        "https://github.com/HanwenZhang-George/codex-startup-animation/releases/tag/community-v34-r5"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-startup-animation/01-cross-project-architecture-and-adoption.md",
+      "sourceBlobSha": "6ad08d9fd92af19e455de80d03cd091d67aa4444",
+      "sourceRevision": "e824fdea06dd92df3c39654c6cba2c692ea43fd9",
+      "reviewedOn": "2026-11-11",
+      "verifiedScope": "逐項核對四個案例的原始碼交接行為、媒體初始化條件與授權界線，跨平台架構為研究推導。",
+      "publicNotice": "各方案運作在不同的權限與 UI 宿主中；表格比較不表示可直接混用，更不代表已完成 Android 開機動畫整合。",
+      "remainingWork": "以最小原型驗證動畫與真實窗口就緒同步、錯誤復原、版權、無障礙和設備級效能後再決定採用。",
+      "knownSources": [
+        "https://github.com/lxj5820/dsh-boot-animation",
+        "https://github.com/yannicksong0106/dsh-550c-boot",
+        "https://github.com/Ryder191/haloflux",
+        "https://github.com/HanwenZhang-George/codex-startup-animation/releases/tag/community-v34-r5"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-startup-animation/02-dsh-boot-animation-handoff-and-fallback.md",
+      "sourceBlobSha": "4e59d5516fc6587512710cc6aa8cfdf395a83f23",
+      "sourceRevision": "e824fdea06dd92df3c39654c6cba2c692ea43fd9",
+      "reviewedOn": "2026-11-11",
+      "verifiedScope": "讀取 entry.js、boot-screen.js、renderers.js、screensaver.js、MANUAL.md 與 LICENSE 的公開版本。",
+      "publicNotice": "原始碼可核對影片交接與有界故障處理，但作者曾報告的屏保效能不是本次實測；媒體素材另有限制。",
+      "remainingWork": "需要 DSH 實際環境對解碼失敗、音效、素材池競態與背景 tab 的控制測試；若用於手機須另評估 Android 支援格式。",
+      "knownSources": [
+        "https://github.com/lxj5820/dsh-boot-animation/blob/6c2ef4b1d5ca4b791323d247fea5b7f6e272cc71/src/boot-screen.js",
+        "https://github.com/lxj5820/dsh-boot-animation/blob/6c2ef4b1d5ca4b791323d247fea5b7f6e272cc71/LICENSE"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-startup-animation/03-dsh-550c-splash-timeline-and-first-frame.md",
+      "sourceBlobSha": "8e5eed806c8cf37189d1888d32e4149133881075",
+      "sourceRevision": "e824fdea06dd92df3c39654c6cba2c692ea43fd9",
+      "reviewedOn": "2026-11-11",
+      "verifiedScope": "核對 Host 注入、show.js 生成來源、client.js 收尾、ARCHITECTURE.md、STATUS.md 與 CREDITS.md。",
+      "publicNotice": "上游所記錄的首幀時序屬於特定 DSH 宿主環境；不代表所有瀏覽器或手機具有相同載入時間。",
+      "remainingWork": "在當期 DSH 桌面與 Web 版量測首幀、音訊、快轉、失敗時序與 CSS 隔離；另查核原始動畫作者授權。",
+      "knownSources": [
+        "https://github.com/yannicksong0106/dsh-550c-boot/blob/df7d202f62088897f476961ef87f408fb525b1ac/docs/ARCHITECTURE.md",
+        "https://github.com/yannicksong0106/dsh-550c-boot/blob/df7d202f62088897f476961ef87f408fb525b1ac/CREDITS.md"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-startup-animation/04-haloflux-beat-canvas-light-rings.md",
+      "sourceBlobSha": "5b3b56b88df1590b1e55716dd2bab97803880ba2",
+      "sourceRevision": "e824fdea06dd92df3c39654c6cba2c692ea43fd9",
+      "reviewedOn": "2026-11-11",
+      "verifiedScope": "核對 lab.html、mobile.html、README.md、LICENSE 的節拍和相機計算、行動版參數與授權。",
+      "publicNotice": "本研究為靜態原始碼閱讀，沒有跑 Canvas 真機效能；原作品視覺與程式碼有非商業權利限制。",
+      "remainingWork": "需跨設備測試幀時間、Canvas 記憶體、背景切換、熱降頻及降低動態設定；公開改作依上游授權另審。",
+      "knownSources": [
+        "https://github.com/Ryder191/haloflux/blob/02174503d0f391b1bb2537b8cad75e8e5f9997f2/lab.html",
+        "https://github.com/Ryder191/haloflux/blob/02174503d0f391b1bb2537b8cad75e8e5f9997f2/mobile.html",
+        "https://github.com/Ryder191/haloflux/blob/02174503d0f391b1bb2537b8cad75e8e5f9997f2/LICENSE"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-startup-animation/05-codex-dragon-r16-living-boot-and-pulse.md",
+      "sourceBlobSha": "3b40d48912445ec823c36c794d3e2e19d85d9dda",
+      "sourceRevision": "e824fdea06dd92df3c39654c6cba2c692ea43fd9",
+      "reviewedOn": "2026-11-11",
+      "verifiedScope": "核對 R16 Release、FilmSplashV2.cs、PulseReveal.cs、renderer.js、VERIFICATION.txt 與 SOURCE-PROVENANCE.txt。",
+      "publicNotice": "本次只審查公開原始碼和作者發行紀錄；六部 MP4 未下載解碼，Windows／Electron 私有通道亦未實機確認。",
+      "remainingWork": "完整核對 ZIP 的 SHA256 與六段影片 PTS、WPF 實機窗口、桌布失敗復原和資產授權；版本變動需重新審核。",
+      "knownSources": [
+        "https://github.com/HanwenZhang-George/codex-startup-animation/releases/tag/community-v34-r5",
+        "https://github.com/HanwenZhang-George/codex-startup-animation/blob/community-v34-r5/community-v34/src/FilmSplashV2.cs",
+        "https://github.com/HanwenZhang-George/codex-startup-animation/blob/community-v34-r5/community-v34/src/PulseReveal.cs",
+        "https://github.com/HanwenZhang-George/codex-startup-animation/blob/community-v34-r5/VERIFICATION.txt"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-startup-animation/06-android-bootanimation-and-video-analysis.md",
+      "sourceBlobSha": "1a3c9fa465eee380c53a8a1c283f8b0708aefe6f",
+      "sourceRevision": "e824fdea06dd92df3c39654c6cba2c692ea43fd9",
+      "reviewedOn": "2026-11-11",
+      "verifiedScope": "依使用者提供的四段影片以 FFmpeg 解碼灰階差異統計，並參照 AOSP 的 bootanimation 格式文件。",
+      "publicNotice": "統計為壓縮影片與縮圖灰階的近似轉場指標，不能用來證明真機 FPS、完整影片美術品質或 HyperOS 可修改。",
+      "remainingWork": "需以原始樣本 PTS 與 hash 重跑解碼，並以不改系統分區的方式檢查 Android 目標尺寸、素材權利和真機畫質。",
+      "knownSources": [
+        "https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/cmds/bootanimation/FORMAT.md",
+        "https://github.com/lxj5820/dsh-boot-animation"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-startup-animation/SOURCES.md",
+      "sourceBlobSha": "ac3b23f163588fda0afce84f6cbf72a876f47be4",
+      "sourceRevision": "e824fdea06dd92df3c39654c6cba2c692ea43fd9",
+      "reviewedOn": "2026-11-11",
+      "verifiedScope": "核對四個 upstream 的 LICENSE、CREDITS、SOURCE-PROVENANCE、原始碼路徑及 AOSP 文檔入口。",
+      "publicNotice": "這份來源索引不等於法律鑑定；第三方視覺資產、人物、音樂與字型必須按個別授權單獨審查。",
+      "remainingWork": "發佈任何改作、影片或套件前重新確認授權及個別資產來源；實作驗證須留存版本、hash 和裝置資訊。",
+      "knownSources": [
+        "https://github.com/lxj5820/dsh-boot-animation/blob/6c2ef4b1d5ca4b791323d247fea5b7f6e272cc71/LICENSE",
+        "https://github.com/yannicksong0106/dsh-550c-boot/blob/df7d202f62088897f476961ef87f408fb525b1ac/CREDITS.md",
+        "https://github.com/Ryder191/haloflux/blob/02174503d0f391b1bb2537b8cad75e8e5f9997f2/LICENSE",
+        "https://github.com/HanwenZhang-George/codex-startup-animation/blob/community-v34-r5/community-v34/SOURCE-PROVENANCE.txt"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }

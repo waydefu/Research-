@@ -4,6 +4,18 @@ import {allDocs} from '../src/lib/catalog.mjs';
 import {visualCoverage,visualForDoc,renderResearchArt,visualFilename,motifFor,sceneKindFor,SCENE_LAYOUTS,ART_BASE} from '../src/lib/research-visuals.mjs';
 const docs=allDocs();
 
+test('startup animation intake uses source-specific original diagrams',()=>{
+  const get=n=>docs.find(d=>d.file.endsWith('/2026-11-startup-animation/'+n));
+  assert.equal(motifFor(get('01-cross-project-architecture-and-adoption.md')),'bootflow');
+  assert.equal(motifFor(get('03-dsh-550c-splash-timeline-and-first-frame.md')),'bootmask');
+  assert.equal(motifFor(get('04-haloflux-beat-canvas-light-rings.md')),'ringfield');
+  assert.equal(motifFor(get('05-codex-dragon-r16-living-boot-and-pulse.md')),'pulse');
+  for(const file of ['01-cross-project-architecture-and-adoption.md','03-dsh-550c-splash-timeline-and-first-frame.md','04-haloflux-beat-canvas-light-rings.md','05-codex-dragon-r16-living-boot-and-pulse.md']){
+    const svg=renderResearchArt(get(file));
+    assert.match(svg,/data-motif=/);
+    assert.doesNotMatch(svg,/<image|https:\/\/(?!www\.w3\.org)/i);
+  }
+});
 test('every existing research document has a distinct content-linked original SVG',()=>{
   const coverage=visualCoverage(docs);
   assert.ok(docs.length>=90);

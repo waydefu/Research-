@@ -557,6 +557,16 @@ const raw = {
       ]
     ]
   ],
+  "research/2026-11-startup-animation": [
+    ["README.md", "資料來源與研究索引", "開機動畫與視覺效果研究：四專案導覽與跨平台界線", ["啟動動畫","動畫","技術研究","導覽"]],
+    ["01-cross-project-architecture-and-adoption.md", "網頁動效與捲動敘事", "開機動畫四種架構比較：時間線、交接、預熱與平台限制", ["啟動動畫","狀態機","視覺轉場","跨平台","驗收"]],
+    ["02-dsh-boot-animation-handoff-and-fallback.md", "網頁動效與捲動敘事", "dsh-boot-animation：影片片尾與主程式就緒如何同步交接", ["dsh-boot-animation","JavaScript","交叉淡出","影片","播放備援"]],
+    ["03-dsh-550c-splash-timeline-and-first-frame.md", "網頁動效與捲動敘事", "dsh-550c-boot：首幀防閃、SVG 動畫與雙段退場", ["dsh-550c-boot","SVG","Shadow DOM","首幀遮罩","時間線"]],
+    ["04-haloflux-beat-canvas-light-rings.md", "網頁動效與捲動敘事", "HALOFLUX：用 Canvas 節拍時鐘與鏡頭產生科幻光環", ["HALOFLUX","Canvas","節拍","光環","非商用授權"]],
+    ["05-codex-dragon-r16-living-boot-and-pulse.md", "影片製作與自動化", "Codex Dragon R16：角色三段片頭、預熱與淚滴波紋揭幕", ["Codex Dragon","WPF","影片預熱","淚滴波紋","桌布"]],
+    ["06-android-bootanimation-and-video-analysis.md", "影片製作與自動化", "Android 開機動畫：四部影片逐幀分析與系統格式界線", ["Android","bootanimation.zip","FFmpeg","逐幀分析","POCO"]],
+    ["SOURCES.md", "資料來源與研究索引", "開機動畫研究出處：四專案原始碼與媒體授權", ["來源索引","授權","GitHub","動畫","AOSP"]]
+  ],
   "research/2026-11-universal-web-engine": [
     [
       "01-framework-selection.md",

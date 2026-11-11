@@ -20,6 +20,14 @@ export function motifFor(doc){
   const file=String(doc.file||'');
   const title=String(doc.publicTitle||'');
   // Navigation, sources, audit and evaluation records need different diagrams.
+  if(file.includes('/2026-11-startup-animation/')) {
+    if(file.endsWith('/01-cross-project-architecture-and-adoption.md')) return 'bootflow';
+    if(file.endsWith('/02-dsh-boot-animation-handoff-and-fallback.md')) return 'bootflow';
+    if(file.endsWith('/03-dsh-550c-splash-timeline-and-first-frame.md')) return 'bootmask';
+    if(file.endsWith('/04-haloflux-beat-canvas-light-rings.md')) return 'ringfield';
+    if(file.endsWith('/05-codex-dragon-r16-living-boot-and-pulse.md')) return 'pulse';
+    if(file.endsWith('/06-android-bootanimation-and-video-analysis.md')) return 'film';
+  }
   if(/\/SOURCES\.md$/.test(file))return 'sources';
   if(/\/README\.md$/.test(file))return 'directory';
   if(/TEMPLATE/i.test(file))return 'template';
@@ -139,7 +147,26 @@ export function renderResearchArt(doc){
   const polygon=points=>'<polygon points="'+points+'" '+stroke+'/>';
   const sym=visualForDoc(doc).motif;
   let drawing='';
-  if(sym==='visibility'){
+  if(sym==='bootflow'){
+    drawing=Array.from({length:3},(_,i)=>rect(210+i*107,118,88,80,8)).join('')+
+      line(298,158,317,158)+line(405,158,424,158)+
+      Array.from({length:3},(_,i)=>circ(254+i*107,157,12)).join('')+
+      line(250,111,250,75)+line(465,198,465,230);
+  }else if(sym==='bootmask'){
+    drawing=rect(212,72,295,169,10)+rect(230,91,260,132,4)+
+      line(244,105,468,105)+line(235,220,487,220)+
+      polygon('336,138 382,158 336,178')+circ(478,112,9);
+  }else if(sym==='ringfield'){
+    drawing=Array.from({length:4},(_,i)=>circ(360,156,42+i*26)).join('')+
+      Array.from({length:8},(_,i)=>{
+        const a=i*Math.PI/4, x=360+Math.cos(a)*151, y=156+Math.sin(a)*102;
+        return line(360+Math.cos(a)*115,156+Math.sin(a)*81,x,y);
+      }).join('')+circ(360,156,15);
+  }else if(sym==='pulse'){
+    drawing=circ(359,164,13)+circ(359,164,51)+circ(359,164,91)+
+      circ(359,164,132)+line(260,164,455,164)+
+      polygon('359,150 370,166 359,184 348,166');
+  }else if(sym==='visibility'){
     // Original rendering diagram: a camera frustum intersects several independent render cells.
     drawing=polygon('217,223 292,94 465,94 528,223')+
       Array.from({length:4},(_,i)=>rect(256+(i%2)*94,121+Math.floor(i/2)*64,74,49,4)).join('')+
