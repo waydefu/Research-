@@ -1,0 +1,66 @@
+/* HALOFLUX × RESEARCH— : added editorial/navigation surface only.
+   Original Canvas construction, rings, colors, lensing and animations remain intact. */
+.research-explore{position:absolute;top:10px;left:14px;z-index:30;font:600 10px/1.5 "JetBrains Mono",Consolas,monospace;letter-spacing:.055em;color:var(--text)}
+.research-explore>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;user-select:none;border:1px solid var(--line2);min-height:35px;padding:7px 12px;background:rgba(8,9,11,.88);color:#f4f5f7}
+.research-explore>summary::-webkit-details-marker{display:none}
+.research-explore>summary span{color:var(--teal)}
+.research-explore>summary:hover,.research-explore[open]>summary{border-color:var(--teal)}
+.research-explore :is(a,button,input,summary):focus-visible,.source-feed-title:focus-visible,.research-route-name:focus-visible,.research-subject:focus-visible,.research-code-link:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.research-drawer{position:fixed;z-index:40;top:55px;left:14px;bottom:14px;width:min(430px,calc(100vw - 28px));padding:25px clamp(16px,2vw,30px);border:1px solid #3c434b;background:rgba(7,9,13,.97);backdrop-filter:blur(18px);box-shadow:12px 0 80px rgba(0,0,0,.55);overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#626b74 transparent;letter-spacing:0}
+.research-overline{margin:0 0 10px;color:var(--teal);font-size:9px;letter-spacing:.2em}
+.research-drawer h2{font:600 clamp(23px,3vw,32px)/1.35 system-ui,"Noto Sans TC",sans-serif;letter-spacing:.045em;color:#f4f5f7;margin:0 0 12px}
+.research-copy{font:400 12px/1.9 system-ui,"Noto Sans TC",sans-serif;color:#adb5bd;max-width:44ch;margin:0 0 22px}
+.research-quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0 0 25px}
+.research-quick a{display:block;text-align:center;padding:10px 3px;border-block:1px solid var(--line2);text-decoration:none;color:var(--text);font-size:11px}
+.research-quick a:hover{color:var(--teal);border-color:var(--teal)}
+.research-find{margin:0 0 26px}
+.research-find label{display:block;margin-bottom:8px;font-size:9px;color:var(--dim);letter-spacing:.12em}
+.research-find>div{display:flex;border-bottom:1px solid var(--teal);gap:8px}
+.research-find input{min-width:0;flex:1;border:0;background:none;color:#fff;padding:12px 0;font:400 13px/1.5 system-ui,sans-serif;outline:0}
+.research-find button{border:0;background:none;color:var(--teal);font-size:11px;cursor:pointer;white-space:nowrap}
+.research-drawer-title{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:20px 0 8px}
+.research-drawer-title h3{font-size:10px;letter-spacing:.12em;margin:0;color:#e6e9ed}
+.research-drawer-title span{font-size:9px;color:var(--dim)}
+.research-domains,.research-recent{list-style:none;margin:0;padding:0}
+.research-domains li,.research-recent li{border-top:1px solid #272b32}
+.research-drawer-link{display:flex;align-items:center;gap:12px;padding:11px 2px;text-decoration:none;min-height:43px;color:#dce1e7}
+.research-drawer-link:hover{color:var(--teal)}
+.research-drawer-link strong{font:500 12px/1.45 system-ui,"Noto Sans TC",sans-serif;flex:1;min-width:0}
+.research-item-index{font-size:9px;color:#737b85}
+.research-item-count{font-size:9px;color:#929aa5;white-space:nowrap}
+.research-item-arrow{font-size:13px;color:var(--teal)}
+.research-drawer-credit{border-top:1px solid var(--line2);padding:18px 0 5px;margin-top:18px;color:#87929d;font:500 9px/2 "JetBrains Mono",Consolas,monospace;letter-spacing:.04em}
+.research-drawer-credit a{color:#d7dce4}
+.research-visible-credit{position:absolute;z-index:4;bottom:12px;left:14px;margin:0;padding:3px 6px;color:#88939f;background:rgba(8,9,11,.65);font:500 8px/1.5 "JetBrains Mono",Consolas,monospace;letter-spacing:.04em;pointer-events:auto}
+.research-visible-credit a{color:#cfd4dc}
+.research-feed-row{display:flex;align-items:baseline;gap:4px;min-width:0;white-space:nowrap}
+.source-feed-title{min-width:0;overflow:hidden;text-overflow:ellipsis;color:#bfcbd2;text-decoration:none}
+.research-feed-row:hover .source-feed-title{color:var(--teal)}
+#feed .research-feed-row:last-child{color:#e4e7eb}
+.research-code-row{display:flex;gap:4px;min-width:0}
+.research-code-link{color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;min-width:0}
+.research-code-link:hover{color:var(--teal)}
+#routes{min-height:0;overflow-y:auto;scrollbar-width:thin;align-content:start;grid-template-columns:minmax(0,2.2fr) 32px 42px 22px}
+#routes .h{font-size:7px;letter-spacing:.05em}
+.research-route-name{color:var(--text);white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-decoration:none}
+.research-route-name:hover{color:var(--teal)}
+.research-route-number{color:var(--white);font-variant-numeric:tabular-nums;text-align:right}
+.research-route-ok{color:var(--dim);font-size:7px}
+.research-route-open{color:var(--teal);text-decoration:none;text-align:center}
+#agents{overflow-y:auto;min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;scrollbar-width:thin;gap:4px 8px}
+.research-subject{display:flex;gap:3px;align-items:center;min-width:0;color:#cdd2db;text-decoration:none;font-size:8px;white-space:nowrap}
+.research-subject:hover{color:var(--teal)}
+.research-subject-id{color:var(--faint);width:15px;flex:none}
+.research-subject-label{overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
+.research-subject-count{color:var(--dim);font-variant-numeric:tabular-nums}
+.research-subject-arrow{color:var(--teal)}
+@media(max-width:1000px){.research-drawer{top:46px;bottom:8px}}
+@media(max-width:520px){
+ .research-explore{top:7px;left:8px;font-size:9px}
+ .research-explore>summary{min-height:36px;padding:8px 10px}
+ .research-drawer{top:auto;bottom:0;left:0;width:100vw;max-height:70dvh;padding:18px 18px calc(24px + env(safe-area-inset-bottom));border-inline:0;border-bottom:0;box-shadow:0 -16px 65px rgba(0,0,0,.65)}
+ .research-visible-credit{bottom:6px;left:8px;max-width:52%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .research-drawer-link strong{font-size:12px}
+ .research-drawer h2{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){.research-explore *,#routes *{transition:none!important;animation:none!important}}
