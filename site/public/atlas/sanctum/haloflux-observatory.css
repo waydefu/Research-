@@ -49,3 +49,12 @@
  .hero-actions{display:flex;flex-wrap:wrap}
 }
 @media(prefers-reduced-motion:reduce){.hero-actions a{transition:none}}
+
+/* The previous stacking context put the Canvas behind the entire page.
+   Keep the photographic fallback visible without JS and put the live stage
+   above it, below real navigation and reading content. */
+.hero-world{position:relative;isolation:isolate;overflow:hidden;background:#08090b url('./assets/world-desktop.webp') center 42%/cover no-repeat}
+.hero-world .halo-stage{z-index:0}
+.hero-world .header,.hero-world .mobile-discovery-nav{position:relative;z-index:2}
+.hero-world .hero{position:relative;z-index:1}
+@media(max-width:800px){.hero-world{background-image:url('./assets/world-mobile.webp')}}
