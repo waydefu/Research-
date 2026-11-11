@@ -1051,6 +1051,8 @@ function drawStage(dt) {
 // Observatory integration: render the real stage without the demo's console,
 // decorative example data panels, automatic audio or full-screen interception.
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
+// Search is an active workspace: keep one complete frame while typing or filtering.
+const readingSearch = Boolean(document.getElementById('search-form'));
 let raf = 0, last = 0, visible = true, initialized = false;
 function render(now) {
   raf = 0;
@@ -1062,7 +1064,7 @@ function render(now) {
 function sync() {
   cancelAnimationFrame(raf); raf = 0; last = 0;
   if (!initialized) return;
-  if (motion.matches) { drawStage(0); return; }
+  if (motion.matches || readingSearch) { drawStage(0); return; }
   if (visible && !document.hidden) raf = requestAnimationFrame(render);
 }
 let resizeTimer, lastWidth = 0, lastHeight = 0;
