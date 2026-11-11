@@ -8,6 +8,7 @@ export const EXHIBITS={
   '2026-11-edge-infrastructure':{name:'低功耗設備與自架服務',what:'研究手機、微型電腦和 Linux 使用者空間如何提供長時間運作的網路服務。',use:'適合評估 Termux、PRoot、家庭 DNS、私有雲與備份可靠性。',image:IMG+'servers.svg'},
   '2026-11-local-ai-inference':{name:'讓 AI 在自己的電腦與手機運作',what:'研究本機模型、記憶體與執行速度，理解不用全靠雲端也能運行 AI。',use:'適合想在自己的硬體部署模型，或比較效能與成本的讀者。',image:IMG+'chip.svg'},
   '2026-11-systems-analysis-design':{name:'系統分析與需求設計',what:'從釐清需求、畫出流程到設計資料與畫面，學習如何規劃一個能真正運作的系統。',use:'適合資訊管理課程、產品規劃或想從零設計資訊系統的人。',image:IMG+'analysis.svg'},
+  '2026-11-startup-animation':{name:'開機動畫、光效與轉場技術',what:'比較開場影片、SVG 逐步演出、Canvas 光環及原生程式的畫面交接，學習各技術的工作原理。',use:'適合研究科幻視覺、啟動動畫與手機系統限制，並根據原始碼、影格證據與素材授權選擇方案。',image:IMG+'startup-animation.svg'},
   '2026-11-universal-web-engine':{name:'網站、三維場景與互動設計',what:'研究網頁外觀、動畫、3D 場景與載入效能，包含真實網站案例。',use:'適合想製作網站、互動作品或改善使用體驗的人。',image:IMG+'browser.svg'},
   '2026-11-agent-engineering':{name:'人工智慧代理與工具',what:'了解 AI 如何分步使用工具、分析任務、讀寫資料並檢查成果。',use:'從理解一般聊天 AI 到建立能工作的自動化代理。',image:IMG+'robot.svg'},
   '2026-11-agent-repository-operations':{name:'自動化工作與程式協作',what:'介紹如何安排代理、版本控制、測試、交接與工作流程，減少重複操作。',use:'適合多人協作、長期維護專案或希望自動化重複工作的讀者。',image:IMG+'workflow.svg'},
