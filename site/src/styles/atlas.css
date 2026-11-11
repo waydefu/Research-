@@ -187,9 +187,3 @@ body,body.atlas-body{margin:0;background:var(--atlas-bg);color:var(--atlas-text)
    including Astro's document-level preview and no-JS rendering. */
 html,body{background-color:#0b0e17;color:#eee5d6}
 body.atlas-body{background-color:#0b0e17;color:#eee5d6}
-
-/* Shared Observatory navigation accents; historical composition studies remain intact. */
-.atlas-header{border-bottom-color:rgba(228,180,81,.35)}
-.atlas-brand-symbol{color:#e4b451}
-.atlas-nav a:focus-visible,.atlas-back:focus-visible{outline:3px solid #40d4de;outline-offset:4px}
-@media(hover:hover){.atlas-nav a:hover,.atlas-back:hover{color:#80e1e6}}
