@@ -31,3 +31,15 @@ test('phone light field animates when motion is enabled',async({page},testInfo)=
   await page.screenshot({path:testInfo.outputPath('native-halo-animated-phone.png')});
   expect(errors).toEqual([]);
 });
+test('root homepage displays its canvas over the background on mobile',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.goto(root);
+  const metrics=await page.evaluate(()=>({
+    isolation:getComputedStyle(document.querySelector('.hero-world')).isolation,
+    stageZ:getComputedStyle(document.querySelector('.hero-world .halo-stage')).zIndex,
+    titleZ:getComputedStyle(document.querySelector('.hero-world .hero')).zIndex
+  }));
+  expect(metrics.isolation).toBe('isolate');
+  expect(Number(metrics.stageZ)).toBeLessThan(Number(metrics.titleZ));
+  await page.screenshot({path:testInfo.outputPath('native-halo-home-phone.png')});
+});
