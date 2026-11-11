@@ -12,6 +12,7 @@
   if (!ctx) return;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let width = 0, height = 0, raf = 0, active = true, time = 0, previous = 0;
+  let pointerX = 0, pointerY = 0, targetX = 0, targetY = 0;
   // HALOFLUX's deterministic radial-line variation, adapted for this scene.
   const hash = x => { const s = Math.sin(x * 12.9898) * 43758.5453; return s - Math.floor(s); };
   function radialLines(a0, a1, step, r0, length, seed, low, cx, cy) {
@@ -28,7 +29,7 @@
   function draw() {
     ctx.clearRect(0, 0, width, height);
     const mobile = width <= 800;
-    const cx = width * (mobile ? .5 : .61), cy = height * (mobile ? .48 : .46);
+    const cx = width * (mobile ? .5 : .61) + pointerX, cy = height * (mobile ? .48 : .46) + pointerY;
     const r = Math.min(width * (mobile ? .22 : .14), height * .25, 175);
     const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 2.4);
     glow.addColorStop(0, 'rgba(255,234,176,.58)');
@@ -62,7 +63,9 @@
     raf = 0;
     if (!active || document.hidden || motion.matches) return;
     if (previous) time += Math.min((now - previous) / 1000, .05);
-    previous = now; draw(); raf = requestAnimationFrame(frame);
+    previous = now;
+    pointerX += (targetX - pointerX) * .035; pointerY += (targetY - pointerY) * .035;
+    draw(); raf = requestAnimationFrame(frame);
   }
   function sync() {
     cancelAnimationFrame(raf); raf = 0; previous = 0;
@@ -77,6 +80,14 @@
   }
   if ('IntersectionObserver' in window) new IntersectionObserver(entries => { active = entries[0].isIntersecting; sync(); }).observe(canvas);
   addEventListener('resize', resize, { passive: true });
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    addEventListener('pointermove', event => {
+      if (motion.matches) return;
+      targetX = (event.clientX / innerWidth - .5) * 20;
+      targetY = (event.clientY / innerHeight - .5) * 14;
+    }, { passive: true });
+    document.addEventListener('pointerleave', () => { targetX = 0; targetY = 0; });
+  }
   document.addEventListener('visibilitychange', sync);
   motion.addEventListener('change', sync);
   resize();
