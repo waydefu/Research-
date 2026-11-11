@@ -226,7 +226,9 @@ function mkd(w, h, d) {
 }
 function resizeStage() {
   const r = stage.getBoundingClientRect();
-  ROT = r.height > r.width * 1.05; SW = r.width; SH = r.height;
+  // Phone hero artwork is already a landscape-like inset in a portrait page.
+  // Keep it upright so the web, data ring and outgoing beams share the frame.
+  ROT = r.width > 700 && r.height > r.width * 1.05; SW = r.width; SH = r.height;
   W = ROT ? r.height : r.width; H = ROT ? r.width : r.height;
   stage.width = SW * DPR; stage.height = SH * DPR;
   // Reframe the original scene for narrow portrait layouts: leave room for
