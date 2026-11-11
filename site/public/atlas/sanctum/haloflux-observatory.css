@@ -1,0 +1,16 @@
+/* HALOFLUX-derived visual direction. See HALOFLUX-LICENSE.txt. */
+.hero-world{background:#0a101d}
+.hero-world::before{background:radial-gradient(ellipse at 60% 42%,#172736 0,#0a101d 62%,#060a12 100%)}
+.hero-world::after{background:linear-gradient(90deg,rgba(5,9,16,.97),rgba(5,9,16,.67) 35%,transparent 65%,rgba(5,9,16,.48)),linear-gradient(0deg,#080e16,transparent 42%)}
+.halo-stage{position:absolute;inset:0;width:100%;height:100%;z-index:-2;pointer-events:none}
+.hero-left::before{background:radial-gradient(ellipse at 30% 50%,rgba(6,11,20,.88),transparent 75%)}
+.hero-dock{border-color:rgba(228,180,81,.4);background:linear-gradient(135deg,rgba(7,14,24,.84),rgba(11,22,32,.76));box-shadow:0 20px 70px #0008,inset 0 0 35px #40d4de09}
+.logo-mark,.eyebrow,.vault-overline{color:#e4b451}
+.hero h1 .zh{letter-spacing:.075em;text-wrap:balance}
+.hero-desc{line-height:1.9}
+.vault-index a,.feature-card,.dock-item{transition:transform .3s ease,border-color .3s ease,background-color .3s ease}
+@media(hover:hover){.vault-index a:hover,.feature-card:hover,.dock-item:hover{transform:translateX(5px);border-color:#40d4de}}
+.halo-credit{position:relative;margin:0;padding:14px 24px;background:#080b11;color:#aab5bf;font:12px/1.7 system-ui,sans-serif;text-align:center}
+.halo-credit a{color:#e4c17c}
+@media(max-width:800px){.hero-world::before{background:radial-gradient(ellipse at 50% 22%,#152c37,#0a101d 65%)}.hero-world::after{background:linear-gradient(180deg,rgba(5,9,16,.2),rgba(5,9,16,.45) 32%,#080e16 78%)}.halo-stage{height:58svh}.hero-left::before{background:rgba(6,11,20,.88)}}
+@media(prefers-reduced-motion:reduce){.vault-index a,.feature-card,.dock-item{transition:none}}
