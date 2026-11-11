@@ -18,3 +18,16 @@ for(const [name,width,height] of [['phone',390,844],['desktop',1440,900]]) {
     expect(errors).toEqual([]);
   });
 }
+test('phone light field animates when motion is enabled',async({page},testInfo)=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.setViewportSize({width:390,height:844});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(root+'v3/library/');
+  const canvas=page.locator('.halo-stage');
+  const first=await canvas.evaluate(c=>c.toDataURL());
+  await page.waitForTimeout(1200);
+  const later=await canvas.evaluate(c=>c.toDataURL());
+  expect(later).not.toBe(first);
+  await page.screenshot({path:testInfo.outputPath('native-halo-animated-phone.png')});
+  expect(errors).toEqual([]);
+});
