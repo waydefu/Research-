@@ -179,6 +179,26 @@ void main(){
     col+=ramp(.80,uTheme)*band*(.28+.55*dash)*.45*smoothstep(0.,.3,frac);
   }
 
+  // A ray/sphere intersection supplies actual depth for a rotating wire globe.
+  // It is procedural geometry (no mesh or texture), composited beneath the core.
+  vec3 rayOrigin=vec3(0.,0.,2.5);
+  vec3 rayDirection=normalize(vec3(p*1.65,-1.8));
+  float b=dot(rayOrigin,rayDirection);
+  float discriminant=b*b-dot(rayOrigin,rayOrigin)+.40*.40;
+  if(discriminant>0.){
+    float nearHit=-b-sqrt(discriminant);
+    vec3 normal=normalize(rayOrigin+rayDirection*nearHit);
+    float longitude=atan(normal.z,normal.x)+t*.075;
+    float latitude=asin(clamp(normal.y,-1.,1.));
+    float meridian=abs(sin(longitude*7.));
+    float parallel=abs(sin(latitude*8.));
+    float grid=1.-smoothstep(.015,.075,min(meridian,parallel));
+    float rim=pow(1.-max(normal.z,0.),2.5);
+    float light=.25+.75*max(dot(normal,normalize(vec3(-.4,.65,1.))),0.);
+    vec3 contour=mix(ramp(.72,uTheme),vec3(.25,.83,.87),.30);
+    col+=contour*(grid*light*.13+rim*.10)*smoothstep(.04,.45,frac);
+  }
+
   // 4. Fractures in the air: gold hairlines growing out of the core into four plates.
   if(uCracks==1){
     float cr=cracks(p,.34*frac+.001)*frac;

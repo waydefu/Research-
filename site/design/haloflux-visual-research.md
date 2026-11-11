@@ -26,8 +26,8 @@
 | Motion Design | 原作節拍、光網、遠近光束、資料環帶及鏡頭重新接入；支援停止與降低動態。 |
 | Interaction Design | 保留導覽、搜尋、鍵盤焦點、手機目錄與原生捲動；滑鼠／觸控需按實際版本驗證。 |
 | Creative Development | 在既有站點上整合上游 Canvas 場景、可見性暫停和 responsive 尺寸；不載入原作全螢幕或背景音樂控制。 |
-| 3D Web Design | 本次移植的是 Canvas 2D 原作，保留既有 WebGL2 觀測所預覽；沒有新增真實 3D 模型，不聲稱場景是 3D 模型。 |
-| Shader Art | 沿用原有觀測所 shader；移植的 HALOFLUX 本身不是 shader，這次沒有新寫 shader。 |
+| 3D Web Design | 原作是 Canvas 2D；WebGL2 觀測所 shader 新增以射線與球面求交繪製的程序化三維球體與經緯線，不是外部 3D 模型。 |
+| Shader Art | 在原有觀測所 shader 增加球面交點、旋轉經緯線及輪廓光；HALOFLUX 本身仍為 Canvas 2D。 |
 | Typography | 統一首頁、研究分類、搜尋、領域和文章的字級階層、行長、段落節奏與手機尺寸。 |
 | Brand Identity | 延續 THE OBSERVATORY 與深空、暖金、青光；配合原作的高亮細線及儀器式細節。 |
 
