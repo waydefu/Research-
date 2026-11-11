@@ -63,3 +63,13 @@ body #main .archive-intro .primary-link:hover,.primary-link:hover{background:#ff
 }
 @media(prefers-reduced-motion:reduce){#main :is(.exhibit-list li a,.topic-exhibit summary,.research-results li>a,.domain-page .document-list a,.research-search-results a,.domain-arrow,.research-item-arrow){transition:none;transform:none}}
 @media(prefers-reduced-transparency:reduce){.global-header,#main .document,#main .library-filters{background:#0a101d}}
+
+.mobile-toc{display:none}
+@media(max-width:850px){
+  .mobile-toc{display:block;border-block:1px solid rgba(228,180,81,.3);padding:.55rem 0}
+  .mobile-toc summary{cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:space-between;color:#f0d39f}
+  .mobile-toc summary::after{content:"＋";color:#40d4de}
+  .mobile-toc[open] summary::after{content:"−"}
+  .mobile-toc .toc{padding:.3rem 0 .8rem}
+  .mobile-toc .toc a{display:inline-block;padding:.25rem 0;color:#d6dfe3}
+}
