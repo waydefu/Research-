@@ -27,3 +27,13 @@ test('reduced motion retains a rendered, stationary light field',async({browser}
   await expect(page.locator('h1')).toBeVisible();
   await context.close();
 });
+test('mobile readers can open a chapter index without JavaScript',async({browser})=>{
+  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:360,height:800}});
+  const page=await context.newPage();
+  await page.goto(root+'v3/research/2026-11-universal-web-engine/01-framework-selection/');
+  const toc=page.locator('details.mobile-toc');
+  await expect(toc.locator('summary')).toBeVisible();
+  await toc.locator('summary').click();
+  await expect(toc.locator('.toc a').first()).toBeVisible();
+  await context.close();
+});
