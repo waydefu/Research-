@@ -28,7 +28,7 @@ const external = doc.externalLinks.filter(x=>x.url!==doc.creator?.url);
 const publicArticle=getPublicArticle(doc.file);
 const sourceReview=reviewForSource(doc.file);
 ---
-<Base title={doc.publicTitle} description={doc.summary.slice(0,155)}>
+<Base title={doc.publicTitle} description={doc.summary.slice(0,155)} artDirection="article">
   <div class="reading-layout">
     <aside class="reading-sidebar" aria-label="文件導覽">
       <a class="back-link" href={BASE + 'domains/' + encodeURIComponent(doc.group) + '/'}>← {displayDomain(doc.group)}</a>
