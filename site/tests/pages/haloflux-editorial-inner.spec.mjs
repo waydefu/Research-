@@ -33,6 +33,12 @@ test.describe('HALOFLUX editorial continuity across the research site',()=>{
         expect(metrics.bodyFont).toContain('Chiron Hei HK');
         expect(metrics.headlineFont).toContain('Chiron Sung HK');
         expect(metrics.artLink).toBe(BASE+'haloflux-research/');
+        if(width<=393){
+          await expect(page.locator('.mobile-lightfield-link')).toBeVisible();
+          await expect(page.locator('.global-header nav a[href="'+BASE+'haloflux-research/"]')).toBeHidden();
+          const visibleNav=page.locator('.global-header nav a:visible');
+          await expect(visibleNav).toHaveCount(2);
+        }else await expect(page.locator('.mobile-lightfield-link')).toBeHidden();
         expect(metrics.links).toContain(BASE+'search/');
         expect(metrics.links).toContain(BASE+'library/');
         expect(metrics.pageWidth).toBeLessThanOrEqual(1);
