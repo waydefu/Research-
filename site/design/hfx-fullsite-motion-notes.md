@@ -38,3 +38,19 @@ Attribution notice checked against upstream bundled LICENSE. The derivative HTML
 ## Full Pages contract review / 2026-11-12
 
 The first optimized run passed required source, Astro, V3 UX and accessibility checks, but single-site browser acceptance found 24 failures: 23 snapshots/typography assertions still assumed the deliberately superseded gold Sanctum root, while the real Canvas test found a missing `T` timeline symbol. Trace evidence from actual Chromium showed `ReferenceError: T is not defined at updateOuter` (not a synthetic test failure). The source section containing `drawStage` previously relied on `let T=0` from the removed panel section; isolated runtime now declares and advances that real source clock. CSS now retains original golden Atlas/Sanctum **as a historical study**, explicitly verifies canonical root's live optical source and dark editorial art, and increases the mobile optical field headroom without overlapping real search controls. Browser screenshots at 393/1440 are test evidence, not owner aesthetic signoff. Runtime frame cadence is adaptive from actual draw time (mobile/desktop baseline 42/33ms with load-based backoff), not a fabricated FPS claim. 
+
+
+## Race fix / real GitHub Pages browser trace (2026-11-12)
+The first isolated renderer had 222/223 passing; its sole failing case saw
+\`data-hfx-running=true\` and \`data-hfx-frame-count=1\` indefinitely.
+The Playwright trace showed the host's resume message arriving **before**
+\`resizeStage()\` initialized Canvas. \`reconcile()\` recorded
+\`integrationRunning=true\` while \`ambientReady=false\`, then returned early
+on the resize callback because \`run===integrationRunning\`. No animation
+timer was ever scheduled, even though the first static frame succeeded.
+The source-derived runtime now checks \`run && ambientReady && !ambientTimer\`
+**independently** from a change to the running state, so both message
+orderings start the render loop and both retain full pause semantics.
+Reproduction with actual extracted HALOFLUX Chromium: early resume
+before resize => 1 frame before, 11 frames within 1.8s after. This is
+a local desktop Chromium reproduction, NOT device FPS.
