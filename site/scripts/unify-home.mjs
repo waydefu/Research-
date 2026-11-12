@@ -12,7 +12,7 @@ if(!html.includes('<link rel="canonical" href="https://waydefu.github.io/Researc
   throw Error('Canonical homepage changed unexpectedly');
 // Transform the canonical page into the same HALOFLUX-driven experience as
 // every Astro inner page. Keep semantic Sanctum links/sections as the fallback.
-const field='<div class="hfx-field" aria-hidden="true"><iframe src="/Research-/v3/haloflux-site/field.html" title="HALOFLUX 光場" tabindex="-1" loading="eager" aria-hidden="true"></iframe></div>';
+const field='<div class="hfx-field" aria-hidden="true"><iframe data-src="/Research-/v3/haloflux-site/field.html" title="HALOFLUX 光場" tabindex="-1" loading="lazy" aria-hidden="true"></iframe></div>';
 let home=html.replaceAll('./assets/','/Research-/v3/atlas/sanctum/assets/');
 home=home.replace('<span class="zh">技術研究與實作知識庫</span><span class="en">人工智慧、網站設計與軟體工程</span>',
   '<span class="zh">追索未知，<br>驗證真實。</span><span class="en">技術研究與實作知識庫 / AI · WEB · ENGINEERING</span>');

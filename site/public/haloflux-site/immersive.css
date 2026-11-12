@@ -19,11 +19,20 @@ body.hfx-root,body.research-inner{background:var(--hfx-void)!important;color:var
 /* The live optical scene is NOT a bitmap backdrop. Its source draws every frame
    in a sandboxed visual surface; the ordinary document remains fully semantic. */
 .hfx-field{
+  view-transition-name:hfx-optical-field;
   position:fixed;inset:0;z-index:0;overflow:hidden;
   background:radial-gradient(ellipse 56vw 52vh at 65% 46%,rgba(152,224,207,.045),transparent 74%);
   pointer-events:none;isolation:isolate;
   opacity:var(--hfx-alpha,.52);
   transition:opacity .8s ease,filter 1.1s ease;
+}
+.hfx-field::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 38% 46% at 72% 43%,rgba(152,224,207,.13),transparent 75%),
+    radial-gradient(ellipse 19% 30% at 76% 49%,rgba(240,166,198,.085),transparent 78%),
+    repeating-radial-gradient(ellipse 35% 56% at 70% 43%,transparent 0 29px,rgba(152,224,207,.027) 30px 31px,transparent 32px 56px);
+  opacity:.83;
 }
 .hfx-field::after{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -323,3 +332,32 @@ html.hfx-motion-ready [data-hfx-reveal].hfx-visible{opacity:1;transform:translat
  .hfx-root .hero-world,.hfx-root .narrative-glass{background:white!important;color:#111!important}
 }
 /* No JS fallback leaves all non-renderer content intact */
+
+/* Scroll/reading scene: leave a real optical viewport in opening sections,
+   but avoid text overlap, contrast loss or opaque full-page slabs. */
+html[data-art-direction="haloflux"] #main .archive-intro{
+  background:linear-gradient(90deg,#08090b 0%,rgba(8,9,11,.92) 38%,rgba(8,9,11,.38) 82%,rgba(8,9,11,.18))!important;
+}
+html[data-art-direction="haloflux"] #main .search-page,
+html[data-art-direction="haloflux"] #main .domain-page{
+  background:linear-gradient(90deg,rgba(8,9,11,.91),rgba(8,9,11,.78) 63%,rgba(8,9,11,.68))!important;
+}
+html[data-art-direction="haloflux"] #main .reading-layout{
+  background:linear-gradient(90deg,rgba(8,9,11,.97),rgba(8,9,11,.94) 74%,rgba(8,9,11,.72));
+}
+html[data-art-direction="haloflux"] #main .document{
+  background:rgba(10,13,17,.97)!important;
+}
+@media(max-width:720px){
+  html[data-art-direction="haloflux"] #main :is(.archive-intro,.search-page,.domain-page){
+    background:linear-gradient(180deg,rgba(8,9,11,.65),#08090b 88%)!important;
+  }
+  .hfx-field{view-transition-name:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .hfx-field{view-transition-name:none}
+  .hfx-field::before{opacity:.48}
+}
+@media print{
+  .hfx-field::before{display:none}
+}

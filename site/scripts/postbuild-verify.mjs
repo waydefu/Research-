@@ -55,6 +55,8 @@ const fieldHTML=readFileSync(fieldPage,'utf8');
 if(!fieldHTML.includes('drawStage(dt)')||!fieldHTML.includes('research-hfx-stage')||
    !fieldHTML.includes('HALOFLUX by Ryder191')||!fieldHTML.includes('noindex,nofollow'))
   throw Error('Full-site HALOFLUX Canvas/credit/pause gate missing');
+if(/drawAdv\(dt\)|initBGM|setInterval\(feedPush|drawDiff\(\)|setInterval\(kpiTick/.test(fieldHTML))
+  throw Error('Ambient stage still contains hidden console work');
 if(!existsSync('dist/haloflux-site/immersive.css')||!existsSync('dist/haloflux-site/immersive.js'))
   throw Error('Full-site optical motion assets missing');
 console.log('P0 output verification: ' + verified + ' pages, Pagefind bundle present, graph consistent.');

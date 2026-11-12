@@ -1,72 +1,44 @@
-// A real HALOFLUX Canvas scene is the shared live stage for ALL site routes.
-// Derive the isolated viewport from the already integrated source, not from a
-// screenshot, SVG imitation or an unrelated procedural ring implementation.
-// The faithful /v3/haloflux/ original is never modified.
+// Source-faithful, isolated, decorative Canvas renderer. No panel work or audio.
+// The original Ryder191/haloflux remains unchanged at /v3/haloflux/.
 import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
-
-const from=resolve('dist/haloflux-research');
-const out=resolve('dist/haloflux-site');
-let html=await readFile(join(from,'lab.html'),'utf8');
-const replaceOne=(needle,replacement,name)=>{
-  const count=html.split(needle).length-1;
-  if(count!==1)throw Error('HALOFLUX ambient source seam: '+name+' / '+count);
-  html=html.replace(needle,replacement);
+const source=resolve('dist/haloflux'),out=resolve('dist/haloflux-site');
+const raw=await readFile(join(source,'lab.html'),'utf8');
+const start=raw.indexOf('const TAU = Math.PI * 2, rnd = Math.random;');
+const end=raw.indexOf('/* ---------- callout box with leader line');
+if(start<0||end<start)throw Error('Original HALOFLUX stage seam missing');
+let engine=raw.slice(start,end);
+if(!engine.includes('function drawStage(dt)')||!engine.includes('function updateBeat(dt)')||!engine.includes('function updateCam(dt)'))
+ throw Error('Refusing to ship substitute renderer');
+const once=(a,b,label)=>{
+ if(engine.split(a).length!==2)throw Error('Source seam changed: '+label);
+ engine=engine.replace(a,b);
 };
-const css=[
-  ':root{color-scheme:dark}',
-  'html,body{width:100%!important;height:100%!important;overflow:hidden!important;background:#08090b!important}',
-  '.app{width:100%!important;height:100svh!important;min-height:100svh!important;display:block!important;overflow:hidden!important}',
-  '.app>header,.app>.panels{display:none!important}',
-  '#stageWrap,.stage{position:relative!important;width:100%!important;height:100svh!important;min-height:100svh!important;overflow:hidden!important}',
-  '#stage{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}',
-  '#stageWrap>.ov,.research-explore,.research-visible-credit{display:none!important}',
-  '.stage::after{opacity:.33;pointer-events:none}',
-  '@media(max-width:600px){.stage::after{opacity:.16}}'
-].join('\n');
-replaceOne('</head>','<style id="hfx-source-stage">\n'+css+'\n</style>\n</head>','style');
-replaceOne('const integrationMotion = matchMedia(\'(prefers-reduced-motion: reduce)\');',
-  "const integrationMotion = matchMedia('(prefers-reduced-motion: reduce)');\nlet integrationHostPaused = false;",'host control');
-replaceOne('cx = W * 0.07; cy = H * 0.5;',
-  'cx = W * 0.64; cy = H * 0.48;','ambient lightfield composition');
-replaceOne('const C = { ...(PRESETS.MINE || PRESETS.B) };',
-  "for(const p of Object.values(PRESETS)){ p.runnerCount=Math.min(p.runnerCount,innerWidth<780?140:390); p.flyerCount=Math.min(p.flyerCount,innerWidth<780?0.65:1.5); p.bokeh=Math.min(p.bokeh,innerWidth<780?0:4); }\nconst C = { ...(PRESETS.MINE || PRESETS.B) };",
-  'adaptive optical density');
-replaceOne("const LS_KEY = 'research.haloflux.lab.cfg.v1';",
-  "const LS_KEY = 'research.haloflux.ambient.cfg.v1';",'ambient prefs');
-html=html.replaceAll('Math.min(window.devicePixelRatio || 1, 2)','Math.min(window.devicePixelRatio || 1, innerWidth<780?1.25:1.75)');
-// The field runs behind a semantic document. Unlike the full interactive
-// demo, 60/120Hz paint is not a useful budget for a decorative layer.
-replaceOne('let integrationHostPaused = false;',
-  'let integrationHostPaused = false;\nlet ambientLastPaint = 0;',
-  'ambient paint clock');
-replaceOne('if (ready) origFrame(now); else { last = now; integrationRaf = requestAnimationFrame(frame); }',
-  'if (ready) { if (now - ambientLastPaint >= (innerWidth<780 ? 44 : 30)) { ambientLastPaint = now; origFrame(now); } else integrationRaf = requestAnimationFrame(frame); } else { last = now; integrationRaf = requestAnimationFrame(frame); }',
-  'ambient frame cap');
-replaceOne('const shouldRun = !document.hidden && !integrationMotion.matches;',
-  'const shouldRun = !document.hidden && !integrationMotion.matches && !integrationHostPaused;','host motion gate');
-replaceOne('data-src="https://raw.githubusercontent.com/Ryder191/haloflux/02174503d0f391b1bb2537b8cad75e8e5f9997f2/audio/sw421k.mp3"',
-  'data-src=""','no background audio requests in decorative scene');
-replaceOne('</body>',
-  '<script>\n'+
-  "addEventListener('message',function(e){\n"+
-  "  if(e.origin!==location.origin||!e.data||e.data.type!=='research-hfx-stage')return;\n"+
-  "  if(e.data.action==='chapter'){\n"+
-  "    const chapter=Math.max(0,Math.min(5,Number(e.data.chapter)||0));\n"+
-  "    C.tempo=chapter>=4?1.5:1.95+chapter*.11;\n"+
-  "    C.camZoom=1+Math.min(.34,chapter*.085);\n"+
-  "    C.glow=Math.min(1.5,1.05+chapter*.06);\n"+
-  "  } else if(e.data.action==='focus'){\n"+
-  "    C.rimBright=e.data.active?2.35:1.8;\n"+
-  "    C.webBright=e.data.active?1.35:.9;\n"+
-  "  } else { integrationHostPaused=Boolean(e.data.paused); syncIntegrationMotion(); }\n"+
-  "});\n"+
-  "document.documentElement.dataset.hfxSourceStage='HALOFLUX';\n"+
-  '</script>\n</body>','message bridge');
-replaceOne('<html lang="en">','<html lang="zh-Hant-TW" data-hfx-ambient="source">','language');
-if(!html.includes('HALOFLUX by Ryder191')||!html.includes('noindex,nofollow')||!html.includes('drawStage(dt)'))
-  throw Error('Source license, indexing or original Canvas drawing missing');
+once('  drawCallout();','  /* UI-only callout disabled in visual derivative. */','callout');
+once('const C = { ...(PRESETS.MINE || PRESETS.B) };',[
+  'const C = { ...(PRESETS.MINE || PRESETS.B) };',
+  '// Background-only particle/density budget; source drawings preserved.',
+  'C.runnerCount=innerWidth<640?96:230;',
+  'C.flyerCount=innerWidth<640?.36:.8;',
+  'C.hazeCount=innerWidth<640?5:9;',
+  'C.bokeh=0; C.depthBlur=0; C.webBlur=0;',
+  'C.atmos=innerWidth<640?.25:.5; C.vignette=.48;'
+].join('\n'),'adaptive preset');
+once('let DPR = Math.min(window.devicePixelRatio || 1, 2);',
+  'let DPR = Math.min(devicePixelRatio||1,innerWidth<640?.9:1.2);','ambient DPR');
+once('cx = W * 0.07; cy = H * 0.5;',
+  'cx = W * 0.64; cy = H * 0.48;','right-aligned optical composition');
+once('R = Math.max(H * 0.78, W * 0.30);',
+  'R = Math.max(H * 0.66, W * 0.27);','buffer budget');
+const style=":root{color-scheme:dark}\n*{box-sizing:border-box}\nhtml,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090b}\n#stage{display:block;position:absolute;inset:0;width:100%;height:100%}";
+const runtime="\n// Source stage drives the filmic background only. No fake KPI, DOM panels or BGM.\nlet integrationRunning=false,ambientReady=false,ambientTimer=0,lastFrame=0,frameCount=0;\nlet lastChapter=-1,hostPaused=true,docHidden=document.hidden;\nconst reduced=matchMedia('(prefers-reduced-motion: reduce)');\nconst frameInterval=()=>innerWidth<720?100:innerWidth<1100?80:66;\nconst setState=()=>{\n document.documentElement.dataset.hfxSourceStage='HALOFLUX';\n document.documentElement.dataset.hfxFrameCount=String(frameCount);\n document.documentElement.dataset.hfxRunning=String(integrationRunning);\n};\nfunction renderStatic(){\n if(!ambientReady)return;\n drawStage(0);frameCount++;setState();\n}\nfunction tick(now){\n ambientTimer=0;\n if(!integrationRunning||!ambientReady)return;\n const dt=Math.min(.05,Math.max(0,(now-lastFrame)/1000));\n lastFrame=now;drawStage(dt);frameCount++;setState();\n ambientTimer=setTimeout(()=>requestAnimationFrame(tick),frameInterval());\n}\nfunction reconcile(){\n const run=!docHidden&&!hostPaused&&!reduced.matches;\n if(run===integrationRunning)return;\n integrationRunning=run;\n if(ambientTimer)clearTimeout(ambientTimer);\n ambientTimer=0;\n if(run&&ambientReady){lastFrame=performance.now();ambientTimer=setTimeout(()=>requestAnimationFrame(tick),frameInterval());}\n else if(ambientReady&&!run)renderStatic();\n setState();\n}\nlet lastWidth=0,lastHeight=0,resizeQueue=0;\nfunction resizeIfNeeded(){\n const width=Math.round(innerWidth),height=Math.round(innerHeight);\n if(width<20||height<20||width===lastWidth&&height===lastHeight)return;\n lastWidth=width;lastHeight=height;\n DPR=Math.min(devicePixelRatio||1,width<640?.9:1.2);\n resizeStage();ambientReady=true;renderStatic();reconcile();\n}\naddEventListener('resize',()=>{\n if(resizeQueue)return;\n resizeQueue=requestAnimationFrame(()=>{resizeQueue=0;resizeIfNeeded();});\n},{passive:true});\naddEventListener('visibilitychange',()=>{docHidden=document.hidden;reconcile();});\nreduced.addEventListener?.('change',reconcile);\naddEventListener('message',e=>{\n if(e.origin!==location.origin||!e.data||e.data.type!=='research-hfx-stage')return;\n if(e.data.action==='chapter'){\n  const chapter=Math.max(0,Math.min(5,Number(e.data.chapter)||0));\n  if(chapter!==lastChapter){\n   lastChapter=chapter;\n   C.tempo=chapter>=4?1.5:1.95+chapter*.11;\n   C.camZoom=1+Math.min(.34,chapter*.085);\n   C.glow=Math.min(1.5,1.05+chapter*.06);\n  }\n }else if(e.data.action==='focus'){\n  C.rimBright=e.data.active?2.35:1.8;\n  C.webBright=e.data.active?1.35:.9;\n }else{hostPaused=Boolean(e.data.paused);reconcile();}\n});\nsetState();requestAnimationFrame(resizeIfNeeded);\n";
+const html='<!doctype html>\n<!-- HALOFLUX original engine by Ryder191, PolyForm Noncommercial 1.0.0. Derived visual stage; original /v3/haloflux/ -->\n'+
+'<html lang="zh-Hant-TW" data-hfx-source-stage="HALOFLUX"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+
+'<meta name="robots" content="noindex,nofollow"><link rel="license" href="LICENSE"><title>HALOFLUX by Ryder191 · Research- optical stage</title>'+
+'<style>'+style+'</style></head><body><canvas id="stage" aria-hidden="true"></canvas><script>\n'+engine+'\n'+runtime+'\n</script></body></html>\n';
+if(html.includes('drawAdv(dt)')||html.includes('initBGM')||html.includes('setInterval(feedPush')||!html.includes('drawStage(dt)'))
+ throw Error('Stage extraction failed');
 await mkdir(out,{recursive:true});
-await copyFile(join(from,'LICENSE'),join(out,'LICENSE'));
+await copyFile(join(source,'LICENSE'),join(out,'LICENSE'));
 await writeFile(join(out,'field.html'),html,'utf8');
-console.log('Full-site HALOFLUX field: direct generated Canvas engine, controls hidden only visually; no audio.');
+console.log('Isolated original HALOFLUX stage '+Math.round(engine.length/1024)+'KB without panel / music / KPI work.');

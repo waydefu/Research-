@@ -19,7 +19,7 @@ const recordCount = editorial ? allDocs().length : null;
 </head>
 <body class:list={[editorial && "research-inner", editorial && `research-inner-${artDirection}`]}>
   <a class="skip" href="#main">直接前往正文</a>
-  {editorial && <div class="hfx-field" aria-hidden="true"><iframe src="/Research-/v3/haloflux-site/field.html" title="HALOFLUX 光場" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>}
+  {editorial && <div class="hfx-field" aria-hidden="true"><iframe data-src="/Research-/v3/haloflux-site/field.html" title="HALOFLUX 光場" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>}
   <header class="global-header">
     <a class="brand" href="/Research-/" aria-label="RESEARCH— THE OBSERVATORY｜返回天文觀測神殿首頁">
       <span class="brand-mark" aria-hidden="true">✦</span>
