@@ -640,3 +640,11 @@ html[data-art-direction="haloflux"] .mobile-lightfield-link{display:none}
   }
 }
 @media print{html[data-art-direction="haloflux"] .mobile-lightfield-link{display:none}}
+
+@media(max-width:520px){
+  /* Preserve the G0 masthead single-row contract geometrically, not just
+     by using nowrap: the brand and the two nav touch targets share a top. */
+  html[data-art-direction="haloflux"] .global-header{align-items:flex-start}
+  html[data-art-direction="haloflux"] .global-header .brand{min-height:44px;align-items:center}
+  html[data-art-direction="haloflux"] .global-header nav{align-items:flex-start}
+}
