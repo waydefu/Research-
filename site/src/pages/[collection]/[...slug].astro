@@ -115,12 +115,12 @@ const sourceReview=reviewForSource(doc.file);
       {publicArticle ? (
         <details class="original-record" data-pagefind-ignore>
           <summary>展開完整原始研究（歷史紀錄，不代表現行功能與驗證結果）</summary>
-          <div class="original-divider"><span>RESEARCH / SOURCE RECORD</span><h2>完整原始研究</h2><p>原文與原始引用完整保留；歷史 PR、階段計畫和數據提案均須依日期重新核對。</p></div>
+          <div class="original-divider"><span>RESEARCH / SOURCE RECORD</span><h2>完整原始研究</h2><p>此處以臺灣繁體字形呈現，方便閱讀；原始 Markdown、連結與來源 SHA 均未更動。歷史 PR、階段計畫和數據提案仍須依日期重新核對。</p></div>
           <div class="article-content"><Content /></div>
         </details>
       ) : (
         <>
-          <div class="original-divider"><span>RESEARCH / ORIGINAL TEXT</span><h2>完整研究內容</h2><p>以下保留原有研究正文、原始連結、數據與不確定性說明。</p></div>
+          <div class="original-divider"><span>RESEARCH / ORIGINAL TEXT</span><h2>完整研究內容</h2><p>以下僅將可閱讀的中文轉為臺灣繁體；原始 Markdown、連結、來源 SHA、數據與不確定性均保留。</p></div>
           <div class="article-content"><Content /></div>
         </>
       )}

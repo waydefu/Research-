@@ -10,8 +10,8 @@ export const REPO_NAVIGATION = Object.freeze([
   {
     id:'content',title:'研究來源與站內路徑',intent:'新增研究、修正連結、確保原文沒有被修改',
     entry:'site/src/lib/catalog.mjs',
-    paths:['research/','docs/governance/','showcase/design/','site/src/lib/catalog.mjs','site/src/content.config.ts','site/src/lib/remark-links.mjs','site/src/lib/rehype-tables.mjs','site/src/pages/graph.json.ts'],
-    checks:['site/tests/catalog.test.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs']
+    paths:['research/','docs/governance/','showcase/design/','site/src/lib/catalog.mjs','site/src/content.config.ts','site/src/lib/remark-links.mjs','site/src/lib/rehype-tables.mjs','site/src/lib/zh-hant-display.mjs','site/src/pages/graph.json.ts'],
+    checks:['site/tests/catalog.test.mjs','site/tests/zh-hant-display.test.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs']
   },
   {
     id:'metadata',title:'繁中標題、分類與證據',intent:'標題分類錯誤、來源不可信、導讀與原文混淆',
@@ -44,7 +44,7 @@ export const REPO_NAVIGATION = Object.freeze([
   {
     id:'quality',title:'建置、回歸與來源 SHA',intent:'CI 失敗、Pagefind 缺頁、手機無 JS 閱讀',
     entry:'site/package.json',
-    paths:['site/package.json','site/scripts/postbuild-verify.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs','site/scripts/audit-public-content.mjs','site/scripts/p05-entry-report.mjs','site/scripts/p1-readiness-report.mjs','site/src/experience/observatory/singularity-shader.js','site/src/experience/observatory/singularity.js','site/src/experience/observatory/scene.js','.github/workflows/research-integrity.yml','.github/workflows/v3-p0-build.yml','.github/workflows/publish-showcase.yml'],
+    paths:['site/package.json','site/scripts/postbuild-verify.mjs','site/scripts/localize-public-display.mjs','site/scripts/preflight.mjs','site/scripts/provenance-audit.mjs','site/scripts/audit-public-content.mjs','site/scripts/p05-entry-report.mjs','site/scripts/p1-readiness-report.mjs','site/src/experience/observatory/singularity-shader.js','site/src/experience/observatory/singularity.js','site/src/experience/observatory/scene.js','.github/workflows/research-integrity.yml','.github/workflows/v3-p0-build.yml','.github/workflows/publish-showcase.yml'],
     checks:['site/tests/observatory-shader.test.mjs','site/tests/catalog.test.mjs','site/tests/pages/v2-reader.spec.mjs','scripts/check_repository.py']
   },
   {

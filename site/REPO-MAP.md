@@ -30,6 +30,8 @@
 
 - **HALOFLUX 原作與實際研究資料整合**：原作位於 `site/public/haloflux/`，不可直接修改；`site/scripts/build-haloflux-integration.mjs` 在 Astro 建置後從原作生成 `dist/haloflux-research/` 的研究版，資料來自 `site/src/lib/catalog.mjs`，介面增量位於 `site/public/haloflux-integration/bridge.js` 與 `bridge.css`，採 `site/tests/pages/haloflux-research-integration.spec.mjs` 驗證桌面／手機、來源連結、reduced-motion 與無 JS。這是獨立預覽，不是根首頁或全站八項美術完成。
 
+- **臺灣繁體公開顯示**：`site/src/lib/zh-hant-display.mjs` 讀取 `site/vendor/opencc/` 的 Apache-2.0 字典；`site/scripts/localize-public-display.mjs` 在 Astro/HALOFLUX 建置後、Pagefind 前只轉換公開 HTML 可見文字與搜尋顯示欄位。歷史原文的 `text`、SHA、檔名、連結及原作 HALOFLUX 原始頁保持不變。驗證 `site/tests/zh-hant-display.test.mjs` 與 `site/tests/pages/mobile-hant-legibility.spec.mjs`。手機字級由 `site/src/styles/haloflux-editorial.css` 與 `site/public/haloflux-integration/bridge.css` 管理。
+
 ## 任務選哪個入口
 
 | 想處理什麼 | 第一個該讀的檔案 | 接著看 | 驗證／注意 |

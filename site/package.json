@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check && node --test tests/*.test.mjs",
-    "build": "npm run preflight && astro build && node scripts/build-haloflux-integration.mjs && pagefind --site dist && node scripts/postbuild-verify.mjs",
+    "build": "npm run preflight && astro build && node scripts/build-haloflux-integration.mjs && node scripts/localize-public-display.mjs && pagefind --site dist && node scripts/postbuild-verify.mjs",
     "preflight": "node scripts/preflight.mjs",
     "preview": "astro preview",
     "predev": "npm run preflight",
