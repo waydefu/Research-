@@ -1,11 +1,14 @@
 ---
 import '../styles/global.css';
 import '../styles/p1-reading-flow.css';
-import { BASE } from '../lib/catalog.mjs';
-const { title = '研究觀測所', description = 'Research-｜可追溯的技術研究資料庫' } = Astro.props;
+import '../styles/haloflux-editorial.css';
+import { BASE, allDocs } from '../lib/catalog.mjs';
+const { title = '研究觀測所', description = 'Research-｜可追溯的技術研究資料庫', artDirection = null } = Astro.props;
+const editorial = ['library','search','domain','article'].includes(artDirection);
+const recordCount = editorial ? allDocs().length : null;
 ---
 <!doctype html>
-<html lang="zh-TW">
+<html lang="zh-Hant-TW" data-art-direction={editorial ? "haloflux" : undefined}>
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -13,7 +16,7 @@ const { title = '研究觀測所', description = 'Research-｜可追溯的技術
   <meta name="color-scheme" content="dark"/>
   <title>{title} · THE OBSERVATORY</title>
 </head>
-<body>
+<body class:list={[editorial && "research-inner", editorial && `research-inner-${artDirection}`]}>
   <a class="skip" href="#main">直接前往正文</a>
   <header class="global-header">
     <a class="brand" href="/Research-/" aria-label="RESEARCH— THE OBSERVATORY｜返回天文觀測神殿首頁">
@@ -24,7 +27,9 @@ const { title = '研究觀測所', description = 'Research-｜可追溯的技術
       <a href="/Research-/">觀測神殿</a>
       <a href={BASE + 'library/'}>研究分類</a>
       <a href={BASE + 'search/'}>全文搜尋</a>
+      {editorial && <a href={BASE + 'haloflux-research/'} aria-label="HALOFLUX 整合研究光場"><span class="nav-full">光場介面</span><span class="nav-compact" aria-hidden="true">光場</span></a>}
     </nav>
+    {editorial && <a class="research-masthead-status" href={BASE + "library/"} aria-label={`研究典藏：目前共 ${recordCount} 份研究`}><span>INDEX / RECORDS</span><strong>{recordCount}</strong></a>}
   </header>
   <main id="main"><slot /></main>
   <footer class="global-footer">

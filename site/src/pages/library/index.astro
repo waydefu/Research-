@@ -9,7 +9,7 @@ const docs=allDocs();
 const topics=topicsFor(docs),tags=tagsFor(docs);
 const counts=new Map(topics.map(topic=>[topic,docs.filter(d=>d.topic===topic).length]));
 ---
-<Base title="研究典藏｜主題與分類">
+<Base title="研究典藏｜主題與分類" artDirection="library">
   <section class="intro archive-intro">
     <p class="eyebrow">THE OBSERVATORY / RESEARCH LIBRARY</p>
     <h1>想了解一項技術？<br/><em>從這裡找到答案。</em></h1>
