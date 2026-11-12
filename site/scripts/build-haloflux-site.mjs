@@ -35,6 +35,14 @@ replaceOne('const C = { ...(PRESETS.MINE || PRESETS.B) };',
 replaceOne("const LS_KEY = 'research.haloflux.lab.cfg.v1';",
   "const LS_KEY = 'research.haloflux.ambient.cfg.v1';",'ambient prefs');
 html=html.replaceAll('Math.min(window.devicePixelRatio || 1, 2)','Math.min(window.devicePixelRatio || 1, innerWidth<780?1.25:1.75)');
+// The field runs behind a semantic document. Unlike the full interactive
+// demo, 60/120Hz paint is not a useful budget for a decorative layer.
+replaceOne('let integrationHostPaused = false;',
+  'let integrationHostPaused = false;\nlet ambientLastPaint = 0;',
+  'ambient paint clock');
+replaceOne('if (ready) origFrame(now); else { last = now; integrationRaf = requestAnimationFrame(frame); }',
+  'if (ready) { if (now - ambientLastPaint >= (innerWidth<780 ? 44 : 30)) { ambientLastPaint = now; origFrame(now); } else integrationRaf = requestAnimationFrame(frame); } else { last = now; integrationRaf = requestAnimationFrame(frame); }',
+  'ambient frame cap');
 replaceOne('const shouldRun = !document.hidden && !integrationMotion.matches;',
   'const shouldRun = !document.hidden && !integrationMotion.matches && !integrationHostPaused;','host motion gate');
 replaceOne('data-src="https://raw.githubusercontent.com/Ryder191/haloflux/02174503d0f391b1bb2537b8cad75e8e5f9997f2/audio/sw421k.mp3"',
