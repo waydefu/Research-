@@ -57,6 +57,7 @@ body.hfx-root,body.research-inner{background:var(--hfx-void)!important;color:var
   background:var(--hfx-teal);box-shadow:0 0 11px rgba(152,224,207,.7);
 }
 .hfx-motion-control[aria-pressed="true"]::before{background:var(--hfx-pink);box-shadow:none}
+.hfx-motion-control[hidden]{display:none!important}
 .hfx-motion-control:is(:hover,:focus-visible){border-color:var(--hfx-teal);color:#fff}
 .hfx-source-credit{
   font:500 .68rem/1.7 var(--hfx-mono);letter-spacing:.025em;color:#aab6c0;

@@ -27,6 +27,14 @@ const css=[
 replaceOne('</head>','<style id="hfx-source-stage">\n'+css+'\n</style>\n</head>','style');
 replaceOne('const integrationMotion = matchMedia(\'(prefers-reduced-motion: reduce)\');',
   "const integrationMotion = matchMedia('(prefers-reduced-motion: reduce)');\nlet integrationHostPaused = false;",'host control');
+replaceOne('cx = W * 0.07; cy = H * 0.5;',
+  'cx = W * 0.64; cy = H * 0.48;','ambient lightfield composition');
+replaceOne('const C = { ...(PRESETS.MINE || PRESETS.B) };',
+  "for(const p of Object.values(PRESETS)){ p.runnerCount=Math.min(p.runnerCount,innerWidth<780?140:390); p.flyerCount=Math.min(p.flyerCount,innerWidth<780?0.65:1.5); p.bokeh=Math.min(p.bokeh,innerWidth<780?0:4); }\nconst C = { ...(PRESETS.MINE || PRESETS.B) };",
+  'adaptive optical density');
+replaceOne("const LS_KEY = 'research.haloflux.lab.cfg.v1';",
+  "const LS_KEY = 'research.haloflux.ambient.cfg.v1';",'ambient prefs');
+html=html.replaceAll('Math.min(window.devicePixelRatio || 1, 2)','Math.min(window.devicePixelRatio || 1, innerWidth<780?1.25:1.75)');
 replaceOne('const shouldRun = !document.hidden && !integrationMotion.matches;',
   'const shouldRun = !document.hidden && !integrationMotion.matches && !integrationHostPaused;','host motion gate');
 replaceOne('data-src="https://raw.githubusercontent.com/Ryder191/haloflux/02174503d0f391b1bb2537b8cad75e8e5f9997f2/audio/sw421k.mp3"',
@@ -35,8 +43,15 @@ replaceOne('</body>',
   '<script>\n'+
   "addEventListener('message',function(e){\n"+
   "  if(e.origin!==location.origin||!e.data||e.data.type!=='research-hfx-stage')return;\n"+
-  "  integrationHostPaused=Boolean(e.data.paused);\n"+
-  "  syncIntegrationMotion();\n"+
+  "  if(e.data.action==='chapter'){\n"+
+  "    const chapter=Math.max(0,Math.min(5,Number(e.data.chapter)||0));\n"+
+  "    C.tempo=chapter>=4?1.5:1.95+chapter*.11;\n"+
+  "    C.camZoom=1+Math.min(.34,chapter*.085);\n"+
+  "    C.glow=Math.min(1.5,1.05+chapter*.06);\n"+
+  "  } else if(e.data.action==='focus'){\n"+
+  "    C.rimBright=e.data.active?2.35:1.8;\n"+
+  "    C.webBright=e.data.active?1.35:.9;\n"+
+  "  } else { integrationHostPaused=Boolean(e.data.paused); syncIntegrationMotion(); }\n"+
   "});\n"+
   "document.documentElement.dataset.hfxSourceStage='HALOFLUX';\n"+
   '</script>\n</body>','message bridge');

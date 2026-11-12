@@ -50,6 +50,12 @@ test('source-derived Canvas animates on the real homepage and can be paused by r
   const source=page.frameLocator('.hfx-field iframe');
   await expect(source.locator('html')).toHaveAttribute('data-hfx-source-stage','HALOFLUX');
   const canvas=source.locator('#stage');
+  const initialTempo=await source.locator('html').evaluate(()=>C.tempo);
+  await page.locator('.vault-index a').first().focus();
+  await expect.poll(async()=>source.locator('html').evaluate(()=>C.rimBright)).toBe(2.35);
+  await expect.poll(async()=>source.locator('html').evaluate(()=>C.tempo)).not.toBe(initialTempo);
+  await page.locator('.hero-discovery input').focus();
+  await expect.poll(async()=>source.locator('html').evaluate(()=>C.rimBright)).toBe(1.8);
   const first=await canvas.evaluate(el=>el.toDataURL());
   await page.waitForTimeout(1050);
   const later=await canvas.evaluate(el=>el.toDataURL());
