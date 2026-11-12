@@ -648,3 +648,96 @@ html[data-art-direction="haloflux"] .mobile-lightfield-link{display:none}
   html[data-art-direction="haloflux"] .global-header .brand{min-height:44px;align-items:center}
   html[data-art-direction="haloflux"] .global-header nav{align-items:flex-start}
 }
+
+
+/* Small-screen Chinese legibility: keep instrument geometry while removing
+   10-13px body copy. Native user zoom and text scaling remain available. */
+@media(max-width:520px){
+  html[data-art-direction="haloflux"] body{
+    font-size:16px;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+  html[data-art-direction="haloflux"] #main .archive-intro .intro-sub,
+  html[data-art-direction="haloflux"] #main .section-heading p:last-child{
+    font-size:1rem;line-height:1.9;
+  }
+  html[data-art-direction="haloflux"] .global-header .brand-type{font-size:.78rem}
+  html[data-art-direction="haloflux"] .global-header .brand-type small{font-size:.55rem}
+  html[data-art-direction="haloflux"] .global-header nav a{font-size:.84rem}
+  html[data-art-direction="haloflux"] .mobile-lightfield-link strong{font-size:.86rem}
+  html[data-art-direction="haloflux"] #main .domain-summary strong,
+  html[data-art-direction="haloflux"] #main .research-item-main strong,
+  html[data-art-direction="haloflux"] #main .topic-exhibit summary strong{
+    font-size:1.1rem;line-height:1.6;
+  }
+  html[data-art-direction="haloflux"] #main .domain-summary>span,
+  html[data-art-direction="haloflux"] #main .research-item-main>span,
+  html[data-art-direction="haloflux"] #main .section-heading p{
+    font-size:.96rem;line-height:1.85;
+  }
+  html[data-art-direction="haloflux"] #main .domain-summary>small,
+  html[data-art-direction="haloflux"] #main .research-item-main small,
+  html[data-art-direction="haloflux"] #main .topic-info small,
+  html[data-art-direction="haloflux"] #main .topic-count,
+  html[data-art-direction="haloflux"] #main .domain-count,
+  html[data-art-direction="haloflux"] #main .index-stat span{
+    font-size:.82rem;line-height:1.7;letter-spacing:.015em;
+  }
+  html[data-art-direction="haloflux"] #main .library-filters label,
+  html[data-art-direction="haloflux"] #main .search-facet-grid label,
+  html[data-art-direction="haloflux"] #main #search-form>label,
+  html[data-art-direction="haloflux"] #main .search-scope label{
+    font-size:.9rem;line-height:1.7;
+  }
+  html[data-art-direction="haloflux"] #main .library-filters :is(input,select),
+  html[data-art-direction="haloflux"] #main .search-facet-grid select,
+  html[data-art-direction="haloflux"] #main #search-term{
+    font-size:1rem;min-height:48px;
+  }
+  html[data-art-direction="haloflux"] #main .search-shortcut,
+  html[data-art-direction="haloflux"] #main #search-feedback,
+  html[data-art-direction="haloflux"] #main #library-result-count{
+    font-size:.875rem;line-height:1.75;
+  }
+  html[data-art-direction="haloflux"] #main .domain-what{font-size:1.05rem;line-height:1.9}
+  html[data-art-direction="haloflux"] #main .domain-usage{font-size:.96rem}
+  html[data-art-direction="haloflux"] #main .domain-topic-intro h2{font-size:1.35rem}
+  html[data-art-direction="haloflux"] #main .domain-topic-intro p{font-size:.94rem}
+  html[data-art-direction="haloflux"] #main .domain-topic-intro small{font-size:.78rem}
+  html[data-art-direction="haloflux"] #main .document-title h1{
+    font-size:clamp(1.92rem,7.5vw,2.8rem);line-height:1.47;letter-spacing:.02em;
+  }
+  html[data-art-direction="haloflux"] #main .reading-deck{
+    font-size:1.0625rem;line-height:1.93;
+  }
+  html[data-art-direction="haloflux"] #main .document .article-content,
+  html[data-art-direction="haloflux"] #main .document .public-article{
+    font-size:1.0625rem;line-height:1.95;
+    max-width:100%;
+  }
+  html[data-art-direction="haloflux"] #main .document .article-content :is(p,li),
+  html[data-art-direction="haloflux"] #main .document .public-article :is(p,li){
+    line-height:1.95;
+  }
+  html[data-art-direction="haloflux"] #main .document :is(.article-content,.public-article) h2{
+    font-size:1.47rem;line-height:1.52;
+  }
+  html[data-art-direction="haloflux"] #main .document :is(.article-content,.public-article) h3{
+    font-size:1.22rem;line-height:1.57;
+  }
+  html[data-art-direction="haloflux"] #main .document-kicker,
+  html[data-art-direction="haloflux"] #main .document-taxonomy span,
+  html[data-art-direction="haloflux"] #main .editorial-status,
+  html[data-art-direction="haloflux"] #main .provenance{
+    font-size:.78rem;line-height:1.8;letter-spacing:0;
+  }
+  html[data-art-direction="haloflux"] #main .document .article-content pre{
+    font-size:.875rem;line-height:1.6;max-width:100%;overflow-x:auto;
+  }
+  html[data-art-direction="haloflux"] #main .source-studio,
+  html[data-art-direction="haloflux"] #main .source-review,
+  html[data-art-direction="haloflux"] #main .source-index{
+    font-size:.94rem;line-height:1.85;
+  }
+}

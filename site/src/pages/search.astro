@@ -55,7 +55,7 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
       return originalDocs;
     }
     function snippet(doc,terms){
-      const text=String(doc.text||'').replace(/[\r\n\t]+/g,' ').replace(/[#*`>\[\]]/g,' ').replace(/\s+/g,' ').trim();
+      const text=String(doc.displayText||doc.text||'').replace(/[\r\n\t]+/g,' ').replace(/[#*`>\[\]]/g,' ').replace(/\s+/g,' ').trim();
       const at=terms.length?norm(text).indexOf(terms[0]):-1;
       const start=Math.max(0,at<0?0:at-45);
       return (start?'…':'')+text.slice(start,start+160)+(text.length>start+160?'…':'');
@@ -130,11 +130,11 @@ const docs=allDocs(),topics=topicsFor(docs),tags=tagsFor(docs);
             if(filters.domain&&doc.group!==filters.domain)return false;
             if(filters.topic&&doc.topic!==filters.topic)return false;
             if(filters.tag&&!doc.tags.includes(filters.tag))return false;
-            const text=norm(doc.title+' '+doc.publicTitle+' '+doc.text);
+            const text=norm(doc.title+' '+doc.publicTitle+' '+doc.text+' '+(doc.displayText||''));
             return terms.every(term=>text.includes(term));
           });
           matches=found.map(doc=>({data:async()=>({
-            url:doc.href,meta:{title:doc.publicTitle},
+            url:doc.href,meta:{title:doc.displayPublicTitle||doc.publicTitle},
             plain_excerpt:snippet(doc,terms),originalFile:doc.file,originalDate:doc.date
           })}));
         }else{

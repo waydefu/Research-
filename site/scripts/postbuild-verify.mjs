@@ -1,6 +1,7 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { allDocs, graph, BASE } from '../src/lib/catalog.mjs';
+import {toTaiwanHant} from '../src/lib/zh-hant-display.mjs';
 
 const docs = allDocs();
 let verified = 0;
@@ -10,7 +11,7 @@ for (const d of docs) {
   const html = readFileSync(page, 'utf8');
   if (!html.includes('data-pagefind-body')) throw new Error('文件未設 Pagefind 索引主體: ' + d.file);
   if (/href\s*=\s*["'][^"']*github\.com\/waydefu\/Research-\//i.test(html)) throw new Error('發現本站 GitHub 連結: ' + d.file);
-  if (!html.includes(d.title.replaceAll('&','&amp;'))) console.warn('注意：標題 HTML 轉義可能與來源不同: ' + d.file);
+  if (!html.includes(toTaiwanHant(d.title).replaceAll('&','&amp;'))) console.warn('注意：標題 HTML 轉義可能與來源不同: ' + d.file);
   verified++;
 }
 if (existsSync('dist/governance/THREAT-MODEL/index.html')) throw new Error('排除文件不應有公開頁面');

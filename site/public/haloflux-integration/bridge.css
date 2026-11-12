@@ -71,3 +71,24 @@
 #feed,#code{justify-content:flex-start;overflow-x:hidden;overflow-y:auto;min-height:0;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#444b55 transparent}
 #feed .research-feed-row,#code .research-code-row{flex:0 0 auto;min-height:15px}
 #feed .source-feed-title,#code .research-code-link{display:inline-block;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+
+/* Real-source navigation on phones is a reading UI, unlike the original
+   cinematic Canvas HUD. Enlarge Chinese labels without altering its artwork. */
+@media(max-width:520px){
+ .research-explore{font-size:12px}
+ .research-explore>summary{min-height:44px;padding:10px 12px}
+ .research-drawer{font-size:14px}
+ .research-drawer h2{font-size:clamp(24px,7vw,30px);line-height:1.45}
+ .research-copy{font-size:15px;line-height:1.9}
+ .research-quick a{font-size:13px;min-height:44px;padding:12px 3px}
+ .research-find label,.research-drawer-title h3{font-size:12px;letter-spacing:.06em}
+ .research-find input{font-size:16px;min-height:46px}
+ .research-find button{font-size:14px;min-height:44px}
+ .research-drawer-title span,.research-item-count{font-size:11px}
+ .research-drawer-link{min-height:48px;padding:13px 2px}
+ .research-drawer-link strong{font-size:15px;line-height:1.6}
+ .research-item-index{font-size:11px}
+ .research-drawer-credit{font-size:11px;line-height:1.85}
+ .research-visible-credit{font-size:10px}
+}
