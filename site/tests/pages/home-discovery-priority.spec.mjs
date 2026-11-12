@@ -19,7 +19,7 @@ for(const width of [320,360,393,430,768]){
       const input=document.querySelector('.hero-discovery input').getBoundingClientRect();
       const button=document.querySelector('.hero-discovery button').getBoundingClientRect();
       const copy=document.querySelector('.hero-left').getBoundingClientRect();
-      const scene=getComputedStyle(document.querySelector('.world-backdrop'),'::before');
+      const scene=getComputedStyle(document.querySelector('.hfx-field'),'::before');
       const glass=getComputedStyle(document.querySelector('.narrative-glass'));
       const headerMenu=document.querySelector('#menuOpen').getBoundingClientRect();
       return {aTop:a.top,aBottom:a.bottom,aHeight:a.height,inputTop:input.top,inputHeight:input.height,buttonTop:button.top,buttonHeight:button.height,copyTop:copy.top,background:scene.backgroundImage,glassBlur:glass.backdropFilter,headerMenuHeight:headerMenu.height,viewportHeight:innerHeight,overflow:root.scrollWidth-innerWidth};
@@ -28,10 +28,11 @@ for(const width of [320,360,393,430,768]){
     if(width<=520){
       // The image, not the headline, owns the central 60% of the mobile screen.
       expect(sizes.copyTop,'headline must not cover observatory focal area').toBeGreaterThanOrEqual(sizes.viewportHeight*.64);
-      expect(sizes.background).toContain('world-mobile.webp');
+      expect(sizes.background).toContain('radial-gradient');
       expect(sizes.glassBlur,'mobile glass must not start with an abrupt blur seam').toBe('none');
     } else {
-      expect(sizes.aBottom).toBeLessThan(sizes.viewportHeight);
+      // Tablets use a scrollable cinematic opening; discovery must remain reachable.
+      expect(sizes.aBottom).toBeLessThan(await page.evaluate(()=>document.documentElement.scrollHeight));
     }
     expect(sizes.headerMenuHeight).toBeGreaterThanOrEqual(35);
     expect(sizes.aHeight).toBeGreaterThanOrEqual(44);

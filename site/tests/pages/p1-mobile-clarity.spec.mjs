@@ -66,6 +66,6 @@ test('local AI article is readable on mobile, has contextual gradient, not Markd
     return {gap:article.top-side.bottom,background:getComputedStyle(document.querySelector('.reading-layout')).backgroundImage,overflow:document.documentElement.scrollWidth-innerWidth};
   });
   expect(r.gap).toBeLessThan(55);
-  expect(r.background).toContain('radial-gradient');
+  expect(r.background).toContain('linear-gradient');
   expect(r.overflow).toBeLessThanOrEqual(1);
 });

@@ -111,7 +111,7 @@ body.hfx-root,body.research-inner{background:var(--hfx-void)!important;color:var
 }
 .hfx-root .hero h1{margin:clamp(22px,3vw,42px) 0 24px!important;line-height:1.22!important;text-wrap:balance}
 .hfx-root .hero h1 .zh{
-  display:block;max-width:9ch;
+  display:block;max-width:none;
   font-family:var(--hfx-serif)!important;
   font-weight:500!important;font-size:clamp(3.05rem,5.5vw,6.75rem)!important;
   line-height:1.34!important;letter-spacing:.02em!important;
@@ -149,7 +149,7 @@ body.hfx-root,body.research-inner{background:var(--hfx-void)!important;color:var
 .hfx-root .dock-item:is(:hover,:focus-visible){background:rgba(152,224,207,.075)!important;transform:translateX(3px)}
 .hfx-root .hero-caption{color:#9aaeb4!important;font-family:var(--hfx-mono)!important}
 .hfx-root .scene-guideline{border-color:rgba(152,224,207,.2)!important}
-.hfx-root .narrative-glass{max-width:none;background:#08090b!important}
+.hfx-root .narrative-glass{max-width:none;margin-top:0!important;background:#08090b!important}
 .hfx-root .library-vault{
   border-top:1px solid var(--hfx-rule);background:
   radial-gradient(ellipse 34vw 30vw at 100% 45%,rgba(152,224,207,.055),transparent 77%),
@@ -278,9 +278,9 @@ html.hfx-motion-ready [data-hfx-reveal].hfx-visible{opacity:1;transform:translat
 /* Mobile: reframe the HALOFLUX source, never shrink the desktop dashboard. */
 @media(max-width:900px){
  .hfx-field{opacity:.36;clip-path:inset(0 0 0 0)}
- .hfx-field iframe{width:140%;left:-20%;transform:translate3d(0,calc(-12vh + var(--hfx-y)*.1),0) scale(1.02)}
+ .hfx-field iframe{width:100%;height:100%;left:0;top:0;transform:translate3d(var(--hfx-x),var(--hfx-y),0)}
  .hfx-field::after{background:linear-gradient(180deg,rgba(8,9,11,.12),rgba(8,9,11,.4) 26%,#08090b 85%)}
- .hfx-root .hero{min-height:clamp(620px,100svh,870px);padding-top:clamp(280px,48vh,440px)!important;padding-bottom:60px!important;align-items:flex-end!important}
+ .hfx-root .hero{min-height:clamp(620px,100svh,870px);padding-top:clamp(245px,33vh,360px)!important;padding-bottom:60px!important;align-items:flex-end!important}
  .hfx-root .hero-left{width:100%!important;max-width:650px}
  .hfx-root .hero-dock{display:none!important}
  .hfx-root .hero h1 .zh{font-size:clamp(2.35rem,7.5vw,4.1rem)!important;max-width:14ch}
@@ -288,9 +288,9 @@ html.hfx-motion-ready [data-hfx-reveal].hfx-visible{opacity:1;transform:translat
 }
 @media(max-width:520px){
  .hfx-field{opacity:.29}
- .hfx-field iframe{width:175%;left:-37%;height:110%;top:-5%;transform:translate3d(0,-23vh,0)}
+ .hfx-field iframe{width:100%;left:0;height:100%;top:0;transform:none}
  .hfx-motion-control{right:8px;bottom:8px;min-height:44px;padding:9px 11px;font-size:.68rem}
- .hfx-root .hero{padding:clamp(275px,72vw,390px) 19px 44px!important;min-height:0}
+ .hfx-root .hero{padding:clamp(450px,61svh,640px) 19px 80px!important;min-height:0}
  .hfx-root .hero h1 .zh{
    font-size:clamp(2.1rem,8.1vw,3.2rem)!important;line-height:1.43!important;
    letter-spacing:0!important;max-width:none;
