@@ -29,7 +29,7 @@ const recordCount = editorial ? allDocs().length : null;
       <a href={BASE + 'search/'}>全文搜尋</a>
       {editorial && <a href={BASE + 'haloflux-research/'} aria-label="光場介面｜HALOFLUX 整合研究光場"><span class="nav-full">光場介面</span><span class="nav-compact" aria-hidden="true">光場</span></a>}
     </nav>
-    {editorial && <a class="research-masthead-status" href={BASE + "library/"} aria-label={`INDEX / RECORDS ${recordCount}｜前往研究典藏`}><span>INDEX / RECORDS</span><strong>{recordCount}</strong></a>}
+    {editorial && <a class="research-masthead-status" href={BASE + "library/"}><span>研究典藏 / INDEX</span><strong>{recordCount}</strong></a>}
   </header>
   {editorial && <a class="mobile-lightfield-link" href={BASE + "haloflux-research/"}><span>HALOFLUX / FIELD</span><strong>開啟光場介面 <span aria-hidden="true">↗</span></strong></a>}
   <main id="main"><slot /></main>
