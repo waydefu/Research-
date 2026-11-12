@@ -23,7 +23,7 @@ home=home.replace('<body data-pagefind-ignore>',
 home=home.replace('<div class="scene-guideline" aria-hidden="true"></div>',
   '<div class="scene-guideline" aria-hidden="true"></div><p class="hfx-instrument" aria-hidden="true">HALOFLUX / LIVE CANVAS / SOURCE-BASED RESEARCH</p>');
 home=home.replace('</body>',
-  '<div class="hfx-source-credit">動態視覺原始碼：<a href="https://github.com/Ryder191/haloflux" rel="noopener noreferrer">HALOFLUX by Ryder191</a> · PolyForm Noncommercial 1.0.0 · <a href="/Research-/v3/haloflux/">檢視原作</a> · Research- 提供真實研究內容</div>\n<script defer src="/Research-/v3/haloflux-site/immersive.js"></script>\n</body>');
+  '<div class="hfx-source-credit">動態視覺原始碼：<a href="https://github.com/Ryder191/haloflux" rel="noopener noreferrer">HALOFLUX by Ryder191（RYDER CODE / Ms MAIKEBAIs CAT）</a> · PolyForm Noncommercial 1.0.0 · <a href="/Research-/v3/haloflux/">檢視原作</a> · Research- 提供真實研究內容</div>\n<script defer src="/Research-/v3/haloflux-site/immersive.js"></script>\n</body>');
 if(!home.includes('hfx-field')||!home.includes('追索未知')||!home.includes('haloflux-site/immersive.js'))throw Error('Full-site cinematic home integration failed');
 if(home.includes('data:image/webp;base64,'))throw Error('Unexpected embedded WebP');
 

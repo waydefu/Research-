@@ -27,6 +27,7 @@ for(const width of [320,393,1440]){
    await expect(page.locator('html')).toHaveAttribute('lang','zh-Hant-TW');
    await expect(page.locator('h1').first()).toBeVisible();
    await expect(page.getByText('HALOFLUX by Ryder191').last()).toBeVisible();
+   await expect(page.locator('.hfx-source-credit')).toContainText('RYDER CODE / Ms MAIKEBAIs CAT');
    const info=await page.evaluate(()=>{
     const field=document.querySelector('.hfx-field');
     return {
