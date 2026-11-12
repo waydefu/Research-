@@ -31,6 +31,7 @@ const recordCount = editorial ? allDocs().length : null;
     </nav>
     {editorial && <a class="research-masthead-status" href={BASE + "library/"} aria-label={`INDEX / RECORDS ${recordCount}｜前往研究典藏`}><span>INDEX / RECORDS</span><strong>{recordCount}</strong></a>}
   </header>
+  {editorial && <a class="mobile-lightfield-link" href={BASE + "haloflux-research/"}><span>HALOFLUX / FIELD</span><strong>開啟光場介面 <span aria-hidden="true">↗</span></strong></a>}
   <main id="main"><slot /></main>
   <footer class="global-footer">
     <span>RESEARCH / VERIFIED SOURCES / OPEN QUESTIONS</span>
