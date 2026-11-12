@@ -42,12 +42,12 @@ for(const width of [393,1440]){
         veil:getComputedStyle(intro,'::after').backgroundImage,
         rule:getComputedStyle(section,'::after').backgroundColor,
         width:getComputedStyle(section,'::after').width,
-        main:getComputedStyle(document.getElementById('main')).backgroundImage
+        main:getComputedStyle(document.querySelector('.hfx-field'),'::before').backgroundImage
       };
     });
     expect(style.veil).toContain('linear-gradient');
     expect(parseFloat(style.width)).toBeGreaterThan(0);
-    expect(style.main).toContain('radial-gradient');
+    expect(style.main,'real optical field must have a static fallback').toContain('radial-gradient');
     expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
 
     await page.emulateMedia({reducedMotion:'reduce'});

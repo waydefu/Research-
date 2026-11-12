@@ -9,10 +9,10 @@ const viewports=[
 ];
 
 for(const {width,height} of viewports){
-  test('G0-03 evidence: rooted Sanctum scene, story chapters and image safety '+width,async({page},testInfo)=>{
+  test('G0-03 evidence: rooted HALOFLUX original optical scene, story chapters and image safety '+width,async({page},testInfo)=>{
     await page.setViewportSize({width,height});
     await page.goto('/Research-/');
-    await expect(page.locator('.world-backdrop')).toBeAttached();
+    await expect(page.locator('.hfx-field iframe')).toHaveAttribute('data-src','/Research-/v3/haloflux-site/field.html');
     await expect(page.getByRole('heading',{level:1,name:/技術研究與實作知識庫/})).toBeVisible();
     await expect(page.locator('.hero-discovery input[name="q"]')).toBeVisible();
 
@@ -24,12 +24,13 @@ for(const {width,height} of viewports){
         return box?{top:Math.round(box.top),bottom:Math.round(box.bottom),
           width:Math.round(box.width),height:Math.round(box.height)}:null;
       };
-      const scene=getComputedStyle(document.querySelector('.world-backdrop'));
-      const art=getComputedStyle(document.querySelector('.world-backdrop'),'::before');
+      const scene=getComputedStyle(document.querySelector('.hfx-field'));
+      const art=getComputedStyle(document.querySelector('.hfx-field'),'::before');
       return {
         horizontalOverflow:document.documentElement.scrollWidth-innerWidth,
         scenePosition:scene.position,
-        worldImage:art.backgroundImage,
+        opticalFallback:art.backgroundImage,
+        sourcePointer:scene.pointerEvents,
         headline:rect('.hero h1'),
         headlineCopy:rect('.hero-left'),
         search:rect('.hero-discovery'),
@@ -41,7 +42,8 @@ for(const {width,height} of viewports){
     });
     expect(metrics.horizontalOverflow).toBeLessThanOrEqual(1);
     expect(metrics.scenePosition).toBe('fixed');
-    expect(metrics.worldImage).toContain(width<=800?'world-mobile.webp':'world-desktop.webp');
+    expect(metrics.opticalFallback).toContain('radial-gradient');
+    expect(metrics.sourcePointer).toBe('none');
     expect(metrics.researchLinks).toHaveLength(4);
     expect(metrics.featuredLinks).toHaveLength(3);
     expect(metrics.search?.width).toBeGreaterThan(120);
