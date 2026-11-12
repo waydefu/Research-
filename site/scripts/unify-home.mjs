@@ -10,7 +10,21 @@ if(!html.includes('技術研究與實作知識庫')||!html.includes('class="worl
   throw Error('The reviewed Sanctum home scene is missing');
 if(!html.includes('<link rel="canonical" href="https://waydefu.github.io/Research-/"'))
   throw Error('Canonical homepage changed unexpectedly');
-const home=html.replaceAll('./assets/','/Research-/v3/atlas/sanctum/assets/');
+// Transform the canonical page into the same HALOFLUX-driven experience as
+// every Astro inner page. Keep semantic Sanctum links/sections as the fallback.
+const field='<div class="hfx-field" aria-hidden="true"><iframe src="/Research-/v3/haloflux-site/field.html" title="HALOFLUX 光場" tabindex="-1" loading="eager" aria-hidden="true"></iframe></div>';
+let home=html.replaceAll('./assets/','/Research-/v3/atlas/sanctum/assets/');
+home=home.replace('<span class="zh">技術研究與實作知識庫</span><span class="en">人工智慧、網站設計與軟體工程</span>',
+  '<span class="zh">追索未知，<br>驗證真實。</span><span class="en">技術研究與實作知識庫 / AI · WEB · ENGINEERING</span>');
+home=home.replace('</head>',
+  '<link rel="stylesheet" href="/Research-/v3/haloflux-site/immersive.css">\n</head>');
+home=home.replace('<body data-pagefind-ignore>',
+  '<body class="hfx-root" data-pagefind-ignore>\n'+field);
+home=home.replace('<div class="scene-guideline" aria-hidden="true"></div>',
+  '<div class="scene-guideline" aria-hidden="true"></div><p class="hfx-instrument" aria-hidden="true">HALOFLUX / LIVE CANVAS / SOURCE-BASED RESEARCH</p>');
+home=home.replace('</body>',
+  '<div class="hfx-source-credit">動態視覺原始碼：<a href="https://github.com/Ryder191/haloflux" rel="noopener noreferrer">HALOFLUX by Ryder191</a> · PolyForm Noncommercial 1.0.0 · <a href="/Research-/v3/haloflux/">檢視原作</a> · Research- 提供真實研究內容</div>\n<script defer src="/Research-/v3/haloflux-site/immersive.js"></script>\n</body>');
+if(!home.includes('hfx-field')||!home.includes('追索未知')||!home.includes('haloflux-site/immersive.js'))throw Error('Full-site cinematic home integration failed');
 if(home.includes('data:image/webp;base64,'))throw Error('Unexpected embedded WebP');
 
 await rm(output,{recursive:true,force:true}); // Generated output only; no source deletions.

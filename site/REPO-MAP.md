@@ -30,6 +30,8 @@
 
 - **HALOFLUX 原作與實際研究資料整合**：原作位於 `site/public/haloflux/`，不可直接修改；`site/scripts/build-haloflux-integration.mjs` 在 Astro 建置後從原作生成 `dist/haloflux-research/` 的研究版，資料來自 `site/src/lib/catalog.mjs`，介面增量位於 `site/public/haloflux-integration/bridge.js` 與 `bridge.css`，採 `site/tests/pages/haloflux-research-integration.spec.mjs` 驗證桌面／手機、來源連結、reduced-motion 與無 JS。這是獨立預覽，不是根首頁或全站八項美術完成。
 
+- **HALOFLUX 全站動態整合**：`site/scripts/build-haloflux-site.mjs` 自原生 `/v3/haloflux-research/lab.html` 生成獨立舞台 `/v3/haloflux-site/field.html`（原始 Canvas 節拍／鏡頭／光場，不是截圖），由 `site/public/haloflux-site/immersive.css`、`immersive.js` 協調真正的首頁、典藏、領域、搜尋、文章的捲動鏡頭、研究互動回饋與跨頁轉場。`site/scripts/unify-home.mjs` 組裝正式 root，`site/src/layouts/Base.astro` 在內頁以語意 DOM 保留全文，並在裝置減少動效／頁面隱藏／文章深度閱讀時暫停渲染；其來源權利仍是 PolyForm Noncommercial 1.0.0。測試：`site/tests/pages/hfx-fullsite.spec.mjs`，加上既有完整 Pages 測試。
+
 - **臺灣繁體公開顯示**：`site/src/lib/zh-hant-display.mjs` 讀取 `site/vendor/opencc/` 的 Apache-2.0 字典；`site/scripts/localize-public-display.mjs` 在 Astro/HALOFLUX 建置後、Pagefind 前只轉換公開 HTML 可見文字與搜尋顯示欄位。歷史原文的 `text`、SHA、檔名、連結及原作 HALOFLUX 原始頁保持不變。驗證 `site/tests/zh-hant-display.test.mjs` 與 `site/tests/pages/mobile-hant-legibility.spec.mjs`。手機字級由 `site/src/styles/haloflux-editorial.css` 與 `site/public/haloflux-integration/bridge.css` 管理。
 
 ## 任務選哪個入口

@@ -15,9 +15,11 @@ const recordCount = editorial ? allDocs().length : null;
   <meta name="description" content={description}/>
   <meta name="color-scheme" content="dark"/>
   <title>{title} · THE OBSERVATORY</title>
+  {editorial && <link rel="stylesheet" href="/Research-/v3/haloflux-site/immersive.css" />}
 </head>
 <body class:list={[editorial && "research-inner", editorial && `research-inner-${artDirection}`]}>
   <a class="skip" href="#main">直接前往正文</a>
+  {editorial && <div class="hfx-field" aria-hidden="true"><iframe src="/Research-/v3/haloflux-site/field.html" title="HALOFLUX 光場" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>}
   <header class="global-header">
     <a class="brand" href="/Research-/" aria-label="RESEARCH— THE OBSERVATORY｜返回天文觀測神殿首頁">
       <span class="brand-mark" aria-hidden="true">✦</span>
@@ -37,5 +39,7 @@ const recordCount = editorial ? allDocs().length : null;
     <span>RESEARCH / VERIFIED SOURCES / OPEN QUESTIONS</span>
     <span>研究觀測神殿 · 技術資料庫 · 來源可追溯</span>
   </footer>
+  {editorial && <div class="hfx-source-credit">動態視覺原始碼：<a href="https://github.com/Ryder191/haloflux" rel="noopener noreferrer">HALOFLUX by Ryder191</a> · PolyForm Noncommercial 1.0.0 · <a href={BASE+"haloflux/"}>檢視原作</a></div>}
+  {editorial && <script defer src="/Research-/v3/haloflux-site/immersive.js"></script>}
 </body>
 </html>
