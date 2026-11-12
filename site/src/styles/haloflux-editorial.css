@@ -618,3 +618,25 @@ html[data-art-direction="haloflux"] #main .source-index summary{color:var(--hf-t
   html[data-art-direction="haloflux"] #main .document{border:0!important;padding:0!important;max-width:none}
   html[data-art-direction="haloflux"] #main .document :is(h1,h2,h3,p,li){color:#171717!important}
 }
+
+/* The two-action mobile nav is a tested G0 contract. Keep the new artistic
+   preview reachable without squeezing a third tab into narrow touch targets. */
+html[data-art-direction="haloflux"] .mobile-lightfield-link{display:none}
+@media(max-width:520px){
+  html[data-art-direction="haloflux"] .global-header nav a[href="/Research-/v3/haloflux-research/"]{display:none}
+  html[data-art-direction="haloflux"] .mobile-lightfield-link{
+    display:flex;justify-content:space-between;align-items:center;
+    min-height:43px;padding:8px 16px;gap:12px;
+    background:#0d1215;border-bottom:1px solid rgba(152,224,207,.26);
+    font:500 .67rem/1.7 var(--hf-mono);letter-spacing:.06em;text-decoration:none;
+    color:#a2b6ba;
+  }
+  html[data-art-direction="haloflux"] .mobile-lightfield-link strong{
+    font:600 .75rem/1.6 var(--hf-sans);letter-spacing:.02em;
+    color:var(--hf-teal);white-space:nowrap;
+  }
+  html[data-art-direction="haloflux"] .mobile-lightfield-link:focus-visible{
+    outline:2px solid var(--hf-teal);outline-offset:-4px;
+  }
+}
+@media print{html[data-art-direction="haloflux"] .mobile-lightfield-link{display:none}}
