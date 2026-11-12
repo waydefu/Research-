@@ -23,7 +23,7 @@ test.describe('HALOFLUX editorial continuity across the research site',()=>{
           const header=document.querySelector('.global-header');
           const title=document.querySelector('main h1');
           const font=el=>getComputedStyle(el).fontFamily;
-          const link=document.querySelector('a[aria-label="HALOFLUX 整合研究光場"]');
+          const link=document.querySelector('.global-header nav a[href="/Research-/v3/haloflux-research/"]');
           return {bodyFont:font(document.body),headlineFont:font(title),
             pageWidth:document.documentElement.scrollWidth-innerWidth,
             links:[...header.querySelectorAll('nav a')].map(a=>a.getAttribute('href')),
