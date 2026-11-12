@@ -63,3 +63,24 @@ test('HALOFLUX integration index keeps stable URLs while offering Traditional di
     expect(doc.source).not.toContain('THREAT-MODEL.md');
   }
 });
+
+for(const width of [320,393,430]){
+  test('Sanctum landing mobile narrative/filters remain legible / '+width,async({page})=>{
+    await page.setViewportSize({width,height:852});
+    await page.goto('/Research-/');
+    await expect(page.locator('html')).toHaveAttribute('lang','zh-Hant-TW');
+    const m=await page.evaluate(()=>{
+      const size=sel=>parseFloat(getComputedStyle(document.querySelector(sel)).fontSize);
+      return {
+        overflow:document.documentElement.scrollWidth-innerWidth,
+        hero:size('.hero-desc'),
+        search:size('.hero-discovery-row input'),
+        catalog:size('.vault-description')
+      };
+    });
+    expect(m.overflow).toBeLessThanOrEqual(1);
+    expect(m.hero).toBeGreaterThanOrEqual(16);
+    expect(m.search).toBeGreaterThanOrEqual(16);
+    expect(m.catalog).toBeGreaterThanOrEqual(14);
+  });
+}
