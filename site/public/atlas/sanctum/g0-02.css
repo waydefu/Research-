@@ -210,3 +210,26 @@
   .hero-dock {background:rgba(5,10,18,.96);backdrop-filter:none;-webkit-backdrop-filter:none}
   .narrative-glass {background:linear-gradient(180deg,rgba(6,10,17,.94),rgba(4,7,13,.99))}
 }
+
+
+/* 2026-11 / mobile Hant reading pass. Existing cinematic layout stays intact;
+   raise narrative, search and catalog text from caption-sized to readable. */
+@media(max-width:520px){
+  body{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  .hero-desc{font-size:1rem;line-height:1.85}
+  .hero h1 .en{font-size:.94rem;line-height:1.75}
+  .hero .eyebrow{font-size:.73rem}
+  .hero-discovery label{font-size:.94rem;line-height:1.7}
+  .hero-discovery p{font-size:.875rem;line-height:1.75}
+  .hero-discovery-row input{font-size:16px;min-height:48px}
+  .hero-discovery-row button{font-size:.92rem;min-height:46px}
+  .mobile-discovery-nav a{font-size:.88rem;min-height:46px}
+  .narrative-glass .feature-card .card-copy h3{font-size:1.06rem;line-height:1.55}
+  .narrative-glass .card-category,.narrative-glass .card-meta{font-size:.75rem;line-height:1.6;letter-spacing:.01em}
+  .narrative-glass .feature-title em{font-size:.73rem}
+  .narrative-glass .vault-intro p{font-size:1rem;line-height:1.9}
+  .vault-copy .vault-name{font-size:1.1rem;line-height:1.55}
+  .vault-description{font-size:.875rem;line-height:1.7}
+  .vault-full-library,.vault-library-action{font-size:.96rem}
+  .site-footer{font-size:.78rem;line-height:1.75;letter-spacing:.02em}
+}
