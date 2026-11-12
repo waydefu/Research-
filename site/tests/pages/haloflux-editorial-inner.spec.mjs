@@ -55,7 +55,7 @@ test.describe('HALOFLUX editorial continuity across the research site',()=>{
     await expect(page.locator('article[data-pagefind-body]')).toBeVisible();
     await expect(page.locator('.article-content')).not.toBeEmpty();
     await expect(page.locator('.provenance')).toBeVisible();
-    await expect(page.locator('a[href="'+BASE+'haloflux-research/"]')).toBeAttached();
+    await expect(page.locator('.mobile-lightfield-link')).toHaveAttribute('href',BASE+'haloflux-research/');
     expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
     await context.close();
   });
