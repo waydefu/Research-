@@ -1,6 +1,10 @@
 // Editorial introductions only. Each entry is tied to one real source path, not an inferred fact.
 // Preserve original Markdown, source provenance, author and demos. Do not claim external testing.
 export const EDITORIAL_LEADS = Object.freeze({
+  "research/2026-11-agent-repository-operations/13-context-compiler-and-governance-drift.md": "說明如何將長期代理協作拆成單一規則真值、任務上下文編譯、條件式資料載入與獨立審查，並以版本來源、正負測試和交接快照阻止規則漂移。適合多宿主或長期維護情境；未量測實際 Token 節省。",
+  "research/2026-11-agent-repository-operations/14-failure-atomicity-and-verifiable-publication.md": "比較原子寫入、子程序輸出收尾、資料保全、版本衝突防護與外部發布讀回等可靠性模式，並設計故障注入和資源上限測試。區分命令成功、資料持久化與生產驗收；尚未重新執行來源案例的測試。",
+  "research/2026-11-universal-web-engine/45-layered-vegetation-overdraw-diagnostics.md": "解析密集植被如何透過逐層停繪、固定鏡頭、草片透明區裁切、深度寫入與視錐剔除找出效能瓶頸，同時維持母版輪廓和光影一致性。公開案例的手機數據僅為來源記錄，最佳化後的真機成效仍未驗證。",
+  "research/2026-11-universal-web-engine/46-rust-wgpu-hybrid-procedural-rendering.md": "比較原生 WebGPU 與 Three.js 的程序化場景案例，討論 TypeScript、Rust/Wasm、Worker 和 WGSL 的責任分工，以及多後端、共享記憶體與部署限制。提出同畫質的分階段比較方法，不代表 Rust 已實測勝出或上游授權均已確認。",
   "research/2026-11-startup-animation/README.md": "整理四個 GitHub 動畫案例：DSH 影片開場、550C 敘事片頭、HALOFLUX 即時光環與 Codex Dragon 三段角色動畫。逐篇區分原始碼核對、作者自述、影片影格統計及未實測的 Android 系統可行性，並保留來源、授權和驗收入口。",
   "research/2026-11-startup-animation/01-cross-project-architecture-and-adoption.md": "比較預製影片、SVG／DOM 時間線、Canvas 即時生成與 Windows 原生啟動器如何控制啟動畫面。主張將動畫完成、程式就緒、首幀呈現和使用者略過分成不同狀態，並以可重現的錯誤案例與效能門檻選型；這是架構推導而非已完成的跨平台整合。",
   "research/2026-11-startup-animation/02-dsh-boot-animation-handoff-and-fallback.md": "研究 DSH 影片式片頭如何用片段結束與核心就緒雙條件控制進入畫面，並用逐幀時間檢查、備用事件和有界超時避免黑屏。另拆解素材快取、播放失敗、音訊淡出及屏保碎片特效，並指出程式 MIT 不包含可自由散布的動畫媒體。",

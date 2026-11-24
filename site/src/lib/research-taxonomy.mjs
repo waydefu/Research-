@@ -261,6 +261,8 @@ const raw = {
     ]
   ],
   "research/2026-11-agent-repository-operations": [
+    ["13-context-compiler-and-governance-drift.md","Agent 協作與任務調度","任務上下文編譯、規則漂移與代理治理",["Agent","Context Compiler","規則同步","Token"]],
+    ["14-failure-atomicity-and-verifiable-publication.md","網站安全、測試與部署","可靠交付：原子寫入、程序收尾與發布讀回",["原子寫入","故障注入","CI/CD","同步","Revision"]],
     [
       "01-governance-and-authority.md",
       "Agent 權限與安全",
@@ -568,6 +570,8 @@ const raw = {
     ["SOURCES.md", "資料來源與研究索引", "開機動畫研究出處：四專案原始碼與媒體授權", ["來源索引","授權","GitHub","動畫","AOSP"]]
   ],
   "research/2026-11-universal-web-engine": [
+    ["45-layered-vegetation-overdraw-diagnostics.md","3D 資產與幾何最佳化","密集植被渲染：逐層消融、透明過繪與畫質驗收",["WebGPU","LOD","Overdraw","Alpha-to-coverage","GPU"]],
+    ["46-rust-wgpu-hybrid-procedural-rendering.md","即時 3D 渲染與 Shader","純程式 3D 的混合架構：Rust、wgpu、WebGPU 與 Wasm",["Rust","wgpu","WebGPU","Wasm","WGSL"]],
     [
       "01-framework-selection.md",
       "Web 框架與技術選型",

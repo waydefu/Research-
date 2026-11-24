@@ -32,6 +32,17 @@
 | **資訊系統工程** | [系統分析與設計](research/2026-11-systems-analysis-design/README.md) | SDLC、商業可行性、WBS、排程與風險 |
 | **資訊安全** | [原則、實體保護與數位身分](research/2026-11-information-security/README.md) | CIA、威脅分析、資料復原、身分驗證與安全指引；原始參考 PDF 不在公開 Repo 散布 |
 
+## 2026-11-24｜跨專案工程研究增補
+
+| 主題 | 研究入口 |
+| --- | --- |
+| 代理治理與任務上下文 | [上下文編譯、規則漂移及治理](research/2026-11-agent-repository-operations/13-context-compiler-and-governance-drift.md) |
+| 可靠交付與故障處理 | [原子寫入、程序收尾、同步讀回](research/2026-11-agent-repository-operations/14-failure-atomicity-and-verifiable-publication.md) |
+| 圖形效能與植被 | [逐層消融、透明過繪與畫質驗收](research/2026-11-universal-web-engine/45-layered-vegetation-overdraw-diagnostics.md) |
+| 程序化 3D 架構 | [Rust、wgpu、WebGPU 與 Wasm](research/2026-11-universal-web-engine/46-rust-wgpu-hybrid-procedural-rendering.md) |
+
+以上為公開案例及變更差異的有限來源研究；沒有重新執行來源測試，不宣稱已導入或取得效能／安全驗收。
+
 ## 研究紀律
 
 1. **來源優先**：官方文件、原始碼、可重現測試優先；社群貼文只是線索。
