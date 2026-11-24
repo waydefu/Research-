@@ -572,6 +572,76 @@
       ],
       "externallyVerifiedAllClaims": false,
       "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/13-context-compiler-and-governance-drift.md",
+      "sourceBlobSha": "255697a1b9f97a2a1bc20df514a069da765f365e",
+      "sourceRevision": "1f4416543fe9c0dd92013cb79b01e821363d9217",
+      "reviewedOn": "2026-11-24",
+      "verifiedScope": "核對公開上下文編譯、規則同步、命令守門的變更描述及部分可見差異；其他案例僅核對說明。",
+      "publicNotice": "這是有限來源的治理模式整理，尚未重新執行來源測試，沒有獨立驗證宿主權限或成本收益。",
+      "remainingWork": "須逐宿主驗證規則生成、缺漏與過期來源拒絕、命令負向控制及相同任務的成本與品質對照。",
+      "knownSources": [
+        "https://github.com/waydefu/2026novel/pull/48",
+        "https://github.com/waydefu/2026novel/pull/38",
+        "https://github.com/waydefu/2026novel/pull/41",
+        "https://github.com/waydefu/clinic/pull/574",
+        "https://github.com/waydefu/video-editor-app/pull/3"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-agent-repository-operations/14-failure-atomicity-and-verifiable-publication.md",
+      "sourceBlobSha": "4267c3c2d0fa7ab91feb2469020804ffefd90574",
+      "sourceRevision": "79ed9c5b4dd249015e1d405352f31577f45f4f41",
+      "reviewedOn": "2026-11-24",
+      "verifiedScope": "核對公開媒體程序、文件同步、發布腳本、探測快取與資產匯入的描述及可見差異；其他案例只核對說明。",
+      "publicNotice": "案例有已合併與尚開放的變更，均不等於生產驗收；沒有重跑真實長時任務或服務讀回。",
+      "remainingWork": "以故障注入、版本衝突、寫後讀回、資源超限和沙盒續跑測試驗證；外部異動與長時驗收需另行授權。",
+      "knownSources": [
+        "https://github.com/waydefu/video-editor-app/pull/5",
+        "https://github.com/waydefu/2026novel/pull/50",
+        "https://github.com/waydefu/clinic/pull/580",
+        "https://github.com/waydefu/Agent-Tool/pull/21",
+        "https://github.com/waydefu/Airplane-cockpit/pull/1"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/45-layered-vegetation-overdraw-diagnostics.md",
+      "sourceBlobSha": "9b8d6af8b9cacbe8989a3253ff73f9ef175f4ed1",
+      "sourceRevision": "cb2705d28a30943750bfe91a5efa8acf4b4792c1",
+      "reviewedOn": "2026-11-24",
+      "verifiedScope": "核對公開逐層診斷、裁邊深度對照的描述及可見差異，並記錄來源提供的固定手機場景資料。",
+      "publicNotice": "來源所報手機 FPS 不是獨立重測，幀間隔差異亦不是 GPU timestamp；新變體的畫質與效能未驗收。",
+      "remainingWork": "以同等畫質、固定解析度和路線重複量測各層、GPU 時間、熱機與回退，並通過獨立視覺審查。",
+      "knownSources": [
+        "https://github.com/waydefu/world-unbound/pull/41",
+        "https://github.com/waydefu/world-unbound/pull/44",
+        "https://github.com/waydefu/world-unbound/pull/46",
+        "https://github.com/waydefu/world-unbound/pull/47"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
+    },
+    {
+      "path": "research/2026-11-universal-web-engine/46-rust-wgpu-hybrid-procedural-rendering.md",
+      "sourceBlobSha": "8f94052ec77f354cb79c0fb871a5c3007fb64812",
+      "sourceRevision": "726dd8e3c7cb1733cddcebb44bce0c59c67fc204",
+      "reviewedOn": "2026-11-24",
+      "verifiedScope": "查閱公開研究報告的差異與架構補充，轉錄原報告提供的上游固定版本與技術文件入口。",
+      "publicNotice": "尚未獨立重跑兩個上游、重新確認全部授權或比較 Rust／WebGPU 真機效能；原研究變更仍開放。",
+      "remainingWork": "正式採用前重新核對授權與能力，建立同等畫質 A/B/C/D 原型並量測 CPU、GPU、功耗與熱機。",
+      "knownSources": [
+        "https://github.com/waydefu/Pixel-Games/pull/149",
+        "https://github.com/Noniv/abyssal-garden/tree/a596354eff400d458bc2aeb9bdf5e0a9734b2bcf",
+        "https://github.com/ChetasLua/crimson-loong/tree/264b9d1c63f298a206f53d18ddc1e49d0b10c334",
+        "https://wgpu.rs/doc/wgpu/documentation/platforms/web/index.html"
+      ],
+      "externallyVerifiedAllClaims": false,
+      "benchmarkStatus": "NOT_RUN"
     }
   ]
 }
