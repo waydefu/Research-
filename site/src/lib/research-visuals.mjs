@@ -19,6 +19,11 @@ const short = (x,max=23) => [...String(x)].length>max?[...String(x)].slice(0,max
 export function motifFor(doc){
   const file=String(doc.file||'');
   const title=String(doc.publicTitle||'');
+  // Source-specific diagrams for cross-project engineering research.
+  if(/13-context-compiler-and-governance-drift\.md$/.test(file))return 'flow';
+  if(/14-failure-atomicity-and-verifiable-publication\.md$/.test(file))return 'servers';
+  if(/45-layered-vegetation-overdraw-diagnostics\.md$/.test(file))return 'visibility';
+  if(/46-rust-wgpu-hybrid-procedural-rendering\.md$/.test(file))return 'container';
   // Navigation, sources, audit and evaluation records need different diagrams.
   if(file.includes('/2026-11-startup-animation/')) {
     if(file.endsWith('/01-cross-project-architecture-and-adoption.md')) return 'bootflow';
